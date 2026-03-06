@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getCardBySlug, getAllSlugs } from "@/lib/slug";
 import { TarotCard } from "@/components/TarotCard";
+import { ShareButton } from "@/components/ShareButton";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -49,6 +50,20 @@ export default async function CardPage({ params }: Props) {
       </div>
 
       <TarotCard card={card} startFlipped={true} />
+
+      <div className="mt-6 flex flex-col items-center gap-3">
+        <ShareButton
+          title={`${card.cardTitle} — ${card.name} | Threat Intelligence Tarot`}
+          text={card.flavor}
+          url={`https://threat-intel-tarot.vercel.app/card/${card.slug}`}
+        />
+        <p
+          className="text-xs text-center"
+          style={{ color: "var(--color-silver)", opacity: 0.4 }}
+        >
+          Share this adversary profile
+        </p>
+      </div>
     </main>
   );
 }
