@@ -341,7 +341,7 @@ function CompareContent() {
             style={{
               background: "rgba(201,168,76,0.04)",
               border: "1px solid rgba(201,168,76,0.2)",
-              animation: "section-reveal 0.4s ease-out both",
+              animation: "section-reveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) both",
             }}
           >
             <div
@@ -375,7 +375,7 @@ function CompareContent() {
         {cardA && cardB ? (
           <div
             className="flex flex-col sm:flex-row gap-4"
-            style={{ animation: "section-reveal 0.4s ease-out both" }}
+            style={{ animation: "section-reveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) both" }}
           >
             <ComparePanel card={cardA} accentTtps={sharedTtps} />
             <ComparePanel card={cardB} accentTtps={sharedTtps} />
