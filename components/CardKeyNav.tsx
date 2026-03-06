@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 export function CardKeyNav({
@@ -11,6 +11,7 @@ export function CardKeyNav({
   nextSlug?: string;
 }) {
   const router = useRouter();
+  const touchStartX = useRef<number | null>(null);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -23,6 +24,30 @@ export function CardKeyNav({
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
+  }, [prevSlug, nextSlug, router]);
+
+  useEffect(() => {
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartX.current = e.touches[0].clientX;
+    };
+    const onTouchEnd = (e: TouchEvent) => {
+      if (touchStartX.current === null) return;
+      const dx = e.changedTouches[0].clientX - touchStartX.current;
+      const absDx = Math.abs(dx);
+      touchStartX.current = null;
+      if (absDx < 60) return; // below threshold
+      if (dx > 0 && prevSlug) {
+        router.push(`/card/${prevSlug}`);
+      } else if (dx < 0 && nextSlug) {
+        router.push(`/card/${nextSlug}`);
+      }
+    };
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
+    return () => {
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
   }, [prevSlug, nextSlug, router]);
 
   return null;

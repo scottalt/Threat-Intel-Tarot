@@ -128,12 +128,20 @@ export default async function CardPage({ params }: Props) {
             Share this adversary profile
           </p>
           {(prev || next) && (
-            <p
-              className="text-xs mt-1 hidden sm:block"
-              style={{ color: "var(--color-silver)", opacity: 0.25 }}
-            >
-              ← → arrow keys to browse
-            </p>
+            <>
+              <p
+                className="text-xs mt-1 hidden sm:block"
+                style={{ color: "var(--color-silver)", opacity: 0.25 }}
+              >
+                ← → arrow keys to browse
+              </p>
+              <p
+                className="text-xs mt-1 sm:hidden"
+                style={{ color: "var(--color-silver)", opacity: 0.25 }}
+              >
+                swipe to browse
+              </p>
+            </>
           )}
         </div>
 
