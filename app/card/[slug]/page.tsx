@@ -5,6 +5,7 @@ import { cards } from "@/data/cards";
 import { TarotCard } from "@/components/TarotCard";
 import { ShareButton } from "@/components/ShareButton";
 import { Starfield } from "@/components/Starfield";
+import type { TarotCard as TarotCardType } from "@/data/types";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -42,6 +43,11 @@ export default async function CardPage({ params }: Props) {
   const card = getCardBySlug(slug);
 
   if (!card) notFound();
+
+  // Prev/next in deck order
+  const index = cards.findIndex((c) => c.slug === card.slug);
+  const prev: TarotCardType | undefined = index > 0 ? cards[index - 1] : undefined;
+  const next: TarotCardType | undefined = index < cards.length - 1 ? cards[index + 1] : undefined;
 
   // Related: same category, excluding current, max 3
   const related = cards
@@ -108,6 +114,44 @@ export default async function CardPage({ params }: Props) {
             Share this adversary profile
           </p>
         </div>
+
+        {/* Prev / Next navigation */}
+        {(prev || next) && (
+          <div className="mt-6 flex justify-between w-full text-xs">
+            {prev ? (
+              <a
+                href={`/card/${prev.slug}`}
+                className="flex flex-col gap-0.5 transition-opacity hover:opacity-100"
+                style={{
+                  color: "var(--color-gold)",
+                  opacity: 0.5,
+                  fontFamily: "var(--font-cinzel), serif",
+                  textDecoration: "none",
+                  maxWidth: "45%",
+                }}
+              >
+                <span className="uppercase tracking-widest" style={{ fontSize: "9px" }}>← Previous</span>
+                <span className="text-xs" style={{ color: "var(--color-silver)" }}>{prev.cardTitle}</span>
+              </a>
+            ) : <div />}
+            {next ? (
+              <a
+                href={`/card/${next.slug}`}
+                className="flex flex-col gap-0.5 text-right transition-opacity hover:opacity-100"
+                style={{
+                  color: "var(--color-gold)",
+                  opacity: 0.5,
+                  fontFamily: "var(--font-cinzel), serif",
+                  textDecoration: "none",
+                  maxWidth: "45%",
+                }}
+              >
+                <span className="uppercase tracking-widest" style={{ fontSize: "9px" }}>Next →</span>
+                <span className="text-xs" style={{ color: "var(--color-silver)" }}>{next.cardTitle}</span>
+              </a>
+            ) : <div />}
+          </div>
+        )}
 
         {/* Related cards */}
         {related.length > 0 && (
