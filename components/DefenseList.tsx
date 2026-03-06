@@ -15,7 +15,8 @@ export function DefenseList({ defenses }: { defenses: Defense[] }) {
   return (
     <ul className="space-y-2">
       {defenses.map((d, i) => (
-        <li key={i} className="flex items-start gap-2">
+        <li key={i} className="flex items-start gap-2"
+          style={{ animation: `defense-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) ${i * 55}ms both` }}>
           <span style={{ color: "var(--color-gold)", marginTop: "2px" }} className="shrink-0 text-sm">
             ▸
           </span>

@@ -112,17 +112,22 @@ export default function Home() {
             style={{
               color: "var(--color-gold-bright)",
               fontFamily: "var(--font-cinzel), serif",
+              animation: "hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both",
             }}
           >
             Threat Intelligence Tarot
           </h1>
           <p
             className="text-sm sm:text-base"
-            style={{ color: "var(--color-silver)" }}
+            style={{
+              color: "var(--color-silver)",
+              animation: "hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 120ms both",
+            }}
           >
             Real threat intelligence. Impossible to scroll past.
           </p>
-          <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 mt-2">
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 mt-2"
+            style={{ animation: "hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 220ms both" }}>
             {[
               { value: cards.length, label: "adversaries" },
               { value: UNIQUE_TECHNIQUES, label: "techniques" },

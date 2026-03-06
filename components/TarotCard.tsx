@@ -22,6 +22,11 @@ interface Particle {
   delay: number;
 }
 
+// Swipe threshold: 80px horizontal before committing flip
+const SWIPE_COMMIT_PX = 80;
+// Max drag rotation shown (degrees) at SWIPE_COMMIT_PX
+const MAX_DRAG_DEG = 50;
+
 export function TarotCard({
   card,
   startFlipped = false,
@@ -32,10 +37,14 @@ export function TarotCard({
   const [flipped, setFlipped] = useState(startFlipped);
   const [particles, setParticles] = useState<Particle[]>([]);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  // dragDeg: live rotation while user is dragging (null = not dragging)
+  const [dragDeg, setDragDeg] = useState<number | null>(null);
+
   const particleIdRef = useRef(0);
   const tiltResetRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const touchStartXRef = useRef<number>(0);
   const touchStartYRef = useRef<number>(0);
+  const isDraggingRef = useRef(false);
 
   const spawnParticles = useCallback(() => {
     // Inner burst — larger, shorter travel
@@ -79,11 +88,15 @@ export function TarotCard({
     });
   }, [spawnParticles]);
 
+  // ── Touch handlers ──────────────────────────────────────────────
+
   const handleTouchStart = useCallback(
     (e: React.TouchEvent<HTMLDivElement>) => {
       const touch = e.touches[0];
       touchStartXRef.current = touch.clientX;
       touchStartYRef.current = touch.clientY;
+      isDraggingRef.current = false;
+
       if (flipped) return;
       clearTimeout(tiltResetRef.current);
       const rect = e.currentTarget.getBoundingClientRect();
@@ -94,7 +107,26 @@ export function TarotCard({
     [flipped]
   );
 
-  const handleTouchEndWithSwipe = useCallback(
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent<HTMLDivElement>) => {
+      if (flipped) return;
+      const touch = e.touches[0];
+      const dx = touch.clientX - touchStartXRef.current;
+      const dy = touch.clientY - touchStartYRef.current;
+
+      // Only track as horizontal drag if clearly more horizontal than vertical
+      if (Math.abs(dx) < Math.abs(dy) * 1.2) return;
+
+      isDraggingRef.current = true;
+      // Map dx to rotation: clamped at MAX_DRAG_DEG
+      const progress = Math.min(Math.abs(dx) / SWIPE_COMMIT_PX, 1);
+      const deg = progress * MAX_DRAG_DEG * (dx > 0 ? 1 : -1);
+      setDragDeg(deg);
+    },
+    [flipped]
+  );
+
+  const handleTouchEnd = useCallback(
     (e: React.TouchEvent<HTMLDivElement>) => {
       const touch = e.changedTouches[0];
       const dx = touch.clientX - touchStartXRef.current;
@@ -102,20 +134,40 @@ export function TarotCard({
       const absX = Math.abs(dx);
       const absY = Math.abs(dy);
 
-      // Swipe-to-flip: only when face-down (not yet revealed), horizontal > 40px
-      if (!flipped && absX > 40 && absX > absY) {
+      // Clear drag visual
+      setDragDeg(null);
+
+      // Commit flip: horizontal swipe > threshold on face-down card
+      if (!flipped && absX >= SWIPE_COMMIT_PX && absX > absY) {
         handleFlip();
+      } else if (!flipped && !isDraggingRef.current && absX < 10 && absY < 10) {
+        // Tap (no drag) — handled by onClick, do nothing here
       }
 
+      isDraggingRef.current = false;
       // Reset tilt
       tiltResetRef.current = setTimeout(() => setTilt({ x: 0, y: 0 }), 120);
     },
     [flipped, handleFlip]
   );
 
-  const sceneTransform =
-    !flipped && (tilt.x !== 0 || tilt.y !== 0)
-      ? `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`
+  // ── Compute card-scene transform ────────────────────────────────
+
+  // dragDeg drives partial flip visual; tilt is the back-face hover tilt
+  const sceneTransform = (() => {
+    if (dragDeg !== null) {
+      return `perspective(1200px) rotateY(${dragDeg}deg)`;
+    }
+    if (!flipped && (tilt.x !== 0 || tilt.y !== 0)) {
+      return `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`;
+    }
+    return undefined;
+  })();
+
+  const sceneTransition = dragDeg !== null
+    ? "none"
+    : (!flipped && tilt.x === 0 && tilt.y === 0)
+      ? "transform 0.25s ease-out"
       : undefined;
 
   return (
@@ -150,6 +202,7 @@ export function TarotCard({
                 ["--ty" as string]: `${p.ty}px`,
                 ["--rot" as string]: `${p.rot}deg`,
                 boxShadow: `0 0 ${p.size * 1.5}px ${categoryParticleColor[card.category] ?? "var(--color-gold-bright)"}`,
+                willChange: "transform, opacity",
               }}
             />
           ))}
@@ -159,7 +212,8 @@ export function TarotCard({
           className="card-scene arcane-border"
           onClick={handleFlip}
           onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEndWithSwipe}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
               e.preventDefault();
@@ -174,13 +228,15 @@ export function TarotCard({
           style={{
             borderRadius: "16px",
             transform: sceneTransform,
-            transition:
-              !flipped && tilt.x === 0 && tilt.y === 0
-                ? "transform 0.2s ease-out"
-                : undefined,
+            transition: sceneTransition,
+            // Pause the border glow when card is face-up (reader mode)
+            animationPlayState: flipped ? "paused" : "running",
+            willChange: "transform",
           }}
         >
-          <div className={`card-wrapper ${flipped ? "is-flipped" : ""}`}>
+          <div className={`card-wrapper ${flipped ? "is-flipped" : ""}`}
+            style={{ willChange: "transform" }}
+          >
             <div className="card-face card-face--back">
               <CardBack />
             </div>
@@ -193,11 +249,12 @@ export function TarotCard({
 
       {!flipped && (
         <p
-          className="text-xs uppercase tracking-widest animate-pulse select-none"
+          className="text-xs uppercase tracking-widest select-none"
           style={{
             color: "var(--color-gold)",
             opacity: 0.65,
             fontFamily: "var(--font-cinzel), serif",
+            animation: "glyph-fade 2.5s ease-in-out infinite",
           }}
         >
           Tap or swipe to reveal

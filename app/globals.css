@@ -53,6 +53,7 @@ body {
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
 .card-wrapper.is-flipped {
@@ -238,10 +239,34 @@ body {
   80%       { opacity: 1;    filter: drop-shadow(0 0 6px currentColor); }
 }
 
-/* Iris glow breathe */
+/* Iris glow breathe — no filter for iOS performance */
 @keyframes iris-breathe {
-  0%, 100% { transform: scale(1);    opacity: 0.65; filter: blur(0px); }
-  50%       { transform: scale(1.18); opacity: 1;   filter: blur(0.4px); }
+  0%, 100% { transform: scale(1);    opacity: 0.65; }
+  50%       { transform: scale(1.18); opacity: 1;   }
+}
+
+/* Draw button idle glow pulse */
+@keyframes draw-button-glow {
+  0%, 100% {
+    box-shadow: 0 0 0px rgba(201, 168, 76, 0);
+    border-color: rgba(201, 168, 76, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 22px rgba(201, 168, 76, 0.45), 0 0 50px rgba(201, 168, 76, 0.12);
+    border-color: rgba(201, 168, 76, 1);
+  }
+}
+
+/* Hero entrance — from slightly below, fade up */
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Defense item slide in from right */
+@keyframes defense-in {
+  from { opacity: 0; transform: translateX(8px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 /* ─────────────────────────────────────────
