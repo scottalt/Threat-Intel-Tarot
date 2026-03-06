@@ -11,7 +11,10 @@ import type { TarotCard as TarotCardType } from "@/data/types";
 
 const UNIQUE_TECHNIQUES = new Set(cards.flatMap((c) => c.ttps.map((t) => t.techniqueId))).size;
 const UNIQUE_TACTICS = new Set(cards.flatMap((c) => c.ttps.map((t) => t.tactic))).size;
-const UNIQUE_ORIGINS = new Set(cards.map((c) => c.origin)).size;
+// Count distinct attributed nations by normalizing origin strings
+const UNIQUE_NATIONS = new Set(
+  cards.map((c) => c.origin.split("(")[0].trim().split("/")[0].trim())
+).size;
 
 const HISTORY_KEY = "ti-tarot-history";
 const MAX_HISTORY = 4;
@@ -124,7 +127,7 @@ export default function Home() {
               { value: cards.length, label: "adversaries" },
               { value: UNIQUE_TECHNIQUES, label: "techniques" },
               { value: UNIQUE_TACTICS, label: "tactics" },
-              { value: UNIQUE_ORIGINS, label: "countries" },
+              { value: UNIQUE_NATIONS, label: "attributed nations" },
             ].map((stat) => (
               <span key={stat.label} className="text-xs" style={{ color: "var(--color-silver)", opacity: 0.45 }}>
                 <span style={{ color: "var(--color-gold)", opacity: 0.8, fontFamily: "var(--font-cinzel), serif" }}>
