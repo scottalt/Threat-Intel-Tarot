@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { drawSpread } from "@/lib/draw";
 import { getCardBySlug } from "@/lib/slug";
@@ -152,7 +152,7 @@ function buildReadingText(spread: TarotCardType[]): string {
   return lines.join("\n");
 }
 
-export default function SpreadPage() {
+function SpreadContent() {
   const [spread, setSpread] = useState<TarotCardType[] | null>(null);
   const [drawKey, setDrawKey] = useState(0);
   const [copied, setCopied] = useState(false);
@@ -645,5 +645,13 @@ export default function SpreadPage() {
         })()}
       </div>
     </main>
+  );
+}
+
+export default function SpreadPage() {
+  return (
+    <Suspense>
+      <SpreadContent />
+    </Suspense>
   );
 }
