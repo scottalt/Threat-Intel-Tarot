@@ -38,6 +38,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${card.cardTitle}: ${card.name}`,
       description: card.flavor,
       type: "website",
+      url: `https://tarot.scottaltiparmak.com/card/${slug}`,
+      siteName: "Threat Intelligence Tarot",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${card.cardTitle}: ${card.name}`,
+      description: card.flavor,
+      creator: "@scottalt",
     },
   };
 }
