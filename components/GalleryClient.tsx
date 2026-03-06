@@ -139,6 +139,16 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
         ))}
       </div>
 
+      {/* Results count */}
+      {(query.trim() || filter !== "all" || arcana !== "all") && filtered.length > 0 && (
+        <div
+          className="text-center mb-4 text-xs"
+          style={{ color: "var(--color-silver)", opacity: 0.45 }}
+        >
+          {filtered.length} of {cards.length} adversaries
+        </div>
+      )}
+
       {/* Empty state */}
       {filtered.length === 0 && (
         <div
