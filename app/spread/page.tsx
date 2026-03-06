@@ -98,13 +98,56 @@ const categoryNebula: Record<string, string> = {
     "radial-gradient(ellipse 900px 500px at 50% 60%, rgba(139,58,15,0.18) 0%, transparent 70%)",
 };
 
+function buildReadingText(spread: TarotCardType[]): string {
+  const reading = buildReading(spread);
+  const lines = [
+    "THREAT INTELLIGENCE TAROT — THREE-CARD SPREAD",
+    "threat-intel-tarot.vercel.app/spread",
+    "",
+    ...positions.map((pos, i) => {
+      const card = spread[i];
+      return [
+        `${pos.label}. ${pos.title.toUpperCase()} (${pos.subtitle})`,
+        `  ${card.cardTitle} — ${card.name}`,
+        `  Origin: ${card.origin} · Risk: ${"★".repeat(card.riskLevel)}${"☆".repeat(5 - card.riskLevel)}`,
+        `  TTPs: ${card.ttps.slice(0, 3).map((t) => t.techniqueId).join(", ")}`,
+      ].join("\n");
+    }),
+    "",
+    "READING",
+    `Origins: ${reading.origins.join(", ")}`,
+    `Avg Risk: ${reading.avgRisk}/5`,
+    `Top Tactics: ${reading.tactics.join(", ")}`,
+    reading.sharedTTPs.length > 0
+      ? `Shared Techniques: ${reading.sharedTTPs.map((t) => `${t.techniqueId} (${t.name})`).join(", ")}`
+      : "",
+    "",
+    reading.narrative,
+  ].filter((line) => line !== undefined);
+  return lines.join("\n");
+}
+
 export default function SpreadPage() {
   const [spread, setSpread] = useState<TarotCardType[] | null>(null);
   const [drawKey, setDrawKey] = useState(0);
+  const [copied, setCopied] = useState(false);
 
   const handleDraw = () => {
     setSpread(drawSpread(3));
     setDrawKey((k) => k + 1);
+    setCopied(false);
+  };
+
+  const handleCopyReading = async () => {
+    if (!spread) return;
+    const text = buildReadingText(spread);
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      // clipboard not available
+    }
   };
 
   // Nebula color based on center card category
@@ -209,6 +252,25 @@ export default function SpreadPage() {
           />
           {spread ? "Draw Again" : "Draw the Spread"}
         </button>
+
+        {spread && (
+          <button
+            onClick={handleCopyReading}
+            className="mt-2 px-5 py-1.5 text-xs uppercase tracking-widest transition-all"
+            style={{
+              fontFamily: "var(--font-cinzel), serif",
+              color: copied ? "var(--color-gold-bright)" : "var(--color-silver)",
+              border: `1px solid ${copied ? "rgba(201,168,76,0.4)" : "rgba(192,192,192,0.2)"}`,
+              background: "transparent",
+              borderRadius: "4px",
+              cursor: "pointer",
+              touchAction: "manipulation",
+              WebkitTapHighlightColor: "transparent",
+            }}
+          >
+            {copied ? "✓ Reading Copied" : "Copy Reading"}
+          </button>
+        )}
 
         {/* Spread layout */}
         {spread && (
