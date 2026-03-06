@@ -79,6 +79,25 @@ export default function Home() {
                 "linear-gradient(90deg, transparent, var(--color-gold), transparent)",
             }}
           />
+
+          {/* Nav links */}
+          <div className="flex gap-4 mt-4 justify-center">
+            <a
+              href="/gallery"
+              className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
+              style={{ color: "var(--color-gold)", opacity: 0.55, fontFamily: "var(--font-cinzel), serif" }}
+            >
+              Browse All Cards
+            </a>
+            <span style={{ color: "var(--color-gold)", opacity: 0.3 }}>·</span>
+            <a
+              href="/daily"
+              className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
+              style={{ color: "var(--color-gold)", opacity: 0.55, fontFamily: "var(--font-cinzel), serif" }}
+            >
+              Card of the Day
+            </a>
+          </div>
         </div>
 
         <DrawButton onClick={handleDraw} />
