@@ -4,6 +4,7 @@ import { useState, useRef, useCallback } from "react";
 import type { TarotCard as TarotCardType } from "@/data/types";
 import { CardBack } from "./CardBack";
 import { CardFront } from "./CardFront";
+import { playFlip } from "@/lib/sounds";
 
 const categoryParticleColor: Record<string, string> = {
   "nation-state": "#4aadad",
@@ -85,6 +86,7 @@ export function TarotCard({
   }, []);
 
   const handleFlip = useCallback(() => {
+    playFlip();
     setFlipped((prev) => {
       if (!prev) setTimeout(spawnParticles, 380);
       return !prev;

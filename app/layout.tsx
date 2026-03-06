@@ -3,6 +3,7 @@ import { Cinzel, EB_Garamond } from "next/font/google";
 import "./globals.css";
 import { KeyboardShortcuts } from "@/components/KeyboardShortcuts";
 import { CustomCursor } from "@/components/CustomCursor";
+import { SoundToggle } from "@/components/SoundToggle";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -76,6 +77,7 @@ export default function RootLayout({
         <a href="#main-content" className="skip-to-content">Skip to content</a>
         <CustomCursor />
         <KeyboardShortcuts />
+        <SoundToggle />
         {children}
       </body>
     </html>

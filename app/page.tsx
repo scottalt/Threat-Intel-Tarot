@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { drawRandom } from "@/lib/draw";
+import { playShuffle, playDeal } from "@/lib/sounds";
 import { getCardBySlug } from "@/lib/slug";
 import { cards } from "@/data/cards";
 import { TarotCard } from "@/components/TarotCard";
@@ -72,8 +73,10 @@ export default function Home() {
   const handleDraw = () => {
     setShuffling(true);
     setCard(null);
+    playShuffle();
     setTimeout(() => {
       const drawn = drawRandom();
+      playDeal();
       setShuffling(false);
       setCard(drawn);
       setKey((k) => k + 1);
@@ -83,7 +86,7 @@ export default function Home() {
         saveHistory(drawn.slug, prev);
         return next;
       });
-    }, 460);
+    }, 900);
   };
 
   // Keyboard shortcut: Space or D to draw (when not focused on an input)
@@ -209,7 +212,7 @@ export default function Home() {
                   boxShadow: "0 0 18px rgba(201,168,76,0.18)",
                   zIndex: p.z,
                   transformOrigin: "50% 100%",
-                  animation: `shuffle-fan 0.35s ease-in-out infinite ${p.delay}`,
+                  animation: `shuffle-fan 0.6s ease-in-out infinite ${p.delay}`,
                 }}
               />
             ))}
