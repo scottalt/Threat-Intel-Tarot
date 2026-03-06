@@ -144,6 +144,30 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
         </select>
       </div>
 
+      {/* Sector quick-search */}
+      <div className="flex flex-wrap justify-center gap-1.5 mb-4">
+        <span className="text-xs self-center" style={{ color: "var(--color-silver)", opacity: 0.35 }}>Sector:</span>
+        {["Government", "Healthcare", "Financial", "Defense", "Energy", "Telecom", "Technology"].map((sector) => (
+          <button
+            key={sector}
+            onClick={() => setQuery(query === sector ? "" : sector)}
+            className="px-2.5 py-0.5 text-xs rounded transition-all"
+            style={{
+              fontFamily: "var(--font-cinzel), serif",
+              fontSize: "9px",
+              letterSpacing: "0.06em",
+              color: query === sector ? "var(--color-gold-bright)" : "var(--color-silver)",
+              border: `1px solid ${query === sector ? "rgba(201,168,76,0.4)" : "rgba(192,192,192,0.15)"}`,
+              background: query === sector ? "rgba(201,168,76,0.08)" : "transparent",
+              opacity: query === sector ? 1 : 0.65,
+              touchAction: "manipulation",
+            }}
+          >
+            {sector}
+          </button>
+        ))}
+      </div>
+
       {/* Category filter */}
       <div className="flex flex-wrap justify-center gap-2 mb-3">
         {filters.map((f) => (
