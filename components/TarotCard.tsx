@@ -5,10 +5,19 @@ import type { TarotCard as TarotCardType } from "@/data/types";
 import { CardBack } from "./CardBack";
 import { CardFront } from "./CardFront";
 
+const categoryParticleColor: Record<string, string> = {
+  "nation-state": "#4aadad",
+  criminal: "#a855f7",
+  hacktivist: "#f97316",
+  unknown: "#c9a84c",
+};
+
 interface Particle {
   id: number;
   tx: number;
   ty: number;
+  size: number;
+  opacity: number;
 }
 
 export function TarotCard({
@@ -32,10 +41,24 @@ export function TarotCard({
         id: particleIdRef.current++,
         tx: Math.cos(angle) * dist,
         ty: Math.sin(angle) * dist,
+        size: 7,
+        opacity: 1,
       };
     });
-    setParticles(burst);
-    setTimeout(() => setParticles([]), 750);
+    // Outer ring — smaller, travel further
+    const outer: Particle[] = Array.from({ length: 8 }, (_, i) => {
+      const angle = ((i * (360 / 8) + 22.5) * Math.PI) / 180;
+      const dist = 90 + Math.random() * 40;
+      return {
+        id: particleIdRef.current++,
+        tx: Math.cos(angle) * dist,
+        ty: Math.sin(angle) * dist,
+        size: 4,
+        opacity: 0.6,
+      };
+    });
+    setParticles([...burst, ...outer]);
+    setTimeout(() => setParticles([]), 900);
   }, []);
 
   const handleFlip = useCallback(() => {
@@ -90,10 +113,11 @@ export function TarotCard({
                 position: "absolute",
                 left: "50%",
                 top: "50%",
-                width: 7,
-                height: 7,
+                width: p.size,
+                height: p.size,
                 borderRadius: "50%",
-                background: "var(--color-gold-bright)",
+                background: categoryParticleColor[card.category] ?? "var(--color-gold-bright)",
+                opacity: p.opacity,
                 transform: "translate(-50%, -50%)",
                 animation: "particle-out 0.72s ease-out forwards",
                 ["--tx" as string]: `${p.tx}px`,
