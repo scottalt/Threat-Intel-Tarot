@@ -57,7 +57,7 @@ function buildReading(spread: TarotCardType[]): {
 
   const narratives: Record<string, string> = {
     "nation-state":
-      "Your threat landscape is dominated by nation-state actors — sophisticated, patient, and politically motivated. Prioritize detection over prevention, and assume persistent access. These adversaries play the long game.",
+      "Your threat landscape is dominated by nation-state actors: sophisticated, patient, and politically motivated. Prioritize detection over prevention and assume persistent access. These adversaries play the long game.",
     criminal:
       "Financially motivated threat actors define this spread. Expect opportunistic entry, rapid monetization, and ransomware or data extortion. Backups, segmentation, and endpoint visibility are your best defenses.",
     hacktivist:
@@ -66,7 +66,7 @@ function buildReading(spread: TarotCardType[]): {
 
   const narrative =
     narratives[dominantCategory] ??
-    "This spread reveals a complex, multi-vector threat environment. No single defensive posture is sufficient — depth, detection, and response speed are critical.";
+    "This spread reveals a complex, multi-vector threat environment. No single defensive posture is sufficient. Depth, detection, and response speed are critical.";
 
   return { origins, tactics, avgRisk, narrative, sharedTTPs };
 }
@@ -101,14 +101,14 @@ const categoryNebula: Record<string, string> = {
 function buildReadingText(spread: TarotCardType[]): string {
   const reading = buildReading(spread);
   const lines = [
-    "THREAT INTELLIGENCE TAROT — THREE-CARD SPREAD",
+    "THREAT INTELLIGENCE TAROT: THREE-CARD SPREAD",
     "threat-intel-tarot.vercel.app/spread",
     "",
     ...positions.map((pos, i) => {
       const card = spread[i];
       return [
         `${pos.label}. ${pos.title.toUpperCase()} (${pos.subtitle})`,
-        `  ${card.cardTitle} — ${card.name}`,
+        `  ${card.cardTitle}: ${card.name}`,
         `  Origin: ${card.origin} · Risk: ${"★".repeat(card.riskLevel)}${"☆".repeat(5 - card.riskLevel)}`,
         `  TTPs: ${card.ttps.slice(0, 3).map((t) => t.techniqueId).join(", ")}`,
       ].join("\n");

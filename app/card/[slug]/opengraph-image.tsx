@@ -88,8 +88,8 @@ export default async function CardOgImage({ params }: Props) {
             }}
           >
             {card.arcanum === "major"
-              ? `Major Arcana — ${card.number ?? ""}`
-              : `${card.suit ?? "Minor"} — ${card.number ?? ""}`}
+              ? `Major Arcana · ${card.number ?? ""}`
+              : `${card.suit ?? "Minor"} · ${card.number ?? ""}`}
           </div>
 
           <div

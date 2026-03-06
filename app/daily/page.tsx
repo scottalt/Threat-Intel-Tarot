@@ -6,7 +6,7 @@ import { Starfield } from "@/components/Starfield";
 import { DailyCountdown } from "@/components/DailyCountdown";
 
 export const metadata: Metadata = {
-  title: "Card of the Day — Threat Intelligence Tarot",
+  title: "Card of the Day | Threat Intelligence Tarot",
   description:
     "Today's threat intelligence card. A new adversary profile every day.",
 };
@@ -97,7 +97,7 @@ export default function DailyPage() {
 
         <div className="mt-6 flex flex-col items-center gap-2">
           <ShareButton
-            title={`Today's Threat: ${card.cardTitle} — ${card.name}`}
+            title={`Today's Threat: ${card.cardTitle}, ${card.name}`}
             text={card.flavor}
             url="https://threat-intel-tarot.vercel.app/daily"
           />

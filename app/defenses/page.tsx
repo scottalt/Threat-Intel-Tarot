@@ -4,9 +4,9 @@ import { Starfield } from "@/components/Starfield";
 import { DefenseIndexClient } from "@/components/DefenseIndexClient";
 
 export const metadata: Metadata = {
-  title: "Defense Index — Threat Intelligence Tarot",
+  title: "Defense Index | Threat Intelligence Tarot",
   description:
-    "Which security controls defend against the most threat actors? Ranked by coverage across 78 adversary profiles — prioritized for defenders.",
+    "Which security controls defend against the most threat actors? Ranked by coverage across 78 adversary profiles, prioritized for defenders.",
 };
 
 type DefenseEntry = {
@@ -111,7 +111,7 @@ export default function DefensesPage() {
             Defense Index
           </h1>
           <p className="text-sm" style={{ color: "var(--color-silver)", opacity: 0.7 }}>
-            Controls ranked by how many adversaries they defend against — prioritized for defenders
+            Controls ranked by how many adversaries they defend against, prioritized for defenders
           </p>
           <div
             className="mt-3 w-24 h-px mx-auto"
@@ -141,9 +141,9 @@ export default function DefensesPage() {
             adversary profiles ({Math.round((top10Coverage / totalCards) * 100)}%).
             {topDefense && (
               <>
-                {" "}The single most effective control —{" "}
-                <em style={{ color: "var(--color-mist)" }}>{topDefense.control}</em>{" "}
-                — appears across {topDefense.count} adversary profiles.
+                {" "}The single most effective control,{" "}
+                <em style={{ color: "var(--color-mist)" }}>{topDefense.control}</em>
+                , appears across {topDefense.count} adversary profiles.
               </>
             )}
           </p>

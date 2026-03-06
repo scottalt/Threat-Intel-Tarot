@@ -160,7 +160,7 @@ export function TarotCard({
           role="button"
           tabIndex={0}
           aria-label={
-            flipped ? `${card.name} — tap to flip back` : "Tap to reveal card"
+            flipped ? `${card.name}, tap to flip back` : "Tap to reveal card"
           }
           style={{
             borderRadius: "16px",

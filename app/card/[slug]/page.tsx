@@ -29,10 +29,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!card) return { title: "Card Not Found" };
 
   return {
-    title: `${card.cardTitle} — ${card.name} | Threat Intelligence Tarot`,
+    title: `${card.cardTitle}: ${card.name} | Threat Intelligence Tarot`,
     description: card.flavor,
     openGraph: {
-      title: `${card.cardTitle} — ${card.name}`,
+      title: `${card.cardTitle}: ${card.name}`,
       description: card.flavor,
       type: "website",
     },
@@ -117,7 +117,7 @@ export default async function CardPage({ params }: Props) {
         {/* Share */}
         <div className="mt-6 flex flex-col items-center gap-2">
           <ShareButton
-            title={`${card.cardTitle} — ${card.name} | Threat Intelligence Tarot`}
+            title={`${card.cardTitle}: ${card.name} | Threat Intelligence Tarot`}
             text={card.flavor}
             url={`https://threat-intel-tarot.vercel.app/card/${card.slug}`}
           />

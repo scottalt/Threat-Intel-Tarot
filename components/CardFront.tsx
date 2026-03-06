@@ -289,7 +289,7 @@ export function CardFront({ card }: { card: TarotCard }) {
               opacity: 0.55,
             }}
           >
-            Reversed — Their Weakness
+            Reversed: Their Weakness
           </div>
           <div
             className="text-sm italic leading-relaxed"

@@ -58,7 +58,7 @@ export default function OgImage() {
             display: "flex",
           }}
         >
-          Major Arcana — Threat Intelligence
+          Major Arcana · Threat Intelligence
         </div>
 
         {/* Title */}

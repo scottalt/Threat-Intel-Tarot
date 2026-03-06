@@ -29,7 +29,7 @@ export const cards: TarotCard[] = [
     flavor:
       "It was here before you named it. Its implants survive reformats, live in firmware, and wake on command from the void. The intelligence community does not confirm its existence. Neither does it deny.",
     reversedMeaning:
-      "When The Ghost stumbles, it leaves traces in registry keys and firewall logs — the telltale signatures that gave Kaspersky researchers their finest decade.",
+      "When The Ghost stumbles, it leaves traces in registry keys and firewall logs  -  the telltale signatures that gave Kaspersky researchers their finest decade.",
     defenses: [
       { control: "Supply chain verification for hardware firmware", framework: "NIST CSF: ID.SC" },
       { control: "Network segmentation for sensitive systems", framework: "CIS Control 12" },
@@ -67,7 +67,7 @@ export const cards: TarotCard[] = [
       "Olympic Destroyer (2018)",
     ],
     flavor:
-      "A phantom built for embarrassment as much as intelligence. It does not merely steal — it releases. The document dump, the timed leak, the hack-and-dump: these are its weapons of political theatre.",
+      "A phantom built for embarrassment as much as intelligence. It does not merely steal  -  it releases. The document dump, the timed leak, the hack-and-dump: these are its weapons of political theatre.",
     reversedMeaning:
       "Fancy Bear's operational security failures have been its undoing: the same Cyrillic keyboard registered the X-Agent compiler; the same VPN exited at the same IP. Attribution came from their own carelessness.",
     defenses: [
@@ -147,7 +147,7 @@ export const cards: TarotCard[] = [
     flavor:
       "It does not want your data. It wants your darkness. Sandworm is a weapon of punishment, sent to demonstrate that the lights can go out, the trains can stop, the hospitals can fall silent.",
     reversedMeaning:
-      "NotPetya's indiscriminate spread was a strategic miscalculation — it hit Russian companies too, and the blast radius destroyed any plausible deniability Russia might have maintained.",
+      "NotPetya's indiscriminate spread was a strategic miscalculation  -  it hit Russian companies too, and the blast radius destroyed any plausible deniability Russia might have maintained.",
     defenses: [
       { control: "OT/ICS network segmentation and unidirectional gateways", framework: "IEC 62443" },
       { control: "Immutable offline backups with tested restoration procedures", framework: "CIS Control 11" },
@@ -222,7 +222,7 @@ export const cards: TarotCard[] = [
       "Hundreds of terabytes stolen over years",
     ],
     flavor:
-      "It does not want power. It wants knowledge — specifically, your knowledge. Blueprints, contracts, research data: The Archivist catalogs and carries everything across the Pacific for the benefit of state industry.",
+      "It does not want power. It wants knowledge  -  specifically, your knowledge. Blueprints, contracts, research data: The Archivist catalogs and carries everything across the Pacific for the benefit of state industry.",
     reversedMeaning:
       "The 2013 Mandiant report named APT1's operators by name, photographed their building, and published their real-person identities. Exposure forced a years-long operational pause.",
     defenses: [
@@ -263,7 +263,7 @@ export const cards: TarotCard[] = [
     flavor:
       "It wears two faces and hides neither. By day it serves the Ministry, filing intelligence on pharmaceutical research and government networks. By night it steals game currency and sells exploits. It operates at the intersection of patriotism and profit.",
     reversedMeaning:
-      "APT41's indictment of five members by the US DOJ in 2020 revealed the group's real names, companies, and methods — a consequence of operating for personal profit while using state infrastructure.",
+      "APT41's indictment of five members by the US DOJ in 2020 revealed the group's real names, companies, and methods  -  a consequence of operating for personal profit while using state infrastructure.",
     defenses: [
       { control: "Software supply chain controls and build pipeline integrity", framework: "NIST SSDF" },
       { control: "Patch management program prioritizing public-facing systems", framework: "CIS Control 7" },
@@ -341,7 +341,7 @@ export const cards: TarotCard[] = [
     flavor:
       "A ghost that needs money. It haunts financial networks and cryptocurrency protocols, not for intelligence, but for the hard currency a sanctioned nation cannot otherwise earn. It has stolen billions. It will steal billions more.",
     reversedMeaning:
-      "WannaCry's killswitch — a single unregistered domain that a British researcher registered for 8 pounds — halted one of history's most damaging cyberattacks. Lazarus Group's urgency became its undoing.",
+      "WannaCry's killswitch  -  a single unregistered domain that a British researcher registered for 8 pounds  -  halted one of history's most damaging cyberattacks. Lazarus Group's urgency became its undoing.",
     defenses: [
       { control: "SWIFT Customer Security Programme controls for financial institutions", framework: "SWIFT CSP" },
       { control: "Cryptocurrency transaction monitoring and wallet screening", framework: "FinCEN guidance" },
@@ -377,9 +377,9 @@ export const cards: TarotCard[] = [
       "Multiple African and Asian bank intrusions",
     ],
     flavor:
-      "It turns network packets into gold. APT38 is the finance department of a rogue state — patient, methodical, willing to spend months inside a bank network learning its SWIFT workflows before issuing fraudulent transfers and then burning the evidence on the way out.",
+      "It turns network packets into gold. APT38 is the finance department of a rogue state  -  patient, methodical, willing to spend months inside a bank network learning its SWIFT workflows before issuing fraudulent transfers and then burning the evidence on the way out.",
     reversedMeaning:
-      "The Bangladesh Bank heist almost succeeded perfectly — but the fraudulent transfers were partially flagged by the Federal Reserve Bank of New York, and a typo in one transfer instruction ('fandation' vs 'foundation') triggered a review.",
+      "The Bangladesh Bank heist almost succeeded perfectly  -  but the fraudulent transfers were partially flagged by the Federal Reserve Bank of New York, and a typo in one transfer instruction ('fandation' vs 'foundation') triggered a review.",
     defenses: [
       { control: "SWIFT Customer Security Programme mandatory controls", framework: "SWIFT CSP" },
       { control: "Dual-control authorization for large wire transfers", framework: "FFIEC guidance" },
@@ -417,7 +417,7 @@ export const cards: TarotCard[] = [
     flavor:
       "It reads your emails about nuclear policy before you send the reply. It listens to your research conversations and reports to Pyongyang on what the outside world thinks of North Korea's next move. It is an ear pressed against the wall of every room that matters.",
     reversedMeaning:
-      "Kimsuky's targeting is sometimes so narrow that victims can identify the operation simply by recognizing they received an email. Its precision is a double-edged sword — targeted actors are more likely to report it.",
+      "Kimsuky's targeting is sometimes so narrow that victims can identify the operation simply by recognizing they received an email. Its precision is a double-edged sword  -  targeted actors are more likely to report it.",
     defenses: [
       { control: "Phishing awareness training with political and research themes", framework: "NIST CSF: PR.AT" },
       { control: "Google Workspace / M365 advanced threat protection", framework: "CIS Control 9" },
@@ -453,9 +453,9 @@ export const cards: TarotCard[] = [
       "Leafminer / Raspite malware deployment",
     ],
     flavor:
-      "It was born of regional rivalry — a tool to burn what it cannot own. The Flame Keeper watches petrochemical plants and aviation systems with patient hostility, waiting for the instruction to ignite.",
+      "It was born of regional rivalry  -  a tool to burn what it cannot own. The Flame Keeper watches petrochemical plants and aviation systems with patient hostility, waiting for the instruction to ignite.",
     reversedMeaning:
-      "APT33's use of commodity tools and publicly available malware complicates attribution — a double-edged sword. When investigators can't confirm the actor, the political pressure on Iran is reduced.",
+      "APT33's use of commodity tools and publicly available malware complicates attribution  -  a double-edged sword. When investigators can't confirm the actor, the political pressure on Iran is reduced.",
     defenses: [
       { control: "OT/ICS monitoring for petrochemical and energy environments", framework: "IEC 62443" },
       { control: "Application whitelisting on industrial workstations", framework: "CIS Control 2" },
@@ -492,7 +492,7 @@ export const cards: TarotCard[] = [
       "Leaked toolset published by Lab Dookhtegan (2019)",
     ],
     flavor:
-      "It knows the DNS of your kingdom's gatekeepers. It reads the mail of ministers. The Oracle does not predict the future — it reads the present correspondence of everyone who might shape it, and reports accordingly.",
+      "It knows the DNS of your kingdom's gatekeepers. It reads the mail of ministers. The Oracle does not predict the future  -  it reads the present correspondence of everyone who might shape it, and reports accordingly.",
     reversedMeaning:
       "APT34's entire toolset was leaked by a hacktivist persona in 2019, exposing its malware, victims, and operators. The Oracle was read.",
     defenses: [
@@ -532,7 +532,7 @@ export const cards: TarotCard[] = [
     flavor:
       "It charms. It sends friendly emails from plausible names. It schedules interviews that never happen. It builds rapport, earns trust, and then steals the credentials of everyone who believed in its warmth.",
     reversedMeaning:
-      "Charming Kitten's social engineering requires direct human interaction — a vulnerability. Targets who report suspicious contact provide investigators with tradecraft details that erode its effectiveness over time.",
+      "Charming Kitten's social engineering requires direct human interaction  -  a vulnerability. Targets who report suspicious contact provide investigators with tradecraft details that erode its effectiveness over time.",
     defenses: [
       { control: "Journalist and researcher security training on social engineering", framework: "NIST CSF: PR.AT" },
       { control: "Hardware security keys for email and account access", framework: "NIST SP 800-63B" },
@@ -571,7 +571,7 @@ export const cards: TarotCard[] = [
     flavor:
       "It wears a suit and carries a business card. FIN7 built a fake cybersecurity firm to hire penetration testers, then sent them to work against real targets. It is organized crime with an org chart and an HR department.",
     reversedMeaning:
-      "FIN7's elaborate organizational structure became its weakness — three members were identified, arrested, and convicted, in part because of the operational paper trail that comes with running a fake company.",
+      "FIN7's elaborate organizational structure became its weakness  -  three members were identified, arrested, and convicted, in part because of the operational paper trail that comes with running a fake company.",
     defenses: [
       { control: "Point-of-sale network isolation and P2PE encryption", framework: "PCI DSS" },
       { control: "Email filtering blocking macro-enabled documents", framework: "CIS Control 9" },
@@ -607,9 +607,9 @@ export const cards: TarotCard[] = [
       "Law firm Grubman Shire data leak threat",
     ],
     flavor:
-      "It sweeps through managed service providers like a scythe through wheat — one compromise, a thousand victims. The Reaper is not interested in your data. It is interested in what your data is worth to you when it is gone.",
+      "It sweeps through managed service providers like a scythe through wheat  -  one compromise, a thousand victims. The Reaper is not interested in your data. It is interested in what your data is worth to you when it is gone.",
     reversedMeaning:
-      "After the Colonial Pipeline political fallout, the US government engaged with Russia directly. REvil's servers were taken down from within, allegedly by allied cyber operations — suggesting nation-state enablers can become nation-state targets.",
+      "After the Colonial Pipeline political fallout, the US government engaged with Russia directly. REvil's servers were taken down from within, allegedly by allied cyber operations  -  suggesting nation-state enablers can become nation-state targets.",
     defenses: [
       { control: "MSP supply chain risk management and vendor vetting", framework: "NIST SP 800-161" },
       { control: "Immutable offline backups with 3-2-1 architecture", framework: "CIS Control 11" },
@@ -647,7 +647,7 @@ export const cards: TarotCard[] = [
     flavor:
       "The most professional ransomware operation ever built: a dark web affiliate portal, a customer service desk, bug bounties for its own malware. The Locked Tower ran ransomware-as-a-business with KPIs and contractor relationships.",
     reversedMeaning:
-      "Operation Cronos in 2024 seized LockBit's infrastructure, published its affiliate list, and posted the gang leader's photo on their own dark web site. The Tower fell — but the affiliates scattered to rebuild elsewhere.",
+      "Operation Cronos in 2024 seized LockBit's infrastructure, published its affiliate list, and posted the gang leader's photo on their own dark web site. The Tower fell  -  but the affiliates scattered to rebuild elsewhere.",
     defenses: [
       { control: "MFA on all remote access including RDP and VPN", framework: "CIS Control 6" },
       { control: "EDR with ransomware behavioral detection", framework: "CIS Control 10" },
@@ -678,15 +678,15 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1003.001", name: "LSASS Memory", tactic: "Credential Access" },
     ],
     notableOps: [
-      "Ireland Health Service Executive (HSE) attack — shut down national healthcare",
+      "Ireland Health Service Executive (HSE) attack  -  shut down national healthcare",
       "Costa Rica government ($20M demanded, national emergency declared)",
       "Internal chat logs leaked by Ukrainian researcher (2022)",
       "400+ healthcare attacks during COVID-19",
     ],
     flavor:
-      "It spread through hospital networks while patients were wheeled into corridors. The Plague does not distinguish between a defense contractor and an ICU — everything encrypts the same. Its leaked chat logs revealed an organization of 100+ people with department heads and vacation policies.",
+      "It spread through hospital networks while patients were wheeled into corridors. The Plague does not distinguish between a defense contractor and an ICU  -  everything encrypts the same. Its leaked chat logs revealed an organization of 100+ people with department heads and vacation policies.",
     reversedMeaning:
-      "When Conti publicly sided with Russia after the Ukraine invasion, a Ukrainian security researcher leaked two years of internal chat logs — exposing everything from the group's internal disputes to its cryptocurrency wallets.",
+      "When Conti publicly sided with Russia after the Ukraine invasion, a Ukrainian security researcher leaked two years of internal chat logs  -  exposing everything from the group's internal disputes to its cryptocurrency wallets.",
     defenses: [
       { control: "Healthcare-specific ransomware response plans (HHS 405(d))", framework: "HHS 405(d)" },
       { control: "SMB signing enforcement to block lateral movement", framework: "CIS Control 12" },
@@ -717,15 +717,15 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1534", name: "Internal Spearphishing", tactic: "Lateral Movement" },
     ],
     notableOps: [
-      "MGM Resorts attack — $100M+ impact, 10-minute social engineering call",
+      "MGM Resorts attack  -  $100M+ impact, 10-minute social engineering call",
       "Caesars Palace $15M ransom paid",
       "Twilio and Cloudflare phishing campaign (2022)",
-      "0ktapus campaign — 130+ companies via Okta credential phishing",
+      "0ktapus campaign  -  130+ companies via Okta credential phishing",
     ],
     flavor:
       "It picks up the phone, says it's from IT, and asks your help desk to reset the CEO's MFA. It speaks your company's internal language because it researched your org chart on LinkedIn first. It does not look like a threat actor. It sounds like a colleague.",
     reversedMeaning:
-      "Scattered Spider's reliance on vishing and social engineering means that a well-trained, skeptical help desk is its most powerful counter. Its members — many teenagers — have been identified and arrested through standard law enforcement channels.",
+      "Scattered Spider's reliance on vishing and social engineering means that a well-trained, skeptical help desk is its most powerful counter. Its members  -  many teenagers  -  have been identified and arrested through standard law enforcement channels.",
     defenses: [
       { control: "Phishing-resistant MFA (FIDO2) eliminating OTP/push", framework: "NIST SP 800-63B" },
       { control: "Strict help desk identity verification protocols for account changes", framework: "CIS Control 6" },
@@ -755,15 +755,15 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1567.002", name: "Exfiltration to Cloud Storage", tactic: "Exfiltration" },
     ],
     notableOps: [
-      "Change Healthcare attack — disrupted US pharmacy systems nationwide (2024)",
+      "Change Healthcare attack  -  disrupted US pharmacy systems nationwide (2024)",
       "MGM Resorts (in partnership with Scattered Spider)",
-      "Written in Rust — cross-platform, Windows and Linux/ESXi variants",
+      "Written in Rust  -  cross-platform, Windows and Linux/ESXi variants",
       "Largest healthcare ransom payment: $22M",
     ],
     flavor:
-      "Built in Rust, it encrypts Windows, Linux, and ESXi hosts with equal indifference. The Void is not personal — it is systematic. It chose Change Healthcare because Change Healthcare was everywhere, and when it encrypted, a third of US pharmacies went dark.",
+      "Built in Rust, it encrypts Windows, Linux, and ESXi hosts with equal indifference. The Void is not personal  -  it is systematic. It chose Change Healthcare because Change Healthcare was everywhere, and when it encrypted, a third of US pharmacies went dark.",
     reversedMeaning:
-      "BlackCat collapsed after the $22M Change Healthcare ransom payment, when its operators allegedly exit-scammed their own affiliates — keeping the payment and shutting down the infrastructure, destroying trust in the brand permanently.",
+      "BlackCat collapsed after the $22M Change Healthcare ransom payment, when its operators allegedly exit-scammed their own affiliates  -  keeping the payment and shutting down the infrastructure, destroying trust in the brand permanently.",
     defenses: [
       { control: "VMware ESXi and hypervisor hardening and patching", framework: "CIS VMware Benchmark" },
       { control: "Healthcare data segmentation and minimum-necessary access", framework: "HIPAA Security Rule" },
@@ -800,7 +800,7 @@ export const cards: TarotCard[] = [
       "Russia leaks following Ukraine invasion (2022)",
     ],
     flavor:
-      "It is not an organization. It has no leader, no members, no headquarters. It is a decision — made independently, simultaneously, by thousands of people wearing the same mask. When it chooses a target, the target knows. Everyone knows.",
+      "It is not an organization. It has no leader, no members, no headquarters. It is a decision  -  made independently, simultaneously, by thousands of people wearing the same mask. When it chooses a target, the target knows. Everyone knows.",
     reversedMeaning:
       "The lack of central coordination is Anonymous's tactical weakness. Operations are uneven, sometimes counterproductive, and frequently claimed by unaffiliated actors. The mask is available to anyone, including those with poor judgment.",
     defenses: [
@@ -837,9 +837,9 @@ export const cards: TarotCard[] = [
       "US Treasury and congressional websites targeting (2023)",
     ],
     flavor:
-      "It is loud and it wants you to know it. KillNet does not steal data — it makes noise. The DDoS is the message. The communique on Telegram is the message. The Storm is geopolitical signaling wrapped in network packets.",
+      "It is loud and it wants you to know it. KillNet does not steal data  -  it makes noise. The DDoS is the message. The communique on Telegram is the message. The Storm is geopolitical signaling wrapped in network packets.",
     reversedMeaning:
-      "KillNet's operations are largely nuisance-level — short-duration DDoS attacks that rarely cause lasting damage. Its strategic value to Russia is in narrative, not effect. When compared to Sandworm's actual capabilities, KillNet is theater.",
+      "KillNet's operations are largely nuisance-level  -  short-duration DDoS attacks that rarely cause lasting damage. Its strategic value to Russia is in narrative, not effect. When compared to Sandworm's actual capabilities, KillNet is theater.",
     defenses: [
       { control: "DDoS mitigation service with scrubbing capacity", framework: "NIST CSF: PR.DS" },
       { control: "Rate limiting and traffic shaping on web properties", framework: "CIS Control 13" },
@@ -851,7 +851,7 @@ export const cards: TarotCard[] = [
   },
 
   // ─────────────────────────────────────────
-  // MINOR ARCANA — SWORDS (Espionage & Intelligence)
+  // MINOR ARCANA  -  SWORDS (Espionage & Intelligence)
   // ─────────────────────────────────────────
 
   {
@@ -863,7 +863,7 @@ export const cards: TarotCard[] = [
     arcanum: "minor",
     suit: "swords",
     number: 1,
-    origin: "China (MSS — Tianjin Bureau)",
+    origin: "China (MSS  -  Tianjin Bureau)",
     category: "nation-state",
     since: "Active since ~2009",
     motivation: ["Intellectual property theft", "Managed service provider compromise", "Supply chain espionage"],
@@ -876,7 +876,7 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1041", name: "Exfiltration Over C2 Channel", tactic: "Exfiltration" },
     ],
     notableOps: [
-      "Operation Cloud Hopper — global MSP compromise (2016–2017)",
+      "Operation Cloud Hopper  -  global MSP compromise (2016–2017)",
       "ANEL and PlugX malware deployments",
       "US, UK, Australia, Canada, Japan advisory (2018)",
       "Targeted 45+ companies across 12 countries via single MSP campaign",
@@ -884,7 +884,7 @@ export const cards: TarotCard[] = [
     flavor:
       "It does not attack companies. It attacks the companies that manage companies. One managed service provider, patiently owned, becomes a skeleton key to a hundred client networks. The Thousand Hands reaches everywhere without touching anything directly.",
     reversedMeaning:
-      "Cloud Hopper's exposure came when security researchers noticed identical malware families and C2 infrastructure across seemingly unrelated victim networks — the pattern of the MSP pivot, once seen, could not be unseen.",
+      "Cloud Hopper's exposure came when security researchers noticed identical malware families and C2 infrastructure across seemingly unrelated victim networks  -  the pattern of the MSP pivot, once seen, could not be unseen.",
     defenses: [
       { control: "Third-party and MSP access segmentation and least-privilege", framework: "CIS Control 6" },
       { control: "MFA enforcement on all remote access including vendor accounts", framework: "NIST SP 800-63B" },
@@ -903,7 +903,7 @@ export const cards: TarotCard[] = [
     arcanum: "minor",
     suit: "swords",
     number: 2,
-    origin: "China (MSS — Hainan State Security)",
+    origin: "China (MSS  -  Hainan State Security)",
     category: "nation-state",
     since: "Active since ~2013",
     motivation: ["Maritime intelligence", "Defense technology theft", "COVID-19 research theft"],
@@ -916,15 +916,15 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1567", name: "Exfiltration Over Web Service", tactic: "Exfiltration" },
     ],
     notableOps: [
-      "US Navy contractor breach — submarine warfare data theft (2018)",
+      "US Navy contractor breach  -  submarine warfare data theft (2018)",
       "COVID-19 vaccine research targeting (2020)",
       "Maritime industry espionage across SE Asia",
       "University research targeting for naval engineering data",
     ],
     flavor:
-      "China needs a navy that can challenge the Pacific. The Tidal Current finds what China needs in the research labs and defense contractors that already built one for the West. It moves like water — patient, persistent, finding every crack.",
+      "China needs a navy that can challenge the Pacific. The Tidal Current finds what China needs in the research labs and defense contractors that already built one for the West. It moves like water  -  patient, persistent, finding every crack.",
     reversedMeaning:
-      "APT40's maritime focus made it identifiable — when US Navy contractor breaches traced back to the same TTPs, the specialization that made the group effective also made attribution straightforward.",
+      "APT40's maritime focus made it identifiable  -  when US Navy contractor breaches traced back to the same TTPs, the specialization that made the group effective also made attribution straightforward.",
     defenses: [
       { control: "Web application firewall and patching of internet-facing systems", framework: "CIS Control 7" },
       { control: "Web shell detection via file integrity monitoring", framework: "NIST CSF: DE.CM" },
@@ -956,7 +956,7 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1041", name: "Exfiltration Over C2 Channel", tactic: "Exfiltration" },
     ],
     notableOps: [
-      "ProxyLogon — Microsoft Exchange 0-day exploitation (March 2021)",
+      "ProxyLogon  -  Microsoft Exchange 0-day exploitation (March 2021)",
       "250,000+ Exchange servers compromised in days",
       "Mass web shell deployment before patches could be applied",
       "US Treasury Department breach (2024, SilkTyphoon)",
@@ -964,7 +964,7 @@ export const cards: TarotCard[] = [
     flavor:
       "Microsoft disclosed four zero-days on a Tuesday. By Wednesday, hundreds of thousands of Exchange servers worldwide had web shells installed. The Hidden Key was already inside before defenders could turn the lock.",
     reversedMeaning:
-      "The mass exploitation of ProxyLogon was so broad and so fast that it attracted every other APT group to pile on the same vulnerabilities — the noise of opportunistic follow-on exploitation helped incident responders identify Hafnium's more deliberate initial access.",
+      "The mass exploitation of ProxyLogon was so broad and so fast that it attracted every other APT group to pile on the same vulnerabilities  -  the noise of opportunistic follow-on exploitation helped incident responders identify Hafnium's more deliberate initial access.",
     defenses: [
       { control: "Emergency patching SLA for Exchange and internet-facing systems", framework: "CIS Control 7" },
       { control: "Web shell detection and file integrity monitoring on IIS", framework: "NIST CSF: DE.CM" },
@@ -1002,9 +1002,9 @@ export const cards: TarotCard[] = [
       "Decade-long persistent campaigns against same targets",
     ],
     flavor:
-      "It does not rush. It selects a Japanese defense subcontractor, deploys a custom RAT, and waits — months, sometimes years — while blueprints, contracts, and technical specifications accumulate in its staging servers. The Patient Archivist reads everything.",
+      "It does not rush. It selects a Japanese defense subcontractor, deploys a custom RAT, and waits  -  months, sometimes years  -  while blueprints, contracts, and technical specifications accumulate in its staging servers. The Patient Archivist reads everything.",
     reversedMeaning:
-      "Bronze Butler's long dwell times work against it when discovered — the extensive log history and consistent malware families made retrospective attribution and full scope-of-compromise analysis unusually complete.",
+      "Bronze Butler's long dwell times work against it when discovered  -  the extensive log history and consistent malware families made retrospective attribution and full scope-of-compromise analysis unusually complete.",
     defenses: [
       { control: "Email attachment sandboxing and filtering", framework: "CIS Control 9" },
       { control: "Endpoint detection with behavioral analysis for RAT activity", framework: "NIST CSF: DE.CM" },
@@ -1044,7 +1044,7 @@ export const cards: TarotCard[] = [
     flavor:
       "Wherever China negotiates, The Nomadic Eye arrives first. When the Vatican opened diplomatic talks, its network was already compromised. When Myanmar shifted governments, the new ministers found it watching. It follows the map of Chinese strategic interest.",
     reversedMeaning:
-      "Mustang Panda's use of PlugX — a well-documented, widely-shared Chinese APT tool — made attribution relatively straightforward. The tool's prevalence across multiple Chinese APT groups created attribution complexity but not deniability.",
+      "Mustang Panda's use of PlugX  -  a well-documented, widely-shared Chinese APT tool  -  made attribution relatively straightforward. The tool's prevalence across multiple Chinese APT groups created attribution complexity but not deniability.",
     defenses: [
       { control: "Macro execution controls and Office hardening", framework: "CIS Control 2" },
       { control: "Diplomatic and NGO sector threat intelligence sharing", framework: "NIST CSF: ID.RA" },
@@ -1082,9 +1082,9 @@ export const cards: TarotCard[] = [
       "Called 'the worst telecom hack in US history' by officials",
     ],
     flavor:
-      "It did not hack phones. It hacked the systems that let the government legally tap phones — and then read everything. The Wire sat inside American telecommunications infrastructure for months, reading the communications of officials who believed they were using secure government intercept systems.",
+      "It did not hack phones. It hacked the systems that let the government legally tap phones  -  and then read everything. The Wire sat inside American telecommunications infrastructure for months, reading the communications of officials who believed they were using secure government intercept systems.",
     reversedMeaning:
-      "Salt Typhoon's access to CALEA intercept infrastructure was so significant it prompted the FBI to advise Americans to use end-to-end encrypted messaging — a remarkable public admission that the interception systems themselves could not be trusted.",
+      "Salt Typhoon's access to CALEA intercept infrastructure was so significant it prompted the FBI to advise Americans to use end-to-end encrypted messaging  -  a remarkable public admission that the interception systems themselves could not be trusted.",
     defenses: [
       { control: "Network device firmware patching and hardening (Cisco, Juniper)", framework: "CIS Control 7" },
       { control: "End-to-end encrypted communications for sensitive discussions", framework: "NIST SP 800-177" },
@@ -1103,7 +1103,7 @@ export const cards: TarotCard[] = [
     arcanum: "minor",
     suit: "swords",
     number: 7,
-    origin: "Russia (FSB — Crimean officers)",
+    origin: "Russia (FSB  -  Crimean officers)",
     category: "nation-state",
     since: "Active since ~2013",
     motivation: ["Ukraine-focused espionage", "Military intelligence", "Volume-based persistent infection"],
@@ -1122,7 +1122,7 @@ export const cards: TarotCard[] = [
       "Post-invasion surge: thousands of phishing attacks per week (2022)",
     ],
     flavor:
-      "Other Russian APTs are surgical. Gamaredon is ravenous. It floods Ukraine with malicious documents by the thousands — spray-and-pray volume phishing that relies on saturation rather than precision. A few always open. The Hunger is always fed.",
+      "Other Russian APTs are surgical. Gamaredon is ravenous. It floods Ukraine with malicious documents by the thousands  -  spray-and-pray volume phishing that relies on saturation rather than precision. A few always open. The Hunger is always fed.",
     reversedMeaning:
       "Gamaredon's high-volume, low-sophistication approach made it one of the most thoroughly documented Russian APT groups. The sheer number of samples gave Ukrainian CERT and Western researchers deep visibility into its tooling and infrastructure.",
     defenses: [
@@ -1162,9 +1162,9 @@ export const cards: TarotCard[] = [
       "Persistent targeting of UK-US policy communities over 8+ years",
     ],
     flavor:
-      "It builds a persona — a credible academic, a conference organizer, a think-tank researcher. It befriends. It follows for months. Then it sends a Google Docs link that steals the password of someone who thought they were among colleagues. The Confessor never forces. It is patient enough to be trusted first.",
+      "It builds a persona  -  a credible academic, a conference organizer, a think-tank researcher. It befriends. It follows for months. Then it sends a Google Docs link that steals the password of someone who thought they were among colleagues. The Confessor never forces. It is patient enough to be trusted first.",
     reversedMeaning:
-      "The Callisto Group's reliance on persona-building and long-term relationship cultivation makes it slow. When exposed, the entire social infrastructure — the fake personas, the established trust — collapses simultaneously.",
+      "The Callisto Group's reliance on persona-building and long-term relationship cultivation makes it slow. When exposed, the entire social infrastructure  -  the fake personas, the established trust  -  collapses simultaneously.",
     defenses: [
       { control: "Phishing-resistant MFA for email and cloud accounts", framework: "NIST SP 800-63B" },
       { control: "Security awareness for targeted spearphishing and pretexting", framework: "NIST SP 800-50" },
@@ -1202,9 +1202,9 @@ export const cards: TarotCard[] = [
       "Bangladesh government targeting",
     ],
     flavor:
-      "The Grudge moves along lines of historical conflict — a South Asian actor targeting rivals across the subcontinent's fault lines. It is not the most sophisticated group in these cards, but it is relentless, and its targets feel it every day.",
+      "The Grudge moves along lines of historical conflict  -  a South Asian actor targeting rivals across the subcontinent's fault lines. It is not the most sophisticated group in these cards, but it is relentless, and its targets feel it every day.",
     reversedMeaning:
-      "Bitter's relatively standard tooling and predictable targeting patterns have made it one of the more thoroughly attributed South Asian APT groups — the consistency of focus on Pakistan–India geopolitical tensions makes intent clear even when attribution is contested.",
+      "Bitter's relatively standard tooling and predictable targeting patterns have made it one of the more thoroughly attributed South Asian APT groups  -  the consistency of focus on Pakistan–India geopolitical tensions makes intent clear even when attribution is contested.",
     defenses: [
       { control: "Email filtering and attachment sandboxing", framework: "CIS Control 9" },
       { control: "VBA macro execution controls in Office documents", framework: "CIS Control 2" },
@@ -1242,7 +1242,7 @@ export const cards: TarotCard[] = [
       "JavaScript-based fileless execution chain deployment",
     ],
     flavor:
-      "It moves low and fast, striking along the fault lines of South Asian geopolitics. Pakistan's military networks feel it every cycle; Nepal's government ministries know its lures by sight. The Viper is not subtle — it is prolific.",
+      "It moves low and fast, striking along the fault lines of South Asian geopolitics. Pakistan's military networks feel it every cycle; Nepal's government ministries know its lures by sight. The Viper is not subtle  -  it is prolific.",
     reversedMeaning:
       "SideWinder's volume-over-sophistication approach creates a large forensic footprint. Its infrastructure reuse and consistent lure themes have made it one of the most-documented South Asian threat actors, providing defenders with extensive indicator libraries.",
     defenses: [
@@ -1282,7 +1282,7 @@ export const cards: TarotCard[] = [
       "South Asian diplomatic community compromise",
     ],
     flavor:
-      "It assembled itself from pieces — copy-pasted code, borrowed tools, recycled infrastructure. The Collage is less art than function: mismatched but operational, watching Chinese think tanks and Pakistani ministries with tools built from the internet's trash.",
+      "It assembled itself from pieces  -  copy-pasted code, borrowed tools, recycled infrastructure. The Collage is less art than function: mismatched but operational, watching Chinese think tanks and Pakistani ministries with tools built from the internet's trash.",
     reversedMeaning:
       "Patchwork's most notable operational security failure was legendary: in 2018, researchers discovered the group had infected its own development machines with its own BADNEWS RAT, exposing operators' identities, their development environment, and their targeting lists.",
     defenses: [
@@ -1322,9 +1322,9 @@ export const cards: TarotCard[] = [
       "Sustained campaign against Indian armed forces since 2013",
     ],
     flavor:
-      "It sends Indian soldiers résumés dressed as government orders, love letters signed as defense ministry officials. The Long Shadow understands its target's psychology — the bureaucratic email, the HR document, the military invitation. It speaks fluently in the language of trust.",
+      "It sends Indian soldiers résumés dressed as government orders, love letters signed as defense ministry officials. The Long Shadow understands its target's psychology  -  the bureaucratic email, the HR document, the military invitation. It speaks fluently in the language of trust.",
     reversedMeaning:
-      "Transparent Tribe's consistent targeting of India means the Indian defense and government sector has built extensive countermeasures — its tactics are well-documented by Indian CERT and security researchers who have deeply analyzed its toolchain.",
+      "Transparent Tribe's consistent targeting of India means the Indian defense and government sector has built extensive countermeasures  -  its tactics are well-documented by Indian CERT and security researchers who have deeply analyzed its toolchain.",
     defenses: [
       { control: "Email security with impersonation detection for government domains", framework: "CIS Control 9" },
       { control: "Endpoint protection with RAT behavioral detection", framework: "NIST CSF: DE.CM" },
@@ -1343,7 +1343,7 @@ export const cards: TarotCard[] = [
     arcanum: "minor",
     suit: "swords",
     number: 13,
-    origin: "China (MSS — Tibet-focused)",
+    origin: "China (MSS  -  Tibet-focused)",
     category: "nation-state",
     since: "Active since ~2012",
     motivation: ["Tibetan diaspora surveillance", "Dalai Lama office intelligence", "Religious community monitoring"],
@@ -1356,15 +1356,15 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1025", name: "Data from Removable Media", tactic: "Collection" },
     ],
     notableOps: [
-      "GhostNet — 1,295 infected computers in 103 countries (2009, linked operations)",
+      "GhostNet  -  1,295 infected computers in 103 countries (2009, linked operations)",
       "Dalai Lama office compromise and communications monitoring",
       "COVID-19 themed lures targeting Tibetan organizations (2020)",
       "Exile government surveillance ongoing since Tibetan exile",
     ],
     flavor:
-      "The Lotus Eye was not born in a hack. It was born in a political situation — a diaspora government, a religious leader, a movement that Beijing will not tolerate. It has watched the Dalai Lama's inbox for over a decade. Surveillance as policy, conducted by code.",
+      "The Lotus Eye was not born in a hack. It was born in a political situation  -  a diaspora government, a religious leader, a movement that Beijing will not tolerate. It has watched the Dalai Lama's inbox for over a decade. Surveillance as policy, conducted by code.",
     reversedMeaning:
-      "The Tibetan targeting of TA413 is so consistent that Citizen Lab and other civil society-focused security researchers have built deep expertise specifically in this threat actor — the human rights community's security posture has improved dramatically because of sustained attention to this threat.",
+      "The Tibetan targeting of TA413 is so consistent that Citizen Lab and other civil society-focused security researchers have built deep expertise specifically in this threat actor  -  the human rights community's security posture has improved dramatically because of sustained attention to this threat.",
     defenses: [
       { control: "Hardened endpoint security for civil society and NGO organizations", framework: "Access Now Digital Security" },
       { control: "Security training for human rights organizations and diaspora groups", framework: "NIST SP 800-50" },
@@ -1383,7 +1383,7 @@ export const cards: TarotCard[] = [
     arcanum: "minor",
     suit: "swords",
     number: 14,
-    origin: "Iran (MOIS — Ministry of Intelligence)",
+    origin: "Iran (MOIS  -  Ministry of Intelligence)",
     category: "nation-state",
     since: "Active since ~2017",
     motivation: ["Middle East political intelligence", "Espionage against Iran opponents", "Regional government access"],
@@ -1402,9 +1402,9 @@ export const cards: TarotCard[] = [
       "SimpleHelp and Atera remote access tool abuse",
     ],
     flavor:
-      "The Marsh does not operate alone — it is the Ministry of Intelligence's instrument across the Middle East, watching Turkey, threatening Israel, monitoring opposition. It moves through the region's political terrain like water through soft ground, taking the shape of whatever crack it finds.",
+      "The Marsh does not operate alone  -  it is the Ministry of Intelligence's instrument across the Middle East, watching Turkey, threatening Israel, monitoring opposition. It moves through the region's political terrain like water through soft ground, taking the shape of whatever crack it finds.",
     reversedMeaning:
-      "MuddyWater's broad geographic mandate and multiple concurrent campaigns created coordination challenges — its overlapping infrastructure and tool reuse across different regional targets helped researchers map the full scope of MOIS cyber operations.",
+      "MuddyWater's broad geographic mandate and multiple concurrent campaigns created coordination challenges  -  its overlapping infrastructure and tool reuse across different regional targets helped researchers map the full scope of MOIS cyber operations.",
     defenses: [
       { control: "PowerShell logging, AMSI, and constrained language mode", framework: "CIS Control 8" },
       { control: "Remote monitoring and management tool allowlisting", framework: "CIS Control 2" },
@@ -1416,7 +1416,7 @@ export const cards: TarotCard[] = [
   },
 
   // ─────────────────────────────────────────
-  // MINOR ARCANA — WANDS (Disruption & Destruction)
+  // MINOR ARCANA  -  WANDS (Disruption & Destruction)
   // ─────────────────────────────────────────
 
   {
@@ -1442,14 +1442,14 @@ export const cards: TarotCard[] = [
     ],
     notableOps: [
       "Iranian steel plant cyberattack causing physical fire (2022)",
-      "Iranian fuel distribution network shutdown — 4,300 stations offline",
-      "Iranian railway hack — fake delay messages and board disruption (2021)",
+      "Iranian fuel distribution network shutdown  -  4,300 stations offline",
+      "Iranian railway hack  -  fake delay messages and board disruption (2021)",
       "Posted videos of ICS monitoring footage as proof of access",
     ],
     flavor:
       "It does not steal. It burns. The Arsonist targeted Iranian steel mills until the furnaces caught fire on camera, then published the footage. It disrupted fuel stations until drivers queued for miles. It is the rarest kind of cyber actor: one that makes the physical world feel the heat.",
     reversedMeaning:
-      "Predatory Sparrow's restraint in its Iranian attacks — targeting industrial systems carefully enough to avoid mass civilian casualties while still causing economic damage — suggests an operator with both technical sophistication and strategic discipline.",
+      "Predatory Sparrow's restraint in its Iranian attacks  -  targeting industrial systems carefully enough to avoid mass civilian casualties while still causing economic damage  -  suggests an operator with both technical sophistication and strategic discipline.",
     defenses: [
       { control: "OT/ICS network segmentation from IT networks", framework: "ICS-CERT guidance" },
       { control: "Industrial control system monitoring and anomaly detection", framework: "NIST SP 800-82" },
@@ -1487,9 +1487,9 @@ export const cards: TarotCard[] = [
       "Claimed access to Israeli defense infrastructure (2021–2022)",
     ],
     flavor:
-      "Moses Staff takes what it finds, publishes it to embarrass, then destroys the systems it came from. It is a weapon designed for humiliation as much as harm — the stolen document, the leaked database, the encrypted server. The Flood leaves nothing clean.",
+      "Moses Staff takes what it finds, publishes it to embarrass, then destroys the systems it came from. It is a weapon designed for humiliation as much as harm  -  the stolen document, the leaked database, the encrypted server. The Flood leaves nothing clean.",
     reversedMeaning:
-      "Moses Staff's combination of espionage and destruction operations muddies attribution — the simultaneous leak-and-destroy approach means victims must simultaneously do breach response, incident response, and public communications, stretching defensive resources dangerously thin.",
+      "Moses Staff's combination of espionage and destruction operations muddies attribution  -  the simultaneous leak-and-destroy approach means victims must simultaneously do breach response, incident response, and public communications, stretching defensive resources dangerously thin.",
     defenses: [
       { control: "Patch management prioritizing internet-facing Exchange and IIS", framework: "CIS Control 7" },
       { control: "Immutable backup systems geographically isolated", framework: "CIS Control 11" },
@@ -1508,7 +1508,7 @@ export const cards: TarotCard[] = [
     arcanum: "minor",
     suit: "wands",
     number: 3,
-    origin: "Iran (IRGC — Islamic Revolutionary Guard Corps)",
+    origin: "Iran (IRGC  -  Islamic Revolutionary Guard Corps)",
     category: "nation-state",
     since: "Active since ~2020",
     motivation: ["US/Israel critical infrastructure targeting", "OT/ICS disruption", "Water system attacks"],
@@ -1521,13 +1521,13 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1491.002", name: "External Defacement", tactic: "Impact" },
     ],
     notableOps: [
-      "Aliquippa, PA water authority — Unitronics PLC compromise (Nov 2023)",
+      "Aliquippa, PA water authority  -  Unitronics PLC compromise (Nov 2023)",
       "Multiple US water utilities targeted via default credentials",
       "CISA emergency alert for water sector (Dec 2023)",
       "US Treasury sanctions on IRGC Cyberspace Battalion officers (2024)",
     ],
     flavor:
-      "It found Israeli-made programmable logic controllers in American water plants and changed their setpoints. It was not subtle — it left its name on the screen. The Wrench is not a scalpel; it is a statement. Your infrastructure runs on components with origins it finds objectionable.",
+      "It found Israeli-made programmable logic controllers in American water plants and changed their setpoints. It was not subtle  -  it left its name on the screen. The Wrench is not a scalpel; it is a statement. Your infrastructure runs on components with origins it finds objectionable.",
     reversedMeaning:
       "Cyber Av3ngers' use of default credentials as its primary attack vector reveals the defensive gap it exploits: the water sector's chronic underinvestment in basic cybersecurity hygiene, not sophisticated tradecraft, enabled the intrusion.",
     defenses: [
@@ -1561,18 +1561,18 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1568", name: "Dynamic Resolution", tactic: "Command and Control" },
     ],
     notableOps: [
-      "SolarWinds Orion supply chain compromise — SUNBURST backdoor (2020)",
+      "SolarWinds Orion supply chain compromise  -  SUNBURST backdoor (2020)",
       "Undetected for 9 months across US government networks",
       "US Treasury and Commerce Department email compromise",
       "FireEye red team tools stolen and disclosed",
     ],
     flavor:
-      "It did not break into the agencies. It was invited in — installed with a software update, cryptographically signed, trusted by every security tool that checked. For nine months, The Invisible Chain moved through the US government undetected, because it arrived as a legitimate patch.",
+      "It did not break into the agencies. It was invited in  -  installed with a software update, cryptographically signed, trusted by every security tool that checked. For nine months, The Invisible Chain moved through the US government undetected, because it arrived as a legitimate patch.",
     reversedMeaning:
-      "The SolarWinds intrusion was discovered not by a government agency but by a private security firm — FireEye — who noticed their own red team tools had been stolen. The chain of discovery exposed significant gaps in federal detection capabilities.",
+      "The SolarWinds intrusion was discovered not by a government agency but by a private security firm  -  FireEye  -  who noticed their own red team tools had been stolen. The chain of discovery exposed significant gaps in federal detection capabilities.",
     defenses: [
       { control: "Software supply chain integrity verification and SBOM tracking", framework: "NIST CSF: ID.SC" },
-      { control: "Zero-trust network architecture — no implicit trust for internal traffic", framework: "CISA Zero Trust Maturity" },
+      { control: "Zero-trust network architecture  -  no implicit trust for internal traffic", framework: "CISA Zero Trust Maturity" },
       { control: "Detection of anomalous OAuth token usage and API access", framework: "NIST CSF: DE.CM" },
       { control: "Privileged access workstations for sensitive administrative tasks", framework: "CIS Control 12" },
     ],
@@ -1601,7 +1601,7 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1600", name: "Weaken Encryption", tactic: "Defense Evasion" },
     ],
     notableOps: [
-      "Natanz centrifuge destruction — 1,000+ centrifuges damaged (2009–2010)",
+      "Natanz centrifuge destruction  -  1,000+ centrifuges damaged (2009–2010)",
       "First confirmed cyberweapon to cause physical destruction",
       "Four Windows zero-days used simultaneously",
       "Air-gap crossing via infected USB drives",
@@ -1609,7 +1609,7 @@ export const cards: TarotCard[] = [
     flavor:
       "The Saboteur crossed the air gap on a USB drive, found its target inside the most protected nuclear facility in Iran, spun enrichment centrifuges to destruction while reporting normal operation to monitoring systems, and set back the Iranian nuclear program by years. It was not malware. It was a weapon.",
     reversedMeaning:
-      "When Stuxnet escaped Natanz and spread across the internet, its discovery became inevitable. The most sophisticated cyberweapon ever deployed was exposed because its air-gap-crossing mechanism worked too well — it left the intended target and spread to the world.",
+      "When Stuxnet escaped Natanz and spread across the internet, its discovery became inevitable. The most sophisticated cyberweapon ever deployed was exposed because its air-gap-crossing mechanism worked too well  -  it left the intended target and spread to the world.",
     defenses: [
       { control: "USB and removable media controls on critical infrastructure", framework: "ICS-CERT guidance" },
       { control: "OT/ICS anomaly detection for PLC behavior", framework: "NIST SP 800-82" },
@@ -1628,7 +1628,7 @@ export const cards: TarotCard[] = [
     arcanum: "minor",
     suit: "wands",
     number: 6,
-    origin: "Sudan / Russia (disputed — possible Russian front)",
+    origin: "Sudan / Russia (disputed  -  possible Russian front)",
     category: "hacktivist",
     since: "Active since ~2023",
     motivation: ["Anti-Western DDoS operations", "Disruption of US/EU services", "Geopolitical pressure"],
@@ -1640,15 +1640,15 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1491.002", name: "External Defacement", tactic: "Impact" },
     ],
     notableOps: [
-      "Microsoft 365, Outlook, Teams DDoS — 30,000+ customers impacted (June 2023)",
-      "US hospital DDoS campaigns — patient care disruption",
+      "Microsoft 365, Outlook, Teams DDoS  -  30,000+ customers impacted (June 2023)",
+      "US hospital DDoS campaigns  -  patient care disruption",
       "ChatGPT outages (2023)",
       "US DoJ indictment of Sudanese national (2024)",
     ],
     flavor:
-      "Hospitals, cloud platforms, airlines — The Thunderhead does not discriminate. It rents botnet capacity, builds layer-7 attack infrastructure, and floods services until they go dark. Whether hacktivist or Russian proxy, the effect is the same: disruption at scale, for causes it publishes on Telegram.",
+      "Hospitals, cloud platforms, airlines  -  The Thunderhead does not discriminate. It rents botnet capacity, builds layer-7 attack infrastructure, and floods services until they go dark. Whether hacktivist or Russian proxy, the effect is the same: disruption at scale, for causes it publishes on Telegram.",
     reversedMeaning:
-      "US prosecutors indicted an Anonymous Sudan member in 2024, revealing the operator behind the persona — a reminder that DDoS actors who generate significant economic damage attract law enforcement attention regardless of their ideological framing.",
+      "US prosecutors indicted an Anonymous Sudan member in 2024, revealing the operator behind the persona  -  a reminder that DDoS actors who generate significant economic damage attract law enforcement attention regardless of their ideological framing.",
     defenses: [
       { control: "DDoS mitigation provider with Anycast scrubbing capacity", framework: "NIST CSF: PR.DS" },
       { control: "Rate limiting and traffic shaping on API and web endpoints", framework: "CIS Control 13" },
@@ -1686,7 +1686,7 @@ export const cards: TarotCard[] = [
     flavor:
       "On the day Russia invaded, Ukraine's Digital Minister posted a Telegram message and 200,000 people volunteered. The Volunteer Corps is something new: a state-coordinated civilian cyber army, given targeting lists by government and turned loose. Conflict has been digitized from below.",
     reversedMeaning:
-      "The IT Army's volunteer-heavy composition creates significant operational security risks — unvetted participants, inconsistent tradecraft, and potential for escalation beyond sanctioned targets make it a blunt instrument in a conflict that also demands precision.",
+      "The IT Army's volunteer-heavy composition creates significant operational security risks  -  unvetted participants, inconsistent tradecraft, and potential for escalation beyond sanctioned targets make it a blunt instrument in a conflict that also demands precision.",
     defenses: [
       { control: "DDoS mitigation and Anycast infrastructure for critical services", framework: "NIST CSF: PR.DS" },
       { control: "Redundant hosting and CDN for government web properties", framework: "NIST CSF: PR.DS" },
@@ -1722,9 +1722,9 @@ export const cards: TarotCard[] = [
       "Collaboration with Stormous ransomware group",
     ],
     flavor:
-      "It began as vigilantes hunting ISIS propaganda online. Then it partnered with ransomware operators and targeted water plants. The Fractured Flag is the story of hacktivist groups without institutional accountability — the mission drifts, the allies change, and what begins as principle ends as crime.",
+      "It began as vigilantes hunting ISIS propaganda online. Then it partnered with ransomware operators and targeted water plants. The Fractured Flag is the story of hacktivist groups without institutional accountability  -  the mission drifts, the allies change, and what begins as principle ends as crime.",
     reversedMeaning:
-      "GhostSec's pivot to ransomware destroyed its credibility as a hacktivist group — the alliance with criminal operators and deployment of GhostLocker demonstrated how ideologically-motivated groups can be co-opted by financial interests when loose organizational structure provides no accountability.",
+      "GhostSec's pivot to ransomware destroyed its credibility as a hacktivist group  -  the alliance with criminal operators and deployment of GhostLocker demonstrated how ideologically-motivated groups can be co-opted by financial interests when loose organizational structure provides no accountability.",
     defenses: [
       { control: "OT/ICS network monitoring for anomalous access attempts", framework: "NIST SP 800-82" },
       { control: "DDoS resilience for internet-facing infrastructure", framework: "NIST CSF: PR.DS" },
@@ -1755,15 +1755,15 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1213", name: "Data from Information Repositories", tactic: "Collection" },
     ],
     notableOps: [
-      "Turkish government email leak — corruption documents published (2013)",
+      "Turkish government email leak  -  corruption documents published (2013)",
       "Police database breach exposing officer identities",
       "Ankara municipality email archive released",
       "Classified Turkish military documents leaked",
     ],
     flavor:
-      "Founded by Turkish leftists, prosecuted under anti-terrorism laws, and undeterred. The Red Star leaks what the Turkish government wishes stayed hidden — police files, ministerial emails, municipal contracts. It is political opposition conducted through exfiltration.",
+      "Founded by Turkish leftists, prosecuted under anti-terrorism laws, and undeterred. The Red Star leaks what the Turkish government wishes stayed hidden  -  police files, ministerial emails, municipal contracts. It is political opposition conducted through exfiltration.",
     reversedMeaning:
-      "Turkish authorities have prosecuted multiple RedHack members successfully under broadly-applied terrorism statutes — illustrating how domestic hacktivist groups operating against their own governments face a fundamentally different legal risk than groups targeting foreign states.",
+      "Turkish authorities have prosecuted multiple RedHack members successfully under broadly-applied terrorism statutes  -  illustrating how domestic hacktivist groups operating against their own governments face a fundamentally different legal risk than groups targeting foreign states.",
     defenses: [
       { control: "Internal email system access controls and DLP", framework: "CIS Control 3" },
       { control: "Privileged account monitoring for government systems", framework: "CIS Control 5" },
@@ -1793,7 +1793,7 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1048", name: "Exfiltration Over Alternative Protocol", tactic: "Exfiltration" },
     ],
     notableOps: [
-      "Mexican military leak — 6TB of SEDENA emails (2022)",
+      "Mexican military leak  -  6TB of SEDENA emails (2022)",
       "AMLO health records included in leak (cardiac condition)",
       "Colombian, Chilean, Peruvian military email archives published",
       "Mining company environmental violations documentation release",
@@ -1801,12 +1801,12 @@ export const cards: TarotCard[] = [
     flavor:
       "From Latin American networks, The Jungle Eye watches governments that watch their own people. It breached Mexico's military and released six terabytes of secrets, including the president's medical records. It publishes what power wants hidden, and it does it in the name of the forest.",
     reversedMeaning:
-      "Guacamaya's exploitation of ProxyShell and ProxyLogon — vulnerabilities patched years before their attacks — revealed that Latin American military and government organizations had critically neglected basic patch management hygiene.",
+      "Guacamaya's exploitation of ProxyShell and ProxyLogon  -  vulnerabilities patched years before their attacks  -  revealed that Latin American military and government organizations had critically neglected basic patch management hygiene.",
     defenses: [
       { control: "Urgent patching of Microsoft Exchange ProxyShell/ProxyLogon", framework: "CIS Control 7" },
       { control: "Email archive access controls and data classification", framework: "CIS Control 3" },
       { control: "Government network segmentation and access logging", framework: "CIS Control 12" },
-      { control: "Data minimization — reduce what sensitive data is email-accessible", framework: "NIST CSF: PR.DS" },
+      { control: "Data minimization  -  reduce what sensitive data is email-accessible", framework: "NIST CSF: PR.DS" },
     ],
     riskLevel: 3,
     mitreGroupId: undefined,
@@ -1837,7 +1837,7 @@ export const cards: TarotCard[] = [
       "Coordinated attacks timed to political events",
     ],
     flavor:
-      "The Affiliate does not act alone — it coordinates, it republishes targets, it amplifies. UserSec is part of an ecosystem of pro-Russian hacktivist groups that operate in loose confederation, sharing infrastructure and timing attacks for maximum political theatre.",
+      "The Affiliate does not act alone  -  it coordinates, it republishes targets, it amplifies. UserSec is part of an ecosystem of pro-Russian hacktivist groups that operate in loose confederation, sharing infrastructure and timing attacks for maximum political theatre.",
     reversedMeaning:
       "UserSec and similar affiliates demonstrate the limits of DDoS as a strategic tool: their attacks generate media coverage far disproportionate to actual damage, and Western governments have learned to respond with muted public statements that deny the group the narrative win it seeks.",
     defenses: [
@@ -1876,9 +1876,9 @@ export const cards: TarotCard[] = [
       "Spanish-language lure documents targeting local officials",
     ],
     flavor:
-      "The Blind Eagle hunts by region and by language. Its lures are in Spanish, its targets are in Bogota, Quito, and Panama City. It is one of the few known South American APT groups — operating in a region where cyber espionage has historically been underreported and underinvestigated.",
+      "The Blind Eagle hunts by region and by language. Its lures are in Spanish, its targets are in Bogota, Quito, and Panama City. It is one of the few known South American APT groups  -  operating in a region where cyber espionage has historically been underreported and underinvestigated.",
     reversedMeaning:
-      "Blind Eagle's heavy reliance on commodity RATs — NjRAT, Imminent Monitor — widely available on criminal forums makes attribution difficult and defenses more achievable; standard endpoint protection catches its tools more reliably than custom malware.",
+      "Blind Eagle's heavy reliance on commodity RATs  -  NjRAT, Imminent Monitor  -  widely available on criminal forums makes attribution difficult and defenses more achievable; standard endpoint protection catches its tools more reliably than custom malware.",
     defenses: [
       { control: "Email sandboxing for Spanish-language documents and archives", framework: "CIS Control 9" },
       { control: "Endpoint protection with RAT detection capabilities", framework: "NIST CSF: DE.CM" },
@@ -1916,9 +1916,9 @@ export const cards: TarotCard[] = [
       "European diplomatic missions in Asia targeted",
     ],
     flavor:
-      "The Mercenary Wing moves quietly through the governments of Southeast Asia — a region where attribution is contested, allies shift, and no single power dominates the intelligence landscape. It leaves custom implants in diplomatic networks and military ministries, and it does not announce itself.",
+      "The Mercenary Wing moves quietly through the governments of Southeast Asia  -  a region where attribution is contested, allies shift, and no single power dominates the intelligence landscape. It leaves custom implants in diplomatic networks and military ministries, and it does not announce itself.",
     reversedMeaning:
-      "Yellow Garuda's relatively recent emergence and limited public attribution means the defensive community has had less time to build detection signatures — its novel malware frameworks like Ninja give it operational advantages that decay as analysis matures.",
+      "Yellow Garuda's relatively recent emergence and limited public attribution means the defensive community has had less time to build detection signatures  -  its novel malware frameworks like Ninja give it operational advantages that decay as analysis matures.",
     defenses: [
       { control: "Microsoft Exchange patching and hardening, IIS monitoring", framework: "CIS Control 7" },
       { control: "Web shell detection via file integrity monitoring", framework: "NIST CSF: DE.CM" },
@@ -1950,13 +1950,13 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1560", name: "Archive Collected Data", tactic: "Collection" },
     ],
     notableOps: [
-      "Google breach — source code and Gmail accounts of Chinese dissidents (2009)",
+      "Google breach  -  source code and Gmail accounts of Chinese dissidents (2009)",
       "30+ major technology and defense companies compromised",
       "IE zero-day (CVE-2010-0249) exploitation at scale",
       "Led Google to reconsider China operations and harden security globally",
     ],
     flavor:
-      "It breached Google and read the Gmail of Chinese human rights activists. It stole source code from Adobe, Intel, and two dozen other companies. When Google disclosed it — a company, not a government, going public with an intrusion by a nation-state — it changed what was considered possible to say.",
+      "It breached Google and read the Gmail of Chinese human rights activists. It stole source code from Adobe, Intel, and two dozen other companies. When Google disclosed it  -  a company, not a government, going public with an intrusion by a nation-state  -  it changed what was considered possible to say.",
     reversedMeaning:
       "Operation Aurora's disclosure by Google was a watershed: a technology company naming a nation-state attacker in a public statement was unprecedented. That decision, and the corporate hardening it prompted industry-wide, represents Aurora's unintended greatest impact.",
     defenses: [
@@ -1970,7 +1970,7 @@ export const cards: TarotCard[] = [
   },
 
   // ─────────────────────────────────────────
-  // MINOR ARCANA — CUPS (Social Engineering & Deception)
+  // MINOR ARCANA  -  CUPS (Social Engineering & Deception)
   // ─────────────────────────────────────────
 
   {
@@ -1995,18 +1995,18 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1213", name: "Data from Information Repositories", tactic: "Collection" },
     ],
     notableOps: [
-      "Nvidia source code theft — 1TB including DLSS (2022)",
+      "Nvidia source code theft  -  1TB including DLSS (2022)",
       "Samsung source code and biometric data theft",
-      "Microsoft Azure DevOps breach — Bing and Cortana source code",
+      "Microsoft Azure DevOps breach  -  Bing and Cortana source code",
       "Rockstar Games GTA VI pre-release footage leak",
-      "Okta breach — customer support system access",
+      "Okta breach  -  customer support system access",
     ],
     flavor:
-      "The Jester is a teenager who called Microsoft's help desk. Then Samsung's. Then Nvidia's. Lapsus$ discovered that corporations spending millions on technical security had left their phone lines and help desks completely open — and that social engineering could defeat any MFA if someone was willing to make enough calls.",
+      "The Jester is a teenager who called Microsoft's help desk. Then Samsung's. Then Nvidia's. Lapsus$ discovered that corporations spending millions on technical security had left their phone lines and help desks completely open  -  and that social engineering could defeat any MFA if someone was willing to make enough calls.",
     reversedMeaning:
-      "Multiple Lapsus$ members were identified, arrested, and prosecuted — many were teenagers operating without operational security. Their notoriety-seeking behavior, bragging in public Telegram channels, and recruitment of insiders provided law enforcement with extensive evidence.",
+      "Multiple Lapsus$ members were identified, arrested, and prosecuted  -  many were teenagers operating without operational security. Their notoriety-seeking behavior, bragging in public Telegram channels, and recruitment of insiders provided law enforcement with extensive evidence.",
     defenses: [
-      { control: "Phishing-resistant MFA (FIDO2) — not SMS or push notification", framework: "NIST SP 800-63B" },
+      { control: "Phishing-resistant MFA (FIDO2)  -  not SMS or push notification", framework: "NIST SP 800-63B" },
       { control: "Help desk identity verification procedures beyond knowledge-based auth", framework: "NIST CSF: PR.AC" },
       { control: "Insider threat monitoring on privileged accounts and code repositories", framework: "NIST CSF: DE.CM" },
       { control: "Conditional access policies for cloud service access", framework: "CIS Control 6" },
@@ -2036,17 +2036,17 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1530", name: "Data from Cloud Storage", tactic: "Collection" },
     ],
     notableOps: [
-      "0ktapus campaign — 130+ orgs via Okta credential phishing (2022)",
+      "0ktapus campaign  -  130+ orgs via Okta credential phishing (2022)",
       "Telecom employee SIM swap operations targeting crypto holders",
       "MGM and Caesars (in coordination with Scattered Spider)",
       "Azure and AWS tenant compromise via phished admin credentials",
     ],
     flavor:
-      "It calls a telecom store employee, invents a story about a lost phone, and transfers a victim's number to a SIM it controls. Then it resets every account tied to that number. The Sim Swap turns the phone carrier — the thing everyone uses to recover accounts — into the attack vector.",
+      "It calls a telecom store employee, invents a story about a lost phone, and transfers a victim's number to a SIM it controls. Then it resets every account tied to that number. The Sim Swap turns the phone carrier  -  the thing everyone uses to recover accounts  -  into the attack vector.",
     reversedMeaning:
-      "SIM swapping's reliance on telecom employee social engineering creates a ceiling on scale — each attack requires a human to be deceived, limiting throughput. When telecoms implemented stronger internal verification procedures, the attack's effectiveness declined significantly.",
+      "SIM swapping's reliance on telecom employee social engineering creates a ceiling on scale  -  each attack requires a human to be deceived, limiting throughput. When telecoms implemented stronger internal verification procedures, the attack's effectiveness declined significantly.",
     defenses: [
-      { control: "Remove phone number as account recovery method — use authenticator apps", framework: "NIST SP 800-63B" },
+      { control: "Remove phone number as account recovery method  -  use authenticator apps", framework: "NIST SP 800-63B" },
       { control: "FIDO2 hardware security keys for high-value accounts", framework: "CISA guidance" },
       { control: "Account port-out PINs and verbal verification at telecom providers", framework: "FCC guidance" },
       { control: "Cloud access monitoring for anomalous login locations and patterns", framework: "NIST CSF: DE.AE" },
@@ -2082,9 +2082,9 @@ export const cards: TarotCard[] = [
       "SEC charges against alleged operators (2015)",
     ],
     flavor:
-      "The Insider does not want your credit card numbers. It wants to know if the drug trial succeeded before the press release. It targets board members, executives, and their advisors — reading emails that will move markets before markets know they should move. It trades on what it steals.",
+      "The Insider does not want your credit card numbers. It wants to know if the drug trial succeeded before the press release. It targets board members, executives, and their advisors  -  reading emails that will move markets before markets know they should move. It trades on what it steals.",
     reversedMeaning:
-      "FIN4's narrow focus on insider trading intelligence made it highly identifiable — when patterns of M&A-related email compromise correlated with unusual options activity, the SEC and security researchers triangulated the connection, leading to the first major attribution of a financially-motivated cyber espionage group.",
+      "FIN4's narrow focus on insider trading intelligence made it highly identifiable  -  when patterns of M&A-related email compromise correlated with unusual options activity, the SEC and security researchers triangulated the connection, leading to the first major attribution of a financially-motivated cyber espionage group.",
     defenses: [
       { control: "Board and C-suite account hardening with hardware MFA", framework: "NIST SP 800-63B" },
       { control: "Email DLP monitoring for sensitive M&A and clinical data", framework: "NIST CSF: PR.DS" },
@@ -2119,12 +2119,12 @@ export const cards: TarotCard[] = [
       "US retail and hospitality POS skimmer campaigns",
       "BADHATCH backdoor deployment across hospitality chains",
       "Pivot to Noberus/ALPHV ransomware affiliate (2021–2022)",
-      "Years-long gaps between campaigns — careful operational pacing",
+      "Years-long gaps between campaigns  -  careful operational pacing",
     ],
     flavor:
-      "It studied the hospitality industry's POS systems, found the gap between checkout and settlement, and inserted itself there. Millions of card numbers, captured at the swipe, sold in batches. The Hospitality Thief is patient — it disappears for months and returns when defenses relax.",
+      "It studied the hospitality industry's POS systems, found the gap between checkout and settlement, and inserted itself there. Millions of card numbers, captured at the swipe, sold in batches. The Hospitality Thief is patient  -  it disappears for months and returns when defenses relax.",
     reversedMeaning:
-      "FIN8's unusual operational pattern — long pauses between campaigns — reflects a discipline that paradoxically aids defenders: extended quiet periods allow threat intelligence to go stale, but also give defenders time to reset, patch, and update detection capabilities.",
+      "FIN8's unusual operational pattern  -  long pauses between campaigns  -  reflects a discipline that paradoxically aids defenders: extended quiet periods allow threat intelligence to go stale, but also give defenders time to reset, patch, and update detection capabilities.",
     defenses: [
       { control: "Point-to-point encryption for all POS card data", framework: "PCI DSS Requirement 4" },
       { control: "Network segmentation isolating POS systems", framework: "PCI DSS Requirement 1" },
@@ -2156,15 +2156,15 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1486", name: "Data Encrypted for Impact", tactic: "Impact" },
     ],
     notableOps: [
-      "Dridex banking trojan distribution — billions in banking fraud",
+      "Dridex banking trojan distribution  -  billions in banking fraud",
       "Locky ransomware global campaigns",
       "FlawedAmmyy RAT and ServHelper malware distribution",
       "Clop ransomware affiliate operations",
     ],
     flavor:
-      "TA505 is infrastructure. It does not specialize in one crime — it specializes in delivery. The Broker runs the largest spam and malware distribution operation ever documented, renting its capacity to ransomware groups, banking trojan operators, and whoever pays. It is a criminal logistics company.",
+      "TA505 is infrastructure. It does not specialize in one crime  -  it specializes in delivery. The Broker runs the largest spam and malware distribution operation ever documented, renting its capacity to ransomware groups, banking trojan operators, and whoever pays. It is a criminal logistics company.",
     reversedMeaning:
-      "TA505's scale — the sheer volume of malicious email — ultimately generates extensive telemetry that feeds detection systems globally. The same volume that makes it dangerous makes it one of the best-documented threat actors, with indicator sharing across the security industry.",
+      "TA505's scale  -  the sheer volume of malicious email  -  ultimately generates extensive telemetry that feeds detection systems globally. The same volume that makes it dangerous makes it one of the best-documented threat actors, with indicator sharing across the security industry.",
     defenses: [
       { control: "Email filtering with attachment sandboxing and URL scanning", framework: "CIS Control 9" },
       { control: "User training on malicious macro-enabled documents", framework: "NIST SP 800-50" },
@@ -2204,7 +2204,7 @@ export const cards: TarotCard[] = [
     flavor:
       "It sends hotel staff a fake booking confirmation. The attachment is a reservation. The attachment is also a remote access trojan. The False Itinerary has spent years in the reservations inbox of hotels across Latin America, reading guest credit cards and booking data for financial fraud.",
     reversedMeaning:
-      "TA558's geographic concentration in Latin America and consistent targeting of the travel sector created predictable patterns that allowed industry-specific threat intelligence to build effective defenses — sector-specific sharing networks proved particularly valuable.",
+      "TA558's geographic concentration in Latin America and consistent targeting of the travel sector created predictable patterns that allowed industry-specific threat intelligence to build effective defenses  -  sector-specific sharing networks proved particularly valuable.",
     defenses: [
       { control: "Disable VBA macros and script execution from email attachments", framework: "CIS Control 9" },
       { control: "Hotel PMS system network segmentation from corporate email", framework: "CIS Control 12" },
@@ -2242,9 +2242,9 @@ export const cards: TarotCard[] = [
       "Israeli critical infrastructure targeting (2022)",
     ],
     flavor:
-      "The Watering Hole does not go to its targets. It goes to the place its targets go — an IT support company, a defense contractor's recruiting portal, a Kurdish news website — and waits. Compromise the supplier, compromise the customer. Compromise the watering hole, drink from every cup.",
+      "The Watering Hole does not go to its targets. It goes to the place its targets go  -  an IT support company, a defense contractor's recruiting portal, a Kurdish news website  -  and waits. Compromise the supplier, compromise the customer. Compromise the watering hole, drink from every cup.",
     reversedMeaning:
-      "Tortoiseshell's supply chain approach means that when a victim IT company discovers the compromise, all of its customers must be considered potentially exposed — the resulting notification cascade can generate significant intelligence for defenders about the full scope of operations.",
+      "Tortoiseshell's supply chain approach means that when a victim IT company discovers the compromise, all of its customers must be considered potentially exposed  -  the resulting notification cascade can generate significant intelligence for defenders about the full scope of operations.",
     defenses: [
       { control: "Third-party vendor security assessments and continuous monitoring", framework: "NIST CSF: ID.SC" },
       { control: "Browser isolation for high-risk web browsing", framework: "CIS Control 9" },
@@ -2276,15 +2276,15 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1071.001", name: "Web Protocols", tactic: "Command and Control" },
     ],
     notableOps: [
-      "Operation Parliament — senior government officials across Middle East (2018)",
+      "Operation Parliament  -  senior government officials across Middle East (2018)",
       "KASPERAGENT and MICROPSIA malware campaigns",
       "Palestinian conflict-themed lures targeting Israeli government",
       "Decade-long persistent targeting of the Israeli-Palestinian conflict zone",
     ],
     flavor:
-      "The Gaza Whisper has operated through wars, ceasefires, and political crises — quietly, from within the conflict itself. It uses the news as its lure: the latest rocket attack, the peace negotiation, the humanitarian crisis. Every headline is a phishing opportunity.",
+      "The Gaza Whisper has operated through wars, ceasefires, and political crises  -  quietly, from within the conflict itself. It uses the news as its lure: the latest rocket attack, the peace negotiation, the humanitarian crisis. Every headline is a phishing opportunity.",
     reversedMeaning:
-      "Molerats' operation from within an active conflict zone creates unusual constraints — infrastructure disruptions, power outages, and regional internet instability affect operations as much as they affect victims, creating intermittent campaigns that make tracking difficult but reveal operational geography.",
+      "Molerats' operation from within an active conflict zone creates unusual constraints  -  infrastructure disruptions, power outages, and regional internet instability affect operations as much as they affect victims, creating intermittent campaigns that make tracking difficult but reveal operational geography.",
     defenses: [
       { control: "Middle East geopolitical news themed phishing awareness training", framework: "NIST SP 800-50" },
       { control: "Email attachment sandboxing for Arabic-language documents", framework: "CIS Control 9" },
@@ -2324,10 +2324,10 @@ export const cards: TarotCard[] = [
     flavor:
       "The Persona Collective built fake news websites, maintained social media identities for years, and used them to gain the trust of journalists and activists before deploying mobile spyware. It is the most elaborate persona operation ever documented by a private surveillance contractor.",
     reversedMeaning:
-      "Bahamut's extensive fake infrastructure — the news websites, the Twitter accounts, the VPN apps — created a sprawling digital footprint that Bellingcat, CitizenLab, and BlackBerry researchers mapped comprehensively, providing an unusually complete picture of a private intelligence contractor's operations.",
+      "Bahamut's extensive fake infrastructure  -  the news websites, the Twitter accounts, the VPN apps  -  created a sprawling digital footprint that Bellingcat, CitizenLab, and BlackBerry researchers mapped comprehensively, providing an unusually complete picture of a private intelligence contractor's operations.",
     defenses: [
       { control: "Mobile device management with app allowlisting", framework: "NIST SP 800-124" },
-      { control: "iOS and Android app source verification — official stores only", framework: "CIS Mobile Security" },
+      { control: "iOS and Android app source verification  -  official stores only", framework: "CIS Mobile Security" },
       { control: "Journalist and activist digital security training", framework: "Access Now Digital Security" },
       { control: "Social engineering awareness for persona-based approaches", framework: "NIST SP 800-50" },
     ],
@@ -2362,9 +2362,9 @@ export const cards: TarotCard[] = [
       "Cryptocurrency platform customer data and trading intelligence theft",
     ],
     flavor:
-      "It arrives in the compliance department's inbox as a KYC document — the identity verification packets that fintech companies process constantly. Inside is a Python backdoor. The False KYC has spent years inside financial technology firms, reading trading data and customer records for whoever hired it.",
+      "It arrives in the compliance department's inbox as a KYC document  -  the identity verification packets that fintech companies process constantly. Inside is a Python backdoor. The False KYC has spent years inside financial technology firms, reading trading data and customer records for whoever hired it.",
     reversedMeaning:
-      "Evilnum's mercenary nature — selling access and intelligence to multiple clients — creates operational security risks inherent to the model: different clients may take different actions with stolen data, creating divergent forensic trails that helped researchers map the group's full scope.",
+      "Evilnum's mercenary nature  -  selling access and intelligence to multiple clients  -  creates operational security risks inherent to the model: different clients may take different actions with stolen data, creating divergent forensic trails that helped researchers map the group's full scope.",
     defenses: [
       { control: "Fintech sector threat intelligence sharing on document-based lures", framework: "FS-ISAC guidance" },
       { control: "KYC document processing system network isolation", framework: "CIS Control 12" },
@@ -2404,7 +2404,7 @@ export const cards: TarotCard[] = [
     flavor:
       "The Ghostwriter does not write news. It writes the news it needs. It compromises news websites, publishes fake statements from real politicians, and lets the fabricated story circulate before correction is possible. By the time the retraction appears, the narrative has already traveled.",
     reversedMeaning:
-      "GhostWriter's influence operations are undermined by speed — digital forensics and platform labeling can now flag manipulated content rapidly, and the coordinated attribution by multiple Western intelligence agencies publicly disrupted the operation's plausible deniability.",
+      "GhostWriter's influence operations are undermined by speed  -  digital forensics and platform labeling can now flag manipulated content rapidly, and the coordinated attribution by multiple Western intelligence agencies publicly disrupted the operation's plausible deniability.",
     defenses: [
       { control: "Two-factor authentication on news site and government CMS systems", framework: "CIS Control 6" },
       { control: "Media literacy programs in targeted Baltic and Polish populations", framework: "EU DisinfoLab guidance" },
@@ -2441,9 +2441,9 @@ export const cards: TarotCard[] = [
       "Coordinated with UNC2452 SolarWinds operations",
     ],
     flavor:
-      "While UNC2452 deployed SUNBURST through the SolarWinds update, SilverFish was inside SolarWinds itself — monitoring the build environment, reading victim data as it flowed through the supply chain, watching 4,700 organizations from a single vantage point inside the update pipeline.",
+      "While UNC2452 deployed SUNBURST through the SolarWinds update, SilverFish was inside SolarWinds itself  -  monitoring the build environment, reading victim data as it flowed through the supply chain, watching 4,700 organizations from a single vantage point inside the update pipeline.",
     reversedMeaning:
-      "The SolarWinds compromise's discovery triggered one of the most extensive threat-hunting operations in corporate history — while SilverFish had exceptional access, the forensic response it triggered permanently hardened software supply chain practices industry-wide.",
+      "The SolarWinds compromise's discovery triggered one of the most extensive threat-hunting operations in corporate history  -  while SilverFish had exceptional access, the forensic response it triggered permanently hardened software supply chain practices industry-wide.",
     defenses: [
       { control: "Software build pipeline integrity monitoring and signing", framework: "NIST CSF: ID.SC" },
       { control: "OAuth token audit and conditional access enforcement", framework: "CIS Control 6" },
@@ -2480,9 +2480,9 @@ export const cards: TarotCard[] = [
       "Open-source RAT distribution and resale operations",
     ],
     flavor:
-      "The Petty Face does not choose between espionage and crime — it does both, sloppily. It targets governments with the same commodity RATs it sells to other criminals. Its operational security is poor, its ambitions exceed its discipline, and its name was earned: it wears the face of something dangerous while being mainly noise.",
+      "The Petty Face does not choose between espionage and crime  -  it does both, sloppily. It targets governments with the same commodity RATs it sells to other criminals. Its operational security is poor, its ambitions exceed its discipline, and its name was earned: it wears the face of something dangerous while being mainly noise.",
     reversedMeaning:
-      "Gorgon Group's poor operational security — publicly documented social media, reused infrastructure, and commodity tooling — made it one of the easiest APT groups to expose and attribute, demonstrating that nation-state proxies operating in the cybercriminal underground face much higher attribution risk.",
+      "Gorgon Group's poor operational security  -  publicly documented social media, reused infrastructure, and commodity tooling  -  made it one of the easiest APT groups to expose and attribute, demonstrating that nation-state proxies operating in the cybercriminal underground face much higher attribution risk.",
     defenses: [
       { control: "Block commodity RAT C2 traffic via threat intelligence feeds", framework: "CIS Control 9" },
       { control: "VBA macro controls for Office documents from email", framework: "CIS Control 2" },
@@ -2514,15 +2514,15 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1125", name: "Video Capture", tactic: "Collection" },
     ],
     notableOps: [
-      "Ecuadorian military targeting — sensitive military documents exfiltrated",
+      "Ecuadorian military targeting  -  sensitive military documents exfiltrated",
       "Decade of operations across Latin American armed forces",
       "Spanish-language lures themed around regional political events",
       "Custom Python-based implant with keylogging and screen capture",
     ],
     flavor:
-      "The Latin Blade has cut through Latin American military networks for over a decade — Ecuador's armed forces, Colombia's defense ministry, Nicaragua's government. It is quiet, persistent, and focused on the intelligence needs of its sponsor. It has never made international headlines. That is the point.",
+      "The Latin Blade has cut through Latin American military networks for over a decade  -  Ecuador's armed forces, Colombia's defense ministry, Nicaragua's government. It is quiet, persistent, and focused on the intelligence needs of its sponsor. It has never made international headlines. That is the point.",
     reversedMeaning:
-      "Machete's long operational lifespan without significant disruption reflects the low level of cybersecurity investment across many Latin American military organizations — defenders who lack visibility into their own networks cannot find what is hiding in them.",
+      "Machete's long operational lifespan without significant disruption reflects the low level of cybersecurity investment across many Latin American military organizations  -  defenders who lack visibility into their own networks cannot find what is hiding in them.",
     defenses: [
       { control: "Endpoint protection with behavioral monitoring for Python-based implants", framework: "NIST CSF: DE.CM" },
       { control: "Email security with Spanish-language document analysis", framework: "CIS Control 9" },
@@ -2534,7 +2534,7 @@ export const cards: TarotCard[] = [
   },
 
   // ─────────────────────────────────────────
-  // MINOR ARCANA — PENTACLES (Financial Crime & Ransomware)
+  // MINOR ARCANA  -  PENTACLES (Financial Crime & Ransomware)
   // ─────────────────────────────────────────
 
   {
@@ -2559,13 +2559,13 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1657", name: "Financial Theft", tactic: "Impact" },
     ],
     notableOps: [
-      "MOVEit zero-day exploitation — 2,000+ organizations, 62M+ individuals (2023)",
-      "GoAnywhere MFT zero-day — 130+ organizations (2023)",
-      "Accellion FTA zero-day campaign — financial and government sectors (2021)",
+      "MOVEit zero-day exploitation  -  2,000+ organizations, 62M+ individuals (2023)",
+      "GoAnywhere MFT zero-day  -  130+ organizations (2023)",
+      "Accellion FTA zero-day campaign  -  financial and government sectors (2021)",
       "Shell, BBC, British Airways, NHS data breaches via MOVEit",
     ],
     flavor:
-      "The Silent Toll discovered that every enterprise uses file transfer software. Every enterprise has a file transfer vulnerability. It finds them first, exploits them all at once, and charges a toll on every file that crossed the wire. The scale is industrial — millions of victims from a single zero-day.",
+      "The Silent Toll discovered that every enterprise uses file transfer software. Every enterprise has a file transfer vulnerability. It finds them first, exploits them all at once, and charges a toll on every file that crossed the wire. The scale is industrial  -  millions of victims from a single zero-day.",
     reversedMeaning:
       "Cl0p's mass exploitation approach creates its own limitations: so many victims notified simultaneously overwhelmed its negotiation capacity, many organizations opted for notification over payment, and the sheer scale attracted coordinated international law enforcement action.",
     defenses: [
@@ -2599,15 +2599,15 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1003", name: "OS Credential Dumping", tactic: "Credential Access" },
     ],
     notableOps: [
-      "Colonial Pipeline — US East Coast fuel supply disruption (May 2021)",
+      "Colonial Pipeline  -  US East Coast fuel supply disruption (May 2021)",
       "Biden administration national emergency declaration",
       "$4.4M ransom paid; $2.3M recovered by DOJ",
       "Group disbanded after international pressure following Colonial attack",
     ],
     flavor:
-      "DarkSide shut down a 5,500-mile pipeline and triggered a national emergency — not because it wanted geopolitical chaos, but because it wanted $4.4 million. The Dark Dividend is what happens when ransomware-as-a-service affiliates operate without strategic judgment about what targets are too consequential to hit.",
+      "DarkSide shut down a 5,500-mile pipeline and triggered a national emergency  -  not because it wanted geopolitical chaos, but because it wanted $4.4 million. The Dark Dividend is what happens when ransomware-as-a-service affiliates operate without strategic judgment about what targets are too consequential to hit.",
     reversedMeaning:
-      "The Colonial Pipeline attack was DarkSide's undoing — international pressure, FBI infrastructure seizure recovering most of the ransom, and sudden US government focus on ransomware as a national security issue forced the group to shut down within weeks of its highest-profile success.",
+      "The Colonial Pipeline attack was DarkSide's undoing  -  international pressure, FBI infrastructure seizure recovering most of the ransom, and sudden US government focus on ransomware as a national security issue forced the group to shut down within weeks of its highest-profile success.",
     defenses: [
       { control: "OT/IT network segmentation for pipeline and energy control systems", framework: "NIST SP 800-82" },
       { control: "Multi-factor authentication on VPN and remote access", framework: "CIS Control 12" },
@@ -2641,7 +2641,7 @@ export const cards: TarotCard[] = [
     notableOps: [
       "130+ million ransom demanded from 1,300+ victims",
       "Costa Rica healthcare system attack disrupting patient care",
-      "FBI infiltration of Hive — decryption keys provided to 300+ victims (2022)",
+      "FBI infiltration of Hive  -  decryption keys provided to 300+ victims (2022)",
       "DOJ and Europol operation dismantled infrastructure (Jan 2023)",
     ],
     flavor:
@@ -2650,7 +2650,7 @@ export const cards: TarotCard[] = [
       "Hive's takedown was a landmark: the FBI spent seven months inside Hive's infrastructure, silently providing decryption keys to victims before going public. The operation demonstrated that law enforcement infiltration of RaaS infrastructure is operationally feasible and strategically effective.",
     defenses: [
       { control: "Healthcare sector offline backups and manual procedure fallbacks", framework: "HHS 405(d) guidance" },
-      { control: "RDP exposure elimination — no internet-facing RDP", framework: "CIS Control 12" },
+      { control: "RDP exposure elimination  -  no internet-facing RDP", framework: "CIS Control 12" },
       { control: "Patch management prioritization for healthcare systems", framework: "CIS Control 7" },
       { control: "Incident response retainer with healthcare sector specialization", framework: "NIST CSF: RS.RP" },
     ],
@@ -2684,9 +2684,9 @@ export const cards: TarotCard[] = [
       "Shut down within 3 months under law enforcement pressure",
     ],
     flavor:
-      "DarkSide died after Colonial Pipeline. BlackMatter was born two months later. It promised not to hit hospitals or pipelines — then hit grain cooperatives during harvest season. The Rebrand learned the wrong lessons: it thought the problem was the target, not the crime. It lasted three months.",
+      "DarkSide died after Colonial Pipeline. BlackMatter was born two months later. It promised not to hit hospitals or pipelines  -  then hit grain cooperatives during harvest season. The Rebrand learned the wrong lessons: it thought the problem was the target, not the crime. It lasted three months.",
     reversedMeaning:
-      "BlackMatter's rapid shutdown demonstrates the fragility of RaaS operations under sustained law enforcement pressure — the Colonial Pipeline aftermath created an environment where even renamed, restructured ransomware groups could not operate without existential risk from multiple international agencies.",
+      "BlackMatter's rapid shutdown demonstrates the fragility of RaaS operations under sustained law enforcement pressure  -  the Colonial Pipeline aftermath created an environment where even renamed, restructured ransomware groups could not operate without existential risk from multiple international agencies.",
     defenses: [
       { control: "Agricultural sector ICS/OT security and network segmentation", framework: "NIST SP 800-82" },
       { control: "Backup and recovery testing for operational technology systems", framework: "CIS Control 11" },
@@ -2718,7 +2718,7 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1489", name: "Service Stop", tactic: "Impact" },
     ],
     notableOps: [
-      "Los Angeles Unified School District attack — student mental health records leaked (2022)",
+      "Los Angeles Unified School District attack  -  student mental health records leaked (2022)",
       "UK education sector systematic targeting",
       "Student PII including therapy notes published when ransom unpaid",
       "CISA advisory specifically warning education sector (2022)",
@@ -2726,7 +2726,7 @@ export const cards: TarotCard[] = [
     flavor:
       "It targets schools because schools have poor security, large datasets, and little budget for ransom. When Los Angeles Unified refused to pay, Vice Society published student therapy notes and mental health records. The Schoolyard does not care what it breaks to extract payment.",
     reversedMeaning:
-      "Vice Society's targeting of K-12 schools — organizations with political visibility and community sympathy — generated disproportionate government attention, resulting in a dedicated CISA advisory and coordinated law enforcement focus on a group that might otherwise have operated beneath the radar.",
+      "Vice Society's targeting of K-12 schools  -  organizations with political visibility and community sympathy  -  generated disproportionate government attention, resulting in a dedicated CISA advisory and coordinated law enforcement focus on a group that might otherwise have operated beneath the radar.",
     defenses: [
       { control: "Education sector incident response planning with state resources", framework: "CISA K-12 guidance" },
       { control: "Student PII data minimization and access controls", framework: "FERPA compliance" },
@@ -2764,7 +2764,7 @@ export const cards: TarotCard[] = [
       "Large-scale card data sold on dark web marketplaces",
     ],
     flavor:
-      "The Dark Counter sits inside retail POS systems and counts cards — millions of them, stripped from checkout terminals across American retail. It sold them in batches, then pivoted to ransomware when the market for card data saturated. It adapts. The business model evolves. The victims stay the same.",
+      "The Dark Counter sits inside retail POS systems and counts cards  -  millions of them, stripped from checkout terminals across American retail. It sold them in batches, then pivoted to ransomware when the market for card data saturated. It adapts. The business model evolves. The victims stay the same.",
     reversedMeaning:
       "FIN6's shift from card theft to ransomware reflected market dynamics: as payment networks improved fraud detection and card data prices fell, the ransomware business model offered better returns. Defenders who tracked the evolution had advance warning to shift defensive priorities.",
     defenses: [
@@ -2785,7 +2785,7 @@ export const cards: TarotCard[] = [
     arcanum: "minor",
     suit: "pentacles",
     number: 7,
-    origin: "Criminal (Eastern European — Ukraine/Russia)",
+    origin: "Criminal (Eastern European  -  Ukraine/Russia)",
     category: "criminal",
     since: "Active since ~2013",
     motivation: ["Direct bank account theft", "ATM jackpotting", "SWIFT transfer fraud"],
@@ -2798,15 +2798,15 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1657", name: "Financial Theft", tactic: "Impact" },
     ],
     notableOps: [
-      "First billion-dollar cybercrime operation — $1B stolen from 100+ banks",
-      "ATM jackpotting — machines dispensing cash on command",
-      "SWIFT fraud at Bangladesh Bank — $81M stolen (linked operations)",
+      "First billion-dollar cybercrime operation  -  $1B stolen from 100+ banks",
+      "ATM jackpotting  -  machines dispensing cash on command",
+      "SWIFT fraud at Bangladesh Bank  -  $81M stolen (linked operations)",
       "300+ financial institutions in 40+ countries targeted",
     ],
     flavor:
-      "The Banker did not rob a bank. It became a bank employee — spending months watching bank teller operations, learning transaction software, studying internal banking processes — then impersonated employees to transfer funds. One billion dollars. One hundred banks. No gun.",
+      "The Banker did not rob a bank. It became a bank employee  -  spending months watching bank teller operations, learning transaction software, studying internal banking processes  -  then impersonated employees to transfer funds. One billion dollars. One hundred banks. No gun.",
     reversedMeaning:
-      "Carbanak's lead developer Denis Katana was arrested in Spain in 2018 after an unprecedented Europol operation involving law enforcement from 15+ countries — demonstrating that even the most sophisticated billion-dollar cybercrime operations can be dismantled through patient international cooperation.",
+      "Carbanak's lead developer Denis Katana was arrested in Spain in 2018 after an unprecedented Europol operation involving law enforcement from 15+ countries  -  demonstrating that even the most sophisticated billion-dollar cybercrime operations can be dismantled through patient international cooperation.",
     defenses: [
       { control: "SWIFT Customer Security Programme controls implementation", framework: "SWIFT CSP" },
       { control: "ATM network monitoring and jackpotting countermeasures", framework: "FSB guidance" },
@@ -2825,7 +2825,7 @@ export const cards: TarotCard[] = [
     arcanum: "minor",
     suit: "pentacles",
     number: 8,
-    origin: "Criminal (Russian-speaking — likely Saint Petersburg)",
+    origin: "Criminal (Russian-speaking  -  likely Saint Petersburg)",
     category: "criminal",
     since: "Active since ~2016",
     motivation: ["Banking credential theft", "Ransomware payload delivery", "Enterprise network reconnaissance"],
@@ -2838,15 +2838,15 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1003.001", name: "LSASS Memory", tactic: "Credential Access" },
     ],
     notableOps: [
-      "TrickBot banking trojan — 250M+ machines infected globally",
-      "Ryuk ransomware delivery via TrickBot — $150M+ in ransoms",
+      "TrickBot banking trojan  -  250M+ machines infected globally",
+      "Ryuk ransomware delivery via TrickBot  -  $150M+ in ransoms",
       "US hospital attacks during COVID-19 pandemic (2020)",
       "UHS hospital chain attack affecting 400 US locations",
     ],
     flavor:
-      "TrickBot arrives first — the email, the attachment, the banking trojan. It learns the network, spreads, and steals credentials. Then it calls Ryuk. The Second Stage is what happens when cybercrime industrializes: one group for initial access, one for reconnaissance, one for the ransom. Division of labor at scale.",
+      "TrickBot arrives first  -  the email, the attachment, the banking trojan. It learns the network, spreads, and steals credentials. Then it calls Ryuk. The Second Stage is what happens when cybercrime industrializes: one group for initial access, one for reconnaissance, one for the ransom. Division of labor at scale.",
     reversedMeaning:
-      "Despite being one of the largest botnets ever constructed, TrickBot was significantly disrupted by a Microsoft-led legal and technical operation in October 2020 — executed days before the US election to prevent election system compromise. The disruption demonstrated private sector-led offensive cyber operations as a viable defensive tool.",
+      "Despite being one of the largest botnets ever constructed, TrickBot was significantly disrupted by a Microsoft-led legal and technical operation in October 2020  -  executed days before the US election to prevent election system compromise. The disruption demonstrated private sector-led offensive cyber operations as a viable defensive tool.",
     defenses: [
       { control: "Email sandbox and attachment detonation before delivery", framework: "CIS Control 9" },
       { control: "Network segmentation to limit TrickBot lateral movement", framework: "CIS Control 12" },
@@ -2878,15 +2878,15 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1583.005", name: "Botnet Infrastructure", tactic: "Resource Development" },
     ],
     notableOps: [
-      "World's largest malware botnet — 1.6M infected machines at peak",
+      "World's largest malware botnet  -  1.6M infected machines at peak",
       "Europol/FBI global takedown operation (January 2021)",
       "Resurrected by TrickBot operators in late 2021",
       "NATO, UN, and US government targeting alongside global spam campaigns",
     ],
     flavor:
-      "Emotet is the postal service of malware. It delivers whatever its clients need — TrickBot, Ryuk, Qbot, AnyDesk — to whatever inbox it can reach. At peak, 1.6 million machines waited for its instructions. When Europol took it down, the world exhaled. When it returned ten months later, the world understood: The Delivery Service has a second shift.",
+      "Emotet is the postal service of malware. It delivers whatever its clients need  -  TrickBot, Ryuk, Qbot, AnyDesk  -  to whatever inbox it can reach. At peak, 1.6 million machines waited for its instructions. When Europol took it down, the world exhaled. When it returned ten months later, the world understood: The Delivery Service has a second shift.",
     reversedMeaning:
-      "Emotet's January 2021 takedown by a coalition of 8 countries was historic — and the decision to use the botnet's own update mechanism to push a self-uninstall module to infected machines was unprecedented. Its return proved resilience, but also proved that such operations are possible.",
+      "Emotet's January 2021 takedown by a coalition of 8 countries was historic  -  and the decision to use the botnet's own update mechanism to push a self-uninstall module to infected machines was unprecedented. Its return proved resilience, but also proved that such operations are possible.",
     defenses: [
       { control: "Email filtering with macro-enabled document blocking", framework: "CIS Control 9" },
       { control: "Disable Office macro execution from internet-sourced documents", framework: "CIS Control 2" },
@@ -2926,7 +2926,7 @@ export const cards: TarotCard[] = [
     flavor:
       "The Payment Card Ghost operates quietly, methodically, and for years. It enters retail networks through remote access tools, waits, and scrapes payment card memory at the moment of swipe. It deletes logs. It leaves nothing. Only when the cards appear on dark web markets do investigators trace backward to find it was there at all.",
     reversedMeaning:
-      "FIN5's extreme focus on evidence destruction — thorough log cleaning, careful tool removal — paradoxically made incident response more expensive and less complete, generating insurance claims and regulatory action that attracted exactly the law enforcement attention its tradecraft was designed to avoid.",
+      "FIN5's extreme focus on evidence destruction  -  thorough log cleaning, careful tool removal  -  paradoxically made incident response more expensive and less complete, generating insurance claims and regulatory action that attracted exactly the law enforcement attention its tradecraft was designed to avoid.",
     defenses: [
       { control: "POS memory scraping protection and file integrity monitoring", framework: "PCI DSS" },
       { control: "Remote access tool allowlisting for POS network environments", framework: "CIS Control 2" },
@@ -2958,15 +2958,15 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1041", name: "Exfiltration Over C2 Channel", tactic: "Exfiltration" },
     ],
     notableOps: [
-      "British Airways breach — 380,000 payment cards skimmed (2018)",
+      "British Airways breach  -  380,000 payment cards skimmed (2018)",
       "Ticketmaster supply chain attack via third-party chatbot script",
-      "Newegg e-commerce compromise — payment page skimmer",
+      "Newegg e-commerce compromise  -  payment page skimmer",
       "Third-party JavaScript library compromise for downstream skimming",
     ],
     flavor:
-      "The Invisible Skimmer inserts 22 lines of JavaScript into a checkout page. No one sees it. Every payment card submitted goes to the attacker's server before going to the merchant. Hundreds of thousands of cards, stolen at the moment of trust — when the customer types their number and clicks Buy.",
+      "The Invisible Skimmer inserts 22 lines of JavaScript into a checkout page. No one sees it. Every payment card submitted goes to the attacker's server before going to the merchant. Hundreds of thousands of cards, stolen at the moment of trust  -  when the customer types their number and clicks Buy.",
     reversedMeaning:
-      "British Airways was fined £20M by the UK ICO for the Magecart breach — not for being attacked, but for failing to implement adequate security measures that would have detected or prevented the skimmer. Regulatory consequence created market pressure for better e-commerce security.",
+      "British Airways was fined £20M by the UK ICO for the Magecart breach  -  not for being attacked, but for failing to implement adequate security measures that would have detected or prevented the skimmer. Regulatory consequence created market pressure for better e-commerce security.",
     defenses: [
       { control: "Content Security Policy (CSP) headers to restrict script execution", framework: "OWASP CSP" },
       { control: "Subresource integrity (SRI) for third-party scripts", framework: "OWASP SRI" },
@@ -3004,9 +3004,9 @@ export const cards: TarotCard[] = [
       "Evolved from banking trojan to ransomware delivery platform",
     ],
     flavor:
-      "IcedID began as a banking trojan and became something more valuable: a loader. It gets in, establishes persistence, and rents the access to ransomware operators. The Frozen Account does not care what gets delivered — it cares about the delivery. Access-as-a-service at enterprise scale.",
+      "IcedID began as a banking trojan and became something more valuable: a loader. It gets in, establishes persistence, and rents the access to ransomware operators. The Frozen Account does not care what gets delivered  -  it cares about the delivery. Access-as-a-service at enterprise scale.",
     reversedMeaning:
-      "IcedID's evolution from banking trojan to ransomware loader reflects the maturing criminal ecosystem — operators who built a reliable infection mechanism found more value in the delivery business than the theft business, allowing law enforcement to target them through their ransomware affiliates.",
+      "IcedID's evolution from banking trojan to ransomware loader reflects the maturing criminal ecosystem  -  operators who built a reliable infection mechanism found more value in the delivery business than the theft business, allowing law enforcement to target them through their ransomware affiliates.",
     defenses: [
       { control: "Email sandboxing and macro execution controls", framework: "CIS Control 9" },
       { control: "Banking credential monitoring and anomalous transaction detection", framework: "NIST CSF: DE.AE" },
@@ -3025,7 +3025,7 @@ export const cards: TarotCard[] = [
     arcanum: "minor",
     suit: "pentacles",
     number: 13,
-    origin: "Criminal (TrickBot operators — Russian-speaking)",
+    origin: "Criminal (TrickBot operators  -  Russian-speaking)",
     category: "criminal",
     since: "Active since ~2020",
     motivation: ["Initial access as a service", "Ryuk and Conti ransomware delivery", "Enterprise network access"],
@@ -3043,12 +3043,12 @@ export const cards: TarotCard[] = [
       "Healthcare sector penetrations during COVID-19 pandemic",
     ],
     flavor:
-      "It emails a fake subscription renewal notice. You call the number to cancel. A call center employee walks you through downloading a file to 'process the cancellation.' The Side Door is one of the most creative initial access techniques documented — it weaponized customer service and deployed call centers for cybercrime.",
+      "It emails a fake subscription renewal notice. You call the number to cancel. A call center employee walks you through downloading a file to 'process the cancellation.' The Side Door is one of the most creative initial access techniques documented  -  it weaponized customer service and deployed call centers for cybercrime.",
     reversedMeaning:
-      "BazaLoader's call-center social engineering model created unusual evidence trails — phone records, voice recordings, and payment processing for the call centers helped law enforcement identify operators in ways purely technical operations do not generate.",
+      "BazaLoader's call-center social engineering model created unusual evidence trails  -  phone records, voice recordings, and payment processing for the call centers helped law enforcement identify operators in ways purely technical operations do not generate.",
     defenses: [
       { control: "User awareness training for fake subscription cancellation scams", framework: "NIST SP 800-50" },
-      { control: "Application execution controls — block unsigned or unrecognized executables", framework: "CIS Control 2" },
+      { control: "Application execution controls  -  block unsigned or unrecognized executables", framework: "CIS Control 2" },
       { control: "Browser isolation for high-risk web browsing", framework: "CIS Control 9" },
       { control: "Endpoint monitoring for BazaLoader behavioral indicators", framework: "NIST CSF: DE.CM" },
     ],
@@ -3079,14 +3079,14 @@ export const cards: TarotCard[] = [
       "Impersonation of German Federal Tax Authority (BZSt) for ransomware delivery",
       "Italian Revenue Agency (Agenzia delle Entrate) impersonation campaign",
       "Cobalt Strike and IcedID delivery via fake tax documents",
-      "Maze ransomware affiliate — Maze Cartel participation",
+      "Maze ransomware affiliate  -  Maze Cartel participation",
     ],
     flavor:
       "The False Tax arrives in the accounts payable inbox as a tax notice. It carries the branding, the formatting, the authority of the German BZSt or Italian revenue service. The attachment is not a tax form. By the time the finance team discovers this, the network is encrypted and the demand has arrived.",
     reversedMeaning:
-      "TA2101's government impersonation approach creates a forensic trail through domain registration, hosting infrastructure, and language/translation quality that helped researchers identify campaign origin and attribute operations — impersonating government entities requires enough authentic-looking collateral to generate evidence.",
+      "TA2101's government impersonation approach creates a forensic trail through domain registration, hosting infrastructure, and language/translation quality that helped researchers identify campaign origin and attribute operations  -  impersonating government entities requires enough authentic-looking collateral to generate evidence.",
     defenses: [
-      { control: "Email authentication verification — check sending domain legitimacy", framework: "CIS Control 9" },
+      { control: "Email authentication verification  -  check sending domain legitimacy", framework: "CIS Control 9" },
       { control: "Finance team training for government agency impersonation lures", framework: "NIST SP 800-50" },
       { control: "Macro and script execution controls on finance workstations", framework: "CIS Control 2" },
       { control: "Network segmentation isolating finance systems from broader IT", framework: "CIS Control 12" },

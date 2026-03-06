@@ -3,7 +3,7 @@ import { Starfield } from "@/components/Starfield";
 import { cards } from "@/data/cards";
 
 export const metadata: Metadata = {
-  title: "About — Threat Intelligence Tarot",
+  title: "About | Threat Intelligence Tarot",
   description:
     "Threat Intelligence Tarot: real MITRE ATT&CK data for 78 adversary groups, presented as a tarot card deck.",
 };
@@ -129,7 +129,7 @@ export default function AboutPage() {
               and documented threat intelligence reports.
             </p>
             <p className="mt-3" style={{ opacity: 0.85 }}>
-              The tarot format is deliberate. Real threat intelligence is dense and technical — easy to ignore,
+              The tarot format is deliberate. Real threat intelligence is dense and technical: easy to ignore,
               hard to internalize. Packaging it as a card game makes it memorable, shareable, and
               impossible to scroll past. The mystical framing is aesthetics. The threat data is real.
             </p>
@@ -193,27 +193,27 @@ export default function AboutPage() {
             <ul className="space-y-2" style={{ opacity: 0.85 }}>
               <li className="flex gap-2">
                 <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
-                <span><strong style={{ color: "var(--color-mist)" }}>Draw a Card</strong> — random adversary from the full deck. Flip to reveal their TTPs, targets, and defenses.</span>
+                <span><strong style={{ color: "var(--color-mist)" }}>Draw a Card:</strong> random adversary from the full deck. Flip to reveal their TTPs, targets, and defenses.</span>
               </li>
               <li className="flex gap-2">
                 <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
-                <span><strong style={{ color: "var(--color-mist)" }}>Three-Card Spread</strong> — draw Past, Present, and Future threat actors. Get a reading of your threat landscape.</span>
+                <span><strong style={{ color: "var(--color-mist)" }}>Three-Card Spread:</strong> draw Past, Present, and Future threat actors. Get a reading of your threat landscape.</span>
               </li>
               <li className="flex gap-2">
                 <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
-                <span><strong style={{ color: "var(--color-mist)" }}>Card of the Day</strong> — seed-based daily adversary. Same card for everyone on a given day, refreshes at midnight.</span>
+                <span><strong style={{ color: "var(--color-mist)" }}>Card of the Day:</strong> seed-based daily adversary. Same card for everyone on a given day, refreshes at midnight.</span>
               </li>
               <li className="flex gap-2">
                 <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
-                <span><strong style={{ color: "var(--color-mist)" }}>Gallery</strong> — browse all 78 cards. Filter by threat category or suit. Search by group name, alias, or origin country.</span>
+                <span><strong style={{ color: "var(--color-mist)" }}>Gallery:</strong> browse all 78 cards. Filter by threat category or suit. Search by group name, alias, or origin country.</span>
               </li>
               <li className="flex gap-2">
                 <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
-                <span><strong style={{ color: "var(--color-mist)" }}>Technique Explorer</strong> — view all MITRE ATT&amp;CK techniques used across the full deck, grouped by tactic and ranked by prevalence across threat actors.</span>
+                <span><strong style={{ color: "var(--color-mist)" }}>Technique Explorer:</strong> view all MITRE ATT&amp;CK techniques used across the full deck, grouped by tactic and ranked by prevalence across threat actors.</span>
               </li>
               <li className="flex gap-2">
                 <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
-                <span><strong style={{ color: "var(--color-mist)" }}>Defense Index</strong> — discover which security controls defend against the most adversaries. Ranked by cross-deck coverage so you can prioritize controls that provide the broadest protection.</span>
+                <span><strong style={{ color: "var(--color-mist)" }}>Defense Index:</strong> discover which security controls defend against the most adversaries. Ranked by cross-deck coverage so you can prioritize controls that provide the broadest protection.</span>
               </li>
             </ul>
           </section>
@@ -233,7 +233,7 @@ export default function AboutPage() {
               Each card shows the group's <strong>tarot identity</strong>, real group name and aliases, active years, origin, and risk level. Below that: the sectors they target, their MITRE ATT&CK techniques (click any technique ID to open the full MITRE reference), notable operations, and specific defensive recommendations.
             </p>
             <p className="mt-3" style={{ opacity: 0.85 }}>
-              The <em>Reversed Meaning</em> section — borrowed from tarot tradition — documents the group's known failures, operational security mistakes, and the circumstances that led to their exposure or disruption.
+              The <em>Reversed Meaning</em> section (borrowed from tarot tradition) documents the group's known failures, operational security mistakes, and the circumstances that led to their exposure or disruption.
             </p>
           </section>
 
