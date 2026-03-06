@@ -263,7 +263,7 @@ export function CardFront({ card }: { card: TarotCard }) {
         flexDirection: "column",
       }}
     >
-      {/* Category top glow */}
+      {/* Category top glow — opacity pulse for breathing effect */}
       <div
         aria-hidden="true"
         style={{
@@ -271,10 +271,12 @@ export function CardFront({ card }: { card: TarotCard }) {
           top: 0,
           left: 0,
           right: 0,
-          height: "80px",
-          background: `radial-gradient(ellipse 100% 100% at 50% 0%, ${glowRgba} 0%, transparent 100%)`,
+          height: "90px",
+          background: `radial-gradient(ellipse 110% 100% at 50% 0%, ${glowRgba} 0%, transparent 100%)`,
           pointerEvents: "none",
           zIndex: 0,
+          animation: "eye-pulse 5s ease-in-out infinite",
+          willChange: "opacity",
         }}
       />
 

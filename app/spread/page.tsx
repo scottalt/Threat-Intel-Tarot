@@ -260,13 +260,18 @@ function SpreadContent() {
             style={{
               color: "var(--color-gold-bright)",
               fontFamily: "var(--font-cinzel), serif",
+              animation: "hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both",
             }}
           >
             Three-Card Spread
           </h1>
           <p
             className="text-sm"
-            style={{ color: "var(--color-silver)", opacity: 0.7 }}
+            style={{
+              color: "var(--color-silver)",
+              opacity: 0.7,
+              animation: "hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 120ms both",
+            }}
           >
             Past threat · Present danger · Emerging risk
           </p>
@@ -360,8 +365,8 @@ function SpreadContent() {
                 key={`${drawKey}-${i}`}
                 className="spread-card-slot flex flex-col items-center gap-3"
                 style={{
-                  animation: "section-reveal 0.5s ease-out both",
-                  animationDelay: `${i * 180}ms`,
+                  animation: "section-reveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) both",
+                  animationDelay: `${i * 200}ms`,
                 }}
               >
                 {/* Position label */}
