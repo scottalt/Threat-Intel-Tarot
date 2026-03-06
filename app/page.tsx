@@ -111,8 +111,20 @@ export default function Home() {
         <DrawButton onClick={handleDraw} />
 
         {card && (
-          <div key={key} className="mt-10 card-deal">
+          <div key={key} className="mt-10 card-deal flex flex-col items-center gap-3">
             <TarotCard key={key} card={card} />
+            <a
+              href={`/card/${card.slug}`}
+              className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
+              style={{
+                color: "var(--color-gold)",
+                opacity: 0.45,
+                fontFamily: "var(--font-cinzel), serif",
+                animation: "section-reveal 0.4s ease-out 0.6s both",
+              }}
+            >
+              View shareable profile →
+            </a>
           </div>
         )}
 
