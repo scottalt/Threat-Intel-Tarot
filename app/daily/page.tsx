@@ -73,6 +73,7 @@ export default function DailyPage() {
               color: "var(--color-silver)",
               opacity: 0.5,
               fontFamily: "var(--font-cinzel), serif",
+              animation: "hero-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both",
             }}
           >
             Card of the Day
@@ -82,6 +83,7 @@ export default function DailyPage() {
             style={{
               color: "var(--color-gold-bright)",
               fontFamily: "var(--font-cinzel), serif",
+              animation: "hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 100ms both",
             }}
           >
             {today}
@@ -95,7 +97,9 @@ export default function DailyPage() {
           />
         </div>
 
-        <TarotCard card={card} startFlipped={true} />
+        <div className="card-deal">
+          <TarotCard card={card} startFlipped={true} />
+        </div>
 
         <div className="mt-6 flex flex-col items-center gap-3">
           <ShareButton

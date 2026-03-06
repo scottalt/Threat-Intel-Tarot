@@ -160,11 +160,11 @@ export default function TechniquesPage() {
         <div className="text-center mb-10">
           <h1
             className="text-2xl sm:text-3xl font-semibold mb-2"
-            style={{ color: "var(--color-gold-bright)", fontFamily: "var(--font-cinzel), serif" }}
+            style={{ color: "var(--color-gold-bright)", fontFamily: "var(--font-cinzel), serif", animation: "hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both" }}
           >
             Technique Explorer
           </h1>
-          <p className="text-sm" style={{ color: "var(--color-silver)", opacity: 0.7 }}>
+          <p className="text-sm" style={{ color: "var(--color-silver)", opacity: 0.7, animation: "hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 120ms both" }}>
             {totalTechniques} unique MITRE ATT&amp;CK techniques across {cards.length} adversary profiles
           </p>
           <div
