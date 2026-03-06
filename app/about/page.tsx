@@ -180,6 +180,18 @@ export default function AboutPage() {
                 <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
                 <span><strong style={{ color: "var(--color-mist)" }}>Threat Brief:</strong> copy a clean markdown adversary profile to your clipboard. Paste into reports, Confluence, or security awareness materials.</span>
               </li>
+              <li className="flex gap-2">
+                <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
+                <span><strong style={{ color: "var(--color-mist)" }}>Sector Intelligence:</strong> browse industries ranked by threat exposure. See which adversaries target each sector, average risk level, and category breakdown.</span>
+              </li>
+              <li className="flex gap-2">
+                <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
+                <span><strong style={{ color: "var(--color-mist)" }}>Adversary Comparison:</strong> compare two threat groups side by side. Shared MITRE ATT&amp;CK techniques are highlighted in gold. Shareable via URL.</span>
+              </li>
+              <li className="flex gap-2">
+                <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
+                <span><strong style={{ color: "var(--color-mist)" }}>Keyboard shortcuts:</strong> on the home page, press <kbd style={{ fontFamily: "monospace", fontSize: "11px" }}>Space</kbd> or <kbd style={{ fontFamily: "monospace", fontSize: "11px" }}>D</kbd> to draw. On card pages, use <kbd style={{ fontFamily: "monospace", fontSize: "11px" }}>←</kbd> <kbd style={{ fontFamily: "monospace", fontSize: "11px" }}>→</kbd> to browse the deck.</span>
+              </li>
             </ul>
           </section>
 
