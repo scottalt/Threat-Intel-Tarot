@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cinzel, EB_Garamond } from "next/font/google";
 import "./globals.css";
 
@@ -30,6 +30,9 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent",
     title: "TI Tarot",
   },
+};
+
+export const viewport: Viewport = {
   themeColor: "#c9a84c",
 };
 

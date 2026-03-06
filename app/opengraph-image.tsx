@@ -19,13 +19,14 @@ export default function OgImage() {
           position: "relative",
         }}
       >
-        {/* Background gold star pattern */}
+        {/* Background gold radial glow */}
         <div
           style={{
             position: "absolute",
             inset: 0,
             background:
               "radial-gradient(ellipse 800px 500px at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%)",
+            display: "flex",
           }}
         />
 
@@ -36,28 +37,17 @@ export default function OgImage() {
             inset: 24,
             border: "1px solid rgba(201,168,76,0.35)",
             borderRadius: 16,
+            display: "flex",
           }}
         />
 
         {/* Corner glyphs */}
-        {["48px 48px", "1152px 48px", "48px 582px", "1152px 582px"].map((pos, i) => (
-          <div
-            key={i}
-            style={{
-              position: "absolute",
-              left: i % 2 === 0 ? 36 : "auto",
-              right: i % 2 === 1 ? 36 : "auto",
-              top: i < 2 ? 36 : "auto",
-              bottom: i >= 2 ? 36 : "auto",
-              color: "rgba(201,168,76,0.5)",
-              fontSize: 20,
-            }}
-          >
-            ✦
-          </div>
-        ))}
+        <div style={{ position: "absolute", left: 36, top: 36, color: "rgba(201,168,76,0.5)", fontSize: 20, display: "flex" }}>*</div>
+        <div style={{ position: "absolute", left: 1152, top: 36, color: "rgba(201,168,76,0.5)", fontSize: 20, display: "flex" }}>*</div>
+        <div style={{ position: "absolute", left: 36, top: 570, color: "rgba(201,168,76,0.5)", fontSize: 20, display: "flex" }}>*</div>
+        <div style={{ position: "absolute", left: 1152, top: 570, color: "rgba(201,168,76,0.5)", fontSize: 20, display: "flex" }}>*</div>
 
-        {/* Main content */}
+        {/* Eyebrow label */}
         <div
           style={{
             fontSize: 16,
@@ -65,13 +55,18 @@ export default function OgImage() {
             color: "rgba(201,168,76,0.7)",
             textTransform: "uppercase",
             marginBottom: 20,
+            display: "flex",
           }}
         >
-          Major Arcana · Threat Intelligence
+          Major Arcana — Threat Intelligence
         </div>
 
+        {/* Title */}
         <div
           style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
             fontSize: 72,
             fontWeight: 700,
             color: "#f0c040",
@@ -80,16 +75,17 @@ export default function OgImage() {
             marginBottom: 16,
           }}
         >
-          Threat Intelligence
-          <br />
-          Tarot
+          <span>Threat Intelligence</span>
+          <span>Tarot</span>
         </div>
 
+        {/* Tagline */}
         <div
           style={{
             fontSize: 22,
             color: "#c0c0c0",
             marginBottom: 40,
+            display: "flex",
           }}
         >
           Real threat intelligence. Impossible to scroll past.
@@ -112,6 +108,7 @@ export default function OgImage() {
                 color: "#c0c0c0",
                 fontSize: 14,
                 letterSpacing: "0.1em",
+                display: "flex",
               }}
             >
               {cat.label}
@@ -126,6 +123,7 @@ export default function OgImage() {
             bottom: 40,
             color: "rgba(192,192,192,0.35)",
             fontSize: 13,
+            display: "flex",
           }}
         >
           Data sourced from MITRE ATT&CK
