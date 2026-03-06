@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { href: "/map", label: "Map" },
   { href: "/compare", label: "Compare" },
   { href: "/watchlist", label: "Watchlist" },
+  { href: "/glossary", label: "Glossary" },
   { href: "/about", label: "About" },
 ];
 
