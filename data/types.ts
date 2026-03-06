@@ -26,6 +26,7 @@ export interface TarotCard {
   origin: string;
   category: Category;
   since: string;
+  active: boolean;
   motivation: string[];
   targets: string[];
   ttps: TTP[];

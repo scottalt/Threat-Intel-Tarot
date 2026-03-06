@@ -75,6 +75,7 @@ type GalleryState = {
   sort: SortOrder;
   originFilter: string;
   volume: VolumeFilter;
+  activeOnly: boolean;
 };
 
 function loadState(): GalleryState {
@@ -82,7 +83,7 @@ function loadState(): GalleryState {
     const raw = sessionStorage.getItem(STATE_KEY);
     if (raw) return JSON.parse(raw) as GalleryState;
   } catch { /* ignore */ }
-  return { filter: "all", arcana: "all", query: "", sort: "deck", originFilter: "", volume: "all" };
+  return { filter: "all", arcana: "all", query: "", sort: "deck", originFilter: "", volume: "all", activeOnly: false };
 }
 
 function saveState(s: GalleryState) {
@@ -96,6 +97,7 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
   const [sort, setSort] = useState<SortOrder>("deck");
   const [originFilter, setOriginFilter] = useState("");
   const [volume, setVolume] = useState<VolumeFilter>("all");
+  const [activeOnly, setActiveOnly] = useState(false);
   const [skipAnimation, setSkipAnimation] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const scrollRestoredRef = useRef(false);
@@ -112,6 +114,7 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
     setSort(s.sort);
     setOriginFilter(s.originFilter);
     setVolume(s.volume ?? "all");
+    setActiveOnly(s.activeOnly ?? false);
     // Suppress card entrance animations when restoring position
     if (hadSavedScroll) setSkipAnimation(true);
     try {
@@ -128,8 +131,8 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
 
   // Save filter state when it changes
   useEffect(() => {
-    saveState({ filter, arcana, query, sort, originFilter, volume });
-  }, [filter, arcana, query, sort, originFilter, volume]);
+    saveState({ filter, arcana, query, sort, originFilter, volume, activeOnly });
+  }, [filter, arcana, query, sort, originFilter, volume, activeOnly]);
 
   // Save scroll position + update progress bar
   useEffect(() => {
@@ -159,7 +162,8 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
         volume === "all" ||
         (volume === "core" && !c.expansion) ||
         (volume === "expansion" && c.expansion === true);
-      return categoryMatch && arcanaMatch && searchMatch && originMatch && volumeMatch;
+      const activeMatch = !activeOnly || c.active === true;
+      return categoryMatch && arcanaMatch && searchMatch && originMatch && volumeMatch && activeMatch;
     })
     .sort((a, b) => {
       if (sort === "risk-desc") return b.riskLevel - a.riskLevel;
@@ -322,6 +326,29 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
         ))}
       </div>
 
+      {/* Active groups toggle */}
+      <div className="flex justify-center mb-3">
+        <button
+          onClick={() => setActiveOnly((v) => !v)}
+          style={{
+            fontFamily: "var(--font-cinzel), serif",
+            fontSize: "9px",
+            letterSpacing: "0.07em",
+            textTransform: "uppercase",
+            padding: "4px 14px",
+            borderRadius: "4px",
+            border: `1px solid ${activeOnly ? "rgba(74,173,173,0.5)" : "rgba(192,192,192,0.15)"}`,
+            background: activeOnly ? "rgba(74,173,173,0.1)" : "transparent",
+            color: activeOnly ? "var(--color-teal)" : "rgba(192,192,192,0.45)",
+            cursor: "pointer",
+            transition: "all 0.18s ease",
+            touchAction: "manipulation",
+          }}
+        >
+          {activeOnly ? "Active Groups Only" : "All Groups (incl. disbanded)"}
+        </button>
+      </div>
+
       {/* Category filter */}
       <div className="flex flex-wrap justify-center gap-2 mb-3">
         {filters.map((f) => (
@@ -365,7 +392,7 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
       </div>
 
       {/* Results count + clear filters */}
-      {(query.trim() || filter !== "all" || arcana !== "all" || originFilter || volume !== "all") && (
+      {(query.trim() || filter !== "all" || arcana !== "all" || originFilter || volume !== "all" || activeOnly) && (
         <div className="flex items-center justify-center gap-4 mb-4">
           {filtered.length > 0 && (
             <div className="text-xs" style={{ color: "var(--color-silver)", opacity: 0.45 }}>
@@ -373,7 +400,7 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
             </div>
           )}
           <button
-            onClick={() => { setFilter("all"); setArcana("all"); setQuery(""); setOriginFilter(""); setSort("deck"); setVolume("all"); }}
+            onClick={() => { setFilter("all"); setArcana("all"); setQuery(""); setOriginFilter(""); setSort("deck"); setVolume("all"); setActiveOnly(false); }}
             className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
             style={{ color: "var(--color-gold)", opacity: 0.5, fontFamily: "var(--font-cinzel), serif", background: "none", border: "none", cursor: "pointer" }}
           >

@@ -12,6 +12,7 @@ export const cards: TarotCard[] = [
     origin: "USA (NSA-linked)",
     category: "nation-state",
     since: "Active since ~2001",
+    active: true,
     motivation: ["Intelligence collection", "Cyber espionage", "Capability pre-positioning"],
     targets: ["Iran", "Russia", "China", "Middle East telecoms", "Nuclear facilities"],
     ttps: [
@@ -52,6 +53,7 @@ export const cards: TarotCard[] = [
     origin: "Russia (GRU Unit 26165)",
     category: "nation-state",
     since: "Active since ~2004",
+    active: true,
     motivation: ["Espionage", "Political influence", "Disinformation"],
     targets: ["Government", "Defense", "Political organizations", "Media", "NATO countries"],
     ttps: [
@@ -95,6 +97,7 @@ export const cards: TarotCard[] = [
     origin: "Russia (SVR)",
     category: "nation-state",
     since: "Active since ~2008",
+    active: true,
     motivation: ["Long-term espionage", "Intelligence collection", "Supply chain access"],
     targets: ["Government", "Think tanks", "Healthcare", "Technology firms"],
     ttps: [
@@ -137,6 +140,7 @@ export const cards: TarotCard[] = [
     origin: "Russia (GRU Unit 74455)",
     category: "nation-state",
     since: "Active since ~2009",
+    active: true,
     motivation: ["Destruction", "Disruption", "Coercive signaling"],
     targets: ["Energy", "Critical infrastructure", "Government", "Media"],
     ttps: [
@@ -178,6 +182,7 @@ export const cards: TarotCard[] = [
     origin: "Russia (FSB)",
     category: "nation-state",
     since: "Active since ~1996",
+    active: true,
     motivation: ["Long-term espionage", "Diplomatic intelligence", "Counter-intelligence"],
     targets: ["Government", "Military", "Embassies", "Defense contractors"],
     ttps: [
@@ -219,6 +224,7 @@ export const cards: TarotCard[] = [
     origin: "China (PLA Unit 61398)",
     category: "nation-state",
     since: "Active since ~2006",
+    active: false,
     motivation: ["Intellectual property theft", "Economic espionage", "Strategic intelligence"],
     targets: ["Aerospace", "Energy", "Telecommunications", "IT", "20 identified industries"],
     ttps: [
@@ -259,6 +265,7 @@ export const cards: TarotCard[] = [
     origin: "China (MSS-affiliated)",
     category: "nation-state",
     since: "Active since ~2012",
+    active: true,
     motivation: ["Espionage", "Financial gain", "Supply chain compromise"],
     targets: ["Healthcare", "Technology", "Gaming", "Telecommunications", "Governments"],
     ttps: [
@@ -301,6 +308,7 @@ export const cards: TarotCard[] = [
     origin: "China (PLA-linked)",
     category: "nation-state",
     since: "Active since ~2021",
+    active: true,
     motivation: ["Pre-positioning for conflict", "Critical infrastructure disruption", "Espionage"],
     targets: ["Communications", "Energy", "Water", "Transportation", "US critical infrastructure"],
     ttps: [
@@ -342,6 +350,7 @@ export const cards: TarotCard[] = [
     origin: "North Korea (Reconnaissance General Bureau)",
     category: "nation-state",
     since: "Active since ~2009",
+    active: true,
     motivation: ["Sanctions evasion", "Financial theft", "Espionage", "Retaliation"],
     targets: ["Financial institutions", "Cryptocurrency exchanges", "Defense", "Media"],
     ttps: [
@@ -384,6 +393,7 @@ export const cards: TarotCard[] = [
     origin: "North Korea (Reconnaissance General Bureau, financial unit)",
     category: "nation-state",
     since: "Active since ~2014",
+    active: true,
     motivation: ["Currency generation", "Sanctions evasion", "Financial system manipulation"],
     targets: ["Banks", "SWIFT network participants", "Financial services globally"],
     ttps: [
@@ -424,6 +434,7 @@ export const cards: TarotCard[] = [
     origin: "North Korea (RGB)",
     category: "nation-state",
     since: "Active since ~2012",
+    active: true,
     motivation: ["Intelligence collection", "Policy research", "Sanctions monitoring"],
     targets: ["Think tanks", "Academic researchers", "Journalists", "South Korean government", "Nuclear experts"],
     ttps: [
@@ -464,6 +475,7 @@ export const cards: TarotCard[] = [
     origin: "Iran (IRGC-affiliated)",
     category: "nation-state",
     since: "Active since ~2013",
+    active: true,
     motivation: ["Espionage", "Sabotage", "Destabilization"],
     targets: ["Aviation", "Energy", "Petrochemical", "Saudi Arabia", "US defense"],
     ttps: [
@@ -504,6 +516,7 @@ export const cards: TarotCard[] = [
     origin: "Iran (Ministry of Intelligence)",
     category: "nation-state",
     since: "Active since ~2014",
+    active: true,
     motivation: ["Regional espionage", "Intelligence on adversaries", "Government surveillance"],
     targets: ["Financial sector", "Government", "Energy", "Telecom (Middle East)"],
     ttps: [
@@ -545,6 +558,7 @@ export const cards: TarotCard[] = [
     origin: "Iran (IRGC)",
     category: "nation-state",
     since: "Active since ~2014",
+    active: true,
     motivation: ["Surveillance", "Espionage", "Targeting dissidents and journalists"],
     targets: ["Journalists", "Activists", "Academic researchers", "Nuclear negotiators", "Government officials"],
     ttps: [
@@ -585,6 +599,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Eastern Europe)",
     category: "criminal",
     since: "Active since ~2015",
+    active: true,
     motivation: ["Financial theft", "Point-of-sale compromise", "Ransomware deployment"],
     targets: ["Restaurants", "Hospitality", "Retail", "Financial services"],
     ttps: [
@@ -627,6 +642,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Russia, CIS-based)",
     category: "criminal",
     since: "Active since ~2019",
+    active: false,
     motivation: ["Ransomware extortion", "Double extortion", "Affiliate revenue"],
     targets: ["MSPs", "Law firms", "Food and agriculture", "Technology"],
     ttps: [
@@ -668,6 +684,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Russia-linked, global affiliates)",
     category: "criminal",
     since: "Active since ~2019",
+    active: true,
     motivation: ["Ransomware extortion", "Affiliate revenue maximization", "Double/triple extortion"],
     targets: ["Manufacturing", "Professional services", "Healthcare", "Government"],
     ttps: [
@@ -709,6 +726,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Russia, St. Petersburg-linked)",
     category: "criminal",
     since: "Active since ~2020",
+    active: false,
     motivation: ["Ransomware extortion", "Data theft", "Disruption"],
     targets: ["Healthcare", "Government", "Critical infrastructure", "Schools"],
     ttps: [
@@ -751,6 +769,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Anglophone, primarily US/UK teens)",
     category: "trickster",
     since: "Active since ~2022",
+    active: true,
     motivation: ["Financial theft", "SIM swapping", "Ransomware deployment", "Social clout"],
     targets: ["BPO firms", "Telecom", "Hospitality", "Gaming", "Identity providers"],
     ttps: [
@@ -792,6 +811,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Russia-linked, RaaS)",
     category: "criminal",
     since: "Active since ~2021",
+    active: true,
     motivation: ["Ransomware extortion", "Data extortion", "Triple extortion"],
     targets: ["Healthcare", "Energy", "Government", "Critical infrastructure"],
     ttps: [
@@ -833,6 +853,7 @@ export const cards: TarotCard[] = [
     origin: "Hacktivist (decentralized, global)",
     category: "hacktivist",
     since: "Active since ~2003",
+    active: false,
     motivation: ["Political protest", "Anti-censorship", "Corporate accountability", "Lulz"],
     targets: ["Governments", "Corporations", "Law enforcement", "Controversial organizations"],
     ttps: [
@@ -872,6 +893,7 @@ export const cards: TarotCard[] = [
     origin: "Russia (pro-Kremlin hacktivist)",
     category: "hacktivist",
     since: "Active since ~2022",
+    active: true,
     motivation: ["Political disruption", "Pro-Russia propaganda", "Anti-NATO signaling"],
     targets: ["NATO member governments", "Healthcare", "Airports", "Financial services", "Media"],
     ttps: [
@@ -915,6 +937,7 @@ export const cards: TarotCard[] = [
     origin: "China (MSS  -  Tianjin Bureau)",
     category: "nation-state",
     since: "Active since ~2009",
+    active: true,
     motivation: ["Intellectual property theft", "Managed service provider compromise", "Supply chain espionage"],
     targets: ["MSPs", "Healthcare", "Defense", "Finance", "Manufacturing", "26+ countries"],
     ttps: [
@@ -957,6 +980,7 @@ export const cards: TarotCard[] = [
     origin: "China (MSS  -  Hainan State Security)",
     category: "nation-state",
     since: "Active since ~2013",
+    active: true,
     motivation: ["Maritime intelligence", "Defense technology theft", "COVID-19 research theft"],
     targets: ["Naval defense", "Aviation", "Satellite", "Maritime", "Universities", "Healthcare"],
     ttps: [
@@ -999,6 +1023,7 @@ export const cards: TarotCard[] = [
     origin: "China (MSS-linked)",
     category: "nation-state",
     since: "Active since ~2021 (publicly disclosed)",
+    active: true,
     motivation: ["Infectious disease research", "Defense industrial base access", "Legal and policy intelligence"],
     targets: ["US Exchange servers", "Law firms", "Research universities", "Defense contractors", "NGOs"],
     ttps: [
@@ -1041,6 +1066,7 @@ export const cards: TarotCard[] = [
     origin: "China (PLA-linked)",
     category: "nation-state",
     since: "Active since ~2008",
+    active: true,
     motivation: ["Japanese industrial espionage", "Defense and technology theft", "Long-term persistent access"],
     targets: ["Japan", "South Korea", "Taiwan", "Critical infrastructure", "Aerospace", "Defense"],
     ttps: [
@@ -1081,6 +1107,7 @@ export const cards: TarotCard[] = [
     origin: "China (MSS-linked)",
     category: "nation-state",
     since: "Active since ~2012",
+    active: true,
     motivation: ["Political intelligence", "Geopolitical monitoring", "Religious group surveillance"],
     targets: ["Tibet", "Myanmar", "Vatican", "EU political entities", "NGOs", "Southeast Asia"],
     ttps: [
@@ -1121,6 +1148,7 @@ export const cards: TarotCard[] = [
     origin: "China (MSS-linked)",
     category: "nation-state",
     since: "Active since ~2019",
+    active: true,
     motivation: ["Telecommunications interception", "Lawful intercept system access", "Senior official surveillance"],
     targets: ["US telecoms", "AT&T", "Verizon", "T-Mobile", "Political campaigns", "CALEA wiretap systems"],
     ttps: [
@@ -1161,6 +1189,7 @@ export const cards: TarotCard[] = [
     origin: "Russia (FSB  -  Crimean officers)",
     category: "nation-state",
     since: "Active since ~2013",
+    active: true,
     motivation: ["Ukraine-focused espionage", "Military intelligence", "Volume-based persistent infection"],
     targets: ["Ukraine government", "Ukrainian military", "Ukrainian NGOs", "Security researchers"],
     ttps: [
@@ -1203,6 +1232,7 @@ export const cards: TarotCard[] = [
     origin: "Russia (FSB Centre 18)",
     category: "nation-state",
     since: "Active since ~2015",
+    active: true,
     motivation: ["Credential harvesting", "Western political intelligence", "Dossier building on targets"],
     targets: ["UK government", "NATO countries", "Journalists", "Think tanks", "Former intelligence officials"],
     ttps: [
@@ -1245,6 +1275,7 @@ export const cards: TarotCard[] = [
     origin: "South Asia (India-linked, suspected)",
     category: "nation-state",
     since: "Active since ~2013",
+    active: true,
     motivation: ["Pakistan military intelligence", "Chinese government targeting", "Energy sector espionage"],
     targets: ["Pakistan", "China", "Bangladesh", "Nuclear energy sector", "Government officials"],
     ttps: [
@@ -1285,6 +1316,7 @@ export const cards: TarotCard[] = [
     origin: "India (suspected)",
     category: "nation-state",
     since: "Active since ~2012",
+    active: true,
     motivation: ["Pakistan military intelligence", "Nepal and Sri Lanka surveillance", "South Asian geopolitical monitoring"],
     targets: ["Pakistan military", "Nepal government", "Sri Lanka", "Bangladesh", "Afghanistan"],
     ttps: [
@@ -1325,6 +1357,7 @@ export const cards: TarotCard[] = [
     origin: "India (suspected)",
     category: "nation-state",
     since: "Active since ~2009",
+    active: true,
     motivation: ["China surveillance", "Pakistan intelligence", "Climate and energy policy monitoring"],
     targets: ["China", "Pakistan", "Think tanks", "Universities", "Climate researchers", "Diplomats"],
     ttps: [
@@ -1365,6 +1398,7 @@ export const cards: TarotCard[] = [
     origin: "Pakistan (ISI-linked, suspected)",
     category: "nation-state",
     since: "Active since ~2013",
+    active: true,
     motivation: ["Indian military intelligence", "Government credential harvesting", "Diplomatic surveillance"],
     targets: ["India", "Afghanistan", "Indian military", "Indian government officials", "Defense contractors"],
     ttps: [
@@ -1405,6 +1439,7 @@ export const cards: TarotCard[] = [
     origin: "China (MSS  -  Tibet-focused)",
     category: "nation-state",
     since: "Active since ~2012",
+    active: true,
     motivation: ["Tibetan diaspora surveillance", "Dalai Lama office intelligence", "Religious community monitoring"],
     targets: ["Tibetan government-in-exile", "Tibetan NGOs", "Dalai Lama offices", "Buddhist organizations", "Human rights groups"],
     ttps: [
@@ -1445,6 +1480,7 @@ export const cards: TarotCard[] = [
     origin: "Iran (MOIS  -  Ministry of Intelligence)",
     category: "nation-state",
     since: "Active since ~2017",
+    active: true,
     motivation: ["Middle East political intelligence", "Espionage against Iran opponents", "Regional government access"],
     targets: ["Turkey", "Pakistan", "Iraq", "Israel", "Saudi Arabia", "Telecom", "Government"],
     ttps: [
@@ -1492,6 +1528,7 @@ export const cards: TarotCard[] = [
     origin: "Israel (suspected)",
     category: "nation-state",
     since: "Active since ~2021",
+    active: true,
     motivation: ["Iranian infrastructure disruption", "Psychological operations", "Kinetic-adjacent sabotage"],
     targets: ["Iranian steel plants", "Iranian fuel distribution", "Iranian railway systems"],
     ttps: [
@@ -1532,6 +1569,7 @@ export const cards: TarotCard[] = [
     origin: "Iran (IRGC-linked)",
     category: "nation-state",
     since: "Active since ~2021",
+    active: true,
     motivation: ["Israeli government disruption", "Leak-and-destroy operations", "Psychological warfare"],
     targets: ["Israel", "Israeli government", "Israeli defense", "Israeli financial sector"],
     ttps: [
@@ -1572,6 +1610,7 @@ export const cards: TarotCard[] = [
     origin: "Iran (IRGC  -  Islamic Revolutionary Guard Corps)",
     category: "nation-state",
     since: "Active since ~2020",
+    active: true,
     motivation: ["US/Israel critical infrastructure targeting", "OT/ICS disruption", "Water system attacks"],
     targets: ["US water utilities", "Israel-linked OT vendors", "Critical infrastructure with Israeli-made equipment"],
     ttps: [
@@ -1612,6 +1651,7 @@ export const cards: TarotCard[] = [
     origin: "Russia (SVR-linked)",
     category: "nation-state",
     since: "Active since ~2019",
+    active: true,
     motivation: ["US government espionage", "Supply chain weaponization", "Intelligence community access"],
     targets: ["US federal agencies", "Treasury", "DHS", "State Department", "18,000 SolarWinds customers"],
     ttps: [
@@ -1655,6 +1695,7 @@ export const cards: TarotCard[] = [
     origin: "USA / Israel (joint NSA–Unit 8200)",
     category: "nation-state",
     since: "Active ~2005–2010",
+    active: true,
     motivation: ["Iranian nuclear program disruption", "Physical infrastructure sabotage", "Covert warfare"],
     targets: ["Iran Natanz nuclear facility", "Siemens PLCs", "Uranium enrichment centrifuges"],
     ttps: [
@@ -1695,6 +1736,7 @@ export const cards: TarotCard[] = [
     origin: "Sudan / Russia (disputed  -  possible Russian front)",
     category: "hacktivist",
     since: "Active since ~2023",
+    active: true,
     motivation: ["Anti-Western DDoS operations", "Disruption of US/EU services", "Geopolitical pressure"],
     targets: ["Microsoft", "US hospitals", "ChatGPT", "X/Twitter", "Scandinavian airlines"],
     ttps: [
@@ -1734,6 +1776,7 @@ export const cards: TarotCard[] = [
     origin: "Ukraine (government-coordinated volunteer collective)",
     category: "hacktivist",
     since: "Active since February 2022",
+    active: true,
     motivation: ["Russian economic disruption", "Psychological operations", "War-time cyber resistance"],
     targets: ["Russian banks", "Russian government websites", "Russian logistics", "Russian propaganda outlets"],
     ttps: [
@@ -1771,6 +1814,7 @@ export const cards: TarotCard[] = [
     origin: "Hacktivist (international collective)",
     category: "hacktivist",
     since: "Active since ~2015",
+    active: true,
     motivation: ["Anti-ISIS operations (originally)", "Ransomware (pivot 2023)", "Mixed hacktivist-criminal"],
     targets: ["ISIS infrastructure (2015–2016)", "Israel (2023)", "Industrial control systems", "Belarus"],
     ttps: [
@@ -1810,6 +1854,7 @@ export const cards: TarotCard[] = [
     origin: "Turkey (Marxist-Leninist hacktivist group)",
     category: "hacktivist",
     since: "Active since ~2012",
+    active: true,
     motivation: ["Anti-government disruption", "Turkish government corruption exposure", "Political opposition"],
     targets: ["Turkish government", "Turkish police", "Turkish military", "Erdogan administration"],
     ttps: [
@@ -1848,6 +1893,7 @@ export const cards: TarotCard[] = [
     origin: "Latin America (environmental/political hacktivist)",
     category: "hacktivist",
     since: "Active since ~2022",
+    active: true,
     motivation: ["Latin American military exposure", "Environmental activism", "Anti-extractivism"],
     targets: ["Mexican military (SEDENA)", "Colombian military", "Chilean military", "Guatemalan police", "Mining corporations"],
     ttps: [
@@ -1887,6 +1933,7 @@ export const cards: TarotCard[] = [
     origin: "Russia (pro-Kremlin hacktivist affiliate)",
     category: "hacktivist",
     since: "Active since ~2023",
+    active: true,
     motivation: ["Pro-Russia DDoS operations", "Anti-NATO disruption", "Collective coordination"],
     targets: ["EU government websites", "NATO member states", "Western financial services", "Media"],
     ttps: [
@@ -1924,6 +1971,7 @@ export const cards: TarotCard[] = [
     origin: "South America (Colombia-linked, suspected)",
     category: "nation-state",
     since: "Active since ~2018",
+    active: true,
     motivation: ["Colombian government surveillance", "Financial sector targeting", "South American espionage"],
     targets: ["Colombia government", "Ecuador", "Panama", "Financial institutions", "Oil sector"],
     ttps: [
@@ -1964,6 +2012,7 @@ export const cards: TarotCard[] = [
     origin: "Unknown (Southeast Asia region, suspected state-linked)",
     category: "nation-state",
     since: "Active since ~2020",
+    active: true,
     motivation: ["Southeast Asian government espionage", "High-value target compromise", "Persistent access"],
     targets: ["Asian governments", "Military organizations", "European diplomatic missions in Asia"],
     ttps: [
@@ -2004,6 +2053,7 @@ export const cards: TarotCard[] = [
     origin: "China (PLA Unit 61398 adjacent)",
     category: "nation-state",
     since: "Active ~2009–2010 (campaign period)",
+    active: true,
     motivation: ["Google source code theft", "Dissident surveillance", "Defense contractor IP theft"],
     targets: ["Google", "Adobe", "Intel", "Morgan Stanley", "30+ major corporations"],
     ttps: [
@@ -2049,6 +2099,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (UK/Brazil, mostly teenagers)",
     category: "trickster",
     since: "Active ~2021–2022",
+    active: true,
     motivation: ["Data theft for extortion", "Notoriety", "Corporate embarrassment"],
     targets: ["Microsoft", "Nvidia", "Samsung", "Okta", "Rockstar Games", "T-Mobile"],
     ttps: [
@@ -2092,6 +2143,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (English-speaking, Western)",
     category: "trickster",
     since: "Active since ~2022",
+    active: true,
     motivation: ["SIM swapping", "Telecom employee social engineering", "Crypto theft and extortion"],
     targets: ["Telecom employees", "Cryptocurrency holders", "IT service desk workers", "Enterprise cloud tenants"],
     ttps: [
@@ -2134,6 +2186,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (financially motivated, suspected Western)",
     category: "criminal",
     since: "Active since ~2013",
+    active: true,
     motivation: ["Insider information for securities trading", "M&A intelligence", "Market manipulation"],
     targets: ["Pharmaceutical companies", "Investment banks", "Healthcare firms", "SEC-regulated companies"],
     ttps: [
@@ -2176,6 +2229,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Eastern European, suspected)",
     category: "criminal",
     since: "Active since ~2016",
+    active: true,
     motivation: ["Point-of-sale payment card theft", "Ransomware (pivot 2021)", "Retail and hospitality targeting"],
     targets: ["Hospitality", "Retail", "Entertainment", "Restaurants", "Financial services"],
     ttps: [
@@ -2218,6 +2272,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Russian-speaking, suspected)",
     category: "criminal",
     since: "Active since ~2014",
+    active: true,
     motivation: ["Malware distribution as a service", "Ransomware delivery", "Banking trojan deployment"],
     targets: ["Financial institutions", "Healthcare", "Retail", "Global", "250+ countries targeted"],
     ttps: [
@@ -2260,6 +2315,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Latin America focused)",
     category: "criminal",
     since: "Active since ~2018",
+    active: true,
     motivation: ["Financial fraud", "Latin American travel sector targeting", "Remote access trojan deployment"],
     targets: ["Hotels", "Travel agencies", "Airlines", "Latin American hospitality sector"],
     ttps: [
@@ -2300,6 +2356,7 @@ export const cards: TarotCard[] = [
     origin: "Iran (IRGC-linked)",
     category: "nation-state",
     since: "Active since ~2018",
+    active: true,
     motivation: ["IT sector compromise for downstream access", "Defense contractor surveillance", "Israel targeting"],
     targets: ["IT companies", "Defense contractors", "Saudi Arabia", "Israel", "Kurdish communities"],
     ttps: [
@@ -2340,6 +2397,7 @@ export const cards: TarotCard[] = [
     origin: "Palestine (Hamas-affiliated, suspected)",
     category: "nation-state",
     since: "Active since ~2012",
+    active: true,
     motivation: ["Israeli intelligence collection", "Middle East political monitoring", "Palestinian diaspora surveillance"],
     targets: ["Israel", "Palestinian authority", "Egypt", "Saudi Arabia", "Middle East governments"],
     ttps: [
@@ -2380,6 +2438,7 @@ export const cards: TarotCard[] = [
     origin: "Private sector (suspected Gulf state contractor)",
     category: "nation-state",
     since: "Active since ~2016",
+    active: true,
     motivation: ["Targeted surveillance", "Dissident monitoring", "Mobile device compromise"],
     targets: ["Middle East activists", "Journalists", "Religious groups", "South Asian governments"],
     ttps: [
@@ -2420,6 +2479,7 @@ export const cards: TarotCard[] = [
     origin: "Private sector (mercenary, suspected European)",
     category: "criminal",
     since: "Active since ~2018",
+    active: true,
     motivation: ["Fintech sector espionage", "Know-your-customer document theft", "Trading intelligence"],
     targets: ["Fintech companies", "Cryptocurrency platforms", "Investment firms", "Financial regulators"],
     ttps: [
@@ -2460,6 +2520,7 @@ export const cards: TarotCard[] = [
     origin: "Belarus (KGB-linked)",
     category: "nation-state",
     since: "Active since ~2017",
+    active: true,
     motivation: ["NATO influence operations", "Baltic state disinformation", "Pro-Russia/Belarus narratives"],
     targets: ["Lithuania", "Latvia", "Poland", "Ukraine", "NATO credibility operations"],
     ttps: [
@@ -2500,6 +2561,7 @@ export const cards: TarotCard[] = [
     origin: "Russia (SVR-linked)",
     category: "nation-state",
     since: "Active since ~2020",
+    active: true,
     motivation: ["Post-SolarWinds exploitation", "Secondary supply chain access", "Western government espionage"],
     targets: ["SolarWinds victims", "US federal agencies", "European government", "Energy sector"],
     ttps: [
@@ -2539,6 +2601,7 @@ export const cards: TarotCard[] = [
     origin: "Pakistan (suspected)",
     category: "criminal",
     since: "Active since ~2018",
+    active: true,
     motivation: ["Commodity cybercrime", "Government targeting (secondary)", "RAT deployment for hire"],
     targets: ["Western government agencies", "Financial sector", "Pakistan regional targets", "Global criminal campaigns"],
     ttps: [
@@ -2578,6 +2641,7 @@ export const cards: TarotCard[] = [
     origin: "Venezuela / Latin America (suspected state-linked)",
     category: "nation-state",
     since: "Active since ~2010",
+    active: true,
     motivation: ["Venezuelan foreign policy intelligence", "Latin American military espionage", "Regional political surveillance"],
     targets: ["Ecuador military", "Colombia military", "Nicaragua government", "Venezuela political opponents"],
     ttps: [
@@ -2623,6 +2687,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Russian-speaking)",
     category: "criminal",
     since: "Active since ~2019",
+    active: true,
     motivation: ["Mass exploitation of file transfer vulnerabilities", "Data extortion", "Zero-day weaponization"],
     targets: ["Enterprise file transfer users", "MOVEit users", "GoAnywhere users", "Healthcare", "Finance"],
     ttps: [
@@ -2665,6 +2730,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Russian-speaking)",
     category: "criminal",
     since: "Active ~2020–2021",
+    active: false,
     motivation: ["Ransomware-as-a-service", "Critical infrastructure extortion", "Affiliate model"],
     targets: ["Colonial Pipeline", "Energy sector", "Manufacturing", "Professional services"],
     ttps: [
@@ -2708,6 +2774,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Eastern European)",
     category: "criminal",
     since: "Active ~2021–2023",
+    active: false,
     motivation: ["Healthcare sector targeting", "Ransomware-as-a-service", "Victim negotiation and extortion"],
     targets: ["Hospitals", "Healthcare", "Schools", "Critical infrastructure", "1,300+ victims"],
     ttps: [
@@ -2750,6 +2817,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Russian-speaking, DarkSide successor)",
     category: "criminal",
     since: "Active ~2021",
+    active: false,
     motivation: ["Ransomware operations post-Colonial", "Critical infrastructure targeting (selective)", "RaaS affiliate model"],
     targets: ["Agriculture", "Food supply chain", "Manufacturing", "Critical infrastructure"],
     ttps: [
@@ -2792,6 +2860,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (suspected Russian-speaking)",
     category: "criminal",
     since: "Active since ~2021",
+    active: true,
     motivation: ["Education sector ransomware", "Data theft and extortion", "Low-security target exploitation"],
     targets: ["K-12 schools", "Universities", "School districts", "Los Angeles USD", "UK education sector"],
     ttps: [
@@ -2832,6 +2901,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Eastern European, suspected)",
     category: "criminal",
     since: "Active since ~2015",
+    active: true,
     motivation: ["Payment card data theft", "POS system compromise", "Retail financial fraud"],
     targets: ["Retail point-of-sale", "Hospitality", "E-commerce", "20M+ payment cards stolen"],
     ttps: [
@@ -2874,6 +2944,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Eastern European  -  Ukraine/Russia)",
     category: "criminal",
     since: "Active since ~2013",
+    active: true,
     motivation: ["Direct bank account theft", "ATM jackpotting", "SWIFT transfer fraud"],
     targets: ["Banks", "Financial institutions", "ATM networks", "SWIFT infrastructure"],
     ttps: [
@@ -2916,6 +2987,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Russian-speaking  -  likely Saint Petersburg)",
     category: "criminal",
     since: "Active since ~2016",
+    active: true,
     motivation: ["Banking credential theft", "Ransomware payload delivery", "Enterprise network reconnaissance"],
     targets: ["Banks", "Healthcare", "Local government", "Hospitals", "Global enterprise"],
     ttps: [
@@ -2959,6 +3031,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Eastern European)",
     category: "criminal",
     since: "Active since ~2014 (recurring)",
+    active: true,
     motivation: ["Malware-as-a-service delivery", "Banking credential theft", "Ransomware loader"],
     targets: ["Global enterprise", "Government", "Healthcare", "Anyone with an email address"],
     ttps: [
@@ -2999,6 +3072,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Eastern European, suspected)",
     category: "criminal",
     since: "Active since ~2008",
+    active: true,
     motivation: ["Payment card data theft", "POS system compromise", "Long-term persistent access"],
     targets: ["Retail POS systems", "Hospitality", "Gaming", "US businesses"],
     ttps: [
@@ -3039,6 +3113,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (multiple groups, decentralized)",
     category: "criminal",
     since: "Active since ~2016",
+    active: true,
     motivation: ["E-commerce payment card theft", "JavaScript injection", "Third-party script compromise"],
     targets: ["E-commerce sites", "British Airways", "Ticketmaster", "Newegg", "380,000+ victim records"],
     ttps: [
@@ -3079,6 +3154,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Eastern European)",
     category: "criminal",
     since: "Active since ~2017",
+    active: true,
     motivation: ["Banking credential theft", "Loader-as-a-service for ransomware", "Financial fraud"],
     targets: ["Banks", "US financial sector", "Healthcare", "Global enterprise"],
     ttps: [
@@ -3121,6 +3197,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (TrickBot operators  -  Russian-speaking)",
     category: "criminal",
     since: "Active since ~2020",
+    active: true,
     motivation: ["Initial access as a service", "Ryuk and Conti ransomware delivery", "Enterprise network access"],
     targets: ["Healthcare", "Law firms", "Financial services", "Enterprise networks globally"],
     ttps: [
@@ -3160,6 +3237,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (suspected Eastern European)",
     category: "criminal",
     since: "Active since ~2019",
+    active: true,
     motivation: ["Ransomware delivery via government impersonation", "Tax authority phishing", "Invoice fraud"],
     targets: ["German enterprises", "Italian businesses", "US businesses", "Tax authority impersonation targets"],
     ttps: [
@@ -3198,6 +3276,7 @@ export const cards: TarotCard[] = [
     origin: "China (MSS - Ministry of State Security)",
     category: "nation-state",
     since: "Active since ~2010",
+    active: true,
     motivation: ["Espionage", "Political surveillance"],
     targets: ["Government", "Political organizations", "NGOs", "Think tanks", "Presidential campaigns"],
     ttps: [
@@ -3238,6 +3317,7 @@ export const cards: TarotCard[] = [
     origin: "Vietnam (Ministry of Public Security, suspected)",
     category: "nation-state",
     since: "Active since ~2014",
+    active: true,
     motivation: ["Espionage", "Intellectual property theft", "Domestic surveillance"],
     targets: ["Private sector", "Automotive", "Government", "Media", "Foreign corporations in Vietnam"],
     ttps: [
@@ -3278,6 +3358,7 @@ export const cards: TarotCard[] = [
     origin: "North Korea (RGB - Reconnaissance General Bureau)",
     category: "nation-state",
     since: "Active since ~2012",
+    active: true,
     motivation: ["Espionage", "Intelligence gathering on defectors"],
     targets: ["South Korea", "Japan", "Vietnam", "Middle East", "Government", "Healthcare", "Defectors and journalists"],
     ttps: [
@@ -3318,6 +3399,7 @@ export const cards: TarotCard[] = [
     origin: "Iran (MOIS - Ministry of Intelligence and Security)",
     category: "nation-state",
     since: "Active since ~2014",
+    active: true,
     motivation: ["Surveillance", "Tracking diaspora and dissidents"],
     targets: ["Telecommunications", "Travel industry", "IT sector", "Middle East governments", "Iranian dissidents abroad"],
     ttps: [
@@ -3358,6 +3440,7 @@ export const cards: TarotCard[] = [
     origin: "Iran (IRGC-IO - Islamic Revolutionary Guard Corps Intelligence Organization)",
     category: "nation-state",
     since: "Active since ~2015",
+    active: true,
     motivation: ["Espionage", "Influence operations", "Credential harvesting"],
     targets: ["Media", "NGOs", "Think tanks", "Western governments", "Nuclear negotiators", "US election campaigns"],
     ttps: [
@@ -3398,6 +3481,7 @@ export const cards: TarotCard[] = [
     origin: "China (MSS-affiliated)",
     category: "nation-state",
     since: "Active since ~2020",
+    active: true,
     motivation: ["Espionage", "Intelligence collection"],
     targets: ["Telecommunications", "Technology", "Government", "Academic institutions"],
     ttps: [
@@ -3437,6 +3521,7 @@ export const cards: TarotCard[] = [
     origin: "China (PLA-affiliated, Taiwan operations)",
     category: "nation-state",
     since: "Active since ~2010",
+    active: true,
     motivation: ["Espionage", "Intellectual property theft"],
     targets: ["Technology", "Government", "Defense", "Electronics", "Taiwan", "Japan", "US subsidiaries"],
     ttps: [
@@ -3477,6 +3562,7 @@ export const cards: TarotCard[] = [
     origin: "China (MSS-affiliated contractor)",
     category: "nation-state",
     since: "Active since ~2019",
+    active: true,
     motivation: ["Espionage", "Financial gain", "Influence operations"],
     targets: ["Government", "Education", "Media", "Healthcare", "Cryptocurrency", "Pro-democracy groups"],
     ttps: [
@@ -3517,6 +3603,7 @@ export const cards: TarotCard[] = [
     origin: "China (MSS - Integrity Technology Group)",
     category: "nation-state",
     since: "Active since ~2021",
+    active: true,
     motivation: ["Espionage", "Pre-positioning", "Persistent access"],
     targets: ["Taiwan", "Philippines", "Malaysia", "Government", "Critical infrastructure", "SOHO devices"],
     ttps: [
@@ -3556,6 +3643,7 @@ export const cards: TarotCard[] = [
     origin: "China (MSS - suspected)",
     category: "nation-state",
     since: "Active since ~2021",
+    active: true,
     motivation: ["Espionage", "Email intelligence collection"],
     targets: ["Government email systems", "US State Department", "Western European governments", "Microsoft cloud customers"],
     ttps: [
@@ -3595,6 +3683,7 @@ export const cards: TarotCard[] = [
     origin: "Russia (GRU Unit 161)",
     category: "nation-state",
     since: "Active since ~2020",
+    active: true,
     motivation: ["Destruction", "Psychological operations", "Disruption"],
     targets: ["Ukraine", "Government", "Critical infrastructure", "NATO-adjacent organizations"],
     ttps: [
@@ -3635,6 +3724,7 @@ export const cards: TarotCard[] = [
     origin: "Russia (FSB Centre 16)",
     category: "nation-state",
     since: "Active since ~2010",
+    active: true,
     motivation: ["Espionage", "Pre-positioning in critical infrastructure"],
     targets: ["Energy sector", "ICS/SCADA systems", "Electric utilities", "Nuclear facilities", "Government", "Defense"],
     ttps: [
@@ -3675,6 +3765,7 @@ export const cards: TarotCard[] = [
     origin: "Russia (pro-Kremlin hacktivist collective)",
     category: "hacktivist",
     since: "Active since March 2022",
+    active: true,
     motivation: ["Pro-Russian propaganda", "Political disruption", "NATO retaliation"],
     targets: ["NATO member governments", "Ukraine supporters", "Banks and financial institutions", "Transportation infrastructure"],
     ttps: [
@@ -3713,6 +3804,7 @@ export const cards: TarotCard[] = [
     origin: "Russia (GRU-linked hacktivist, Sandworm affiliate)",
     category: "hacktivist",
     since: "Active since 2022",
+    active: true,
     motivation: ["Disruption of Western infrastructure", "Pro-Kremlin propaganda"],
     targets: ["Water treatment facilities", "Hydroelectric dams", "US critical infrastructure", "Poland", "France", "US utilities"],
     ttps: [
@@ -3751,6 +3843,7 @@ export const cards: TarotCard[] = [
     origin: "North Korea (RGB - 3rd Bureau)",
     category: "nation-state",
     since: "Active since ~2014",
+    active: true,
     motivation: ["Espionage", "Defense intelligence theft"],
     targets: ["Defense contractors", "South Korea", "Japan", "IT service providers", "Think tanks"],
     ttps: [
@@ -3791,6 +3884,7 @@ export const cards: TarotCard[] = [
     origin: "North Korea (RGB - Lazarus sub-unit)",
     category: "nation-state",
     since: "Active since ~2022",
+    active: true,
     motivation: ["Cryptocurrency theft", "Revenue generation"],
     targets: ["Cryptocurrency exchanges", "Blockchain companies", "Technology firms", "Crypto developers"],
     ttps: [
@@ -3830,6 +3924,7 @@ export const cards: TarotCard[] = [
     origin: "North Korea (RGB)",
     category: "nation-state",
     since: "Active since ~2023",
+    active: true,
     motivation: ["Revenue generation", "Espionage", "Defense IP theft"],
     targets: ["Defense", "Aerospace", "Education", "IT sector", "Cryptocurrency"],
     ttps: [
@@ -3869,6 +3964,7 @@ export const cards: TarotCard[] = [
     origin: "Iran (IRGC - contractor network)",
     category: "nation-state",
     since: "Active since ~2017",
+    active: true,
     motivation: ["Espionage", "Access brokering", "Ransomware facilitation"],
     targets: ["Government", "Defense", "Technology", "Healthcare", "US and Israeli organizations"],
     ttps: [
@@ -3909,6 +4005,7 @@ export const cards: TarotCard[] = [
     origin: "Russia (FSB-linked, Maksim Yakubets)",
     category: "criminal",
     since: "Active since ~2007",
+    active: true,
     motivation: ["Financial crime", "Ransomware", "Banking fraud"],
     targets: ["Financial institutions", "Insurance", "Healthcare", "Manufacturing", "Private sector globally"],
     ttps: [
@@ -3949,6 +4046,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Russian-speaking, Conti splinter group)",
     category: "criminal",
     since: "Active since April 2022",
+    active: true,
     motivation: ["Financial extortion", "Ransomware-as-a-Service"],
     targets: ["Healthcare", "Manufacturing", "Construction", "Finance", "Technology", "Critical infrastructure"],
     ttps: [
@@ -3988,6 +4086,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Russian-speaking, suspected)",
     category: "criminal",
     since: "Active since March 2023",
+    active: true,
     motivation: ["Financial extortion", "Double extortion"],
     targets: ["SMBs", "Healthcare", "Education", "Manufacturing", "Critical infrastructure"],
     ttps: [
@@ -4027,6 +4126,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (suspected Eastern European)",
     category: "criminal",
     since: "Active since June 2022",
+    active: true,
     motivation: ["Financial extortion"],
     targets: ["Government", "Healthcare", "Critical infrastructure", "Municipalities", "Media"],
     ttps: [
@@ -4066,6 +4166,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (suspected Eastern European)",
     category: "criminal",
     since: "Active since May 2023",
+    active: true,
     motivation: ["Financial extortion", "Ransomware-as-a-Service"],
     targets: ["Healthcare", "Education", "Government", "Manufacturing", "Defense"],
     ttps: [
@@ -4105,6 +4206,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Russia-linked, global affiliates)",
     category: "criminal",
     since: "Active since February 2024",
+    active: true,
     motivation: ["Financial extortion", "RaaS platform"],
     targets: ["Healthcare", "Critical infrastructure", "Government", "Technology", "Water utilities"],
     ttps: [
@@ -4144,6 +4246,7 @@ export const cards: TarotCard[] = [
     origin: "Unknown (suspected nation-state, telecom specialist)",
     category: "unknown",
     since: "Active since ~2016",
+    active: true,
     motivation: ["Signals intelligence", "Mass surveillance"],
     targets: ["Telecommunications exclusively", "Mobile network operators", "13+ global carriers simultaneously"],
     ttps: [
@@ -4183,6 +4286,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (French and Moroccan nationals, suspected)",
     category: "trickster",
     since: "Active since 2020",
+    active: true,
     motivation: ["Data theft", "Financial gain", "Notoriety"],
     targets: ["Cloud storage", "SaaS platforms", "Consumer databases", "Technology companies", "Retail"],
     ttps: [
@@ -4222,6 +4326,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (Anglophone, primarily US/UK teens and young adults)",
     category: "trickster",
     since: "Active since ~2020",
+    active: true,
     motivation: ["Financial gain", "Notoriety", "Chaos"],
     targets: ["Telecom companies", "Technology firms", "Cryptocurrency holders", "Individuals", "Corporations"],
     ttps: [
@@ -4261,6 +4366,7 @@ export const cards: TarotCard[] = [
     origin: "Criminal (US-based, young adults)",
     category: "trickster",
     since: "Active since ~2021",
+    active: true,
     motivation: ["Doxing", "Extortion", "Status", "Financial gain"],
     targets: ["Law enforcement databases", "Social media accounts", "Cryptocurrency wallets", "Individuals with valuable handles", "Personal data brokers"],
     ttps: [
