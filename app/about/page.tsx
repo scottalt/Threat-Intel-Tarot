@@ -58,6 +58,18 @@ export default function AboutPage() {
           >
             Gallery
           </a>
+          <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
+          <a
+            href="/techniques"
+            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
+            style={{
+              color: "var(--color-gold)",
+              opacity: 0.5,
+              fontFamily: "var(--font-cinzel), serif",
+            }}
+          >
+            Techniques
+          </a>
         </div>
 
         <h1
@@ -182,6 +194,10 @@ export default function AboutPage() {
               <li className="flex gap-2">
                 <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
                 <span><strong style={{ color: "var(--color-mist)" }}>Gallery</strong> — browse all 78 cards. Filter by threat category or suit. Search by group name, alias, or origin country.</span>
+              </li>
+              <li className="flex gap-2">
+                <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
+                <span><strong style={{ color: "var(--color-mist)" }}>Technique Explorer</strong> — view all MITRE ATT&amp;CK techniques used across the full deck, grouped by tactic and ranked by prevalence across threat actors.</span>
               </li>
             </ul>
           </section>
