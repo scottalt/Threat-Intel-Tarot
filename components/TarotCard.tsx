@@ -1,44 +1,154 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import type { TarotCard as TarotCardType } from "@/data/types";
 import { CardBack } from "./CardBack";
 import { CardFront } from "./CardFront";
 
-export function TarotCard({ card, startFlipped = false }: { card: TarotCardType; startFlipped?: boolean }) {
+interface Particle {
+  id: number;
+  tx: number;
+  ty: number;
+}
+
+export function TarotCard({
+  card,
+  startFlipped = false,
+}: {
+  card: TarotCardType;
+  startFlipped?: boolean;
+}) {
   const [flipped, setFlipped] = useState(startFlipped);
+  const [particles, setParticles] = useState<Particle[]>([]);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const particleIdRef = useRef(0);
+  const tiltResetRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  const spawnParticles = useCallback(() => {
+    const burst: Particle[] = Array.from({ length: 14 }, (_, i) => {
+      const angle = (i * (360 / 14) * Math.PI) / 180;
+      const dist = 55 + Math.random() * 45;
+      return {
+        id: particleIdRef.current++,
+        tx: Math.cos(angle) * dist,
+        ty: Math.sin(angle) * dist,
+      };
+    });
+    setParticles(burst);
+    setTimeout(() => setParticles([]), 750);
+  }, []);
+
+  const handleFlip = useCallback(() => {
+    setFlipped((prev) => {
+      if (!prev) {
+        setTimeout(spawnParticles, 380);
+      }
+      return !prev;
+    });
+  }, [spawnParticles]);
+
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent<HTMLDivElement>) => {
+      if (flipped) return;
+      clearTimeout(tiltResetRef.current);
+      const touch = e.touches[0];
+      const rect = e.currentTarget.getBoundingClientRect();
+      const nx = (touch.clientX - rect.left) / rect.width - 0.5;
+      const ny = (touch.clientY - rect.top) / rect.height - 0.5;
+      setTilt({ x: -ny * 14, y: nx * 14 });
+    },
+    [flipped]
+  );
+
+  const handleTouchEnd = useCallback(() => {
+    tiltResetRef.current = setTimeout(() => setTilt({ x: 0, y: 0 }), 120);
+  }, []);
+
+  const sceneTransform =
+    !flipped && (tilt.x !== 0 || tilt.y !== 0)
+      ? `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`
+      : undefined;
 
   return (
     <div className="flex flex-col items-center gap-3">
-      <div
-        className="card-scene arcane-border"
-        onClick={() => setFlipped((f) => !f)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            setFlipped((f) => !f);
+      <div className="relative">
+        {/* Particle layer */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "none",
+            zIndex: 20,
+            overflow: "visible",
+          }}
+        >
+          {particles.map((p) => (
+            <div
+              key={p.id}
+              style={{
+                position: "absolute",
+                left: "50%",
+                top: "50%",
+                width: 7,
+                height: 7,
+                borderRadius: "50%",
+                background: "var(--color-gold-bright)",
+                transform: "translate(-50%, -50%)",
+                animation: "particle-out 0.72s ease-out forwards",
+                ["--tx" as string]: `${p.tx}px`,
+                ["--ty" as string]: `${p.ty}px`,
+              }}
+            />
+          ))}
+        </div>
+
+        <div
+          className="card-scene arcane-border"
+          onClick={handleFlip}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              handleFlip();
+            }
+          }}
+          role="button"
+          tabIndex={0}
+          aria-label={
+            flipped ? `${card.name} — tap to flip back` : "Tap to reveal card"
           }
-        }}
-        role="button"
-        tabIndex={0}
-        aria-label={flipped ? `${card.name} — click to flip back` : "Click to reveal card"}
-        style={{ borderRadius: "16px" }}
-      >
-        <div className={`card-wrapper ${flipped ? "is-flipped" : ""}`}>
-          <div className="card-face card-face--back">
-            <CardBack />
-          </div>
-          <div className="card-face card-face--front">
-            <CardFront card={card} />
+          style={{
+            borderRadius: "16px",
+            transform: sceneTransform,
+            transition:
+              !flipped && tilt.x === 0 && tilt.y === 0
+                ? "transform 0.2s ease-out"
+                : undefined,
+          }}
+        >
+          <div className={`card-wrapper ${flipped ? "is-flipped" : ""}`}>
+            <div className="card-face card-face--back">
+              <CardBack />
+            </div>
+            <div className="card-face card-face--front">
+              <CardFront card={card} />
+            </div>
           </div>
         </div>
       </div>
+
       {!flipped && (
         <p
-          className="text-xs uppercase tracking-widest animate-pulse"
-          style={{ color: "var(--color-gold)", opacity: 0.7, fontFamily: "var(--font-cinzel), serif" }}
+          className="text-xs uppercase tracking-widest animate-pulse select-none"
+          style={{
+            color: "var(--color-gold)",
+            opacity: 0.65,
+            fontFamily: "var(--font-cinzel), serif",
+          }}
         >
-          Click to reveal
+          Tap to reveal
         </p>
       )}
     </div>
