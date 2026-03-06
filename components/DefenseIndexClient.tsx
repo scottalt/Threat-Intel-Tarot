@@ -143,7 +143,7 @@ export function DefenseIndexClient({ defenses }: { defenses: DefenseEntry[] }) {
               style={{
                 background: "var(--color-arcane)",
                 border: "1px solid rgba(201,168,76,0.1)",
-                animation: "section-reveal 0.35s ease-out both",
+                animation: "section-reveal 0.4s cubic-bezier(0.22, 1, 0.36, 1) both",
                 animationDelay: `${Math.min(i, 20) * 30}ms`,
               }}
             >
@@ -199,7 +199,8 @@ export function DefenseIndexClient({ defenses }: { defenses: DefenseEntry[] }) {
                           style={{
                             width: `${Math.round((defense.count / maxCount) * 80)}px`,
                             background: "var(--color-gold)",
-                            opacity: 0.4,
+                            opacity: 0.5,
+                            animation: `bar-grow 0.5s cubic-bezier(0.22, 1, 0.36, 1) ${Math.min(i, 20) * 30 + 100}ms both`,
                           }}
                         />
                         <span className="text-xs" style={{ color: "var(--color-silver)", opacity: 0.4 }}>
