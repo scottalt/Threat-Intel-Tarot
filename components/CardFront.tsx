@@ -24,6 +24,23 @@ const section = (i: number): CSSProperties => ({
   animationDelay: `${i * 65}ms`,
 });
 
+const ATT_CK_TACTICS = [
+  { id: "Reconnaissance", abbr: "RCN" },
+  { id: "Resource Development", abbr: "RDV" },
+  { id: "Initial Access", abbr: "INI" },
+  { id: "Execution", abbr: "EXC" },
+  { id: "Persistence", abbr: "PRS" },
+  { id: "Privilege Escalation", abbr: "PRV" },
+  { id: "Defense Evasion", abbr: "EVA" },
+  { id: "Credential Access", abbr: "CRD" },
+  { id: "Discovery", abbr: "DSC" },
+  { id: "Lateral Movement", abbr: "LAT" },
+  { id: "Collection", abbr: "COL" },
+  { id: "Command and Control", abbr: "C2" },
+  { id: "Exfiltration", abbr: "EXF" },
+  { id: "Impact", abbr: "IMP" },
+] as const;
+
 const RiskStars = ({ level }: { level: number }) => (
   <span>
     {Array.from({ length: 5 }, (_, i) => (
@@ -227,6 +244,36 @@ export function CardFront({ card }: { card: TarotCard }) {
           >
             Tactics & Techniques
           </div>
+          {/* ATT&CK kill-chain heatmap */}
+          {(() => {
+            const activeTactics = new Set(card.ttps.map((t) => t.tactic));
+            return (
+              <div className="flex flex-wrap gap-0.5 mb-3" title="ATT&CK tactic coverage">
+                {ATT_CK_TACTICS.map((tactic) => {
+                  const active = activeTactics.has(tactic.id);
+                  return (
+                    <div
+                      key={tactic.id}
+                      title={tactic.id}
+                      style={{
+                        fontSize: "7px",
+                        letterSpacing: "0.04em",
+                        padding: "2px 3px",
+                        borderRadius: "2px",
+                        fontFamily: "var(--font-cinzel), serif",
+                        background: active ? "rgba(201,168,76,0.18)" : "rgba(255,255,255,0.04)",
+                        border: `1px solid ${active ? "rgba(201,168,76,0.45)" : "rgba(255,255,255,0.08)"}`,
+                        color: active ? "var(--color-gold-bright)" : "rgba(192,192,192,0.25)",
+                        transition: "all 0.2s",
+                      }}
+                    >
+                      {tactic.abbr}
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })()}
           <div className="space-y-0.5">
             {card.ttps.map((ttp, i) => (
               <TTPBadge key={ttp.techniqueId} ttp={ttp} index={i} />
