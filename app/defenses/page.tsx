@@ -108,6 +108,18 @@ export default function DefensesPage() {
           >
             Sectors
           </a>
+          <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
+          <a
+            href="/compare"
+            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
+            style={{
+              color: "var(--color-gold)",
+              opacity: 0.5,
+              fontFamily: "var(--font-cinzel), serif",
+            }}
+          >
+            Compare
+          </a>
         </div>
 
         {/* Header */}
