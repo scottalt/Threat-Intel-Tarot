@@ -22,12 +22,16 @@
   --color-crimson: var(--color-crimson);
   --color-silver: var(--color-silver);
   --color-mist: var(--color-mist);
+  --color-teal: var(--color-teal);
+  --color-purple: var(--color-purple);
+  --color-ember: var(--color-ember);
+  --color-arcane-light: var(--color-arcane-light);
 }
 
 body {
   background: var(--color-void);
   color: var(--color-mist);
-  font-family: 'EB Garamond', Georgia, serif;
+  font-family: var(--font-garamond), Georgia, serif;
 }
 
 /* Card flip 3D animation */
