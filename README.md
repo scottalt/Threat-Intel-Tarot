@@ -4,7 +4,7 @@
 
 A full 78-card tarot deck where every card is a real adversary group drawn from MITRE ATT&CK. Each card presents TTPs, targets, motivations, and defensive recommendations — styled as a dark arcane tarot experience.
 
-Live: [threat-intel-tarot.vercel.app](https://threat-intel-tarot.vercel.app)
+Live: [tarot.scottaltiparmak.com](https://tarot.scottaltiparmak.com)
 
 ---
 
@@ -21,6 +21,7 @@ Each card covers a documented adversary group with:
 - Specific defensive control recommendations
 - ATT&CK Navigator layer export (import directly into the Navigator)
 - Markdown threat brief for reports and documentation
+- Shareable card image (portrait PNG, watermarked)
 
 ---
 
@@ -42,16 +43,17 @@ Groups include: Equation Group, APT28, APT29, Sandworm, Turla, APT41, Lazarus, L
 
 ## Features
 
-- **Draw a Card**: random adversary from the full deck
+- **Draw a Card**: random adversary from the full deck, with shuffle animation and procedural sound effects
 - **Daily Card**: seed-based, same card for everyone each day, resets at midnight
 - **Three-Card Spread**: Past, Present, Future threat actors with shared TTP analysis and priority defenses
-- **Gallery**: browse all 78 cards with search, category, suit, origin, and sector filters
+- **Gallery**: browse all 78 cards with search, category, suit, origin, and sector filters, scroll progress indicator
 - **Adversary Comparison**: side-by-side TTP, target, and defense comparison for any two groups, with shared techniques highlighted and a shareable URL
 - **Technique Explorer**: all MITRE ATT&CK techniques across the deck, grouped by tactic, ranked by prevalence, with kill-chain distribution chart
 - **Defense Index**: security controls ranked by cross-deck coverage to help prioritize what defends against the most adversaries
 - **Sector Intelligence**: industries ranked by adversary targeting with average risk scores
 - **ATT&CK Navigator Export**: download a Navigator v5 layer file pre-loaded with any adversary's techniques
 - **Threat Brief**: copy a clean markdown profile to clipboard for reports, Confluence, or security awareness materials
+- **Share Card**: download a portrait card image or share directly to X and LinkedIn with pre-filled text
 
 ---
 
@@ -68,10 +70,12 @@ Flavor text and reversed meanings are creative interpretations. Threat data is f
 
 ## Stack
 
-- Next.js 14 (App Router) + TypeScript
+- Next.js 16 (App Router) + TypeScript
 - Tailwind CSS v4
 - Static card data in `data/cards.ts` (MITRE ATT&CK-sourced, typed)
-- Deployed on Vercel
+- Card share images generated server-side via Satori (`ImageResponse`)
+- Procedural sound effects via Web Audio API (no audio files)
+- Deployed on Vercel at [tarot.scottaltiparmak.com](https://tarot.scottaltiparmak.com)
 
 ---
 
@@ -86,7 +90,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ```bash
 # Type check
-npx tsc --noEmit
+npm run type-check
 
 # Validate card data
 python3 scripts/validate_data.py
@@ -96,7 +100,9 @@ python3 scripts/validate_data.py
 
 ## Built By
 
-**Scott Altiparmak** - Senior Information Security Engineer, CISSP
+**Scott Altiparmak** — Senior Information Security Engineer, CISSP
+
+Director of Programming, South Florida ISSA. Security practitioner writing for practitioners.
 
 [scottaltiparmak.com](https://www.scottaltiparmak.com) | [LinkedIn](https://www.linkedin.com/in/scottaltiparmak/)
 
