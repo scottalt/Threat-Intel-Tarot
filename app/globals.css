@@ -34,12 +34,17 @@ body {
   font-family: var(--font-garamond), Georgia, serif;
 }
 
-/* Card flip 3D animation */
+/* ─────────────────────────────────────────
+   Card Flip — 3D Scene
+───────────────────────────────────────── */
+
 .card-scene {
   perspective: 1200px;
   cursor: pointer;
-  width: 340px;
-  height: 600px;
+  width: min(340px, 92vw);
+  aspect-ratio: 17 / 30;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .card-wrapper {
@@ -65,18 +70,22 @@ body {
 
 .card-face--front {
   transform: rotateY(180deg);
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Gold shimmer on hover */
-.card-scene:hover .card-wrapper:not(.is-flipped) {
-  transform: rotateY(8deg) rotateX(-2deg);
+/* Hover tilt — desktop only */
+@media (hover: hover) {
+  .card-scene:hover .card-wrapper:not(.is-flipped) {
+    transform: rotateY(8deg) rotateX(-2deg);
+  }
 }
 
 /* Arcane border glow */
 .arcane-border {
   border: 1px solid var(--color-gold);
   box-shadow:
-    0 0 8px rgba(201, 168, 76, 0.2),
+    0 0 12px rgba(201, 168, 76, 0.25),
+    0 0 40px rgba(201, 168, 76, 0.05),
     inset 0 0 8px rgba(201, 168, 76, 0.05);
 }
 
@@ -87,4 +96,92 @@ body {
 
 .risk-star-empty {
   color: #333;
+}
+
+/* Card title shimmer (one-shot on reveal) */
+.card-title-shimmer {
+  background: linear-gradient(
+    105deg,
+    var(--color-gold-bright) 35%,
+    #fff8e1 50%,
+    var(--color-gold-bright) 65%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: title-shimmer 0.9s ease-out 0.35s both;
+}
+
+/* ─────────────────────────────────────────
+   Keyframe Animations
+───────────────────────────────────────── */
+
+@keyframes sigil-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes eye-pulse {
+  0%, 100% { transform: scale(1);    opacity: 0.8; }
+  50%       { transform: scale(1.1); opacity: 1;   }
+}
+
+@keyframes glyph-fade {
+  0%, 100% { opacity: 0.5;  }
+  50%       { opacity: 0.12; }
+}
+
+@keyframes shimmer {
+  0%   { transform: translateX(-150%); }
+  100% { transform: translateX(400%);  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0);    }
+  50%       { transform: translateY(-7px); }
+}
+
+@keyframes particle-out {
+  0%   { transform: translate(0, 0) scale(1);                         opacity: 1; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+}
+
+@keyframes section-reveal {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes badge-slide {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0);     }
+}
+
+@keyframes title-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center;  }
+}
+
+@keyframes star-fill {
+  from { color: #333; transform: scale(0.7); }
+  to   { color: var(--color-gold-bright); transform: scale(1); }
+}
+
+@keyframes nebula-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─────────────────────────────────────────
+   Accessibility — Reduced Motion
+───────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
