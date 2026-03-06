@@ -69,13 +69,13 @@ export default function GalleryPage() {
               fontFamily: "var(--font-cinzel), serif",
             }}
           >
-            The 22 Major Arcana
+            The Adversary Archive
           </h1>
           <p
             className="text-sm"
             style={{ color: "var(--color-silver)", opacity: 0.7 }}
           >
-            {cards.length} adversary profiles. Search by name, alias, or origin.
+            {cards.length} adversary profiles across Major and Minor Arcana.
           </p>
           <div
             className="mt-3 w-24 h-px mx-auto"
