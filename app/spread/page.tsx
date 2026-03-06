@@ -7,6 +7,7 @@ import { Starfield } from "@/components/Starfield";
 import type { TarotCard as TarotCardType } from "@/data/types";
 
 type SharedTTP = { techniqueId: string; name: string; tactic: string };
+type PriorityDefense = { control: string; count: number };
 
 function buildReading(spread: TarotCardType[]): {
   origins: string[];
@@ -14,6 +15,7 @@ function buildReading(spread: TarotCardType[]): {
   avgRisk: number;
   narrative: string;
   sharedTTPs: SharedTTP[];
+  priorityDefenses: PriorityDefense[];
 } {
   const origins = [...new Set(spread.map((c) => c.origin))];
   const tactics = [
@@ -68,7 +70,25 @@ function buildReading(spread: TarotCardType[]): {
     narratives[dominantCategory] ??
     "This spread reveals a complex, multi-vector threat environment. No single defensive posture is sufficient. Depth, detection, and response speed are critical.";
 
-  return { origins, tactics, avgRisk, narrative, sharedTTPs };
+  // Compute defenses recommended by 2+ cards in this spread
+  const defenseCount = new Map<string, number>();
+  for (const card of spread) {
+    const seen = new Set<string>();
+    for (const defense of card.defenses) {
+      const key = defense.control.trim().toLowerCase();
+      if (!seen.has(key)) {
+        seen.add(key);
+        defenseCount.set(defense.control.trim(), (defenseCount.get(defense.control.trim()) ?? 0) + 1);
+      }
+    }
+  }
+  const priorityDefenses = [...defenseCount.entries()]
+    .filter(([, count]) => count >= 2)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 4)
+    .map(([control, count]) => ({ control, count }));
+
+  return { origins, tactics, avgRisk, narrative, sharedTTPs, priorityDefenses };
 }
 
 const positions = [
@@ -120,6 +140,9 @@ function buildReadingText(spread: TarotCardType[]): string {
     `Top Tactics: ${reading.tactics.join(", ")}`,
     reading.sharedTTPs.length > 0
       ? `Shared Techniques: ${reading.sharedTTPs.map((t) => `${t.techniqueId} (${t.name})`).join(", ")}`
+      : "",
+    reading.priorityDefenses.length > 0
+      ? `Priority Defenses: ${reading.priorityDefenses.map((d) => d.control).join("; ")}`
       : "",
     "",
     reading.narrative,
@@ -508,6 +531,42 @@ export default function SpreadPage() {
                           {ttp.tactic}
                         </span>
                       </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Priority defenses — controls recommended by 2+ cards */}
+              {reading.priorityDefenses.length > 0 && (
+                <div className="mb-6">
+                  <div
+                    className="text-xs uppercase tracking-widest mb-3 text-center"
+                    style={{
+                      color: "var(--color-gold)",
+                      fontFamily: "var(--font-cinzel), serif",
+                      opacity: 0.55,
+                    }}
+                  >
+                    Priority Defenses
+                  </div>
+                  <div className="space-y-1.5 px-2">
+                    {reading.priorityDefenses.map((d) => (
+                      <div
+                        key={d.control}
+                        className="flex items-center gap-2 text-xs"
+                        style={{ color: "var(--color-mist)" }}
+                      >
+                        <span style={{ color: "var(--color-gold)", opacity: 0.7, flexShrink: 0 }}>◆</span>
+                        <span style={{ opacity: 0.85 }}>{d.control}</span>
+                        {d.count === spread.length && (
+                          <span
+                            className="ml-auto"
+                            style={{ color: "var(--color-gold)", opacity: 0.5, fontSize: "9px", flexShrink: 0 }}
+                          >
+                            all {d.count}
+                          </span>
+                        )}
+                      </div>
                     ))}
                   </div>
                 </div>
