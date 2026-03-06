@@ -211,7 +211,7 @@ export default function TechniquesPage() {
             Kill-Chain Coverage
           </div>
           <div className="space-y-1.5">
-            {tacticUsage.map(({ tactic, count }) => (
+            {tacticUsage.map(({ tactic, count }, i) => (
               <div key={tactic} className="flex items-center gap-2">
                 <div
                   className="text-xs shrink-0"
@@ -225,9 +225,10 @@ export default function TechniquesPage() {
                       height: "6px",
                       width: `${Math.round((count / maxTacticCount) * 100)}%`,
                       background: "var(--color-gold)",
-                      opacity: 0.45,
+                      opacity: 0.55,
                       borderRadius: "3px",
                       minWidth: "4px",
+                      animation: `bar-grow 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${i * 40}ms both`,
                     }}
                   />
                   <span className="text-xs shrink-0" style={{ color: "var(--color-gold)", opacity: 0.55, fontSize: "10px" }}>

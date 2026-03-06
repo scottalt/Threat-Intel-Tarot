@@ -100,6 +100,7 @@ export default function AboutPage() {
           style={{
             color: "var(--color-gold-bright)",
             fontFamily: "var(--font-cinzel), serif",
+            animation: "hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both",
           }}
         >
           About This Deck

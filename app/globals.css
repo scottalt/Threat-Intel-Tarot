@@ -255,6 +255,12 @@ body {
   to   { opacity: 1; transform: translateX(0); }
 }
 
+/* Bar chart grow — clip-path reveal from left (GPU composited) */
+@keyframes bar-grow {
+  from { clip-path: inset(0 100% 0 0 round 3px); }
+  to   { clip-path: inset(0 0% 0 0 round 3px); }
+}
+
 /* ─────────────────────────────────────────
    Three-Card Spread — compact card slots
 ───────────────────────────────────────── */
