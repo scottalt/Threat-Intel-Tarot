@@ -215,13 +215,14 @@ export function TechniqueExplorerClient({
               </div>
 
               <div className="space-y-1.5">
-                {tacticTechniques.map((tech) => (
+                {tacticTechniques.map((tech, ti) => (
                   <div
                     key={tech.techniqueId}
                     className="flex items-start gap-3 px-3 py-2 rounded"
                     style={{
                       background: "var(--color-arcane)",
                       border: "1px solid rgba(201,168,76,0.08)",
+                      animation: `badge-slide 0.3s cubic-bezier(0.22, 1, 0.36, 1) ${Math.min(ti * 25, 200)}ms both`,
                     }}
                   >
                     <a
@@ -280,10 +281,12 @@ export function TechniqueExplorerClient({
                     <div className="flex items-center gap-1.5 shrink-0">
                       {tech.count > 1 && (
                         <div
-                          className="h-1 rounded-full opacity-40"
+                          className="h-1 rounded-full"
                           style={{
                             width: `${Math.max(8, Math.round((tech.count / tacticMax) * 40))}px`,
                             background: "var(--color-gold)",
+                            opacity: 0.5,
+                            animation: `bar-grow 0.4s cubic-bezier(0.22, 1, 0.36, 1) both`,
                           }}
                         />
                       )}
