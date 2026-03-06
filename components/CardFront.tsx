@@ -10,6 +10,7 @@ const categoryAccent: Record<string, string> = {
   criminal: "var(--color-purple)",
   hacktivist: "var(--color-ember)",
   unknown: "var(--color-silver)",
+  trickster: "var(--color-trickster)",
 };
 
 // Brighter colors for sigil SVGs (small artwork, needs to pop on dark bg)
@@ -18,6 +19,7 @@ const sigilColor: Record<string, string> = {
   criminal: "#9f7aea",
   hacktivist: "#f97316",
   unknown: "#b8b8c8",
+  trickster: "#e040a0",
 };
 
 function CardSigil({ category }: { category: string }) {
@@ -165,6 +167,35 @@ function CardSigil({ category }: { category: string }) {
     );
   }
 
+  if (category === "trickster") {
+    return (
+      <svg viewBox="0 0 76 76" width="72" height="72" aria-hidden="true">
+        {/* Outer rotating ring */}
+        <g style={{ transformOrigin: "38px 38px", animation: "sigil-rotate 20s linear infinite" }}>
+          <circle cx="38" cy="38" r="34" fill="none" stroke={color} strokeWidth="0.5" opacity="0.22"
+            strokeDasharray="3 6" />
+        </g>
+        {/* Mask outer shape */}
+        <path d="M10,32 Q10,20 26,20 Q38,14 50,20 Q66,20 66,32 Q66,46 50,42 Q38,50 26,42 Q10,46 10,32 Z"
+          fill="none" stroke={color} strokeWidth="0.8" opacity="0.45" />
+        {/* Mask left eye hole */}
+        <ellipse cx="26" cy="34" rx="8" ry="6" fill="none" stroke={color} strokeWidth="1.2" opacity="0.8"
+          style={{ animation: "eye-pulse 2.2s ease-in-out infinite" }} />
+        {/* Mask right eye hole */}
+        <ellipse cx="50" cy="34" rx="8" ry="6" fill="none" stroke={color} strokeWidth="1.2" opacity="0.8"
+          style={{ animation: "eye-pulse 2.2s ease-in-out infinite 0.4s" }} />
+        {/* Mask bridge */}
+        <line x1="34" y1="34" x2="42" y2="34" stroke={color} strokeWidth="1" opacity="0.5" />
+        {/* Smile arc */}
+        <path d="M28,52 Q38,62 48,52" fill="none" stroke={color} strokeWidth="1.2" opacity="0.65"
+          strokeLinecap="round" style={{ animation: "iris-breathe 3s ease-in-out infinite" }} />
+        {/* Center diamond */}
+        <polygon points="38,28 42,34 38,40 34,34" fill={color} opacity="0.8"
+          style={{ animation: "spark-flicker 2.5s ease-in-out infinite" }} />
+      </svg>
+    );
+  }
+
   // unknown — watching eye with scan line
   return (
     <svg viewBox="0 0 76 76" width="72" height="72" aria-hidden="true" style={{ overflow: "hidden" }}>
@@ -203,6 +234,7 @@ const categoryGlowRgba: Record<string, string> = {
   criminal: "rgba(74,26,106,0.32)",
   hacktivist: "rgba(139,58,15,0.28)",
   unknown: "rgba(192,192,192,0.08)",
+  trickster: "rgba(192,38,160,0.28)",
 };
 
 const section = (i: number): CSSProperties => ({
@@ -310,6 +342,8 @@ export function CardFront({ card }: { card: TarotCard }) {
             >
               {card.arcanum === "major"
                 ? `Major Arcana · ${card.number}`
+                : card.arcanum === "expansion"
+                ? `Vol. II · ${card.number}`
                 : `${card.suit ?? "Minor Arcana"} · ${card.number}`}
             </div>
             <div className="flex items-center gap-2">

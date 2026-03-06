@@ -77,6 +77,7 @@ const catColor: Record<string, string> = {
   criminal:       "#9f7aea",
   hacktivist:     "#f97316",
   unknown:        "#b8b8c8",
+  trickster:      "#e040a0",
   mixed:          "#c9a84c",
 };
 
@@ -182,6 +183,7 @@ export function MapClient({ cards }: MapClientProps) {
     { value: "nation-state", label: "Nation-State",  color: catColor["nation-state"] },
     { value: "criminal",     label: "Criminal",      color: catColor["criminal"] },
     { value: "hacktivist",   label: "Hacktivist",    color: catColor["hacktivist"] },
+    { value: "trickster",    label: "Trickster",     color: catColor["trickster"] },
   ];
 
   return (

@@ -7,6 +7,7 @@ const categoryLabel: Record<string, string> = {
   "nation-state": "Nation-State",
   criminal: "Criminal",
   hacktivist: "Hacktivist",
+  trickster: "Trickster",
   unknown: "Unknown",
 };
 
@@ -14,6 +15,7 @@ const categoryAccent: Record<string, string> = {
   "nation-state": "var(--color-teal)",
   criminal: "var(--color-purple)",
   hacktivist: "var(--color-ember)",
+  trickster: "var(--color-trickster)",
   unknown: "var(--color-silver)",
 };
 
@@ -22,7 +24,8 @@ const riskLabel = (level: number) =>
     <span key={i} style={{ color: i < level ? "var(--color-gold-bright)" : "#333" }}>★</span>
   ));
 
-type Category = "all" | "nation-state" | "criminal" | "hacktivist";
+type Category = "all" | "nation-state" | "criminal" | "hacktivist" | "trickster";
+type VolumeFilter = "all" | "core" | "expansion";
 type ArcanaFilter = "all" | "major" | "swords" | "wands" | "cups" | "pentacles";
 type SortOrder = "deck" | "risk-desc" | "risk-asc" | "name" | "ttps-desc";
 
@@ -71,6 +74,7 @@ type GalleryState = {
   query: string;
   sort: SortOrder;
   originFilter: string;
+  volume: VolumeFilter;
 };
 
 function loadState(): GalleryState {
@@ -78,7 +82,7 @@ function loadState(): GalleryState {
     const raw = sessionStorage.getItem(STATE_KEY);
     if (raw) return JSON.parse(raw) as GalleryState;
   } catch { /* ignore */ }
-  return { filter: "all", arcana: "all", query: "", sort: "deck", originFilter: "" };
+  return { filter: "all", arcana: "all", query: "", sort: "deck", originFilter: "", volume: "all" };
 }
 
 function saveState(s: GalleryState) {
@@ -91,6 +95,7 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<SortOrder>("deck");
   const [originFilter, setOriginFilter] = useState("");
+  const [volume, setVolume] = useState<VolumeFilter>("all");
   const [skipAnimation, setSkipAnimation] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const scrollRestoredRef = useRef(false);
@@ -106,6 +111,7 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
     setQuery(s.query);
     setSort(s.sort);
     setOriginFilter(s.originFilter);
+    setVolume(s.volume ?? "all");
     // Suppress card entrance animations when restoring position
     if (hadSavedScroll) setSkipAnimation(true);
     try {
@@ -122,8 +128,8 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
 
   // Save filter state when it changes
   useEffect(() => {
-    saveState({ filter, arcana, query, sort, originFilter });
-  }, [filter, arcana, query, sort, originFilter]);
+    saveState({ filter, arcana, query, sort, originFilter, volume });
+  }, [filter, arcana, query, sort, originFilter, volume]);
 
   // Save scroll position + update progress bar
   useEffect(() => {
@@ -149,7 +155,11 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
         (arcana !== "major" && c.suit === arcana);
       const searchMatch = query.trim() === "" || matchesSearch(c, query.trim());
       const originMatch = originFilter === "" || c.origin.toLowerCase().includes(originFilter.toLowerCase());
-      return categoryMatch && arcanaMatch && searchMatch && originMatch;
+      const volumeMatch =
+        volume === "all" ||
+        (volume === "core" && !c.expansion) ||
+        (volume === "expansion" && c.expansion === true);
+      return categoryMatch && arcanaMatch && searchMatch && originMatch && volumeMatch;
     })
     .sort((a, b) => {
       if (sort === "risk-desc") return b.riskLevel - a.riskLevel;
@@ -163,6 +173,7 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
     { label: "Nation-State", value: "nation-state" },
     { label: "Criminal", value: "criminal" },
     { label: "Hacktivist", value: "hacktivist" },
+    { label: "Trickster", value: "trickster" },
   ];
 
   return (
@@ -283,6 +294,34 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
         ))}
       </div>
 
+      {/* Volume filter */}
+      <div className="flex flex-wrap justify-center gap-2 mb-3">
+        <span className="text-xs self-center" style={{ color: "var(--color-silver)", opacity: 0.35 }}>Volume:</span>
+        {([
+          { label: "All", value: "all" as VolumeFilter },
+          { label: "Core Deck (I)", value: "core" as VolumeFilter },
+          { label: "Unbound Arcana (II)", value: "expansion" as VolumeFilter },
+        ]).map((v) => (
+          <button
+            key={v.value}
+            onClick={() => setVolume(v.value)}
+            className="px-3 py-1 text-xs uppercase tracking-widest transition-all duration-200"
+            style={{
+              fontFamily: "var(--font-cinzel), serif",
+              fontSize: "9px",
+              letterSpacing: "0.06em",
+              color: volume === v.value ? "var(--color-gold-bright)" : "var(--color-silver)",
+              border: `1px solid ${volume === v.value ? "rgba(201,168,76,0.4)" : "rgba(192,192,192,0.12)"}`,
+              background: volume === v.value ? "rgba(201,168,76,0.08)" : "transparent",
+              opacity: volume === v.value ? 1 : 0.55,
+              touchAction: "manipulation",
+            }}
+          >
+            {v.label}
+          </button>
+        ))}
+      </div>
+
       {/* Category filter */}
       <div className="flex flex-wrap justify-center gap-2 mb-3">
         {filters.map((f) => (
@@ -326,7 +365,7 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
       </div>
 
       {/* Results count + clear filters */}
-      {(query.trim() || filter !== "all" || arcana !== "all" || originFilter) && (
+      {(query.trim() || filter !== "all" || arcana !== "all" || originFilter || volume !== "all") && (
         <div className="flex items-center justify-center gap-4 mb-4">
           {filtered.length > 0 && (
             <div className="text-xs" style={{ color: "var(--color-silver)", opacity: 0.45 }}>
@@ -334,7 +373,7 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
             </div>
           )}
           <button
-            onClick={() => { setFilter("all"); setArcana("all"); setQuery(""); setOriginFilter(""); setSort("deck"); }}
+            onClick={() => { setFilter("all"); setArcana("all"); setQuery(""); setOriginFilter(""); setSort("deck"); setVolume("all"); }}
             className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
             style={{ color: "var(--color-gold)", opacity: 0.5, fontFamily: "var(--font-cinzel), serif", background: "none", border: "none", cursor: "pointer" }}
           >
@@ -395,7 +434,7 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
                     className="text-xs opacity-50"
                     style={{ color: "var(--color-gold)", fontFamily: "var(--font-cinzel), serif" }}
                   >
-                    {card.arcanum === "major" ? "★" : card.suit?.charAt(0).toUpperCase()}
+                    {card.expansion ? "II·" : (card.arcanum === "major" ? "★" : card.suit?.charAt(0).toUpperCase())}
                     {card.number}
                   </span>
                   <span

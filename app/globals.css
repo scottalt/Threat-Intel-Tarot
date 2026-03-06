@@ -12,6 +12,8 @@
   --color-teal: #2d6a6a;
   --color-purple: #4a1a6a;
   --color-ember: #8b3a0f;
+  --color-trickster: #c026a0;
+  --color-trickster-dim: #7a1a5a;
 }
 
 @theme inline {
@@ -26,6 +28,8 @@
   --color-purple: var(--color-purple);
   --color-ember: var(--color-ember);
   --color-arcane-light: var(--color-arcane-light);
+  --color-trickster: var(--color-trickster);
+  --color-trickster-dim: var(--color-trickster-dim);
 }
 
 body {

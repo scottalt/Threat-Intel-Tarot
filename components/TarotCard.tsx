@@ -11,6 +11,7 @@ const categoryParticleColor: Record<string, string> = {
   criminal: "#a855f7",
   hacktivist: "#f97316",
   unknown: "#c9a84c",
+  trickster: "#e040a0",
 };
 
 // Foil tint color per category
@@ -19,6 +20,7 @@ const categoryFoilColor: Record<string, string> = {
   criminal: "#9f7aea",
   hacktivist: "#f97316",
   unknown: "#b8b8c8",
+  trickster: "#e879a0",
 };
 
 interface Particle {

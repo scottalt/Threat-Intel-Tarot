@@ -10,8 +10,8 @@ export interface Defense {
 }
 
 export type RiskLevel = 1 | 2 | 3 | 4 | 5;
-export type Category = "nation-state" | "criminal" | "hacktivist" | "unknown";
-export type Arcanum = "major" | "minor";
+export type Category = "nation-state" | "criminal" | "hacktivist" | "unknown" | "trickster";
+export type Arcanum = "major" | "minor" | "expansion";
 export type Suit = "swords" | "wands" | "cups" | "pentacles";
 
 export interface TarotCard {
@@ -35,4 +35,5 @@ export interface TarotCard {
   defenses: Defense[];
   riskLevel: RiskLevel;
   mitreGroupId?: string;
+  expansion?: boolean;
 }
