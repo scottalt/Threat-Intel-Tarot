@@ -24,6 +24,7 @@ const riskLabel = (level: number) =>
 
 type Category = "all" | "nation-state" | "criminal" | "hacktivist";
 type ArcanaFilter = "all" | "major" | "swords" | "wands" | "cups" | "pentacles";
+type SortOrder = "deck" | "risk-desc" | "risk-asc" | "name";
 
 const arcanaLabel: Record<ArcanaFilter, string> = {
   all: "All",
@@ -53,20 +54,35 @@ function matchesSearch(card: TarotCard, q: string): boolean {
   );
 }
 
+const SORT_LABELS: Record<SortOrder, string> = {
+  deck: "Deck Order",
+  "risk-desc": "Highest Risk",
+  "risk-asc": "Lowest Risk",
+  name: "A–Z",
+};
+
 export function GalleryClient({ cards }: { cards: TarotCard[] }) {
   const [filter, setFilter] = useState<Category>("all");
   const [arcana, setArcana] = useState<ArcanaFilter>("all");
   const [query, setQuery] = useState("");
+  const [sort, setSort] = useState<SortOrder>("deck");
 
-  const filtered = cards.filter((c) => {
-    const categoryMatch = filter === "all" || c.category === filter;
-    const arcanaMatch =
-      arcana === "all" ||
-      (arcana === "major" && c.arcanum === "major") ||
-      (arcana !== "major" && c.suit === arcana);
-    const searchMatch = query.trim() === "" || matchesSearch(c, query.trim());
-    return categoryMatch && arcanaMatch && searchMatch;
-  });
+  const filtered = cards
+    .filter((c) => {
+      const categoryMatch = filter === "all" || c.category === filter;
+      const arcanaMatch =
+        arcana === "all" ||
+        (arcana === "major" && c.arcanum === "major") ||
+        (arcana !== "major" && c.suit === arcana);
+      const searchMatch = query.trim() === "" || matchesSearch(c, query.trim());
+      return categoryMatch && arcanaMatch && searchMatch;
+    })
+    .sort((a, b) => {
+      if (sort === "risk-desc") return b.riskLevel - a.riskLevel;
+      if (sort === "risk-asc") return a.riskLevel - b.riskLevel;
+      if (sort === "name") return a.name.localeCompare(b.name);
+      return 0; // deck order: preserve original array order
+    });
   const filters: { label: string; value: Category }[] = [
     { label: "All", value: "all" },
     { label: "Nation-State", value: "nation-state" },
@@ -76,8 +92,9 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
 
   return (
     <>
-      {/* Search box */}
-      <div className="relative w-full max-w-sm mx-auto mb-5">
+      {/* Search + sort row */}
+      <div className="flex flex-wrap gap-2 items-center justify-center mb-5">
+        <div className="relative w-full max-w-sm">
         <input
           type="search"
           value={query}
@@ -102,6 +119,29 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
             ✕
           </button>
         )}
+        </div>
+
+        {/* Sort select */}
+        <select
+          value={sort}
+          onChange={(e) => setSort(e.target.value as SortOrder)}
+          className="text-xs px-3 py-2 bg-transparent outline-none cursor-pointer"
+          style={{
+            color: "var(--color-silver)",
+            border: "1px solid rgba(201,168,76,0.2)",
+            borderRadius: "4px",
+            fontFamily: "var(--font-cinzel), serif",
+            background: "var(--color-arcane)",
+            touchAction: "manipulation",
+          }}
+          aria-label="Sort order"
+        >
+          {(["deck", "risk-desc", "risk-asc", "name"] as SortOrder[]).map((s) => (
+            <option key={s} value={s} style={{ background: "var(--color-arcane)" }}>
+              {SORT_LABELS[s]}
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* Category filter */}
