@@ -95,15 +95,15 @@ export function TarotCard({
       const absX = Math.abs(dx);
       const absY = Math.abs(dy);
 
-      // Swipe: horizontal movement > 40px and more horizontal than vertical
-      if (absX > 40 && absX > absY) {
+      // Swipe-to-flip: only when face-down (not yet revealed), horizontal > 40px
+      if (!flipped && absX > 40 && absX > absY) {
         handleFlip();
       }
 
       // Reset tilt
       tiltResetRef.current = setTimeout(() => setTilt({ x: 0, y: 0 }), 120);
     },
-    [handleFlip]
+    [flipped, handleFlip]
   );
 
   const sceneTransform =
