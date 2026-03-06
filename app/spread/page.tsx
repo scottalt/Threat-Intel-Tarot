@@ -6,6 +6,44 @@ import { TarotCard } from "@/components/TarotCard";
 import { Starfield } from "@/components/Starfield";
 import type { TarotCard as TarotCardType } from "@/data/types";
 
+function buildReading(spread: TarotCardType[]): {
+  origins: string[];
+  tactics: string[];
+  avgRisk: number;
+  narrative: string;
+} {
+  const origins = [...new Set(spread.map((c) => c.origin))];
+  const tactics = [
+    ...new Set(spread.flatMap((c) => c.ttps.map((t) => t.tactic))),
+  ].slice(0, 4);
+  const avgRisk = Math.round(
+    spread.reduce((sum, c) => sum + c.riskLevel, 0) / spread.length
+  );
+
+  const categoryCount: Record<string, number> = {};
+  spread.forEach((c) => {
+    categoryCount[c.category] = (categoryCount[c.category] ?? 0) + 1;
+  });
+  const dominantCategory = Object.entries(categoryCount).sort(
+    (a, b) => b[1] - a[1]
+  )[0][0];
+
+  const narratives: Record<string, string> = {
+    "nation-state":
+      "Your threat landscape is dominated by nation-state actors — sophisticated, patient, and politically motivated. Prioritize detection over prevention, and assume persistent access. These adversaries play the long game.",
+    criminal:
+      "Financially motivated threat actors define this spread. Expect opportunistic entry, rapid monetization, and ransomware or data extortion. Backups, segmentation, and endpoint visibility are your best defenses.",
+    hacktivist:
+      "Ideologically driven actors appear across this spread. Attacks are often loud, public-facing, and timed to political events. DDoS resilience and public disclosure preparedness are essential.",
+  };
+
+  const narrative =
+    narratives[dominantCategory] ??
+    "This spread reveals a complex, multi-vector threat environment. No single defensive posture is sufficient — depth, detection, and response speed are critical.";
+
+  return { origins, tactics, avgRisk, narrative };
+}
+
 const positions = [
   {
     label: "I",
@@ -214,15 +252,143 @@ export default function SpreadPage() {
           </div>
         )}
 
-        {/* Divider rule between position cards */}
-        {spread && (
-          <div
-            className="mt-12 text-xs text-center"
-            style={{ color: "var(--color-silver)", opacity: 0.25 }}
-          >
-            Data sourced from MITRE ATT&CK. For educational purposes.
-          </div>
-        )}
+        {/* Spread Analysis */}
+        {spread && (() => {
+          const reading = buildReading(spread);
+          return (
+            <div
+              className="mt-12 w-full max-w-2xl mx-auto"
+              style={{
+                animation: "section-reveal 0.5s ease-out both",
+                animationDelay: "700ms",
+              }}
+            >
+              <div
+                className="w-full h-px mb-8"
+                style={{
+                  background:
+                    "linear-gradient(90deg, transparent, var(--color-gold), transparent)",
+                }}
+              />
+
+              <div
+                className="text-center mb-6"
+                style={{
+                  color: "var(--color-gold)",
+                  fontFamily: "var(--font-cinzel), serif",
+                  fontSize: "11px",
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  opacity: 0.8,
+                }}
+              >
+                Your Threat Reading
+              </div>
+
+              <div className="grid grid-cols-3 gap-4 mb-6 text-center">
+                {/* Origins */}
+                <div>
+                  <div
+                    className="text-xs uppercase tracking-widest mb-2"
+                    style={{
+                      color: "var(--color-gold)",
+                      fontFamily: "var(--font-cinzel), serif",
+                      opacity: 0.55,
+                    }}
+                  >
+                    Origins
+                  </div>
+                  <div className="space-y-1">
+                    {reading.origins.map((o) => (
+                      <div
+                        key={o}
+                        className="text-xs"
+                        style={{ color: "var(--color-mist)" }}
+                      >
+                        {o}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Combined Risk */}
+                <div>
+                  <div
+                    className="text-xs uppercase tracking-widest mb-2"
+                    style={{
+                      color: "var(--color-gold)",
+                      fontFamily: "var(--font-cinzel), serif",
+                      opacity: 0.55,
+                    }}
+                  >
+                    Avg. Risk
+                  </div>
+                  <div className="text-sm">
+                    {Array.from({ length: 5 }, (_, i) => (
+                      <span
+                        key={i}
+                        style={{
+                          color:
+                            i < reading.avgRisk
+                              ? "var(--color-gold-bright)"
+                              : "#333",
+                        }}
+                      >
+                        ★
+                      </span>
+                    ))}
+                  </div>
+                  <div
+                    className="text-xs mt-0.5"
+                    style={{ color: "var(--color-silver)", opacity: 0.45 }}
+                  >
+                    {reading.avgRisk}/5
+                  </div>
+                </div>
+
+                {/* Top Tactics */}
+                <div>
+                  <div
+                    className="text-xs uppercase tracking-widest mb-2"
+                    style={{
+                      color: "var(--color-gold)",
+                      fontFamily: "var(--font-cinzel), serif",
+                      opacity: 0.55,
+                    }}
+                  >
+                    Top Tactics
+                  </div>
+                  <div className="space-y-1">
+                    {reading.tactics.map((t) => (
+                      <div
+                        key={t}
+                        className="text-xs"
+                        style={{ color: "var(--color-mist)", opacity: 0.85 }}
+                      >
+                        {t}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Narrative */}
+              <div
+                className="text-sm italic leading-relaxed text-center px-4 pb-2"
+                style={{ color: "var(--color-silver)", opacity: 0.75 }}
+              >
+                {reading.narrative}
+              </div>
+
+              <div
+                className="mt-8 text-xs text-center"
+                style={{ color: "var(--color-silver)", opacity: 0.25 }}
+              >
+                Data sourced from MITRE ATT&CK. For educational purposes.
+              </div>
+            </div>
+          );
+        })()}
       </div>
     </main>
   );
