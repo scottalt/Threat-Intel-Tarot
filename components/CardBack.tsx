@@ -33,7 +33,7 @@ export function CardBack() {
           borderRadius: "inherit",
           background: "radial-gradient(ellipse 65% 55% at 50% 50%, rgba(201,168,76,0.07) 0%, transparent 70%)",
           pointerEvents: "none",
-          animation: "arcane-border-pulse 4s ease-in-out infinite",
+          animation: "arcane-glow-overlay 4s ease-in-out infinite",
         }}
       />
 

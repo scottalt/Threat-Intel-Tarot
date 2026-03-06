@@ -7,8 +7,8 @@ export function TTPBadge({ ttp, index = 0 }: { ttp: TTP; index?: number }) {
     <div
       className="flex items-start gap-2 py-1"
       style={{
-        animation: "badge-slide 0.35s ease-out both",
-        animationDelay: `${index * 45}ms`,
+        animation: "badge-slide 0.35s cubic-bezier(0.22, 1, 0.36, 1) both",
+        animationDelay: `${Math.min(index * 45, 350)}ms`,
       }}
     >
       <a
