@@ -52,7 +52,7 @@ body {
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .card-wrapper.is-flipped {
@@ -87,6 +87,7 @@ body {
     0 0 12px rgba(201, 168, 76, 0.25),
     0 0 40px rgba(201, 168, 76, 0.05),
     inset 0 0 8px rgba(201, 168, 76, 0.05);
+  animation: arcane-border-pulse 3.5s ease-in-out infinite;
 }
 
 /* Risk star styling */
@@ -122,14 +123,20 @@ body {
   to   { transform: rotate(360deg); }
 }
 
+@keyframes sigil-counter-rotate {
+  from { transform: rotate(360deg); }
+  to   { transform: rotate(0deg); }
+}
+
 @keyframes eye-pulse {
-  0%, 100% { transform: scale(1);    opacity: 0.8; }
-  50%       { transform: scale(1.1); opacity: 1;   }
+  0%, 100% { transform: scale(1);      opacity: 0.75; }
+  40%       { transform: scale(1.12);  opacity: 1;    }
+  70%       { transform: scale(1.06);  opacity: 0.9;  }
 }
 
 @keyframes glyph-fade {
-  0%, 100% { opacity: 0.5;  }
-  50%       { opacity: 0.12; }
+  0%, 100% { opacity: 0.55; }
+  50%       { opacity: 0.1;  }
 }
 
 @keyframes shimmer {
@@ -143,12 +150,21 @@ body {
 }
 
 @keyframes particle-out {
-  0%   { transform: translate(0, 0) scale(1);                         opacity: 1; }
-  100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+  0%   {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  60%  {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0) rotate(var(--rot, 180deg));
+    opacity: 0;
+  }
 }
 
 @keyframes section-reveal {
-  from { opacity: 0; transform: translateY(14px); }
+  from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0);    }
 }
 
@@ -174,13 +190,58 @@ body {
 
 /* Card deal — slides in from above when drawn */
 @keyframes card-deal {
-  0%   { opacity: 0; transform: translateY(-60px) rotate(-4deg) scale(0.92); }
-  60%  { transform: translateY(8px) rotate(0.5deg) scale(1.01); }
+  0%   { opacity: 0; transform: translateY(-70px) rotate(-5deg) scale(0.9); }
+  55%  { transform: translateY(6px) rotate(0.4deg) scale(1.015); }
+  75%  { transform: translateY(-2px) rotate(-0.1deg) scale(0.998); }
   100% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
 }
 
 .card-deal {
-  animation: card-deal 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: card-deal 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Arcane border — breathing glow */
+@keyframes arcane-border-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 12px rgba(201, 168, 76, 0.25),
+      0 0 40px rgba(201, 168, 76, 0.05),
+      inset 0 0 8px rgba(201, 168, 76, 0.05);
+  }
+  50% {
+    box-shadow:
+      0 0 20px rgba(201, 168, 76, 0.40),
+      0 0 60px rgba(201, 168, 76, 0.12),
+      inset 0 0 14px rgba(201, 168, 76, 0.10);
+  }
+}
+
+/* Scan line sweep (for unknown sigil eye) */
+@keyframes scan-line {
+  0%   { transform: translateX(-140%); opacity: 0.6; }
+  50%  { opacity: 0.9; }
+  100% { transform: translateX(140%);  opacity: 0; }
+}
+
+/* Node orbit pulse */
+@keyframes node-pulse {
+  0%, 100% { r: 2;   opacity: 0.45; }
+  50%       { r: 3.2; opacity: 0.9;  }
+}
+
+/* Spark flicker — used by hacktivist bolt */
+@keyframes spark-flicker {
+  0%, 100% { opacity: 0.85; filter: drop-shadow(0 0 2px currentColor); }
+  15%       { opacity: 0.3;  filter: drop-shadow(0 0 0px currentColor); }
+  30%       { opacity: 0.95; filter: drop-shadow(0 0 5px currentColor); }
+  60%       { opacity: 0.7;  filter: drop-shadow(0 0 1px currentColor); }
+  80%       { opacity: 1;    filter: drop-shadow(0 0 6px currentColor); }
+}
+
+/* Iris glow breathe */
+@keyframes iris-breathe {
+  0%, 100% { transform: scale(1);    opacity: 0.65; filter: blur(0px); }
+  50%       { transform: scale(1.18); opacity: 1;   filter: blur(0.4px); }
 }
 
 /* ─────────────────────────────────────────

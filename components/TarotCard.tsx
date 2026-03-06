@@ -16,8 +16,10 @@ interface Particle {
   id: number;
   tx: number;
   ty: number;
+  rot: number;
   size: number;
   opacity: number;
+  delay: number;
 }
 
 export function TarotCard({
@@ -36,31 +38,36 @@ export function TarotCard({
   const touchStartYRef = useRef<number>(0);
 
   const spawnParticles = useCallback(() => {
-    const burst: Particle[] = Array.from({ length: 14 }, (_, i) => {
-      const angle = (i * (360 / 14) * Math.PI) / 180;
-      const dist = 55 + Math.random() * 45;
+    // Inner burst — larger, shorter travel
+    const burst: Particle[] = Array.from({ length: 16 }, (_, i) => {
+      const angle = (i * (360 / 16) * Math.PI) / 180;
+      const dist = 50 + Math.random() * 50;
       return {
         id: particleIdRef.current++,
         tx: Math.cos(angle) * dist,
         ty: Math.sin(angle) * dist,
-        size: 7,
+        rot: (Math.random() - 0.5) * 360,
+        size: 5 + Math.random() * 4,
         opacity: 1,
+        delay: Math.random() * 80,
       };
     });
     // Outer ring — smaller, travel further
-    const outer: Particle[] = Array.from({ length: 8 }, (_, i) => {
-      const angle = ((i * (360 / 8) + 22.5) * Math.PI) / 180;
-      const dist = 90 + Math.random() * 40;
+    const outer: Particle[] = Array.from({ length: 10 }, (_, i) => {
+      const angle = ((i * (360 / 10) + 18) * Math.PI) / 180;
+      const dist = 85 + Math.random() * 55;
       return {
         id: particleIdRef.current++,
         tx: Math.cos(angle) * dist,
         ty: Math.sin(angle) * dist,
-        size: 4,
-        opacity: 0.6,
+        rot: (Math.random() - 0.5) * 480,
+        size: 3 + Math.random() * 2,
+        opacity: 0.65,
+        delay: 40 + Math.random() * 60,
       };
     });
     setParticles([...burst, ...outer]);
-    setTimeout(() => setParticles([]), 900);
+    setTimeout(() => setParticles([]), 950);
   }, []);
 
   const handleFlip = useCallback(() => {
@@ -138,9 +145,11 @@ export function TarotCard({
                 background: categoryParticleColor[card.category] ?? "var(--color-gold-bright)",
                 opacity: p.opacity,
                 transform: "translate(-50%, -50%)",
-                animation: "particle-out 0.72s ease-out forwards",
+                animation: `particle-out 0.78s cubic-bezier(0.22, 1, 0.36, 1) ${p.delay}ms forwards`,
                 ["--tx" as string]: `${p.tx}px`,
                 ["--ty" as string]: `${p.ty}px`,
+                ["--rot" as string]: `${p.rot}deg`,
+                boxShadow: `0 0 ${p.size * 1.5}px ${categoryParticleColor[card.category] ?? "var(--color-gold-bright)"}`,
               }}
             />
           ))}

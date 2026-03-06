@@ -32,25 +32,44 @@ function CardSigil({ category }: { category: string }) {
       const a = (i * 60 - 30) * (Math.PI / 180);
       return { x: 38 + 32 * Math.cos(a), y: 38 + 32 * Math.sin(a) };
     });
+    const innerRing = Array.from({ length: 12 }, (_, i) => {
+      const a = (i * 30) * (Math.PI / 180);
+      return { x: 38 + 16 * Math.cos(a), y: 38 + 16 * Math.sin(a) };
+    });
     return (
       <svg viewBox="0 0 76 76" width="72" height="72" aria-hidden="true">
-        <g style={{ transformOrigin: "38px 38px", animation: "sigil-rotate 30s linear infinite" }}>
-          <circle cx="38" cy="38" r="35" fill="none" stroke={color} strokeWidth="0.5" opacity="0.22" />
+        {/* Outer ring — clockwise slow */}
+        <g style={{ transformOrigin: "38px 38px", animation: "sigil-rotate 28s linear infinite" }}>
+          <circle cx="38" cy="38" r="35" fill="none" stroke={color} strokeWidth="0.5" opacity="0.2"
+            strokeDasharray="3 5" />
           {outerRing.map((p, i) => (
-            <circle key={i} cx={p.x} cy={p.y} r="2" fill={color} opacity="0.45" />
+            <circle key={i} cx={p.x} cy={p.y} r="2.2" fill={color}
+              opacity="0.5"
+              style={{ animation: `eye-pulse 2.5s ease-in-out infinite ${i * 0.4}s` }}
+            />
           ))}
         </g>
+        {/* Inner ring — counter-clockwise */}
+        <g style={{ transformOrigin: "38px 38px", animation: "sigil-counter-rotate 18s linear infinite" }}>
+          {innerRing.map((p, i) => (
+            <circle key={i} cx={p.x} cy={p.y} r="0.8" fill={color} opacity={i % 3 === 0 ? "0.7" : "0.25"} />
+          ))}
+        </g>
+        {/* Static hexagon */}
         <polygon
           points={hex.map((p) => `${p.x},${p.y}`).join(" ")}
-          fill="none" stroke={color} strokeWidth="0.8" opacity="0.55"
+          fill="none" stroke={color} strokeWidth="0.9" opacity="0.6"
         />
+        {/* Radial spokes from center to outer nodes */}
         {outerRing.map((p, i) => (
-          <line key={i} x1="38" y1="38" x2={p.x} y2={p.y} stroke={color} strokeWidth="0.4" opacity="0.2" />
+          <line key={i} x1="38" y1="38" x2={p.x} y2={p.y} stroke={color} strokeWidth="0.4" opacity="0.18" />
         ))}
-        <circle cx="38" cy="38" r="7" fill="none" stroke={color} strokeWidth="1" opacity="0.75"
-          style={{ animation: "eye-pulse 3s ease-in-out infinite" }}
+        {/* Center node */}
+        <circle cx="38" cy="38" r="7" fill="none" stroke={color} strokeWidth="1.1" opacity="0.7"
+          style={{ animation: "eye-pulse 3.2s ease-in-out infinite" }}
         />
-        <circle cx="38" cy="38" r="2.5" fill={color} opacity="0.9" />
+        <circle cx="38" cy="38" r="2.8" fill={color} opacity="0.95" />
+        <circle cx="38" cy="38" r="1" fill="#0a0a0f" opacity="0.9" />
       </svg>
     );
   }
@@ -58,29 +77,50 @@ function CardSigil({ category }: { category: string }) {
   if (category === "criminal") {
     const spokes = Array.from({ length: 8 }, (_, i) => {
       const a = (i * 45) * (Math.PI / 180);
-      return { x: 38 + 28 * Math.cos(a), y: 38 + 28 * Math.sin(a) };
+      return { x: 38 + 30 * Math.cos(a), y: 38 + 30 * Math.sin(a) };
+    });
+    const midSpokes = Array.from({ length: 8 }, (_, i) => {
+      const a = (i * 45) * (Math.PI / 180);
+      return { x: 38 + 20 * Math.cos(a), y: 38 + 20 * Math.sin(a) };
     });
     return (
       <svg viewBox="0 0 76 76" width="72" height="72" aria-hidden="true">
-        <g style={{ transformOrigin: "38px 38px", animation: "sigil-rotate 22s linear infinite reverse" }}>
-          <circle cx="38" cy="38" r="34" fill="none" stroke={color} strokeWidth="0.5" opacity="0.25" />
+        {/* Outer ring — counter-clockwise */}
+        <g style={{ transformOrigin: "38px 38px", animation: "sigil-counter-rotate 20s linear infinite" }}>
+          <circle cx="38" cy="38" r="34" fill="none" stroke={color} strokeWidth="0.6" opacity="0.28"
+            strokeDasharray="2 8" />
         </g>
+        {/* Web radial spokes */}
         {spokes.map((s, i) => (
-          <line key={i} x1="38" y1="38" x2={s.x} y2={s.y} stroke={color} strokeWidth="0.6" opacity="0.35" />
+          <line key={i} x1="38" y1="38" x2={s.x} y2={s.y} stroke={color} strokeWidth="0.6" opacity="0.3" />
         ))}
-        <circle cx="38" cy="38" r="14" fill="none" stroke={color} strokeWidth="0.5" opacity="0.25" />
-        <circle cx="38" cy="38" r="22" fill="none" stroke={color} strokeWidth="0.5" opacity="0.18" />
+        {/* Outer web ring */}
         {spokes.map((s, i) => {
           const next = spokes[(i + 1) % spokes.length];
           return (
             <line key={i} x1={s.x} y1={s.y} x2={next.x} y2={next.y}
-              stroke={color} strokeWidth="0.4" opacity="0.22" />
+              stroke={color} strokeWidth="0.5" opacity="0.25" />
           );
         })}
-        <circle cx="38" cy="38" r="4.5" fill={color} opacity="0.8"
-          style={{ animation: "eye-pulse 2.2s ease-in-out infinite" }}
+        {/* Mid web ring */}
+        {midSpokes.map((s, i) => {
+          const next = midSpokes[(i + 1) % midSpokes.length];
+          return (
+            <line key={i} x1={s.x} y1={s.y} x2={next.x} y2={next.y}
+              stroke={color} strokeWidth="0.4" opacity="0.18" />
+          );
+        })}
+        <circle cx="38" cy="38" r="13" fill="none" stroke={color} strokeWidth="0.5" opacity="0.22" />
+        {/* Rotating inner web ring */}
+        <g style={{ transformOrigin: "38px 38px", animation: "sigil-rotate 14s linear infinite" }}>
+          <circle cx="38" cy="38" r="21" fill="none" stroke={color} strokeWidth="0.5" opacity="0.2"
+            strokeDasharray="1.5 6" />
+        </g>
+        {/* Pulsing center node */}
+        <circle cx="38" cy="38" r="5" fill={color} opacity="0.85"
+          style={{ animation: "iris-breathe 2.2s ease-in-out infinite" }}
         />
-        <circle cx="38" cy="38" r="1.5" fill="#0a0a0f" opacity="0.9" />
+        <circle cx="38" cy="38" r="1.8" fill="#0a0a0f" opacity="0.95" />
       </svg>
     );
   }
@@ -88,34 +128,72 @@ function CardSigil({ category }: { category: string }) {
   if (category === "hacktivist") {
     return (
       <svg viewBox="0 0 76 76" width="72" height="72" aria-hidden="true">
-        <circle cx="38" cy="38" r="34" fill="none" stroke={color} strokeWidth="0.5" opacity="0.22" />
-        {/* Glow behind bolt */}
+        {/* Outer rotating ring */}
+        <g style={{ transformOrigin: "38px 38px", animation: "sigil-rotate 16s linear infinite" }}>
+          <circle cx="38" cy="38" r="34" fill="none" stroke={color} strokeWidth="0.5" opacity="0.22"
+            strokeDasharray="4 7" />
+        </g>
+        {/* Wide outer glow behind bolt */}
         <polyline
           points="47,9 29,38 43,38 25,67"
-          fill="none" stroke={color} strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"
-          opacity="0.1"
+          fill="none" stroke={color} strokeWidth="10" strokeLinecap="round" strokeLinejoin="round"
+          opacity="0.07"
+          style={{ animation: "spark-flicker 2.4s ease-in-out infinite" }}
         />
-        {/* Lightning bolt */}
+        {/* Mid glow */}
+        <polyline
+          points="47,9 29,38 43,38 25,67"
+          fill="none" stroke={color} strokeWidth="5" strokeLinecap="round" strokeLinejoin="round"
+          opacity="0.14"
+          style={{ animation: "spark-flicker 2.4s ease-in-out infinite 0.15s" }}
+        />
+        {/* Lightning bolt — main */}
         <polyline
           points="47,9 29,38 43,38 25,67"
           fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-          opacity="0.85"
-          style={{ animation: "glyph-fade 1.8s ease-in-out infinite" }}
+          opacity="0.9"
+          style={{ animation: "spark-flicker 1.9s ease-in-out infinite" }}
+        />
+        {/* Bolt highlight — thinner, bright center */}
+        <polyline
+          points="47,9 29,38 43,38 25,67"
+          fill="none" stroke="white" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round"
+          opacity="0.3"
+          style={{ animation: "spark-flicker 1.9s ease-in-out infinite 0.08s" }}
         />
       </svg>
     );
   }
 
-  // unknown — watching eye
+  // unknown — watching eye with scan line
   return (
-    <svg viewBox="0 0 76 76" width="72" height="72" aria-hidden="true">
-      <circle cx="38" cy="38" r="34" fill="none" stroke={color} strokeWidth="0.5" opacity="0.22" />
-      <ellipse cx="38" cy="38" rx="21" ry="13" fill="none" stroke={color} strokeWidth="0.8" opacity="0.45" />
-      <ellipse cx="38" cy="38" rx="16" ry="9" fill="none" stroke={color} strokeWidth="1" opacity="0.75"
-        style={{ animation: "eye-pulse 2.5s ease-in-out infinite" }}
+    <svg viewBox="0 0 76 76" width="72" height="72" aria-hidden="true" style={{ overflow: "hidden" }}>
+      {/* Outer slowly rotating ring */}
+      <g style={{ transformOrigin: "38px 38px", animation: "sigil-rotate 40s linear infinite" }}>
+        <circle cx="38" cy="38" r="34" fill="none" stroke={color} strokeWidth="0.5" opacity="0.2"
+          strokeDasharray="1.5 9" />
+      </g>
+      {/* Outer eyelid */}
+      <ellipse cx="38" cy="38" rx="22" ry="13" fill="none" stroke={color} strokeWidth="0.8" opacity="0.4" />
+      {/* Inner eyelid — breathing */}
+      <ellipse cx="38" cy="38" rx="17" ry="10" fill="none" stroke={color} strokeWidth="1.2" opacity="0.8"
+        style={{ animation: "eye-pulse 2.8s ease-in-out infinite" }}
       />
-      <circle cx="38" cy="38" r="3.5" fill={color} opacity="0.85" />
-      <circle cx="38" cy="38" r="1.5" fill="#0a0a0f" opacity="0.9" />
+      {/* Iris ring */}
+      <circle cx="38" cy="38" r="6.5" fill="none" stroke={color} strokeWidth="0.7" opacity="0.45"
+        style={{ animation: "iris-breathe 2.8s ease-in-out infinite" }}
+      />
+      {/* Pupil */}
+      <circle cx="38" cy="38" r="3.5" fill={color} opacity="0.9"
+        style={{ animation: "iris-breathe 2.8s ease-in-out infinite" }}
+      />
+      <circle cx="38" cy="38" r="1.5" fill="#0a0a0f" opacity="0.95" />
+      {/* Scan line — horizontal sweep across eye */}
+      <rect
+        x="16" y="37" width="10" height="2" rx="1"
+        fill={color} opacity="0.55"
+        style={{ animation: "scan-line 3.5s ease-in-out infinite" }}
+      />
     </svg>
   );
 }
@@ -128,8 +206,8 @@ const categoryGlowRgba: Record<string, string> = {
 };
 
 const section = (i: number): CSSProperties => ({
-  animation: "section-reveal 0.4s ease-out both",
-  animationDelay: `${i * 65}ms`,
+  animation: "section-reveal 0.45s cubic-bezier(0.22, 1, 0.36, 1) both",
+  animationDelay: `${i * 70}ms`,
 });
 
 const ATT_CK_TACTICS = [
