@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import type { TarotCard as TarotCardType } from "@/data/types";
 import { CardBack } from "./CardBack";
 import { CardFront } from "./CardFront";
@@ -11,6 +11,14 @@ const categoryParticleColor: Record<string, string> = {
   criminal: "#a855f7",
   hacktivist: "#f97316",
   unknown: "#c9a84c",
+};
+
+// Foil tint color per category
+const categoryFoilColor: Record<string, string> = {
+  "nation-state": "#4aadad",
+  criminal: "#9f7aea",
+  hacktivist: "#f97316",
+  unknown: "#b8b8c8",
 };
 
 interface Particle {
@@ -43,6 +51,8 @@ export function TarotCard({
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   // Drag rotation while swiping (null = not dragging)
   const [dragDeg, setDragDeg] = useState<number | null>(null);
+  // Foil overlay active state (shown when card face is hovered)
+  const [foilActive, setFoilActive] = useState(false);
 
   const particleIdRef = useRef(0);
   const tiltResetRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -51,6 +61,10 @@ export function TarotCard({
   const isDraggingRef = useRef(false);
   // Track whether pointer device supports hover (desktop)
   const isPointerDeviceRef = useRef(false);
+  // Ref to the foil overlay div for direct CSS variable updates
+  const foilRef = useRef<HTMLDivElement>(null);
+  // Ref to the card scene element for foil bounds
+  const sceneRef = useRef<HTMLDivElement>(null);
 
   // ── Particle burst ───────────────────────────────────────────────
 
@@ -93,22 +107,57 @@ export function TarotCard({
     });
   }, [spawnParticles]);
 
-  // ── Mouse-move tilt (desktop only) ─────────────────────────────
+  // ── Foil: device orientation (mobile, only when flipped) ────────
+
+  useEffect(() => {
+    if (!flipped) return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) return;
+
+    const handler = (e: DeviceOrientationEvent) => {
+      if (!foilRef.current) return;
+      const gamma = e.gamma ?? 0; // -90 to 90 (left/right tilt)
+      const beta  = e.beta  ?? 0; // -180 to 180 (front/back tilt)
+      const x = Math.min(Math.max(((gamma + 45) / 90) * 100, 0), 100);
+      const y = Math.min(Math.max(((beta  - 10) / 60) * 100, 0), 100);
+      foilRef.current.style.setProperty("--foil-x", `${x}%`);
+      foilRef.current.style.setProperty("--foil-y", `${y}%`);
+      setFoilActive(true);
+    };
+
+    window.addEventListener("deviceorientation", handler);
+    return () => window.removeEventListener("deviceorientation", handler);
+  }, [flipped]);
+
+  // ── Mouse-move tilt + foil (desktop only) ───────────────────────
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
-      if (flipped) return;
       isPointerDeviceRef.current = true;
       clearTimeout(tiltResetRef.current);
       const rect = e.currentTarget.getBoundingClientRect();
       const nx = (e.clientX - rect.left) / rect.width - 0.5;
       const ny = (e.clientY - rect.top) / rect.height - 0.5;
-      setTilt({ x: -ny * TILT_MAX, y: nx * TILT_MAX });
+
+      // Tilt only when face-down
+      if (!flipped) {
+        setTilt({ x: -ny * TILT_MAX, y: nx * TILT_MAX });
+      }
+
+      // Foil only when face-up
+      if (flipped && foilRef.current) {
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        foilRef.current.style.setProperty("--foil-x", `${x}%`);
+        foilRef.current.style.setProperty("--foil-y", `${y}%`);
+        setFoilActive(true);
+      }
     },
     [flipped]
   );
 
   const handleMouseLeave = useCallback(() => {
+    setFoilActive(false);
     if (flipped) return;
     tiltResetRef.current = setTimeout(() => setTilt({ x: 0, y: 0 }), 180);
   }, [flipped]);
@@ -229,6 +278,7 @@ export function TarotCard({
         </div>
 
         <div
+          ref={sceneRef}
           className="card-scene arcane-border"
           onClick={handleFlip}
           onMouseMove={handleMouseMove}
@@ -281,6 +331,28 @@ export function TarotCard({
             </div>
             <div className="card-face card-face--front">
               <CardFront card={card} />
+              {/* Holographic foil overlay — GPU-safe opacity-only transition, no filter animations */}
+              <div
+                ref={foilRef}
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  borderRadius: "inherit",
+                  pointerEvents: "none",
+                  zIndex: 10,
+                  background: [
+                    `radial-gradient(ellipse 70% 70% at var(--foil-x, 50%) var(--foil-y, 50%), rgba(255,255,255,0.22) 0%, ${categoryFoilColor[card.category] ?? "#c9a84c"}44 28%, transparent 65%)`,
+                    `linear-gradient(135deg, ${categoryFoilColor[card.category] ?? "#c9a84c"}11 0%, rgba(255,255,255,0.06) 40%, ${categoryFoilColor[card.category] ?? "#c9a84c"}0a 100%)`,
+                  ].join(", "),
+                  mixBlendMode: "color-dodge",
+                  opacity: foilActive ? 0.82 : 0,
+                  transition: "opacity 0.35s ease",
+                  willChange: "opacity",
+                  "--foil-x": "50%",
+                  "--foil-y": "50%",
+                } as React.CSSProperties}
+              />
             </div>
           </div>
         </div>
