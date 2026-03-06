@@ -261,8 +261,13 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
                 </div>
 
                 {/* Group name */}
-                <div className="text-xs mb-2" style={{ color: "var(--color-silver)", opacity: 0.7 }}>
+                <div className="text-xs" style={{ color: "var(--color-silver)", opacity: 0.7 }}>
                   {card.name}
+                </div>
+
+                {/* Origin */}
+                <div className="text-xs mb-2" style={{ color: "var(--color-silver)", opacity: 0.4, fontSize: "9px" }}>
+                  {card.origin}
                 </div>
 
                 {/* Risk stars */}
