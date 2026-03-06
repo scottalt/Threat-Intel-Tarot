@@ -6,6 +6,7 @@ import { drawSpread } from "@/lib/draw";
 import { getCardBySlug } from "@/lib/slug";
 import { TarotCard } from "@/components/TarotCard";
 import { Starfield } from "@/components/Starfield";
+import { SiteNav } from "@/components/SiteNav";
 import type { TarotCard as TarotCardType } from "@/data/types";
 
 type SharedTTP = { techniqueId: string; name: string; tactic: string };
@@ -242,19 +243,12 @@ function SpreadContent() {
         className="relative flex flex-col items-center w-full max-w-5xl"
         style={{ zIndex: 2 }}
       >
+        <div className="self-start w-full">
+          <SiteNav current="/spread" />
+        </div>
+
         {/* Header */}
         <div className="text-center mb-2">
-          <a
-            href="/"
-            className="text-xs uppercase tracking-widest mb-6 inline-block transition-opacity hover:opacity-100"
-            style={{
-              color: "var(--color-gold)",
-              opacity: 0.45,
-              fontFamily: "var(--font-cinzel), serif",
-            }}
-          >
-            ← Back
-          </a>
           <h1
             className="text-2xl sm:text-3xl font-semibold mb-2"
             style={{

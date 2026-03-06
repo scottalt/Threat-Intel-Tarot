@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { cards } from "@/data/cards";
 import { getCardBySlug } from "@/lib/slug";
 import { Starfield } from "@/components/Starfield";
+import { SiteNav } from "@/components/SiteNav";
 import type { TarotCard } from "@/data/types";
 
 const categoryAccent: Record<string, string> = {
@@ -263,24 +264,7 @@ function CompareContent() {
       <Starfield />
 
       <div className="relative max-w-5xl mx-auto" style={{ zIndex: 2 }}>
-        {/* Nav */}
-        <div className="flex flex-wrap gap-4 mb-8">
-          <a
-            href="/"
-            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-            style={{ color: "var(--color-gold)", opacity: 0.5, fontFamily: "var(--font-cinzel), serif" }}
-          >
-            Home
-          </a>
-          <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
-          <a
-            href="/gallery"
-            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-            style={{ color: "var(--color-gold)", opacity: 0.5, fontFamily: "var(--font-cinzel), serif" }}
-          >
-            Gallery
-          </a>
-        </div>
+        <SiteNav current="/compare" />
 
         {/* Header */}
         <div className="text-center mb-8">

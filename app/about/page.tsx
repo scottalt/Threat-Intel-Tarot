@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Starfield } from "@/components/Starfield";
+import { SiteNav } from "@/components/SiteNav";
 import { cards } from "@/data/cards";
 
 export const metadata: Metadata = {
@@ -32,68 +33,7 @@ export default function AboutPage() {
         className="relative max-w-2xl mx-auto"
         style={{ zIndex: 2 }}
       >
-        {/* Nav */}
-        <div className="flex gap-4 mb-8">
-          <a
-            href="/"
-            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-            style={{
-              color: "var(--color-gold)",
-              opacity: 0.5,
-              fontFamily: "var(--font-cinzel), serif",
-            }}
-          >
-            Home
-          </a>
-          <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
-          <a
-            href="/gallery"
-            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-            style={{
-              color: "var(--color-gold)",
-              opacity: 0.5,
-              fontFamily: "var(--font-cinzel), serif",
-            }}
-          >
-            Gallery
-          </a>
-          <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
-          <a
-            href="/techniques"
-            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-            style={{
-              color: "var(--color-gold)",
-              opacity: 0.5,
-              fontFamily: "var(--font-cinzel), serif",
-            }}
-          >
-            Techniques
-          </a>
-          <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
-          <a
-            href="/defenses"
-            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-            style={{
-              color: "var(--color-gold)",
-              opacity: 0.5,
-              fontFamily: "var(--font-cinzel), serif",
-            }}
-          >
-            Defenses
-          </a>
-          <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
-          <a
-            href="/compare"
-            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-            style={{
-              color: "var(--color-gold)",
-              opacity: 0.5,
-              fontFamily: "var(--font-cinzel), serif",
-            }}
-          >
-            Compare
-          </a>
-        </div>
+        <SiteNav current="/about" />
 
         <h1
           className="text-2xl sm:text-3xl font-semibold mb-2"

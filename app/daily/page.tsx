@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { drawDaily, drawDailyOffset } from "@/lib/draw";
+import { SiteNav } from "@/components/SiteNav";
 import { TarotCard } from "@/components/TarotCard";
 import { ShareButton } from "@/components/ShareButton";
 import { Starfield } from "@/components/Starfield";
@@ -38,31 +39,8 @@ export default function DailyPage() {
         className="relative flex flex-col items-center w-full max-w-xl"
         style={{ zIndex: 2 }}
       >
-        {/* Nav */}
-        <div className="flex gap-4 mb-8 self-start">
-          <a
-            href="/"
-            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-            style={{
-              color: "var(--color-gold)",
-              opacity: 0.5,
-              fontFamily: "var(--font-cinzel), serif",
-            }}
-          >
-            Home
-          </a>
-          <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
-          <a
-            href="/gallery"
-            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-            style={{
-              color: "var(--color-gold)",
-              opacity: 0.5,
-              fontFamily: "var(--font-cinzel), serif",
-            }}
-          >
-            Gallery
-          </a>
+        <div className="self-start w-full">
+          <SiteNav current="/daily" />
         </div>
 
         {/* Header */}

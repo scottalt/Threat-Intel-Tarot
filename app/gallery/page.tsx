@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { cards } from "@/data/cards";
 import { GalleryClient } from "@/components/GalleryClient";
 import { Starfield } from "@/components/Starfield";
+import { SiteNav } from "@/components/SiteNav";
 
 export const metadata: Metadata = {
   title: "All Adversaries | Threat Intelligence Tarot",
@@ -21,92 +22,7 @@ export default function GalleryPage() {
       <Starfield />
 
       <div className="relative max-w-5xl mx-auto" style={{ zIndex: 2 }}>
-        {/* Nav */}
-        <div className="flex gap-4 mb-8">
-          <a
-            href="/"
-            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-            style={{
-              color: "var(--color-gold)",
-              opacity: 0.5,
-              fontFamily: "var(--font-cinzel), serif",
-            }}
-          >
-            ← Home
-          </a>
-          <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
-          <a
-            href="/spread"
-            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-            style={{
-              color: "var(--color-gold)",
-              opacity: 0.5,
-              fontFamily: "var(--font-cinzel), serif",
-            }}
-          >
-            Three-Card Spread
-          </a>
-          <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
-          <a
-            href="/daily"
-            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-            style={{
-              color: "var(--color-gold)",
-              opacity: 0.5,
-              fontFamily: "var(--font-cinzel), serif",
-            }}
-          >
-            Daily Card
-          </a>
-          <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
-          <a
-            href="/techniques"
-            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-            style={{
-              color: "var(--color-gold)",
-              opacity: 0.5,
-              fontFamily: "var(--font-cinzel), serif",
-            }}
-          >
-            Techniques
-          </a>
-          <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
-          <a
-            href="/defenses"
-            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-            style={{
-              color: "var(--color-gold)",
-              opacity: 0.5,
-              fontFamily: "var(--font-cinzel), serif",
-            }}
-          >
-            Defenses
-          </a>
-          <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
-          <a
-            href="/sectors"
-            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-            style={{
-              color: "var(--color-gold)",
-              opacity: 0.5,
-              fontFamily: "var(--font-cinzel), serif",
-            }}
-          >
-            Sectors
-          </a>
-          <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
-          <a
-            href="/compare"
-            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-            style={{
-              color: "var(--color-gold)",
-              opacity: 0.5,
-              fontFamily: "var(--font-cinzel), serif",
-            }}
-          >
-            Compare
-          </a>
-        </div>
+        <SiteNav current="/gallery" />
 
         {/* Header */}
         <div className="text-center mb-10">
