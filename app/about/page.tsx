@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   const majorCount = cards.filter((c) => c.arcanum === "major").length;
-  const minorCount = cards.filter((c) => c.arcanum === "minor").length;
 
   const suitCounts = {
     swords: cards.filter((c) => c.suit === "swords").length,
@@ -44,7 +43,7 @@ export default function AboutPage() {
               fontFamily: "var(--font-cinzel), serif",
             }}
           >
-            ← Home
+            Home
           </a>
           <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
           <a
@@ -197,7 +196,7 @@ export default function AboutPage() {
               </li>
               <li className="flex gap-2">
                 <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
-                <span><strong style={{ color: "var(--color-mist)" }}>Three-Card Spread:</strong> draw Past, Present, and Future threat actors. Get a reading of your threat landscape.</span>
+                <span><strong style={{ color: "var(--color-mist)" }}>Three-Card Spread:</strong> draw Past, Present, and Future threat actors. Get a reading of your threat landscape with shared TTPs and priority defenses across all three.</span>
               </li>
               <li className="flex gap-2">
                 <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
@@ -205,15 +204,27 @@ export default function AboutPage() {
               </li>
               <li className="flex gap-2">
                 <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
-                <span><strong style={{ color: "var(--color-mist)" }}>Gallery:</strong> browse all 78 cards. Filter by threat category or suit. Search by group name, alias, or origin country.</span>
+                <span><strong style={{ color: "var(--color-mist)" }}>Gallery:</strong> browse all 78 cards. Filter by threat category, suit, or origin country. Search by group name, alias, technique ID, or targeted sector.</span>
               </li>
               <li className="flex gap-2">
                 <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
-                <span><strong style={{ color: "var(--color-mist)" }}>Technique Explorer:</strong> view all MITRE ATT&amp;CK techniques used across the full deck, grouped by tactic and ranked by prevalence across threat actors.</span>
+                <span><strong style={{ color: "var(--color-mist)" }}>Technique Explorer:</strong> view all MITRE ATT&amp;CK techniques across the full deck, grouped by tactic, ranked by prevalence, with a kill-chain distribution chart.</span>
               </li>
               <li className="flex gap-2">
                 <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
-                <span><strong style={{ color: "var(--color-mist)" }}>Defense Index:</strong> discover which security controls defend against the most adversaries. Ranked by cross-deck coverage so you can prioritize controls that provide the broadest protection.</span>
+                <span><strong style={{ color: "var(--color-mist)" }}>Defense Index:</strong> discover which security controls defend against the most adversaries. Ranked by cross-deck coverage to help prioritize controls with the broadest impact.</span>
+              </li>
+              <li className="flex gap-2">
+                <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
+                <span><strong style={{ color: "var(--color-mist)" }}>ATT&amp;CK Navigator Export:</strong> from any card or daily page, download a Navigator v5 layer file pre-loaded with that adversary's techniques. Import directly into{" "}
+                  <a href="https://mitre-attack.github.io/attack-navigator/" target="_blank" rel="noopener noreferrer" style={{ color: "var(--color-gold)", textDecoration: "underline" }}>
+                    ATT&CK Navigator
+                  </a>
+                  {" "}for deeper analysis.</span>
+              </li>
+              <li className="flex gap-2">
+                <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
+                <span><strong style={{ color: "var(--color-mist)" }}>Threat Brief:</strong> copy a clean markdown adversary profile to your clipboard. Paste into reports, Confluence, or security awareness materials.</span>
               </li>
             </ul>
           </section>
@@ -230,7 +241,7 @@ export default function AboutPage() {
               Reading a Card
             </h2>
             <p style={{ opacity: 0.85 }}>
-              Each card shows the group's <strong>tarot identity</strong>, real group name and aliases, active years, origin, and risk level. Below that: the sectors they target, their MITRE ATT&CK techniques (click any technique ID to open the full MITRE reference), notable operations, and specific defensive recommendations.
+              Each card shows the group's <strong>tarot identity</strong>, real group name and aliases, active years, origin, and risk level. Below that: the sectors they target, their MITRE ATT&CK techniques with a kill-chain coverage heatmap (click any technique ID to open the full MITRE reference), notable operations, and specific defensive recommendations.
             </p>
             <p className="mt-3" style={{ opacity: 0.85 }}>
               The <em>Reversed Meaning</em> section (borrowed from tarot tradition) documents the group's known failures, operational security mistakes, and the circumstances that led to their exposure or disruption.
@@ -258,7 +269,7 @@ export default function AboutPage() {
               >
                 MITRE ATT&CK
               </a>
-              , public government advisories (CISA, NSA, FBI, NCSC), and documented security research from Mandiant, CrowdStrike, Kaspersky, Citizen Lab, and others. All information is publicly available. This tool is for educational purposes only.
+              , public government advisories (CISA, NSA, FBI, NCSC), and documented security research from Mandiant, CrowdStrike, Kaspersky, Citizen Lab, and others. All information is publicly available. Flavor text and reversed meanings are creative interpretations; threat data is factual.
             </p>
           </section>
         </div>
@@ -278,7 +289,7 @@ export default function AboutPage() {
             Built by
           </div>
           <div className="text-sm" style={{ color: "var(--color-mist)", opacity: 0.85 }}>
-            <strong>Scott Altiparmak</strong> - Senior Information Security Engineer, CISSP
+            <strong>Scott Altiparmak</strong>, Senior Information Security Engineer, CISSP
           </div>
           <div className="flex gap-4 mt-2">
             <a
