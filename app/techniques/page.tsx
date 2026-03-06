@@ -70,6 +70,13 @@ export default function TechniquesPage() {
   const tacticCount = uniqueTactics.length;
   const mostUsed = [...techniques].sort((a, b) => b.count - a.count).slice(0, 5);
 
+  // Tactic distribution: total TTP uses per tactic (across all cards)
+  const tacticUsage = TACTIC_ORDER.filter((t) => uniqueTactics.includes(t)).map((tactic) => {
+    const count = techniques.filter((t) => t.tactic === tactic).reduce((sum, t) => sum + t.count, 0);
+    return { tactic, count };
+  });
+  const maxTacticCount = Math.max(...tacticUsage.map((t) => t.count));
+
   const orderedTactics = [
     ...TACTIC_ORDER.filter((t) => uniqueTactics.includes(t)),
     ...uniqueTactics.filter((t) => !TACTIC_ORDER.includes(t)),
@@ -169,6 +176,43 @@ export default function TechniquesPage() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Tactic distribution */}
+        <div className="mb-10">
+          <div
+            className="text-xs uppercase tracking-widest mb-4"
+            style={{ color: "var(--color-gold)", fontFamily: "var(--font-cinzel), serif", opacity: 0.7 }}
+          >
+            Kill-Chain Coverage
+          </div>
+          <div className="space-y-1.5">
+            {tacticUsage.map(({ tactic, count }) => (
+              <div key={tactic} className="flex items-center gap-2">
+                <div
+                  className="text-xs shrink-0"
+                  style={{ color: "var(--color-silver)", opacity: 0.55, width: "160px", fontSize: "10px" }}
+                >
+                  {tactic}
+                </div>
+                <div className="flex-1 flex items-center gap-2">
+                  <div
+                    style={{
+                      height: "6px",
+                      width: `${Math.round((count / maxTacticCount) * 100)}%`,
+                      background: "var(--color-gold)",
+                      opacity: 0.45,
+                      borderRadius: "3px",
+                      minWidth: "4px",
+                    }}
+                  />
+                  <span className="text-xs shrink-0" style={{ color: "var(--color-gold)", opacity: 0.55, fontSize: "10px" }}>
+                    {count}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Most used techniques */}
