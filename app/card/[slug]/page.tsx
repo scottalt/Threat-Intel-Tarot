@@ -5,6 +5,7 @@ import { cards } from "@/data/cards";
 import { TarotCard } from "@/components/TarotCard";
 import { ShareButton } from "@/components/ShareButton";
 import { Starfield } from "@/components/Starfield";
+import { CardKeyNav } from "@/components/CardKeyNav";
 import type { TarotCard as TarotCardType } from "@/data/types";
 
 type Props = {
@@ -65,6 +66,7 @@ export default async function CardPage({ params }: Props) {
       }}
     >
       <Starfield />
+      <CardKeyNav prevSlug={prev?.slug} nextSlug={next?.slug} />
 
       <div
         className="relative flex flex-col items-center w-full max-w-xl"
