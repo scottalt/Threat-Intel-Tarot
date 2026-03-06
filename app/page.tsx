@@ -81,7 +81,7 @@ export default function Home() {
           />
 
           {/* Nav links */}
-          <div className="flex gap-4 mt-4 justify-center">
+          <div className="flex flex-wrap gap-4 mt-4 justify-center">
             <a
               href="/gallery"
               className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
@@ -96,6 +96,14 @@ export default function Home() {
               style={{ color: "var(--color-gold)", opacity: 0.55, fontFamily: "var(--font-cinzel), serif" }}
             >
               Card of the Day
+            </a>
+            <span style={{ color: "var(--color-gold)", opacity: 0.3 }}>·</span>
+            <a
+              href="/spread"
+              className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
+              style={{ color: "var(--color-gold)", opacity: 0.55, fontFamily: "var(--font-cinzel), serif" }}
+            >
+              Three-Card Spread
             </a>
           </div>
         </div>

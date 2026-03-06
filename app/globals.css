@@ -184,6 +184,14 @@ body {
 }
 
 /* ─────────────────────────────────────────
+   Three-Card Spread — compact card slots
+───────────────────────────────────────── */
+
+.spread-card-slot .card-scene {
+  width: min(280px, 88vw);
+}
+
+/* ─────────────────────────────────────────
    Accessibility — Reduced Motion
 ───────────────────────────────────────── */
 
