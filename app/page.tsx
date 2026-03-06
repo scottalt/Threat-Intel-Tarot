@@ -72,6 +72,12 @@ export default function Home() {
           >
             Real threat intelligence. Impossible to scroll past.
           </p>
+          <p
+            className="text-xs mt-1"
+            style={{ color: "var(--color-silver)", opacity: 0.4 }}
+          >
+            78 adversary profiles from MITRE ATT&CK
+          </p>
           <div
             className="mt-3 w-24 h-px mx-auto"
             style={{
