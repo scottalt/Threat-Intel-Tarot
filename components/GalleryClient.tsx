@@ -23,6 +23,16 @@ const riskLabel = (level: number) =>
   ));
 
 type Category = "all" | "nation-state" | "criminal" | "hacktivist";
+type ArcanaFilter = "all" | "major" | "swords" | "wands" | "cups" | "pentacles";
+
+const arcanaLabel: Record<ArcanaFilter, string> = {
+  all: "All",
+  major: "Major Arcana",
+  swords: "Swords",
+  wands: "Wands",
+  cups: "Cups",
+  pentacles: "Pentacles",
+};
 
 function matchesSearch(card: TarotCard, q: string): boolean {
   const lower = q.toLowerCase();
@@ -38,12 +48,17 @@ function matchesSearch(card: TarotCard, q: string): boolean {
 
 export function GalleryClient({ cards }: { cards: TarotCard[] }) {
   const [filter, setFilter] = useState<Category>("all");
+  const [arcana, setArcana] = useState<ArcanaFilter>("all");
   const [query, setQuery] = useState("");
 
   const filtered = cards.filter((c) => {
     const categoryMatch = filter === "all" || c.category === filter;
+    const arcanaMatch =
+      arcana === "all" ||
+      (arcana === "major" && c.arcanum === "major") ||
+      (arcana !== "major" && c.suit === arcana);
     const searchMatch = query.trim() === "" || matchesSearch(c, query.trim());
-    return categoryMatch && searchMatch;
+    return categoryMatch && arcanaMatch && searchMatch;
   });
   const filters: { label: string; value: Category }[] = [
     { label: "All", value: "all" },
@@ -82,8 +97,8 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
         )}
       </div>
 
-      {/* Filter bar */}
-      <div className="flex flex-wrap justify-center gap-2 mb-8">
+      {/* Category filter */}
+      <div className="flex flex-wrap justify-center gap-2 mb-3">
         {filters.map((f) => (
           <button
             key={f.value}
@@ -98,6 +113,28 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
             }}
           >
             {f.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Arcana / suit filter */}
+      <div className="flex flex-wrap justify-center gap-2 mb-8">
+        {(["all", "major", "swords", "wands", "cups", "pentacles"] as ArcanaFilter[]).map((a) => (
+          <button
+            key={a}
+            onClick={() => setArcana(a)}
+            className="px-3 py-1 text-xs uppercase tracking-widest transition-all duration-200"
+            style={{
+              fontFamily: "var(--font-cinzel), serif",
+              color: arcana === a ? "var(--color-gold)" : "var(--color-silver)",
+              border: `1px solid ${arcana === a ? "rgba(201,168,76,0.4)" : "rgba(192,192,192,0.12)"}`,
+              background: arcana === a ? "rgba(201,168,76,0.05)" : "transparent",
+              opacity: arcana === a ? 1 : 0.55,
+              touchAction: "manipulation",
+              fontSize: "9px",
+            }}
+          >
+            {arcanaLabel[a]}
           </button>
         ))}
       </div>
@@ -135,12 +172,13 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
               <div style={{ height: 3, background: accent }} />
 
               <div className="p-3">
-                {/* Number + category */}
+                {/* Number + arcana/category */}
                 <div className="flex items-center justify-between mb-1.5">
                   <span
                     className="text-xs opacity-50"
                     style={{ color: "var(--color-gold)", fontFamily: "var(--font-cinzel), serif" }}
                   >
+                    {card.arcanum === "major" ? "★" : card.suit?.charAt(0).toUpperCase()}
                     {card.number}
                   </span>
                   <span

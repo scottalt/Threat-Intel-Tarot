@@ -6,7 +6,7 @@ import { Starfield } from "@/components/Starfield";
 export const metadata: Metadata = {
   title: "All Adversaries — Threat Intelligence Tarot",
   description:
-    "Browse all 22 Major Arcana threat actor profiles. Nation-state, criminal, and hacktivist groups from MITRE ATT&CK.",
+    "Browse all 78 adversary profiles — the complete tarot deck. Nation-state, criminal, and hacktivist groups from MITRE ATT&CK.",
 };
 
 export default function GalleryPage() {
