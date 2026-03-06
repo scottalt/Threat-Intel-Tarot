@@ -1,3 +1,5 @@
+"use client";
+
 import type { TTP } from "@/data/types";
 
 export function TTPBadge({ ttp, index = 0 }: { ttp: TTP; index?: number }) {
@@ -9,16 +11,22 @@ export function TTPBadge({ ttp, index = 0 }: { ttp: TTP; index?: number }) {
         animationDelay: `${index * 45}ms`,
       }}
     >
-      <span
-        className="shrink-0 text-xs font-mono px-1.5 py-0.5 rounded mt-0.5"
+      <a
+        href={`https://attack.mitre.org/techniques/${ttp.techniqueId.replace(".", "/")}/`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="shrink-0 text-xs font-mono px-1.5 py-0.5 rounded mt-0.5 transition-opacity hover:opacity-80"
         style={{
           background: "rgba(201,168,76,0.15)",
           color: "var(--color-gold-bright)",
           border: "1px solid rgba(201,168,76,0.3)",
+          textDecoration: "none",
+          touchAction: "manipulation",
         }}
+        onClick={(e) => e.stopPropagation()}
       >
         {ttp.techniqueId}
-      </span>
+      </a>
       <div className="min-w-0">
         <div className="text-sm" style={{ color: "var(--color-mist)" }}>
           {ttp.name}
