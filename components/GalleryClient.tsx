@@ -62,6 +62,27 @@ const SORT_LABELS: Record<SortOrder, string> = {
 };
 
 const SCROLL_KEY = "ti-gallery-scroll";
+const STATE_KEY = "ti-gallery-state";
+
+type GalleryState = {
+  filter: Category;
+  arcana: ArcanaFilter;
+  query: string;
+  sort: SortOrder;
+  originFilter: string;
+};
+
+function loadState(): GalleryState {
+  try {
+    const raw = sessionStorage.getItem(STATE_KEY);
+    if (raw) return JSON.parse(raw) as GalleryState;
+  } catch { /* ignore */ }
+  return { filter: "all", arcana: "all", query: "", sort: "deck", originFilter: "" };
+}
+
+function saveState(s: GalleryState) {
+  try { sessionStorage.setItem(STATE_KEY, JSON.stringify(s)); } catch { /* ignore */ }
+}
 
 export function GalleryClient({ cards }: { cards: TarotCard[] }) {
   const [filter, setFilter] = useState<Category>("all");
@@ -71,10 +92,16 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
   const [originFilter, setOriginFilter] = useState("");
   const scrollRestoredRef = useRef(false);
 
-  // Restore scroll position when returning from a card page
+  // Restore filter state + scroll position when returning from a card page
   useEffect(() => {
     if (scrollRestoredRef.current) return;
     scrollRestoredRef.current = true;
+    const s = loadState();
+    setFilter(s.filter);
+    setArcana(s.arcana);
+    setQuery(s.query);
+    setSort(s.sort);
+    setOriginFilter(s.originFilter);
     try {
       const y = sessionStorage.getItem(SCROLL_KEY);
       if (y) {
@@ -86,6 +113,11 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
       // sessionStorage not available
     }
   }, []);
+
+  // Save filter state when it changes
+  useEffect(() => {
+    saveState({ filter, arcana, query, sort, originFilter });
+  }, [filter, arcana, query, sort, originFilter]);
 
   // Save scroll position before navigating away
   useEffect(() => {
@@ -268,13 +300,21 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
         ))}
       </div>
 
-      {/* Results count */}
-      {(query.trim() || filter !== "all" || arcana !== "all" || originFilter) && filtered.length > 0 && (
-        <div
-          className="text-center mb-4 text-xs"
-          style={{ color: "var(--color-silver)", opacity: 0.45 }}
-        >
-          {filtered.length} of {cards.length} adversaries
+      {/* Results count + clear filters */}
+      {(query.trim() || filter !== "all" || arcana !== "all" || originFilter) && (
+        <div className="flex items-center justify-center gap-4 mb-4">
+          {filtered.length > 0 && (
+            <div className="text-xs" style={{ color: "var(--color-silver)", opacity: 0.45 }}>
+              {filtered.length} of {cards.length} adversaries
+            </div>
+          )}
+          <button
+            onClick={() => { setFilter("all"); setArcana("all"); setQuery(""); setOriginFilter(""); setSort("deck"); }}
+            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
+            style={{ color: "var(--color-gold)", opacity: 0.5, fontFamily: "var(--font-cinzel), serif", background: "none", border: "none", cursor: "pointer" }}
+          >
+            ✕ Clear
+          </button>
         </div>
       )}
 

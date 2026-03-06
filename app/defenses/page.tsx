@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { cards } from "@/data/cards";
 import { Starfield } from "@/components/Starfield";
 import { SiteNav } from "@/components/SiteNav";
+import { BackToTop } from "@/components/BackToTop";
 import { DefenseIndexClient } from "@/components/DefenseIndexClient";
 
 export const metadata: Metadata = {
@@ -74,6 +75,7 @@ export default function DefensesPage() {
       }}
     >
       <Starfield />
+      <BackToTop />
 
       <div className="relative max-w-4xl mx-auto" style={{ zIndex: 2 }}>
         <SiteNav current="/defenses" />

@@ -3,6 +3,7 @@ import { cards } from "@/data/cards";
 import { GalleryClient } from "@/components/GalleryClient";
 import { Starfield } from "@/components/Starfield";
 import { SiteNav } from "@/components/SiteNav";
+import { BackToTop } from "@/components/BackToTop";
 
 export const metadata: Metadata = {
   title: "All Adversaries | Threat Intelligence Tarot",
@@ -20,6 +21,7 @@ export default function GalleryPage() {
       }}
     >
       <Starfield />
+      <BackToTop />
 
       <div className="relative max-w-5xl mx-auto" style={{ zIndex: 2 }}>
         <SiteNav current="/gallery" />
