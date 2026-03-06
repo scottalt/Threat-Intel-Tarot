@@ -19,6 +19,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1014", name: "Rootkit", tactic: "Defense Evasion" },
       { techniqueId: "T1078", name: "Valid Accounts", tactic: "Persistence" },
       { techniqueId: "T1119", name: "Automated Collection", tactic: "Collection" },
+    
+      { techniqueId: "T1068", name: "Exploitation for Privilege Escalation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Stuxnet (joint with Unit 8200, 2010)",
@@ -56,8 +58,11 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1566.001", name: "Spearphishing Attachment", tactic: "Initial Access" },
       { techniqueId: "T1059.001", name: "PowerShell", tactic: "Execution" },
       { techniqueId: "T1078", name: "Valid Accounts", tactic: "Persistence" },
-      { techniqueId: "T1003.001", name: "LSASS Memory Credential Dumping", tactic: "Credential Access" },
+      { techniqueId: "T1003.001", name: "LSASS Memory", tactic: "Credential Access" },
       { techniqueId: "T1566.002", name: "Spearphishing Link", tactic: "Initial Access" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
+      { techniqueId: "T1068", name: "Exploitation for Privilege Escalation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "DNC hack and email leak (2016)",
@@ -98,6 +103,9 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1053.005", name: "Scheduled Task", tactic: "Persistence" },
       { techniqueId: "T1550.001", name: "Application Access Token", tactic: "Lateral Movement" },
       { techniqueId: "T1078", name: "Valid Accounts", tactic: "Defense Evasion" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
+      { techniqueId: "T1068", name: "Exploitation for Privilege Escalation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "SolarWinds SUNBURST (2020)",
@@ -137,6 +145,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1059.005", name: "Visual Basic", tactic: "Execution" },
       { techniqueId: "T1078", name: "Valid Accounts", tactic: "Initial Access" },
       { techniqueId: "T1489", name: "Service Stop", tactic: "Impact" },
+    
+      { techniqueId: "T1068", name: "Exploitation for Privilege Escalation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Ukraine power grid attacks (2015, 2016)",
@@ -176,6 +186,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1560", name: "Archive Collected Data", tactic: "Collection" },
       { techniqueId: "T1014", name: "Rootkit", tactic: "Defense Evasion" },
       { techniqueId: "T1584.004", name: "Compromise Infrastructure: Server", tactic: "Resource Development" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Moonlight Maze (1996-1999, attributed)",
@@ -214,6 +226,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1005", name: "Data from Local System", tactic: "Collection" },
       { techniqueId: "T1566.001", name: "Spearphishing Attachment", tactic: "Initial Access" },
       { techniqueId: "T1083", name: "File and Directory Discovery", tactic: "Discovery" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Mandiant APT1 report exposure (2013)",
@@ -253,6 +267,9 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1059.003", name: "Windows Command Shell", tactic: "Execution" },
       { techniqueId: "T1195.002", name: "Compromise Software Supply Chain", tactic: "Initial Access" },
       { techniqueId: "T1486", name: "Data Encrypted for Impact", tactic: "Impact" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
+      { techniqueId: "T1068", name: "Exploitation for Privilege Escalation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Asus Live Update supply chain attack (2019)",
@@ -290,8 +307,10 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1078", name: "Valid Accounts", tactic: "Defense Evasion" },
       { techniqueId: "T1133", name: "External Remote Services", tactic: "Initial Access" },
       { techniqueId: "T1090.002", name: "External Proxy", tactic: "Command and Control" },
-      { techniqueId: "T1036", name: "Masquerading (LOLBins)", tactic: "Defense Evasion" },
+      { techniqueId: "T1036", name: "Masquerading", tactic: "Defense Evasion" },
       { techniqueId: "T1087", name: "Account Discovery", tactic: "Discovery" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "US critical infrastructure pre-positioning (2021-present)",
@@ -331,6 +350,9 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1204.002", name: "Malicious File", tactic: "Execution" },
       { techniqueId: "T1059.001", name: "PowerShell", tactic: "Execution" },
       { techniqueId: "T1105", name: "Ingress Tool Transfer", tactic: "Command and Control" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
+      { techniqueId: "T1068", name: "Exploitation for Privilege Escalation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Sony Pictures hack (2014)",
@@ -369,6 +391,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1485", name: "Data Destruction", tactic: "Impact" },
       { techniqueId: "T1071.001", name: "Web Protocols", tactic: "Command and Control" },
       { techniqueId: "T1565.001", name: "Stored Data Manipulation", tactic: "Impact" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Bangladesh Bank $81M SWIFT heist (2016)",
@@ -407,6 +431,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1056.001", name: "Keylogging", tactic: "Collection" },
       { techniqueId: "T1102", name: "Web Service", tactic: "Command and Control" },
       { techniqueId: "T1114.002", name: "Remote Email Collection", tactic: "Collection" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Operation Smoke Screen (South Korean targets)",
@@ -445,6 +471,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1059.001", name: "PowerShell", tactic: "Execution" },
       { techniqueId: "T1486", name: "Data Encrypted for Impact", tactic: "Impact" },
       { techniqueId: "T1204.002", name: "Malicious File", tactic: "Execution" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Shamoon 2 campaign (linked, Saudi Aramco targeting)",
@@ -484,6 +512,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1136.001", name: "Create Local Account", tactic: "Persistence" },
       { techniqueId: "T1572", name: "Protocol Tunneling", tactic: "Command and Control" },
       { techniqueId: "T1040", name: "Network Sniffing", tactic: "Credential Access" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "DNSpionage campaign (DNS hijacking, 2018)",
@@ -521,7 +551,9 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1566.002", name: "Spearphishing Link", tactic: "Initial Access" },
       { techniqueId: "T1078", name: "Valid Accounts", tactic: "Defense Evasion" },
       { techniqueId: "T1056.001", name: "Keylogging", tactic: "Collection" },
-      { techniqueId: "T1598.003", name: "Spearphishing Link (Reconnaissance)", tactic: "Reconnaissance" },
+      { techniqueId: "T1598.003", name: "Spearphishing Link", tactic: "Reconnaissance" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Targeting JCPOA nuclear deal negotiators",
@@ -559,8 +591,11 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1566.001", name: "Spearphishing Attachment", tactic: "Initial Access" },
       { techniqueId: "T1059.001", name: "PowerShell", tactic: "Execution" },
       { techniqueId: "T1071.001", name: "Web Protocols", tactic: "Command and Control" },
-      { techniqueId: "T1056.001", name: "Input Capture", tactic: "Collection" },
+      { techniqueId: "T1056.001", name: "Keylogging", tactic: "Collection" },
       { techniqueId: "T1105", name: "Ingress Tool Transfer", tactic: "Command and Control" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
+      { techniqueId: "T1068", name: "Exploitation for Privilege Escalation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Applebee's, Arby's, Chipotle POS compromise",
@@ -599,6 +634,9 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1190", name: "Exploit Public-Facing Application", tactic: "Initial Access" },
       { techniqueId: "T1078", name: "Valid Accounts", tactic: "Persistence" },
       { techniqueId: "T1048", name: "Exfiltration Over Alternative Protocol", tactic: "Exfiltration" },
+    
+      { techniqueId: "T1548.002", name: "Bypass User Account Control", tactic: "Privilege Escalation" },
+      { techniqueId: "T1068", name: "Exploitation for Privilege Escalation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Kaseya VSA supply chain attack (1,500+ companies, 2021)",
@@ -637,6 +675,9 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1078", name: "Valid Accounts", tactic: "Initial Access" },
       { techniqueId: "T1021.001", name: "Remote Desktop Protocol", tactic: "Lateral Movement" },
       { techniqueId: "T1562.001", name: "Disable or Modify Tools", tactic: "Defense Evasion" },
+    
+      { techniqueId: "T1068", name: "Exploitation for Privilege Escalation", tactic: "Privilege Escalation" },
+      { techniqueId: "T1548.002", name: "Bypass User Account Control", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Most prolific ransomware group 2022-2024",
@@ -676,6 +717,9 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1059.003", name: "Windows Command Shell", tactic: "Execution" },
       { techniqueId: "T1021.002", name: "SMB/Windows Admin Shares", tactic: "Lateral Movement" },
       { techniqueId: "T1003.001", name: "LSASS Memory", tactic: "Credential Access" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
+      { techniqueId: "T1548.002", name: "Bypass User Account Control", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Ireland Health Service Executive (HSE) attack  -  shut down national healthcare",
@@ -711,10 +755,12 @@ export const cards: TarotCard[] = [
     targets: ["BPO firms", "Telecom", "Hospitality", "Gaming", "Identity providers"],
     ttps: [
       { techniqueId: "T1621", name: "Multi-Factor Authentication Request Generation", tactic: "Credential Access" },
-      { techniqueId: "T1566.004", name: "Spearphishing Voice (Vishing)", tactic: "Initial Access" },
+      { techniqueId: "T1566.004", name: "Spearphishing Voice", tactic: "Initial Access" },
       { techniqueId: "T1078", name: "Valid Accounts", tactic: "Defense Evasion" },
       { techniqueId: "T1539", name: "Steal Web Session Cookie", tactic: "Credential Access" },
       { techniqueId: "T1534", name: "Internal Spearphishing", tactic: "Lateral Movement" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "MGM Resorts attack  -  $100M+ impact, 10-minute social engineering call",
@@ -753,6 +799,9 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1190", name: "Exploit Public-Facing Application", tactic: "Initial Access" },
       { techniqueId: "T1078", name: "Valid Accounts", tactic: "Persistence" },
       { techniqueId: "T1567.002", name: "Exfiltration to Cloud Storage", tactic: "Exfiltration" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
+      { techniqueId: "T1068", name: "Exploitation for Privilege Escalation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Change Healthcare attack  -  disrupted US pharmacy systems nationwide (2024)",
@@ -874,6 +923,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1059.003", name: "Windows Command Shell", tactic: "Execution" },
       { techniqueId: "T1021.001", name: "Remote Desktop Protocol", tactic: "Lateral Movement" },
       { techniqueId: "T1041", name: "Exfiltration Over C2 Channel", tactic: "Exfiltration" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Operation Cloud Hopper  -  global MSP compromise (2016–2017)",
@@ -914,6 +965,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1027", name: "Obfuscated Files or Information", tactic: "Defense Evasion" },
       { techniqueId: "T1083", name: "File and Directory Discovery", tactic: "Discovery" },
       { techniqueId: "T1567", name: "Exfiltration Over Web Service", tactic: "Exfiltration" },
+    
+      { techniqueId: "T1068", name: "Exploitation for Privilege Escalation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "US Navy contractor breach  -  submarine warfare data theft (2018)",
@@ -954,6 +1007,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1003.001", name: "LSASS Memory", tactic: "Credential Access" },
       { techniqueId: "T1560.001", name: "Archive via Utility", tactic: "Collection" },
       { techniqueId: "T1041", name: "Exfiltration Over C2 Channel", tactic: "Exfiltration" },
+    
+      { techniqueId: "T1068", name: "Exploitation for Privilege Escalation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "ProxyLogon  -  Microsoft Exchange 0-day exploitation (March 2021)",
@@ -1033,7 +1088,7 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1204.002", name: "Malicious File", tactic: "Execution" },
       { techniqueId: "T1027", name: "Obfuscated Files or Information", tactic: "Defense Evasion" },
       { techniqueId: "T1105", name: "Ingress Tool Transfer", tactic: "Command and Control" },
-      { techniqueId: "T1071.001", name: "Web Protocols C2", tactic: "Command and Control" },
+      { techniqueId: "T1071.001", name: "Web Protocols", tactic: "Command and Control" },
     ],
     notableOps: [
       "Vatican network compromise ahead of China–Holy See negotiations (2020)",
@@ -1114,6 +1169,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1204.002", name: "Malicious File", tactic: "Execution" },
       { techniqueId: "T1082", name: "System Information Discovery", tactic: "Discovery" },
       { techniqueId: "T1113", name: "Screen Capture", tactic: "Collection" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Continuous Ukraine targeting since 2014 annexation of Crimea",
@@ -1150,10 +1207,12 @@ export const cards: TarotCard[] = [
     targets: ["UK government", "NATO countries", "Journalists", "Think tanks", "Former intelligence officials"],
     ttps: [
       { techniqueId: "T1566.002", name: "Spearphishing Link", tactic: "Initial Access" },
-      { techniqueId: "T1598.003", name: "Spearphishing Link for Credentials", tactic: "Reconnaissance" },
+      { techniqueId: "T1598.003", name: "Spearphishing Link", tactic: "Reconnaissance" },
       { techniqueId: "T1114.002", name: "Remote Email Collection", tactic: "Collection" },
       { techniqueId: "T1585.001", name: "Social Media Accounts", tactic: "Resource Development" },
       { techniqueId: "T1591", name: "Gather Victim Org Information", tactic: "Reconnaissance" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "UK Conservative Party donors and MPs credential harvest (2023)",
@@ -1393,7 +1452,9 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1059.001", name: "PowerShell", tactic: "Execution" },
       { techniqueId: "T1105", name: "Ingress Tool Transfer", tactic: "Command and Control" },
       { techniqueId: "T1021.004", name: "SSH", tactic: "Lateral Movement" },
-      { techniqueId: "T1136.001", name: "Local Account Creation", tactic: "Persistence" },
+      { techniqueId: "T1136.001", name: "Create Local Account", tactic: "Persistence" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "CISA advisory on Iran MOIS operations (2022)",
@@ -1559,6 +1620,9 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1070", name: "Indicator Removal", tactic: "Defense Evasion" },
       { techniqueId: "T1550.001", name: "Application Access Token", tactic: "Lateral Movement" },
       { techniqueId: "T1568", name: "Dynamic Resolution", tactic: "Command and Control" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
+      { techniqueId: "T1068", name: "Exploitation for Privilege Escalation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "SolarWinds Orion supply chain compromise  -  SUNBURST backdoor (2020)",
@@ -1993,6 +2057,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1530", name: "Data from Cloud Storage", tactic: "Collection" },
       { techniqueId: "T1621", name: "Multi-Factor Authentication Request Generation", tactic: "Credential Access" },
       { techniqueId: "T1213", name: "Data from Information Repositories", tactic: "Collection" },
+    
+      { techniqueId: "T1548.002", name: "Bypass User Account Control", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Nvidia source code theft  -  1TB including DLSS (2022)",
@@ -2034,6 +2100,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1566.004", name: "Spearphishing Voice", tactic: "Initial Access" },
       { techniqueId: "T1078", name: "Valid Accounts", tactic: "Persistence" },
       { techniqueId: "T1530", name: "Data from Cloud Storage", tactic: "Collection" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "0ktapus campaign  -  130+ orgs via Okta credential phishing (2022)",
@@ -2074,6 +2142,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1056.001", name: "Keylogging", tactic: "Collection" },
       { techniqueId: "T1539", name: "Steal Web Session Cookie", tactic: "Credential Access" },
       { techniqueId: "T1213", name: "Data from Information Repositories", tactic: "Collection" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "100+ pharmaceutical and healthcare company targeting for M&A intelligence",
@@ -2114,6 +2184,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1055", name: "Process Injection", tactic: "Defense Evasion" },
       { techniqueId: "T1003", name: "OS Credential Dumping", tactic: "Credential Access" },
       { techniqueId: "T1486", name: "Data Encrypted for Impact", tactic: "Impact" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "US retail and hospitality POS skimmer campaigns",
@@ -2154,6 +2226,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1059.003", name: "Windows Command Shell", tactic: "Execution" },
       { techniqueId: "T1105", name: "Ingress Tool Transfer", tactic: "Command and Control" },
       { techniqueId: "T1486", name: "Data Encrypted for Impact", tactic: "Impact" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Dridex banking trojan distribution  -  billions in banking fraud",
@@ -2311,9 +2385,9 @@ export const cards: TarotCard[] = [
     ttps: [
       { techniqueId: "T1585.001", name: "Social Media Accounts", tactic: "Resource Development" },
       { techniqueId: "T1566.002", name: "Spearphishing Link", tactic: "Initial Access" },
-      { techniqueId: "T1436", name: "Commonly Used Port", tactic: "Command and Control" },
-      { techniqueId: "T1417", name: "Input Capture", tactic: "Collection" },
-      { techniqueId: "T1512", name: "Video Capture", tactic: "Collection" },
+      { techniqueId: "T1071.001", name: "Web Protocols", tactic: "Command and Control" },
+      { techniqueId: "T1056.001", name: "Keylogging", tactic: "Collection" },
+      { techniqueId: "T1125", name: "Video Capture", tactic: "Collection" },
     ],
     notableOps: [
       "Fake news websites to build credibility for persona approach",
@@ -2557,6 +2631,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1486", name: "Data Encrypted for Impact", tactic: "Impact" },
       { techniqueId: "T1567", name: "Exfiltration Over Web Service", tactic: "Exfiltration" },
       { techniqueId: "T1657", name: "Financial Theft", tactic: "Impact" },
+    
+      { techniqueId: "T1068", name: "Exploitation for Privilege Escalation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "MOVEit zero-day exploitation  -  2,000+ organizations, 62M+ individuals (2023)",
@@ -2597,6 +2673,9 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1078", name: "Valid Accounts", tactic: "Initial Access" },
       { techniqueId: "T1567", name: "Exfiltration Over Web Service", tactic: "Exfiltration" },
       { techniqueId: "T1003", name: "OS Credential Dumping", tactic: "Credential Access" },
+    
+      { techniqueId: "T1548.002", name: "Bypass User Account Control", tactic: "Privilege Escalation" },
+      { techniqueId: "T1068", name: "Exploitation for Privilege Escalation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Colonial Pipeline  -  US East Coast fuel supply disruption (May 2021)",
@@ -2637,6 +2716,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1021.001", name: "Remote Desktop Protocol", tactic: "Lateral Movement" },
       { techniqueId: "T1059.003", name: "Windows Command Shell", tactic: "Execution" },
       { techniqueId: "T1567", name: "Exfiltration Over Web Service", tactic: "Exfiltration" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "130+ million ransom demanded from 1,300+ victims",
@@ -2676,6 +2757,9 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1078", name: "Valid Accounts", tactic: "Initial Access" },
       { techniqueId: "T1021.002", name: "SMB/Windows Admin Shares", tactic: "Lateral Movement" },
       { techniqueId: "T1567", name: "Exfiltration Over Web Service", tactic: "Exfiltration" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
+      { techniqueId: "T1068", name: "Exploitation for Privilege Escalation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Iowa-based grain cooperative NEW Cooperative ransomware attack (2021)",
@@ -2756,6 +2840,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1005", name: "Data from Local System", tactic: "Collection" },
       { techniqueId: "T1041", name: "Exfiltration Over C2 Channel", tactic: "Exfiltration" },
       { techniqueId: "T1486", name: "Data Encrypted for Impact", tactic: "Impact" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "20M+ payment cards stolen from US retailers",
@@ -2796,6 +2882,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1113", name: "Screen Capture", tactic: "Collection" },
       { techniqueId: "T1021.001", name: "Remote Desktop Protocol", tactic: "Lateral Movement" },
       { techniqueId: "T1657", name: "Financial Theft", tactic: "Impact" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "First billion-dollar cybercrime operation  -  $1B stolen from 100+ banks",
@@ -2836,6 +2924,9 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1486", name: "Data Encrypted for Impact", tactic: "Impact" },
       { techniqueId: "T1021.002", name: "SMB/Windows Admin Shares", tactic: "Lateral Movement" },
       { techniqueId: "T1003.001", name: "LSASS Memory", tactic: "Credential Access" },
+    
+      { techniqueId: "T1134", name: "Access Token Manipulation", tactic: "Privilege Escalation" },
+      { techniqueId: "T1548.002", name: "Bypass User Account Control", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "TrickBot banking trojan  -  250M+ machines infected globally",
@@ -2996,6 +3087,8 @@ export const cards: TarotCard[] = [
       { techniqueId: "T1071.001", name: "Web Protocols", tactic: "Command and Control" },
       { techniqueId: "T1105", name: "Ingress Tool Transfer", tactic: "Command and Control" },
       { techniqueId: "T1486", name: "Data Encrypted for Impact", tactic: "Impact" },
+    
+      { techniqueId: "T1068", name: "Exploitation for Privilege Escalation", tactic: "Privilege Escalation" },
     ],
     notableOps: [
       "Banking trojan affecting 100+ financial institutions globally",
