@@ -281,10 +281,19 @@ export default function Home() {
         )}
 
         <div
-          className="mt-auto pt-16 text-xs text-center"
+          className="mt-auto pt-16 text-xs text-center space-y-1"
           style={{ color: "var(--color-silver)", opacity: 0.3 }}
         >
-          Data sourced from MITRE ATT&CK. For educational purposes.
+          <div>Data sourced from MITRE ATT&CK. For educational purposes.</div>
+          <div>
+            Built by{" "}
+            <a
+              href="/about"
+              style={{ color: "var(--color-gold)", textDecoration: "none", opacity: 0.7 }}
+            >
+              Scott Altiparmak
+            </a>
+          </div>
         </div>
       </div>
     </main>
