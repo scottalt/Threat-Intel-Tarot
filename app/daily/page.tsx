@@ -4,6 +4,8 @@ import { TarotCard } from "@/components/TarotCard";
 import { ShareButton } from "@/components/ShareButton";
 import { Starfield } from "@/components/Starfield";
 import { DailyCountdown } from "@/components/DailyCountdown";
+import { NavigatorExport } from "@/components/NavigatorExport";
+import { ThreatBrief } from "@/components/ThreatBrief";
 
 export const metadata: Metadata = {
   title: "Card of the Day | Threat Intelligence Tarot",
@@ -47,7 +49,7 @@ export default function DailyPage() {
               fontFamily: "var(--font-cinzel), serif",
             }}
           >
-            ← Home
+            Home
           </a>
           <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
           <a
@@ -95,12 +97,22 @@ export default function DailyPage() {
 
         <TarotCard card={card} startFlipped={true} />
 
-        <div className="mt-6 flex flex-col items-center gap-2">
+        <div className="mt-6 flex flex-col items-center gap-3">
           <ShareButton
             title={`Today's Threat: ${card.cardTitle}, ${card.name}`}
             text={card.flavor}
             url="https://threat-intel-tarot.vercel.app/daily"
           />
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <p
+              className="text-xs"
+              style={{ color: "var(--color-silver)", opacity: 0.35 }}
+            >
+              Export for reports
+            </p>
+            <NavigatorExport card={card} />
+            <ThreatBrief card={card} />
+          </div>
         </div>
 
         <DailyCountdown />
