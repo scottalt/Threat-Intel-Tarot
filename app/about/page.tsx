@@ -300,8 +300,19 @@ export default function AboutPage() {
           >
             Built by
           </div>
-          <div className="text-sm" style={{ color: "var(--color-mist)", opacity: 0.85 }}>
+          <div className="text-sm mb-1" style={{ color: "var(--color-mist)", opacity: 0.85 }}>
             <strong>Scott Altiparmak</strong>, Senior Information Security Engineer, CISSP
+          </div>
+          <div className="text-xs mb-2" style={{ color: "var(--color-silver)", opacity: 0.55 }}>
+            Live at{" "}
+            <a
+              href="https://tarot.scottaltiparmak.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "var(--color-gold)", opacity: 0.8, textDecoration: "none" }}
+            >
+              tarot.scottaltiparmak.com
+            </a>
           </div>
           <div className="flex gap-4 mt-2">
             <a
