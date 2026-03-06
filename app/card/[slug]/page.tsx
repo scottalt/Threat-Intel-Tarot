@@ -115,6 +115,18 @@ export default async function CardPage({ params }: Props) {
             </p>
             <NavigatorExport card={card} />
             <ThreatBrief card={card} />
+            <a
+              href={`/compare?a=${card.slug}`}
+              className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
+              style={{
+                color: "var(--color-silver)",
+                opacity: 0.5,
+                fontFamily: "var(--font-cinzel), serif",
+                textDecoration: "none",
+              }}
+            >
+              Compare →
+            </a>
           </div>
           {(prev || next) && (
             <>
