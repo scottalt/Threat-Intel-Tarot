@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { isMuted, setMuted } from "@/lib/sounds";
+import { musicPlayer } from "@/lib/music";
 
 export function SoundToggle() {
   const [muted, setMutedState] = useState(false); // on by default
@@ -14,6 +15,11 @@ export function SoundToggle() {
     const next = !muted;
     setMutedState(next);
     setMuted(next);
+    if (next) {
+      musicPlayer.pause();
+    } else {
+      musicPlayer.resume();
+    }
   };
 
   return (

@@ -4,6 +4,7 @@ import "./globals.css";
 import { KeyboardShortcuts } from "@/components/KeyboardShortcuts";
 import { CustomCursor } from "@/components/CustomCursor";
 import { SoundToggle } from "@/components/SoundToggle";
+import { MusicStarter } from "@/components/MusicStarter";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -78,6 +79,7 @@ export default function RootLayout({
         <CustomCursor />
         <KeyboardShortcuts />
         <SoundToggle />
+        <MusicStarter />
         {children}
       </body>
     </html>
