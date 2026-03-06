@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { href: "/sectors", label: "Sectors" },
   { href: "/map", label: "Map" },
   { href: "/compare", label: "Compare" },
+  { href: "/watchlist", label: "Watchlist" },
   { href: "/about", label: "About" },
 ];
 

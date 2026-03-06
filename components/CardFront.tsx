@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import type { TarotCard } from "@/data/types";
 import { TTPBadge } from "./TTPBadge";
 import { DefenseList } from "./DefenseList";
+import { BookmarkButton } from "./BookmarkButton";
 
 const categoryAccent: Record<string, string> = {
   "nation-state": "var(--color-teal)",
@@ -346,10 +347,11 @@ export function CardFront({ card }: { card: TarotCard }) {
                 ? `Vol. II · ${card.number}`
                 : `${card.suit ?? "Minor Arcana"} · ${card.number}`}
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <div className="text-xs" style={{ color: "var(--color-silver)" }}>
                 {card.origin}
               </div>
+              <BookmarkButton slug={card.slug} />
               {card.mitreGroupId && (
                 <a
                   href={`https://attack.mitre.org/groups/${card.mitreGroupId}/`}
