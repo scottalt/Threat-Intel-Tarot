@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { getCoverage, toggleCoverage } from "@/lib/coverage";
 
 type DefenseEntry = {
   control: string;
@@ -13,6 +14,7 @@ const categoryAccent: Record<string, string> = {
   "nation-state": "var(--color-teal)",
   criminal: "var(--color-purple)",
   hacktivist: "var(--color-ember)",
+  trickster: "var(--color-trickster)",
   unknown: "var(--color-silver)",
 };
 
@@ -48,6 +50,15 @@ function matchesFramework(fw: string | null, filter: FrameworkFilter): boolean {
 export function DefenseIndexClient({ defenses }: { defenses: DefenseEntry[] }) {
   const [query, setQuery] = useState("");
   const [fwFilter, setFwFilter] = useState<FrameworkFilter>("all");
+  const [covered, setCovered] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    setCovered(getCoverage());
+  }, []);
+
+  const handleToggleCoverage = (control: string) => {
+    setCovered(new Set(toggleCoverage(control)));
+  };
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -118,6 +129,42 @@ export function DefenseIndexClient({ defenses }: { defenses: DefenseEntry[] }) {
         </div>
       </div>
 
+      {/* Coverage tracker summary */}
+      {covered.size > 0 && (
+        <div
+          className="mb-4 px-4 py-3 rounded-lg"
+          style={{ background: "rgba(74,173,173,0.08)", border: "1px solid rgba(74,173,173,0.2)" }}
+        >
+          <div className="flex items-center justify-between mb-1.5">
+            <span
+              style={{
+                fontFamily: "var(--font-cinzel), serif",
+                fontSize: "10px",
+                color: "var(--color-teal)",
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+              }}
+            >
+              Coverage Tracker
+            </span>
+            <span style={{ fontSize: "11px", color: "var(--color-teal)" }}>
+              {covered.size} / {defenses.length} implemented
+            </span>
+          </div>
+          <div style={{ height: "4px", background: "rgba(74,173,173,0.15)", borderRadius: "2px", overflow: "hidden" }}>
+            <div
+              style={{
+                height: "100%",
+                width: `${Math.round((covered.size / defenses.length) * 100)}%`,
+                background: "var(--color-teal)",
+                borderRadius: "2px",
+                transition: "width 0.3s ease",
+              }}
+            />
+          </div>
+        </div>
+      )}
+
       {/* Results count */}
       {(query.trim() || fwFilter !== "all") && filtered.length > 0 && (
         <div className="text-xs mb-4" style={{ color: "var(--color-silver)", opacity: 0.45 }}>
@@ -186,7 +233,30 @@ export function DefenseIndexClient({ defenses }: { defenses: DefenseEntry[] }) {
                       )}
                     </div>
 
-                    <div className="flex flex-col items-end shrink-0 gap-1">
+                    <div className="flex flex-col items-end shrink-0 gap-1.5">
+                      <button
+                        onClick={() => handleToggleCoverage(defense.control)}
+                        title={covered.has(defense.control) ? "Mark as not implemented" : "Mark as implemented"}
+                        aria-label={covered.has(defense.control) ? "Remove from coverage" : "Mark as implemented"}
+                        style={{
+                          width: "20px",
+                          height: "20px",
+                          borderRadius: "4px",
+                          border: `1px solid ${covered.has(defense.control) ? "rgba(74,173,173,0.6)" : "rgba(192,192,192,0.2)"}`,
+                          background: covered.has(defense.control) ? "rgba(74,173,173,0.2)" : "transparent",
+                          cursor: "pointer",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "var(--color-teal)",
+                          fontSize: "11px",
+                          transition: "all 0.18s ease",
+                          flexShrink: 0,
+                          touchAction: "manipulation",
+                        }}
+                      >
+                        {covered.has(defense.control) ? "✓" : ""}
+                      </button>
                       <span
                         className="text-sm font-semibold"
                         style={{ color: "var(--color-gold-bright)", fontFamily: "var(--font-cinzel), serif" }}
