@@ -42,8 +42,8 @@ export default function Home() {
 
       {/* Card */}
       {card && (
-        <div className="mt-10" key={key}>
-          <TarotCard card={card} />
+        <div className="mt-10">
+          <TarotCard key={key} card={card} />
         </div>
       )}
 
