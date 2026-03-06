@@ -92,8 +92,10 @@ export default function Home() {
   // Keyboard shortcut: Space or D to draw (when not focused on an input)
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      const tag = (e.target as HTMLElement)?.tagName;
-      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+      const el = e.target as HTMLElement;
+      const tag = el?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || tag === "BUTTON") return;
+      if (el?.getAttribute("role") === "button") return;
       if (e.key === " " || e.key === "d" || e.key === "D") {
         e.preventDefault();
         if (!shuffling) handleDraw();
