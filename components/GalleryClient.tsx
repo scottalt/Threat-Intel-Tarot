@@ -42,7 +42,14 @@ function matchesSearch(card: TarotCard, q: string): boolean {
     card.origin.toLowerCase().includes(lower) ||
     card.aka.some((a) => a.toLowerCase().includes(lower)) ||
     card.targets.some((t) => t.toLowerCase().includes(lower)) ||
-    card.motivation.some((m) => m.toLowerCase().includes(lower))
+    card.motivation.some((m) => m.toLowerCase().includes(lower)) ||
+    card.ttps.some(
+      (t) =>
+        t.techniqueId.toLowerCase().includes(lower) ||
+        t.name.toLowerCase().includes(lower) ||
+        t.tactic.toLowerCase().includes(lower)
+    ) ||
+    (card.mitreGroupId?.toLowerCase().includes(lower) ?? false)
   );
 }
 
@@ -75,7 +82,7 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search by name, alias, origin…"
+          placeholder="Search by name, alias, origin, TTP, technique ID…"
           className="w-full px-4 py-2 text-sm bg-transparent outline-none"
           style={{
             color: "var(--color-mist)",
