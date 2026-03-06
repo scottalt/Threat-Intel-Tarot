@@ -16,6 +16,7 @@ const ebGaramond = EB_Garamond({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://tarot.scottaltiparmak.com"),
   title: {
     default: "Threat Intelligence Tarot",
     template: "%s | Threat Intelligence Tarot",
@@ -33,17 +34,22 @@ export const metadata: Metadata = {
     "red team",
     "blue team",
     "incident response",
+    "APT28",
+    "Lazarus Group",
+    "ransomware",
   ],
   openGraph: {
     title: "Threat Intelligence Tarot",
     description: "Real threat intelligence. Impossible to scroll past. 78 adversary profiles from MITRE ATT&CK.",
     type: "website",
-    url: "https://threat-intel-tarot.vercel.app",
+    url: "https://tarot.scottaltiparmak.com",
+    siteName: "Threat Intelligence Tarot",
   },
   twitter: {
     card: "summary_large_image",
     title: "Threat Intelligence Tarot",
-    description: "Real threat intelligence. Impossible to scroll past.",
+    description: "Real threat intelligence. Impossible to scroll past. 78 MITRE ATT&CK adversary profiles.",
+    creator: "@scottalt",
   },
   manifest: "/manifest.webmanifest",
   appleWebApp: {

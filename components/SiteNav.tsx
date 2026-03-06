@@ -12,12 +12,12 @@ const NAV_LINKS = [
   { href: "/about", label: "About" },
 ];
 
-export function SiteNav({ current }: { current?: string }) {
+export function SiteNav({ current, className }: { current?: string; className?: string }) {
   const links = NAV_LINKS.filter((l) => l.href !== current);
 
   return (
     <nav
-      className="flex flex-wrap gap-y-2 mb-8"
+      className={`flex flex-wrap gap-y-2 mb-8 ${className ?? ""}`}
       style={{ gap: "0 4px" }}
       aria-label="Site navigation"
     >

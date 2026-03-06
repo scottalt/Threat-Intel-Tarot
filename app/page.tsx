@@ -155,7 +155,7 @@ export default function Home() {
 
           {/* Nav links */}
           <div className="mt-4 flex justify-center">
-            <SiteNav current="/" />
+            <SiteNav current="/" className="mb-0" />
           </div>
         </div>
 
