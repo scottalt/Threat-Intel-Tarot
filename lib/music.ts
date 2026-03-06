@@ -1,87 +1,115 @@
-// Procedural ambient music — A minor drone with slow LFO breathing
-// No audio files. All synthesized via Web Audio API.
-// Starts on first user interaction, respects the shared mute state.
+// Ambient music via Tone.js — actual melody, not a drone
+// Dynamic import keeps Tone (~200KB) out of the initial bundle.
+// Starts only after first user interaction (browser autoplay policy).
 
 import { isMuted } from "./sounds";
 
-// Layered notes for a rich Am ambient pad
-// Pairs of slightly detuned oscillators create natural chorus/shimmer
-const LAYERS = [
-  { freq: 55,    vol: 0.20, detune: 0   }, // A1 — sub bass foundation
-  { freq: 110,   vol: 0.22, detune: 4   }, // A2 — bass
-  { freq: 110,   vol: 0.14, detune: -6  }, // A2 — detuned pair (beating)
-  { freq: 165,   vol: 0.13, detune: 3   }, // E3 — perfect fifth
-  { freq: 165,   vol: 0.08, detune: -4  }, // E3 — detuned pair
-  { freq: 220,   vol: 0.10, detune: 5   }, // A3 — octave
-  { freq: 261.6, vol: 0.06, detune: -3  }, // C4 — minor third (the darkness)
-  { freq: 330,   vol: 0.04, detune: 7   }, // E4 — high fifth shimmer
-  { freq: 440,   vol: 0.02, detune: -8  }, // A4 — air
+const MASTER_DB = -14;
+const BPM = 68;
+
+// 8-bar loop, A minor:
+//   Bars 1–4: Am (A C E) pad
+//   Bars 5–8: G  (G B D) pad
+//
+// Arpeggio walks the A minor pentatonic scale (A C D E G)
+// at a half-note pulse — one note every two beats (~1.76s at 68bpm).
+// The pattern ascends, peaks, and descends, giving it forward motion.
+
+const PAD_EVENTS: [string, string[]][] = [
+  ["0:0", ["A2", "E3", "A3", "C4"]],
+  ["4:0", ["G2", "D3", "G3", "B3"]],
 ];
 
-const MASTER_VOL = 0.10; // kept deliberately quiet
+const ARP_EVENTS: [string, string][] = [
+  // Am arc — rise
+  ["0:0", "A3"], ["0:2", "C4"],
+  ["1:0", "E4"], ["1:2", "G4"],
+  ["2:0", "A4"], ["2:2", "G4"],
+  ["3:0", "E4"], ["3:2", "C4"],
+  // G arc — descent with colour
+  ["4:0", "G3"], ["4:2", "B3"],
+  ["5:0", "D4"], ["5:2", "G4"],
+  ["6:0", "B4"], ["6:2", "A4"],
+  ["7:0", "G4"], ["7:2", "E4"],
+];
 
 class AmbientMusicPlayer {
-  private ctx: AudioContext | null = null;
-  private masterGain: GainNode | null = null;
-  private nodes: AudioNode[] = [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private masterVol: any = null;
   private started = false;
+  private loading = false;
 
-  start(): void {
-    if (this.started) return;
-    if (isMuted()) return;
+  async start(): Promise<void> {
+    if (this.started || this.loading || isMuted()) return;
+    this.loading = true;
 
-    this.ctx = new AudioContext();
-    const now = this.ctx.currentTime;
+    // Dynamic import — Tone only loads on first interaction
+    const Tone = await import("tone");
 
-    // Master gain — slow 5s fade in so it's not jarring
-    this.masterGain = this.ctx.createGain();
-    this.masterGain.gain.setValueAtTime(0, now);
-    this.masterGain.gain.linearRampToValueAtTime(MASTER_VOL, now + 5);
-    this.masterGain.connect(this.ctx.destination);
+    // Resume AudioContext (required by browser autoplay policy)
+    await Tone.start();
 
-    for (const layer of LAYERS) {
-      const osc = this.ctx.createOscillator();
-      osc.type = "sine";
-      osc.frequency.value = layer.freq;
-      osc.detune.value = layer.detune;
+    Tone.getTransport().bpm.value = BPM;
 
-      const gainNode = this.ctx.createGain();
-      gainNode.gain.value = layer.vol;
+    // --- Effects ---
+    const reverb = new Tone.Reverb({ decay: 7, wet: 0.6 });
+    await reverb.ready; // Reverb builds an IR buffer — must await
 
-      // Slow tremolo LFO — each layer breathes at a slightly different rate
-      // so they phase in and out of each other organically
-      const lfo = this.ctx.createOscillator();
-      lfo.type = "sine";
-      lfo.frequency.value = 0.04 + Math.random() * 0.04; // 0.04–0.08 Hz
+    const delay = new Tone.FeedbackDelay("8n.", 0.22);
 
-      const lfoDepth = this.ctx.createGain();
-      lfoDepth.gain.value = layer.vol * 0.28; // subtle — 28% modulation depth
+    this.masterVol = new Tone.Volume(-60); // start silent, ramp up
+    this.masterVol.toDestination();
+    reverb.connect(this.masterVol);
+    delay.connect(reverb);
 
-      lfo.connect(lfoDepth);
-      lfoDepth.connect(gainNode.gain);
+    // --- Pad synth ---
+    // Sine wave, very slow attack — fills space without intruding
+    const pad = new Tone.PolySynth(Tone.Synth, {
+      oscillator: { type: "sine" as const },
+      envelope: { attack: 3, decay: 0.8, sustain: 0.85, release: 6 },
+    });
+    pad.volume.value = -6;
+    pad.connect(reverb);
 
-      // Very gentle high-shelf rolloff to keep it warm
-      const filter = this.ctx.createBiquadFilter();
-      filter.type = "highshelf";
-      filter.frequency.value = 2000;
-      filter.gain.value = -10; // tame any harshness
+    // --- Arpeggio synth ---
+    // Triangle wave — warmer than a sine, pluckier envelope
+    const arp = new Tone.Synth({
+      oscillator: { type: "triangle" as const },
+      envelope: { attack: 0.06, decay: 1.0, sustain: 0.15, release: 3 },
+    });
+    arp.volume.value = -12;
+    arp.connect(delay);
 
-      osc.connect(filter);
-      filter.connect(gainNode);
-      gainNode.connect(this.masterGain);
+    // --- Sequences ---
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const padPart = new Tone.Part<string[]>(
+      (time, chord) => pad.triggerAttackRelease(chord, "3m", time),
+      PAD_EVENTS as any
+    );
+    padPart.loop = true;
+    padPart.loopEnd = "8m";
 
-      osc.start(now);
-      lfo.start(now);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const arpPart = new Tone.Part<string>(
+      (time, note) => arp.triggerAttackRelease(note, "4n", time),
+      ARP_EVENTS as any
+    );
+    arpPart.loop = true;
+    arpPart.loopEnd = "8m";
 
-      this.nodes.push(osc, lfo, gainNode, lfoDepth, filter);
-    }
+    padPart.start(0);
+    arpPart.start(0);
+
+    // Fade in over 5s
+    this.masterVol.volume.rampTo(MASTER_DB, 5);
+    Tone.getTransport().start();
 
     this.started = true;
+    this.loading = false;
   }
 
   pause(): void {
-    if (!this.masterGain || !this.ctx) return;
-    this.masterGain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.8);
+    this.masterVol?.volume.rampTo(-60, 2);
   }
 
   resume(): void {
@@ -89,8 +117,7 @@ class AmbientMusicPlayer {
       this.start();
       return;
     }
-    if (!this.masterGain || !this.ctx) return;
-    this.masterGain.gain.setTargetAtTime(MASTER_VOL, this.ctx.currentTime, 0.8);
+    this.masterVol?.volume.rampTo(MASTER_DB, 2);
   }
 
   isStarted(): boolean {
@@ -98,5 +125,4 @@ class AmbientMusicPlayer {
   }
 }
 
-// Singleton — shared across the app
 export const musicPlayer = new AmbientMusicPlayer();
