@@ -132,7 +132,6 @@ export function TarotCard({
 
   const handleTouchMove = useCallback(
     (e: React.TouchEvent<HTMLDivElement>) => {
-      if (flipped) return;
       const touch = e.touches[0];
       const dx = touch.clientX - touchStartXRef.current;
       const dy = touch.clientY - touchStartYRef.current;
@@ -141,8 +140,9 @@ export function TarotCard({
 
       isDraggingRef.current = true;
       const progress = Math.min(Math.abs(dx) / SWIPE_COMMIT_PX, 1);
-      const deg = progress * MAX_DRAG_DEG * (dx > 0 ? 1 : -1);
-      setDragDeg(deg);
+      const rawDeg = progress * MAX_DRAG_DEG * (dx > 0 ? 1 : -1);
+      // When flipped, invert so the drag works against the 180deg wrapper rotation
+      setDragDeg(flipped ? -rawDeg : rawDeg);
     },
     [flipped]
   );
@@ -157,7 +157,7 @@ export function TarotCard({
 
       setDragDeg(null);
 
-      if (!flipped && absX >= SWIPE_COMMIT_PX && absX > absY) {
+      if (absX >= SWIPE_COMMIT_PX && absX > absY) {
         handleFlip();
       }
 

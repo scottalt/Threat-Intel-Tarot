@@ -69,10 +69,12 @@ export function Starfield() {
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const dpr = Math.min(window.devicePixelRatio || 1, 2); // cap at 2x for perf
+    // Extra margin so star glows don't clip at viewport edges
+    const EDGE = 16;
 
     const init = () => {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
+      const w = window.innerWidth + EDGE * 2;
+      const h = window.innerHeight + EDGE * 2;
       canvas.width = w * dpr;
       canvas.height = h * dpr;
       canvas.style.width = `${w}px`;
@@ -166,7 +168,7 @@ export function Starfield() {
       aria-hidden="true"
       style={{
         position: "fixed",
-        inset: 0,
+        inset: -16,
         pointerEvents: "none",
         zIndex: 0,
         opacity: 0.75,

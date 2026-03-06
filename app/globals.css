@@ -43,7 +43,7 @@ body {
   cursor: pointer;
   width: min(340px, 92vw);
   aspect-ratio: 17 / 30;
-  touch-action: manipulation;
+  touch-action: pan-y;
   -webkit-tap-highlight-color: transparent;
 }
 
