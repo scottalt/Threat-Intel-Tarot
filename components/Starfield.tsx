@@ -67,6 +67,7 @@ export function Starfield() {
     let lastTime = 0;
     let paused = false;
 
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const dpr = Math.min(window.devicePixelRatio || 1, 2); // cap at 2x for perf
 
     const init = () => {
@@ -99,7 +100,8 @@ export function Starfield() {
         animId = requestAnimationFrame(draw);
         return;
       }
-      const dt = Math.min((timestamp - lastTime) / 1000, 0.1);
+      // With reduced motion: draw once then stop
+      const dt = reducedMotion ? 0 : Math.min((timestamp - lastTime) / 1000, 0.1);
       lastTime = timestamp;
 
       const w = canvas.width / dpr;
@@ -136,7 +138,9 @@ export function Starfield() {
         if (s.y > h) s.y = 0;
       }
 
-      animId = requestAnimationFrame(draw);
+      if (!reducedMotion) {
+        animId = requestAnimationFrame(draw);
+      }
     };
 
     const onVisibilityChange = () => {
