@@ -187,8 +187,22 @@ body {
    Three-Card Spread — compact card slots
 ───────────────────────────────────────── */
 
+/* Mobile: narrow enough for 3 side-by-side with gaps */
 .spread-card-slot .card-scene {
   width: min(280px, 88vw);
+}
+
+@media (min-width: 768px) {
+  .spread-card-slot .card-scene {
+    width: min(260px, 30vw);
+  }
+}
+
+/* Compact 3-card horizontal layout on medium screens */
+@media (min-width: 640px) and (max-width: 767px) {
+  .spread-card-slot .card-scene {
+    width: min(180px, 29vw);
+  }
 }
 
 /* ─────────────────────────────────────────

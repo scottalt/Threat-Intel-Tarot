@@ -187,7 +187,7 @@ export default function SpreadPage() {
         {spread && (
           <div
             key={drawKey}
-            className="flex flex-col md:flex-row gap-8 md:gap-5 items-center md:items-start justify-center w-full"
+            className="flex flex-col sm:flex-row gap-4 sm:gap-3 items-center sm:items-start justify-center w-full"
           >
             {spread.map((card, i) => (
               <div
