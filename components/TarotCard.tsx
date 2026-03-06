@@ -32,6 +32,8 @@ export function TarotCard({
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const particleIdRef = useRef(0);
   const tiltResetRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const touchStartXRef = useRef<number>(0);
+  const touchStartYRef = useRef<number>(0);
 
   const spawnParticles = useCallback(() => {
     const burst: Particle[] = Array.from({ length: 14 }, (_, i) => {
@@ -72,9 +74,11 @@ export function TarotCard({
 
   const handleTouchStart = useCallback(
     (e: React.TouchEvent<HTMLDivElement>) => {
+      const touch = e.touches[0];
+      touchStartXRef.current = touch.clientX;
+      touchStartYRef.current = touch.clientY;
       if (flipped) return;
       clearTimeout(tiltResetRef.current);
-      const touch = e.touches[0];
       const rect = e.currentTarget.getBoundingClientRect();
       const nx = (touch.clientX - rect.left) / rect.width - 0.5;
       const ny = (touch.clientY - rect.top) / rect.height - 0.5;
@@ -83,9 +87,24 @@ export function TarotCard({
     [flipped]
   );
 
-  const handleTouchEnd = useCallback(() => {
-    tiltResetRef.current = setTimeout(() => setTilt({ x: 0, y: 0 }), 120);
-  }, []);
+  const handleTouchEndWithSwipe = useCallback(
+    (e: React.TouchEvent<HTMLDivElement>) => {
+      const touch = e.changedTouches[0];
+      const dx = touch.clientX - touchStartXRef.current;
+      const dy = touch.clientY - touchStartYRef.current;
+      const absX = Math.abs(dx);
+      const absY = Math.abs(dy);
+
+      // Swipe: horizontal movement > 40px and more horizontal than vertical
+      if (absX > 40 && absX > absY) {
+        handleFlip();
+      }
+
+      // Reset tilt
+      tiltResetRef.current = setTimeout(() => setTilt({ x: 0, y: 0 }), 120);
+    },
+    [handleFlip]
+  );
 
   const sceneTransform =
     !flipped && (tilt.x !== 0 || tilt.y !== 0)
@@ -131,7 +150,7 @@ export function TarotCard({
           className="card-scene arcane-border"
           onClick={handleFlip}
           onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
+          onTouchEnd={handleTouchEndWithSwipe}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
               e.preventDefault();
@@ -172,7 +191,7 @@ export function TarotCard({
             fontFamily: "var(--font-cinzel), serif",
           }}
         >
-          Tap to reveal
+          Tap or swipe to reveal
         </p>
       )}
     </div>
