@@ -119,8 +119,10 @@ export default async function CardPage({ params }: Props) {
           </a>
         </div>
 
-        {/* Card */}
-        <TarotCard card={card} startFlipped={true} />
+        {/* Card — card-deal entrance animation */}
+        <div className="card-deal">
+          <TarotCard card={card} startFlipped={true} />
+        </div>
 
         {/* Share */}
         <div className="mt-6 flex flex-col items-center gap-2">
@@ -216,7 +218,7 @@ export default async function CardPage({ params }: Props) {
               Related Adversaries
             </div>
             <div className="grid grid-cols-3 gap-3">
-              {related.map(({ card: rel, shared }) => (
+              {related.map(({ card: rel, shared }, i) => (
                 <a
                   key={rel.slug}
                   href={`/card/${rel.slug}`}
@@ -227,6 +229,7 @@ export default async function CardPage({ params }: Props) {
                     boxShadow: `0 0 10px ${accent}18`,
                     textDecoration: "none",
                     touchAction: "manipulation",
+                    animation: `section-reveal 0.4s cubic-bezier(0.22, 1, 0.36, 1) ${i * 80}ms both`,
                   }}
                 >
                   <div style={{ height: 3, background: accent }} />
