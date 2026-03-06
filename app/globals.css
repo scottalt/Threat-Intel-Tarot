@@ -172,6 +172,17 @@ body {
   to   { opacity: 1; }
 }
 
+/* Card deal — slides in from above when drawn */
+@keyframes card-deal {
+  0%   { opacity: 0; transform: translateY(-60px) rotate(-4deg) scale(0.92); }
+  60%  { transform: translateY(8px) rotate(0.5deg) scale(1.01); }
+  100% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+}
+
+.card-deal {
+  animation: card-deal 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 /* ─────────────────────────────────────────
    Accessibility — Reduced Motion
 ───────────────────────────────────────── */

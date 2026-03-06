@@ -84,7 +84,7 @@ export default function Home() {
         <DrawButton onClick={handleDraw} />
 
         {card && (
-          <div className="mt-10">
+          <div key={key} className="mt-10 card-deal">
             <TarotCard key={key} card={card} />
           </div>
         )}
