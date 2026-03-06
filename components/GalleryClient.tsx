@@ -68,6 +68,7 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
   const [arcana, setArcana] = useState<ArcanaFilter>("all");
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<SortOrder>("deck");
+  const [originFilter, setOriginFilter] = useState("");
   const scrollRestoredRef = useRef(false);
 
   // Restore scroll position when returning from a card page
@@ -107,7 +108,8 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
         (arcana === "major" && c.arcanum === "major") ||
         (arcana !== "major" && c.suit === arcana);
       const searchMatch = query.trim() === "" || matchesSearch(c, query.trim());
-      return categoryMatch && arcanaMatch && searchMatch;
+      const originMatch = originFilter === "" || c.origin.toLowerCase().includes(originFilter.toLowerCase());
+      return categoryMatch && arcanaMatch && searchMatch && originMatch;
     })
     .sort((a, b) => {
       if (sort === "risk-desc") return b.riskLevel - a.riskLevel;
@@ -176,22 +178,22 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
         </select>
       </div>
 
-      {/* Country quick-search */}
+      {/* Country quick-filter (origin-only match) */}
       <div className="flex flex-wrap justify-center gap-1.5 mb-2">
         <span className="text-xs self-center" style={{ color: "var(--color-silver)", opacity: 0.35 }}>Origin:</span>
         {["Russia", "China", "North Korea", "Iran", "USA"].map((country) => (
           <button
             key={country}
-            onClick={() => setQuery(query === country ? "" : country)}
+            onClick={() => setOriginFilter(originFilter === country ? "" : country)}
             className="px-2.5 py-0.5 text-xs rounded transition-all"
             style={{
               fontFamily: "var(--font-cinzel), serif",
               fontSize: "9px",
               letterSpacing: "0.06em",
-              color: query === country ? "var(--color-gold-bright)" : "var(--color-silver)",
-              border: `1px solid ${query === country ? "rgba(201,168,76,0.4)" : "rgba(192,192,192,0.15)"}`,
-              background: query === country ? "rgba(201,168,76,0.08)" : "transparent",
-              opacity: query === country ? 1 : 0.65,
+              color: originFilter === country ? "var(--color-gold-bright)" : "var(--color-silver)",
+              border: `1px solid ${originFilter === country ? "rgba(201,168,76,0.4)" : "rgba(192,192,192,0.15)"}`,
+              background: originFilter === country ? "rgba(201,168,76,0.08)" : "transparent",
+              opacity: originFilter === country ? 1 : 0.65,
               touchAction: "manipulation",
             }}
           >
@@ -267,7 +269,7 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
       </div>
 
       {/* Results count */}
-      {(query.trim() || filter !== "all" || arcana !== "all") && filtered.length > 0 && (
+      {(query.trim() || filter !== "all" || arcana !== "all" || originFilter) && filtered.length > 0 && (
         <div
           className="text-center mb-4 text-xs"
           style={{ color: "var(--color-silver)", opacity: 0.45 }}
