@@ -70,6 +70,18 @@ export default function AboutPage() {
           >
             Techniques
           </a>
+          <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
+          <a
+            href="/defenses"
+            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
+            style={{
+              color: "var(--color-gold)",
+              opacity: 0.5,
+              fontFamily: "var(--font-cinzel), serif",
+            }}
+          >
+            Defenses
+          </a>
         </div>
 
         <h1
@@ -198,6 +210,10 @@ export default function AboutPage() {
               <li className="flex gap-2">
                 <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
                 <span><strong style={{ color: "var(--color-mist)" }}>Technique Explorer</strong> — view all MITRE ATT&amp;CK techniques used across the full deck, grouped by tactic and ranked by prevalence across threat actors.</span>
+              </li>
+              <li className="flex gap-2">
+                <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
+                <span><strong style={{ color: "var(--color-mist)" }}>Defense Index</strong> — discover which security controls defend against the most adversaries. Ranked by cross-deck coverage so you can prioritize controls that provide the broadest protection.</span>
               </li>
             </ul>
           </section>
