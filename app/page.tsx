@@ -3,10 +3,15 @@
 import { useState, useEffect } from "react";
 import { drawRandom } from "@/lib/draw";
 import { getCardBySlug } from "@/lib/slug";
+import { cards } from "@/data/cards";
 import { TarotCard } from "@/components/TarotCard";
 import { DrawButton } from "@/components/DrawButton";
 import { Starfield } from "@/components/Starfield";
 import type { TarotCard as TarotCardType } from "@/data/types";
+
+const UNIQUE_TECHNIQUES = new Set(cards.flatMap((c) => c.ttps.map((t) => t.techniqueId))).size;
+const UNIQUE_TACTICS = new Set(cards.flatMap((c) => c.ttps.map((t) => t.tactic))).size;
+const UNIQUE_ORIGINS = new Set(cards.map((c) => c.origin)).size;
 
 const HISTORY_KEY = "ti-tarot-history";
 const MAX_HISTORY = 4;
@@ -114,12 +119,21 @@ export default function Home() {
           >
             Real threat intelligence. Impossible to scroll past.
           </p>
-          <p
-            className="text-xs mt-1"
-            style={{ color: "var(--color-silver)", opacity: 0.4 }}
-          >
-            78 adversary profiles from MITRE ATT&CK
-          </p>
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 mt-2">
+            {[
+              { value: cards.length, label: "adversaries" },
+              { value: UNIQUE_TECHNIQUES, label: "techniques" },
+              { value: UNIQUE_TACTICS, label: "tactics" },
+              { value: UNIQUE_ORIGINS, label: "countries" },
+            ].map((stat) => (
+              <span key={stat.label} className="text-xs" style={{ color: "var(--color-silver)", opacity: 0.45 }}>
+                <span style={{ color: "var(--color-gold)", opacity: 0.8, fontFamily: "var(--font-cinzel), serif" }}>
+                  {stat.value}
+                </span>
+                {" "}{stat.label}
+              </span>
+            ))}
+          </div>
           <div
             className="mt-3 w-24 h-px mx-auto"
             style={{
