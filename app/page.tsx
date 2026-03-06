@@ -79,6 +79,20 @@ export default function Home() {
     });
   };
 
+  // Keyboard shortcut: Space or D to draw (when not focused on an input)
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+      if (e.key === " " || e.key === "d" || e.key === "D") {
+        e.preventDefault();
+        handleDraw();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  });
+
   return (
     <main
       id="main-content"
@@ -161,6 +175,12 @@ export default function Home() {
         </div>
 
         <DrawButton onClick={handleDraw} />
+        <p
+          className="mt-2 text-xs hidden sm:block"
+          style={{ color: "var(--color-silver)", opacity: 0.2 }}
+        >
+          Press <kbd style={{ fontFamily: "monospace" }}>Space</kbd> or <kbd style={{ fontFamily: "monospace" }}>D</kbd> to draw
+        </p>
 
         {card && (
           <div key={key} className="mt-10 card-deal flex flex-col items-center gap-3">
