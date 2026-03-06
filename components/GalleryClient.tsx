@@ -301,8 +301,8 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
                 background: "var(--color-arcane)",
                 border: `1px solid ${accent}44`,
                 boxShadow: `0 0 12px ${accent}22`,
-                animation: "section-reveal 0.35s ease-out both",
-                animationDelay: `${i * 30}ms`,
+                animation: "section-reveal 0.4s cubic-bezier(0.22, 1, 0.36, 1) both",
+                animationDelay: `${Math.min(i * 30, 400)}ms`,
                 textDecoration: "none",
                 touchAction: "manipulation",
               }}
