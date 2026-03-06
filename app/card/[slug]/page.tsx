@@ -7,6 +7,7 @@ import { ShareButton } from "@/components/ShareButton";
 import { Starfield } from "@/components/Starfield";
 import { CardKeyNav } from "@/components/CardKeyNav";
 import { NavigatorExport } from "@/components/NavigatorExport";
+import { ThreatBrief } from "@/components/ThreatBrief";
 import type { TarotCard as TarotCardType } from "@/data/types";
 
 type Props = {
@@ -128,7 +129,7 @@ export default async function CardPage({ params }: Props) {
             text={card.flavor}
             url={`https://threat-intel-tarot.vercel.app/card/${card.slug}`}
           />
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-4">
             <p
               className="text-xs"
               style={{ color: "var(--color-silver)", opacity: 0.35 }}
@@ -136,6 +137,7 @@ export default async function CardPage({ params }: Props) {
               Share this adversary profile
             </p>
             <NavigatorExport card={card} />
+            <ThreatBrief card={card} />
           </div>
           {(prev || next) && (
             <>
