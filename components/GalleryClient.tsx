@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import type { TarotCard } from "@/data/types";
 
 const categoryLabel: Record<string, string> = {
@@ -61,11 +61,43 @@ const SORT_LABELS: Record<SortOrder, string> = {
   name: "A–Z",
 };
 
+const SCROLL_KEY = "ti-gallery-scroll";
+
 export function GalleryClient({ cards }: { cards: TarotCard[] }) {
   const [filter, setFilter] = useState<Category>("all");
   const [arcana, setArcana] = useState<ArcanaFilter>("all");
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<SortOrder>("deck");
+  const scrollRestoredRef = useRef(false);
+
+  // Restore scroll position when returning from a card page
+  useEffect(() => {
+    if (scrollRestoredRef.current) return;
+    scrollRestoredRef.current = true;
+    try {
+      const y = sessionStorage.getItem(SCROLL_KEY);
+      if (y) {
+        requestAnimationFrame(() => {
+          window.scrollTo({ top: parseInt(y, 10), behavior: "instant" });
+        });
+      }
+    } catch {
+      // sessionStorage not available
+    }
+  }, []);
+
+  // Save scroll position before navigating away
+  useEffect(() => {
+    const handleScroll = () => {
+      try {
+        sessionStorage.setItem(SCROLL_KEY, String(Math.round(window.scrollY)));
+      } catch {
+        // sessionStorage not available
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const filtered = cards
     .filter((c) => {
