@@ -113,6 +113,14 @@ export default function Home() {
             </a>
             <span style={{ color: "var(--color-gold)", opacity: 0.3 }}>·</span>
             <a
+              href="/techniques"
+              className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
+              style={{ color: "var(--color-gold)", opacity: 0.55, fontFamily: "var(--font-cinzel), serif" }}
+            >
+              Techniques
+            </a>
+            <span style={{ color: "var(--color-gold)", opacity: 0.3 }}>·</span>
+            <a
               href="/about"
               className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
               style={{ color: "var(--color-gold)", opacity: 0.55, fontFamily: "var(--font-cinzel), serif" }}

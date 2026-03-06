@@ -58,6 +58,18 @@ export default function GalleryPage() {
           >
             Daily Card
           </a>
+          <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
+          <a
+            href="/techniques"
+            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
+            style={{
+              color: "var(--color-gold)",
+              opacity: 0.5,
+              fontFamily: "var(--font-cinzel), serif",
+            }}
+          >
+            Techniques
+          </a>
         </div>
 
         {/* Header */}
