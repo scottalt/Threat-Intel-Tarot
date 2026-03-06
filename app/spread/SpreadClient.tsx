@@ -125,7 +125,7 @@ function buildReadingText(spread: TarotCardType[]): string {
   const reading = buildReading(spread);
   const lines = [
     "THREAT INTELLIGENCE TAROT: THREE-CARD SPREAD",
-    "threat-intel-tarot.vercel.app/spread",
+    "tarot.scottaltiparmak.com/spread",
     "",
     ...positions.map((pos, i) => {
       const card = spread[i];

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllSlugs } from "@/lib/slug";
 
-const BASE_URL = "https://threat-intel-tarot.vercel.app";
+const BASE_URL = "https://tarot.scottaltiparmak.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const cardSlugs = getAllSlugs();

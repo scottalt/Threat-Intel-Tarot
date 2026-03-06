@@ -95,7 +95,7 @@ export default async function CardPage({ params }: Props) {
           <ShareButton
             title={`${card.cardTitle}: ${card.name} | Threat Intelligence Tarot`}
             text={card.flavor}
-            url={`https://threat-intel-tarot.vercel.app/card/${card.slug}`}
+            url={`https://tarot.scottaltiparmak.com/card/${card.slug}`}
           />
           <div className="flex flex-wrap items-center justify-center gap-4">
             <p

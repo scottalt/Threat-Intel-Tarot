@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://threat-intel-tarot.vercel.app/sitemap.xml",
+    sitemap: "https://tarot.scottaltiparmak.com/sitemap.xml",
   };
 }

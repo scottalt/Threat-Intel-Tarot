@@ -225,7 +225,7 @@ export default async function CardOgImage({ params }: Props) {
               marginTop: 16,
             }}
           >
-            threat-intel-tarot.vercel.app
+            tarot.scottaltiparmak.com
           </div>
         </div>
       </div>

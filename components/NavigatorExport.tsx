@@ -19,7 +19,7 @@ export function NavigatorExport({ card }: { card: TarotCard }) {
       name: `${card.name} (${card.cardTitle})`,
       versions: { attack: "16", navigator: "5.0.0", layer: "4.5" },
       domain: "enterprise-attack",
-      description: `ATT&CK techniques for ${card.name} — exported from Threat Intelligence Tarot (threat-intel-tarot.vercel.app)`,
+      description: `ATT&CK techniques for ${card.name} — exported from Threat Intelligence Tarot (tarot.scottaltiparmak.com)`,
       filters: { platforms: ["Windows", "Linux", "macOS", "Network", "Cloud"] },
       sorting: 0,
       layout: {
@@ -40,7 +40,7 @@ export function NavigatorExport({ card }: { card: TarotCard }) {
         { name: "origin", value: card.origin },
         { name: "risk_level", value: String(card.riskLevel) },
       ],
-      links: [{ label: "Threat Intelligence Tarot", url: `https://threat-intel-tarot.vercel.app/card/${card.slug}` }],
+      links: [{ label: "Threat Intelligence Tarot", url: `https://tarot.scottaltiparmak.com/card/${card.slug}` }],
       showTacticRowBackground: false,
       tacticRowBackground: "#dddddd",
       selectTechniquesAcrossSubtechniques: true,

@@ -51,7 +51,7 @@ function buildBrief(card: TarotCard): string {
     card.reversedMeaning,
     "",
     "---",
-    `*Source: Threat Intelligence Tarot — https://threat-intel-tarot.vercel.app/card/${card.slug}*`,
+    `*Source: Threat Intelligence Tarot — https://tarot.scottaltiparmak.com/card/${card.slug}*`,
     `*Data sourced from MITRE ATT&CK. For educational purposes.*`,
   ]
     .filter((line) => line !== undefined)

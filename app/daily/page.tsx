@@ -83,7 +83,7 @@ export default function DailyPage() {
           <ShareButton
             title={`Today's Threat: ${card.cardTitle}, ${card.name}`}
             text={card.flavor}
-            url="https://threat-intel-tarot.vercel.app/daily"
+            url="https://tarot.scottaltiparmak.com/daily"
           />
           <div className="flex flex-wrap items-center justify-center gap-4">
             <p
