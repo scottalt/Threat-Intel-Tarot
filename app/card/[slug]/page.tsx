@@ -1,11 +1,20 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getCardBySlug, getAllSlugs } from "@/lib/slug";
+import { cards } from "@/data/cards";
 import { TarotCard } from "@/components/TarotCard";
 import { ShareButton } from "@/components/ShareButton";
+import { Starfield } from "@/components/Starfield";
 
 type Props = {
   params: Promise<{ slug: string }>;
+};
+
+const categoryAccent: Record<string, string> = {
+  "nation-state": "var(--color-teal)",
+  criminal: "var(--color-purple)",
+  hacktivist: "var(--color-ember)",
+  unknown: "var(--color-silver)",
 };
 
 export async function generateStaticParams() {
@@ -34,35 +43,152 @@ export default async function CardPage({ params }: Props) {
 
   if (!card) notFound();
 
+  // Related: same category, excluding current, max 3
+  const related = cards
+    .filter((c) => c.category === card.category && c.slug !== card.slug)
+    .slice(0, 3);
+
+  const accent = categoryAccent[card.category];
+
   return (
     <main
-      className="min-h-screen flex flex-col items-center py-16 px-4"
-      style={{ background: "var(--color-void)" }}
+      className="relative min-h-screen flex flex-col items-center py-12 px-4"
+      style={{
+        background: "var(--color-void)",
+        paddingBottom: "max(3rem, env(safe-area-inset-bottom))",
+      }}
     >
-      <div className="text-center mb-10">
-        <a
-          href="/"
-          className="text-xs uppercase tracking-widest hover:opacity-100 transition-opacity"
-          style={{ color: "var(--color-gold)", opacity: 0.6, fontFamily: "var(--font-cinzel), serif" }}
-        >
-          ← Threat Intelligence Tarot
-        </a>
-      </div>
+      <Starfield />
 
-      <TarotCard card={card} startFlipped={true} />
+      <div
+        className="relative flex flex-col items-center w-full max-w-xl"
+        style={{ zIndex: 2 }}
+      >
+        {/* Nav */}
+        <div className="flex gap-4 mb-8 self-start">
+          <a
+            href="/"
+            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
+            style={{
+              color: "var(--color-gold)",
+              opacity: 0.5,
+              fontFamily: "var(--font-cinzel), serif",
+            }}
+          >
+            ← Home
+          </a>
+          <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
+          <a
+            href="/gallery"
+            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
+            style={{
+              color: "var(--color-gold)",
+              opacity: 0.5,
+              fontFamily: "var(--font-cinzel), serif",
+            }}
+          >
+            Gallery
+          </a>
+        </div>
 
-      <div className="mt-6 flex flex-col items-center gap-3">
-        <ShareButton
-          title={`${card.cardTitle} — ${card.name} | Threat Intelligence Tarot`}
-          text={card.flavor}
-          url={`https://threat-intel-tarot.vercel.app/card/${card.slug}`}
-        />
-        <p
-          className="text-xs text-center"
-          style={{ color: "var(--color-silver)", opacity: 0.4 }}
+        {/* Card */}
+        <TarotCard card={card} startFlipped={true} />
+
+        {/* Share */}
+        <div className="mt-6 flex flex-col items-center gap-2">
+          <ShareButton
+            title={`${card.cardTitle} — ${card.name} | Threat Intelligence Tarot`}
+            text={card.flavor}
+            url={`https://threat-intel-tarot.vercel.app/card/${card.slug}`}
+          />
+          <p
+            className="text-xs"
+            style={{ color: "var(--color-silver)", opacity: 0.35 }}
+          >
+            Share this adversary profile
+          </p>
+        </div>
+
+        {/* Related cards */}
+        {related.length > 0 && (
+          <div className="mt-14 w-full">
+            <div
+              className="w-full h-px mb-6"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, var(--color-gold), transparent)",
+              }}
+            />
+            <div
+              className="text-center text-xs uppercase tracking-widest mb-5"
+              style={{
+                color: "var(--color-gold)",
+                fontFamily: "var(--font-cinzel), serif",
+                opacity: 0.55,
+              }}
+            >
+              Related Adversaries
+            </div>
+            <div className="grid grid-cols-3 gap-3">
+              {related.map((rel) => (
+                <a
+                  key={rel.slug}
+                  href={`/card/${rel.slug}`}
+                  className="block rounded-xl overflow-hidden transition-transform duration-200 hover:scale-105 active:scale-95"
+                  style={{
+                    background: "var(--color-arcane)",
+                    border: `1px solid ${accent}44`,
+                    boxShadow: `0 0 10px ${accent}18`,
+                    textDecoration: "none",
+                    touchAction: "manipulation",
+                  }}
+                >
+                  <div style={{ height: 3, background: accent }} />
+                  <div className="p-3">
+                    <div
+                      className="text-xs font-semibold leading-tight mb-1"
+                      style={{
+                        color: "var(--color-gold-bright)",
+                        fontFamily: "var(--font-cinzel), serif",
+                        fontSize: "11px",
+                      }}
+                    >
+                      {rel.cardTitle}
+                    </div>
+                    <div
+                      className="text-xs"
+                      style={{ color: "var(--color-silver)", opacity: 0.65 }}
+                    >
+                      {rel.name}
+                    </div>
+                    <div className="mt-1.5 text-xs">
+                      {Array.from({ length: 5 }, (_, i) => (
+                        <span
+                          key={i}
+                          style={{
+                            color:
+                              i < rel.riskLevel
+                                ? "var(--color-gold-bright)"
+                                : "#333",
+                          }}
+                        >
+                          ★
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div
+          className="mt-12 text-xs text-center"
+          style={{ color: "var(--color-silver)", opacity: 0.25 }}
         >
-          Share this adversary profile
-        </p>
+          Data sourced from MITRE ATT&CK. For educational purposes.
+        </div>
       </div>
     </main>
   );
