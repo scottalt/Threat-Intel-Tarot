@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { drawSpread } from "@/lib/draw";
+import { getCardBySlug } from "@/lib/slug";
 import { TarotCard } from "@/components/TarotCard";
 import { Starfield } from "@/components/Starfield";
 import type { TarotCard as TarotCardType } from "@/data/types";
@@ -154,11 +156,45 @@ export default function SpreadPage() {
   const [spread, setSpread] = useState<TarotCardType[] | null>(null);
   const [drawKey, setDrawKey] = useState(0);
   const [copied, setCopied] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  // Load spread from URL params on mount
+  useEffect(() => {
+    const cardParam = searchParams.get("cards");
+    if (cardParam) {
+      const slugs = cardParam.split(",").slice(0, 3);
+      const loaded = slugs.map((s) => getCardBySlug(s)).filter(Boolean) as TarotCardType[];
+      if (loaded.length === 3) {
+        setSpread(loaded);
+        setDrawKey(1);
+      }
+    }
+  }, [searchParams]);
 
   const handleDraw = () => {
-    setSpread(drawSpread(3));
+    const drawn = drawSpread(3);
+    setSpread(drawn);
     setDrawKey((k) => k + 1);
     setCopied(false);
+    setLinkCopied(false);
+    // Update URL without page reload
+    const slugs = drawn.map((c) => c.slug).join(",");
+    router.replace(`/spread?cards=${slugs}`, { scroll: false });
+  };
+
+  const handleCopyLink = async () => {
+    if (!spread) return;
+    const slugs = spread.map((c) => c.slug).join(",");
+    const url = `${window.location.origin}/spread?cards=${slugs}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setLinkCopied(true);
+      setTimeout(() => setLinkCopied(false), 2500);
+    } catch {
+      // clipboard not available
+    }
   };
 
   const handleCopyReading = async () => {
@@ -277,22 +313,40 @@ export default function SpreadPage() {
         </button>
 
         {spread && (
-          <button
-            onClick={handleCopyReading}
-            className="mt-2 px-5 py-1.5 text-xs uppercase tracking-widest transition-all"
-            style={{
-              fontFamily: "var(--font-cinzel), serif",
-              color: copied ? "var(--color-gold-bright)" : "var(--color-silver)",
-              border: `1px solid ${copied ? "rgba(201,168,76,0.4)" : "rgba(192,192,192,0.2)"}`,
-              background: "transparent",
-              borderRadius: "4px",
-              cursor: "pointer",
-              touchAction: "manipulation",
-              WebkitTapHighlightColor: "transparent",
-            }}
-          >
-            {copied ? "✓ Reading Copied" : "Copy Reading"}
-          </button>
+          <div className="mt-2 flex gap-2 flex-wrap justify-center">
+            <button
+              onClick={handleCopyReading}
+              className="px-5 py-1.5 text-xs uppercase tracking-widest transition-all"
+              style={{
+                fontFamily: "var(--font-cinzel), serif",
+                color: copied ? "var(--color-gold-bright)" : "var(--color-silver)",
+                border: `1px solid ${copied ? "rgba(201,168,76,0.4)" : "rgba(192,192,192,0.2)"}`,
+                background: "transparent",
+                borderRadius: "4px",
+                cursor: "pointer",
+                touchAction: "manipulation",
+                WebkitTapHighlightColor: "transparent",
+              }}
+            >
+              {copied ? "✓ Copied" : "Copy Reading"}
+            </button>
+            <button
+              onClick={handleCopyLink}
+              className="px-5 py-1.5 text-xs uppercase tracking-widest transition-all"
+              style={{
+                fontFamily: "var(--font-cinzel), serif",
+                color: linkCopied ? "var(--color-gold-bright)" : "var(--color-silver)",
+                border: `1px solid ${linkCopied ? "rgba(201,168,76,0.4)" : "rgba(192,192,192,0.2)"}`,
+                background: "transparent",
+                borderRadius: "4px",
+                cursor: "pointer",
+                touchAction: "manipulation",
+                WebkitTapHighlightColor: "transparent",
+              }}
+            >
+              {linkCopied ? "✓ Link Copied" : "Share Link"}
+            </button>
+          </div>
         )}
 
         {/* Spread layout */}
