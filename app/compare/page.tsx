@@ -365,11 +365,47 @@ function CompareContent() {
             <ComparePanel card={cardB} accentTtps={sharedTtps} />
           </div>
         ) : (
-          <div
-            className="text-center py-16 text-sm italic"
-            style={{ color: "var(--color-silver)", opacity: 0.4, animation: "float 3.2s ease-in-out infinite" }}
-          >
-            Select two adversaries to compare their profiles, techniques, and defenses.
+          <div className="text-center py-8">
+            <div
+              className="text-sm italic mb-8"
+              style={{ color: "var(--color-silver)", opacity: 0.4, animation: "float 3.2s ease-in-out infinite" }}
+            >
+              Select two adversaries to compare their profiles, techniques, and defenses.
+            </div>
+            <div
+              className="text-xs uppercase tracking-widest mb-4"
+              style={{ color: "var(--color-gold)", fontFamily: "var(--font-cinzel), serif", opacity: 0.5 }}
+            >
+              Suggested Matchups
+            </div>
+            <div className="flex flex-wrap gap-2 justify-center">
+              {[
+                { a: "apt28-fancy-bear", b: "apt29-cozy-bear", label: "APT28 vs APT29" },
+                { a: "lazarus-group-the-specter", b: "apt38-the-alchemist", label: "Lazarus vs APT38" },
+                { a: "apt33-the-flame-keeper", b: "apt34-oilrig", label: "APT33 vs APT34" },
+                { a: "lockbit-the-locked-tower", b: "revil-sodinokibi-the-reaper", label: "LockBit vs REvil" },
+                { a: "fin7-the-merchant", b: "carbanak-the-banker", label: "FIN7 vs Carbanak" },
+              ].map((pair) => (
+                <button
+                  key={pair.label}
+                  onClick={() => { setSlugA(pair.a); setSlugB(pair.b); }}
+                  className="px-3 py-1.5 text-xs rounded transition-all"
+                  style={{
+                    fontFamily: "var(--font-cinzel), serif",
+                    fontSize: "9px",
+                    letterSpacing: "0.06em",
+                    color: "var(--color-silver)",
+                    border: "1px solid rgba(192,192,192,0.2)",
+                    background: "transparent",
+                    cursor: "pointer",
+                    opacity: 0.65,
+                    touchAction: "manipulation",
+                  }}
+                >
+                  {pair.label}
+                </button>
+              ))}
+            </div>
           </div>
         )}
 

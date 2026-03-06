@@ -7,6 +7,7 @@ import { cards } from "@/data/cards";
 import { TarotCard } from "@/components/TarotCard";
 import { DrawButton } from "@/components/DrawButton";
 import { Starfield } from "@/components/Starfield";
+import { SiteNav } from "@/components/SiteNav";
 import type { TarotCard as TarotCardType } from "@/data/types";
 
 const UNIQUE_TECHNIQUES = new Set(cards.flatMap((c) => c.ttps.map((t) => t.techniqueId))).size;
@@ -129,17 +130,19 @@ export default function Home() {
           <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 mt-2"
             style={{ animation: "hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 220ms both" }}>
             {[
-              { value: cards.length, label: "adversaries" },
-              { value: UNIQUE_TECHNIQUES, label: "techniques" },
-              { value: UNIQUE_TACTICS, label: "tactics" },
-              { value: UNIQUE_NATIONS, label: "attributed nations" },
+              { value: cards.length, label: "adversaries", href: "/gallery" },
+              { value: UNIQUE_TECHNIQUES, label: "techniques", href: "/techniques" },
+              { value: UNIQUE_TACTICS, label: "tactics", href: "/techniques" },
+              { value: UNIQUE_NATIONS, label: "attributed nations", href: "/sectors" },
             ].map((stat) => (
-              <span key={stat.label} className="text-xs" style={{ color: "var(--color-silver)", opacity: 0.45 }}>
+              <a key={stat.label} href={stat.href}
+                className="text-xs transition-opacity hover:opacity-70"
+                style={{ color: "var(--color-silver)", opacity: 0.45, textDecoration: "none" }}>
                 <span style={{ color: "var(--color-gold)", opacity: 0.8, fontFamily: "var(--font-cinzel), serif" }}>
                   {stat.value}
                 </span>
                 {" "}{stat.label}
-              </span>
+              </a>
             ))}
           </div>
           <div
@@ -151,70 +154,8 @@ export default function Home() {
           />
 
           {/* Nav links */}
-          <div className="flex flex-wrap gap-4 mt-4 justify-center">
-            <a
-              href="/gallery"
-              className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-              style={{ color: "var(--color-gold)", opacity: 0.55, fontFamily: "var(--font-cinzel), serif" }}
-            >
-              Browse All Cards
-            </a>
-            <span style={{ color: "var(--color-gold)", opacity: 0.3 }}>·</span>
-            <a
-              href="/daily"
-              className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-              style={{ color: "var(--color-gold)", opacity: 0.55, fontFamily: "var(--font-cinzel), serif" }}
-            >
-              Card of the Day
-            </a>
-            <span style={{ color: "var(--color-gold)", opacity: 0.3 }}>·</span>
-            <a
-              href="/spread"
-              className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-              style={{ color: "var(--color-gold)", opacity: 0.55, fontFamily: "var(--font-cinzel), serif" }}
-            >
-              Three-Card Spread
-            </a>
-            <span style={{ color: "var(--color-gold)", opacity: 0.3 }}>·</span>
-            <a
-              href="/techniques"
-              className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-              style={{ color: "var(--color-gold)", opacity: 0.55, fontFamily: "var(--font-cinzel), serif" }}
-            >
-              Techniques
-            </a>
-            <span style={{ color: "var(--color-gold)", opacity: 0.3 }}>·</span>
-            <a
-              href="/defenses"
-              className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-              style={{ color: "var(--color-gold)", opacity: 0.55, fontFamily: "var(--font-cinzel), serif" }}
-            >
-              Defenses
-            </a>
-            <span style={{ color: "var(--color-gold)", opacity: 0.3 }}>·</span>
-            <a
-              href="/sectors"
-              className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-              style={{ color: "var(--color-gold)", opacity: 0.55, fontFamily: "var(--font-cinzel), serif" }}
-            >
-              Sectors
-            </a>
-            <span style={{ color: "var(--color-gold)", opacity: 0.3 }}>·</span>
-            <a
-              href="/compare"
-              className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-              style={{ color: "var(--color-gold)", opacity: 0.55, fontFamily: "var(--font-cinzel), serif" }}
-            >
-              Compare
-            </a>
-            <span style={{ color: "var(--color-gold)", opacity: 0.3 }}>·</span>
-            <a
-              href="/about"
-              className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-              style={{ color: "var(--color-gold)", opacity: 0.55, fontFamily: "var(--font-cinzel), serif" }}
-            >
-              About
-            </a>
+          <div className="mt-4 flex justify-center">
+            <SiteNav current="/" />
           </div>
         </div>
 
