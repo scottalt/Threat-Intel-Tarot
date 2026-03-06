@@ -16,13 +16,34 @@ const ebGaramond = EB_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Threat Intelligence Tarot",
+  title: {
+    default: "Threat Intelligence Tarot",
+    template: "%s | Threat Intelligence Tarot",
+  },
   description:
-    "Real threat intelligence. Impossible to scroll past. Draw a card to reveal an adversary profile drawn from MITRE ATT&CK.",
+    "78 real adversary profiles from MITRE ATT&CK, presented as a tarot card deck. Draw a card to reveal TTPs, targets, and defenses for APT groups worldwide.",
+  keywords: [
+    "threat intelligence",
+    "APT",
+    "MITRE ATT&CK",
+    "cybersecurity",
+    "threat actors",
+    "tarot",
+    "CTI",
+    "red team",
+    "blue team",
+    "incident response",
+  ],
   openGraph: {
     title: "Threat Intelligence Tarot",
-    description: "Real threat intelligence. Impossible to scroll past.",
+    description: "Real threat intelligence. Impossible to scroll past. 78 adversary profiles from MITRE ATT&CK.",
     type: "website",
+    url: "https://threat-intel-tarot.vercel.app",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Threat Intelligence Tarot",
+    description: "Real threat intelligence. Impossible to scroll past.",
   },
   manifest: "/manifest.webmanifest",
   appleWebApp: {
