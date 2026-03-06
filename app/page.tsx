@@ -1,11 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { drawRandom } from "@/lib/draw";
+import { getCardBySlug } from "@/lib/slug";
 import { TarotCard } from "@/components/TarotCard";
 import { DrawButton } from "@/components/DrawButton";
 import { Starfield } from "@/components/Starfield";
 import type { TarotCard as TarotCardType } from "@/data/types";
+
+const HISTORY_KEY = "ti-tarot-history";
+const MAX_HISTORY = 4;
 
 const categoryNebula: Record<string, string> = {
   "nation-state":
@@ -16,16 +20,54 @@ const categoryNebula: Record<string, string> = {
     "radial-gradient(ellipse 700px 500px at 50% 65%, rgba(139,58,15,0.22) 0%, transparent 70%)",
 };
 
+const categoryAccent: Record<string, string> = {
+  "nation-state": "var(--color-teal)",
+  criminal: "var(--color-purple)",
+  hacktivist: "var(--color-ember)",
+  unknown: "var(--color-silver)",
+};
+
+function loadHistory(): TarotCardType[] {
+  try {
+    const raw = localStorage.getItem(HISTORY_KEY);
+    if (!raw) return [];
+    const slugs: string[] = JSON.parse(raw);
+    return slugs.map((s) => getCardBySlug(s)).filter(Boolean) as TarotCardType[];
+  } catch {
+    return [];
+  }
+}
+
+function saveHistory(newSlug: string, current: TarotCardType[]): void {
+  try {
+    const filtered = current.filter((c) => c.slug !== newSlug).slice(0, MAX_HISTORY - 1);
+    const slugs = [newSlug, ...filtered.map((c) => c.slug)];
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(slugs));
+  } catch {
+    // localStorage not available
+  }
+}
+
 export default function Home() {
   const [card, setCard] = useState<TarotCardType | null>(null);
   const [key, setKey] = useState(0);
   const [nebula, setNebula] = useState<string | null>(null);
+  const [history, setHistory] = useState<TarotCardType[]>([]);
+
+  useEffect(() => {
+    setHistory(loadHistory());
+  }, []);
 
   const handleDraw = () => {
     const drawn = drawRandom();
     setCard(drawn);
     setKey((k) => k + 1);
     setNebula(categoryNebula[drawn.category] ?? null);
+    setHistory((prev) => {
+      const next = [drawn, ...prev.filter((c) => c.slug !== drawn.slug)].slice(0, MAX_HISTORY);
+      saveHistory(drawn.slug, prev);
+      return next;
+    });
   };
 
   return (
@@ -168,6 +210,59 @@ export default function Home() {
             }}
           >
             The cards await. Draw to reveal your adversary.
+          </div>
+        )}
+
+        {/* Recently drawn history */}
+        {history.length > 0 && (
+          <div
+            className="mt-12 w-full max-w-md"
+            style={{ animation: "section-reveal 0.4s ease-out 0.3s both" }}
+          >
+            <div
+              className="w-full h-px mb-5"
+              style={{ background: "linear-gradient(90deg, transparent, var(--color-gold), transparent)", opacity: 0.2 }}
+            />
+            <div
+              className="text-xs uppercase tracking-widest mb-3 text-center"
+              style={{ color: "var(--color-gold)", fontFamily: "var(--font-cinzel), serif", opacity: 0.4 }}
+            >
+              Recently Drawn
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              {history.map((h) => {
+                const accent = categoryAccent[h.category];
+                return (
+                  <a
+                    key={h.slug}
+                    href={`/card/${h.slug}`}
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg transition-opacity hover:opacity-100"
+                    style={{
+                      background: "var(--color-arcane)",
+                      border: `1px solid ${accent}33`,
+                      textDecoration: "none",
+                      opacity: 0.7,
+                    }}
+                  >
+                    <div style={{ width: 3, height: 28, background: accent, borderRadius: 2, flexShrink: 0 }} />
+                    <div className="min-w-0">
+                      <div
+                        className="text-xs font-semibold truncate"
+                        style={{ color: "var(--color-gold-bright)", fontFamily: "var(--font-cinzel), serif" }}
+                      >
+                        {h.cardTitle}
+                      </div>
+                      <div
+                        className="text-xs truncate"
+                        style={{ color: "var(--color-silver)", opacity: 0.6 }}
+                      >
+                        {h.name}
+                      </div>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
           </div>
         )}
 
