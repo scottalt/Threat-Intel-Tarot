@@ -115,6 +115,14 @@ export default function TechniquesPage() {
           >
             Three-Card Spread
           </a>
+          <span style={{ color: "var(--color-gold)", opacity: 0.25 }}>·</span>
+          <a
+            href="/defenses"
+            className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
+            style={{ color: "var(--color-gold)", opacity: 0.5, fontFamily: "var(--font-cinzel), serif" }}
+          >
+            Defenses
+          </a>
         </div>
 
         {/* Header */}
