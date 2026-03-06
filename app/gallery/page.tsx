@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 export default function GalleryPage() {
   return (
     <main
+      id="main-content"
       className="relative min-h-screen px-4 py-12"
       style={{
         background: "var(--color-void)",

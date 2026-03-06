@@ -81,6 +81,7 @@ export default function Home() {
 
   return (
     <main
+      id="main-content"
       className="relative min-h-screen flex flex-col items-center justify-start py-16 px-4"
       style={{
         background: "var(--color-void)",

@@ -71,6 +71,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${cinzel.variable} ${ebGaramond.variable} antialiased`}>
+        <a href="#main-content" className="skip-to-content">Skip to content</a>
         {children}
       </body>
     </html>

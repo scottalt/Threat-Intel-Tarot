@@ -90,6 +90,7 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<SortOrder>("deck");
   const [originFilter, setOriginFilter] = useState("");
+  const [skipAnimation, setSkipAnimation] = useState(false);
   const scrollRestoredRef = useRef(false);
 
   // Restore filter state + scroll position when returning from a card page
@@ -97,11 +98,14 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
     if (scrollRestoredRef.current) return;
     scrollRestoredRef.current = true;
     const s = loadState();
+    const hadSavedScroll = !!sessionStorage.getItem(SCROLL_KEY);
     setFilter(s.filter);
     setArcana(s.arcana);
     setQuery(s.query);
     setSort(s.sort);
     setOriginFilter(s.originFilter);
+    // Suppress card entrance animations when restoring position
+    if (hadSavedScroll) setSkipAnimation(true);
     try {
       const y = sessionStorage.getItem(SCROLL_KEY);
       if (y) {
@@ -341,8 +345,8 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
                 background: "var(--color-arcane)",
                 border: `1px solid ${accent}44`,
                 boxShadow: `0 0 12px ${accent}22`,
-                animation: "section-reveal 0.4s cubic-bezier(0.22, 1, 0.36, 1) both",
-                animationDelay: `${Math.min(i * 30, 400)}ms`,
+                animation: skipAnimation ? "none" : "section-reveal 0.4s cubic-bezier(0.22, 1, 0.36, 1) both",
+                animationDelay: skipAnimation ? "0ms" : `${Math.min(i * 30, 400)}ms`,
                 textDecoration: "none",
                 touchAction: "manipulation",
               }}
