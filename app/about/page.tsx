@@ -263,8 +263,56 @@ export default function AboutPage() {
           </section>
         </div>
 
+        {/* Author */}
         <div
-          className="mt-12 pt-8 text-xs text-center"
+          className="mt-10 p-5 rounded-xl"
+          style={{
+            background: "rgba(201,168,76,0.03)",
+            border: "1px solid rgba(201,168,76,0.12)",
+          }}
+        >
+          <div
+            className="text-xs uppercase tracking-widest mb-2"
+            style={{ color: "var(--color-gold)", fontFamily: "var(--font-cinzel), serif", opacity: 0.7 }}
+          >
+            Built by
+          </div>
+          <div className="text-sm" style={{ color: "var(--color-mist)", opacity: 0.85 }}>
+            <strong>Scott Altiparmak</strong> - Senior Information Security Engineer, CISSP
+          </div>
+          <div className="flex gap-4 mt-2">
+            <a
+              href="https://scottaltiparmak.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs transition-opacity hover:opacity-100"
+              style={{ color: "var(--color-gold)", opacity: 0.5, textDecoration: "none" }}
+            >
+              scottaltiparmak.com
+            </a>
+            <a
+              href="https://linkedin.com/in/scottaltiparmak"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs transition-opacity hover:opacity-100"
+              style={{ color: "var(--color-gold)", opacity: 0.5, textDecoration: "none" }}
+            >
+              LinkedIn
+            </a>
+            <a
+              href="https://github.com/scottalt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs transition-opacity hover:opacity-100"
+              style={{ color: "var(--color-gold)", opacity: 0.5, textDecoration: "none" }}
+            >
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <div
+          className="mt-8 pt-6 text-xs text-center"
           style={{
             borderTop: "1px solid rgba(201,168,76,0.1)",
             color: "var(--color-silver)",
