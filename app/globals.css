@@ -1,26 +1,86 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-void: #0a0a0f;
+  --color-arcane: #1a1a2e;
+  --color-arcane-light: #16213e;
+  --color-gold: #c9a84c;
+  --color-gold-bright: #f0c040;
+  --color-crimson: #8b0000;
+  --color-silver: #c0c0c0;
+  --color-mist: #e8e0f0;
+  --color-teal: #2d6a6a;
+  --color-purple: #4a1a6a;
+  --color-ember: #8b3a0f;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-void: var(--color-void);
+  --color-arcane: var(--color-arcane);
+  --color-gold: var(--color-gold);
+  --color-gold-bright: var(--color-gold-bright);
+  --color-crimson: var(--color-crimson);
+  --color-silver: var(--color-silver);
+  --color-mist: var(--color-mist);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-void);
+  color: var(--color-mist);
+  font-family: 'EB Garamond', Georgia, serif;
+}
+
+/* Card flip 3D animation */
+.card-scene {
+  perspective: 1200px;
+  cursor: pointer;
+  width: 340px;
+  height: 600px;
+}
+
+.card-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-wrapper.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.card-face--front {
+  transform: rotateY(180deg);
+}
+
+/* Gold shimmer on hover */
+.card-scene:hover .card-wrapper:not(.is-flipped) {
+  transform: rotateY(8deg) rotateX(-2deg);
+}
+
+/* Arcane border glow */
+.arcane-border {
+  border: 1px solid var(--color-gold);
+  box-shadow:
+    0 0 8px rgba(201, 168, 76, 0.2),
+    inset 0 0 8px rgba(201, 168, 76, 0.05);
+}
+
+/* Risk star styling */
+.risk-star-filled {
+  color: var(--color-gold-bright);
+}
+
+.risk-star-empty {
+  color: #333;
 }
