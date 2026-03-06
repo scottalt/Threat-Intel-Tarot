@@ -63,21 +63,27 @@ export default function Home() {
   const [key, setKey] = useState(0);
   const [nebula, setNebula] = useState<string | null>(null);
   const [history, setHistory] = useState<TarotCardType[]>([]);
+  const [shuffling, setShuffling] = useState(false);
 
   useEffect(() => {
     setHistory(loadHistory());
   }, []);
 
   const handleDraw = () => {
-    const drawn = drawRandom();
-    setCard(drawn);
-    setKey((k) => k + 1);
-    setNebula(categoryNebula[drawn.category] ?? null);
-    setHistory((prev) => {
-      const next = [drawn, ...prev.filter((c) => c.slug !== drawn.slug)].slice(0, MAX_HISTORY);
-      saveHistory(drawn.slug, prev);
-      return next;
-    });
+    setShuffling(true);
+    setCard(null);
+    setTimeout(() => {
+      const drawn = drawRandom();
+      setShuffling(false);
+      setCard(drawn);
+      setKey((k) => k + 1);
+      setNebula(categoryNebula[drawn.category] ?? null);
+      setHistory((prev) => {
+        const next = [drawn, ...prev.filter((c) => c.slug !== drawn.slug)].slice(0, MAX_HISTORY);
+        saveHistory(drawn.slug, prev);
+        return next;
+      });
+    }, 460);
   };
 
   // Keyboard shortcut: Space or D to draw (when not focused on an input)
@@ -87,7 +93,7 @@ export default function Home() {
       if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
       if (e.key === " " || e.key === "d" || e.key === "D") {
         e.preventDefault();
-        handleDraw();
+        if (!shuffling) handleDraw();
       }
     };
     window.addEventListener("keydown", onKey);
@@ -175,13 +181,40 @@ export default function Home() {
           </div>
         </div>
 
-        <DrawButton onClick={handleDraw} />
+        <DrawButton onClick={handleDraw} disabled={shuffling} />
         <p
           className="mt-2 text-xs hidden sm:block"
           style={{ color: "var(--color-silver)", opacity: 0.2 }}
         >
           Press <kbd style={{ fontFamily: "monospace" }}>Space</kbd> or <kbd style={{ fontFamily: "monospace" }}>D</kbd> to draw
         </p>
+
+        {shuffling && (
+          <div className="mt-10 flex items-end justify-center" style={{ height: "min(510px, calc(92vw * 30/17))", position: "relative" }}>
+            {[
+              { rot: -10, delay: "0s", z: 1 },
+              { rot: 0,   delay: "0.08s", z: 3 },
+              { rot: 10,  delay: "0.16s", z: 2 },
+            ].map((p, i) => (
+              <div
+                key={i}
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  width: "min(340px, 92vw)",
+                  aspectRatio: "17/30",
+                  background: "var(--color-arcane)",
+                  border: "1px solid rgba(201,168,76,0.35)",
+                  borderRadius: 16,
+                  boxShadow: "0 0 18px rgba(201,168,76,0.18)",
+                  zIndex: p.z,
+                  transformOrigin: "50% 100%",
+                  animation: `shuffle-fan 0.35s ease-in-out infinite ${p.delay}`,
+                }}
+              />
+            ))}
+          </div>
+        )}
 
         {card && (
           <div key={key} className="mt-10 card-deal flex flex-col items-center gap-3">

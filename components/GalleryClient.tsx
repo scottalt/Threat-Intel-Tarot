@@ -92,6 +92,7 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
   const [sort, setSort] = useState<SortOrder>("deck");
   const [originFilter, setOriginFilter] = useState("");
   const [skipAnimation, setSkipAnimation] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const scrollRestoredRef = useRef(false);
 
   // Restore filter state + scroll position when returning from a card page
@@ -124,7 +125,7 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
     saveState({ filter, arcana, query, sort, originFilter });
   }, [filter, arcana, query, sort, originFilter]);
 
-  // Save scroll position before navigating away
+  // Save scroll position + update progress bar
   useEffect(() => {
     const handleScroll = () => {
       try {
@@ -132,6 +133,8 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
       } catch {
         // sessionStorage not available
       }
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(docH > 0 ? Math.min(window.scrollY / docH, 1) : 0);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -164,6 +167,22 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
 
   return (
     <>
+      {/* Scroll progress bar */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          height: 2,
+          width: `${scrollProgress * 100}%`,
+          background: "linear-gradient(90deg, var(--color-gold), var(--color-gold-bright))",
+          zIndex: 100,
+          transition: "width 0.1s linear",
+          pointerEvents: "none",
+        }}
+      />
+
       {/* Search + sort row */}
       <div className="flex flex-wrap gap-2 items-center justify-center mb-5">
         <div className="relative w-full max-w-sm">
@@ -342,7 +361,7 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
             <a
               key={card.slug}
               href={`/card/${card.slug}`}
-              className="block rounded-xl overflow-hidden transition-transform duration-200 hover:scale-105 active:scale-95"
+              className="block rounded-xl overflow-hidden active:scale-95"
               style={{
                 background: "var(--color-arcane)",
                 border: `1px solid ${accent}44`,
@@ -351,6 +370,19 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
                 animationDelay: skipAnimation ? "0ms" : `${Math.min(i * 30, 400)}ms`,
                 textDecoration: "none",
                 touchAction: "manipulation",
+                transition: "transform 0.2s cubic-bezier(0.34, 1.3, 0.64, 1), box-shadow 0.2s ease, border-color 0.2s ease",
+              }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLAnchorElement;
+                el.style.transform = "translateY(-4px) scale(1.03)";
+                el.style.boxShadow = `0 8px 24px ${accent}44, 0 0 20px ${accent}22`;
+                el.style.borderColor = `${accent}88`;
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLAnchorElement;
+                el.style.transform = "";
+                el.style.boxShadow = `0 0 12px ${accent}22`;
+                el.style.borderColor = `${accent}44`;
               }}
             >
               {/* Category accent bar */}

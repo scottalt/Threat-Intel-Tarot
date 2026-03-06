@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Cinzel, EB_Garamond } from "next/font/google";
 import "./globals.css";
+import { KeyboardShortcuts } from "@/components/KeyboardShortcuts";
+import { CustomCursor } from "@/components/CustomCursor";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -72,6 +74,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${cinzel.variable} ${ebGaramond.variable} antialiased`}>
         <a href="#main-content" className="skip-to-content">Skip to content</a>
+        <CustomCursor />
+        <KeyboardShortcuts />
         {children}
       </body>
     </html>

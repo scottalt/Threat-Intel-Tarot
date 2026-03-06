@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 
 interface ShareButtonProps {
   cardTitle: string;
@@ -12,6 +12,7 @@ interface ShareButtonProps {
 export function ShareButton({ cardTitle, groupName, topTtp, slug }: ShareButtonProps) {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [popoverAbove, setPopoverAbove] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
 
   const cardUrl = `https://tarot.scottaltiparmak.com/card/${slug}`;
@@ -23,6 +24,15 @@ export function ShareButton({ cardTitle, groupName, topTtp, slug }: ShareButtonP
 
   const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(cardUrl)}`;
   const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(cardUrl)}`;
+
+  const handleToggle = useCallback(() => {
+    if (!open && ref.current) {
+      const rect = ref.current.getBoundingClientRect();
+      // Popover is ~180px tall; open downward if not enough room above
+      setPopoverAbove(rect.top > 200);
+    }
+    setOpen((v) => !v);
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -80,7 +90,7 @@ export function ShareButton({ cardTitle, groupName, topTtp, slug }: ShareButtonP
   return (
     <div ref={ref} style={{ position: "relative", display: "inline-block" }}>
       <button
-        onClick={() => setOpen((v) => !v)}
+        onClick={handleToggle}
         className="relative overflow-hidden px-5 py-2 text-xs uppercase tracking-widest transition-transform duration-150 active:scale-95"
         style={{
           fontFamily: "var(--font-cinzel), serif",
@@ -100,7 +110,9 @@ export function ShareButton({ cardTitle, groupName, topTtp, slug }: ShareButtonP
         <div
           style={{
             position: "absolute",
-            bottom: "calc(100% + 8px)",
+            ...(popoverAbove
+              ? { bottom: "calc(100% + 8px)" }
+              : { top: "calc(100% + 8px)" }),
             left: "50%",
             transform: "translateX(-50%)",
             background: "var(--color-arcane)",

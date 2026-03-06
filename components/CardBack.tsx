@@ -37,6 +37,30 @@ export function CardBack() {
         }}
       />
 
+      {/* Periodic light shimmer sweep across card back */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          borderRadius: "inherit",
+          overflow: "hidden",
+          pointerEvents: "none",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "35%",
+            height: "100%",
+            background: "linear-gradient(105deg, transparent 20%, rgba(201,168,76,0.18) 50%, transparent 80%)",
+            animation: "card-back-shimmer 5.5s ease-in-out infinite 1.2s",
+          }}
+        />
+      </div>
+
       <svg
         viewBox="0 0 200 200"
         className="w-52 h-52"

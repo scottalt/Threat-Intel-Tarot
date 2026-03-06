@@ -14,6 +14,8 @@ interface Star {
   twinklePhase: number;
   // 0=gold, 1=silver, 2=dim-blue
   colorType: 0 | 1 | 2;
+  // parallax layer: 0=back, 1=mid, 2=fore
+  layer: 0 | 1 | 2;
 }
 
 // Build star with a specific layer profile
@@ -24,7 +26,8 @@ function makeStar(
   opacityRange: [number, number],
   speed: number,
   colorWeights: [number, number, number],
-  twinkleRange: [number, number]
+  twinkleRange: [number, number],
+  layer: 0 | 1 | 2
 ): Star {
   const r = Math.random();
   const colorType = (
@@ -41,6 +44,7 @@ function makeStar(
     twinkleSpeed: twinkleRange[0] + Math.random() * (twinkleRange[1] - twinkleRange[0]),
     twinklePhase: Math.random() * Math.PI * 2,
     colorType,
+    layer,
   };
 }
 
@@ -67,6 +71,21 @@ export function Starfield() {
     let lastTime = 0;
     let paused = false;
 
+    // Parallax offsets per layer (background/mid/fore)
+    const parallax = [
+      { ox: 0, oy: 0 }, // layer 0 — barely moves
+      { ox: 0, oy: 0 }, // layer 1 — medium
+      { ox: 0, oy: 0 }, // layer 2 — most movement
+    ];
+    const PARALLAX_STRENGTH = [0.004, 0.01, 0.022];
+    let targetX = 0, targetY = 0;
+
+    const onMouseMove = (e: MouseEvent) => {
+      targetX = (e.clientX / window.innerWidth - 0.5) * 2;
+      targetY = (e.clientY / window.innerHeight - 0.5) * 2;
+    };
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const dpr = Math.min(window.devicePixelRatio || 1, 2); // cap at 2x for perf
     // Extra margin so star glows don't clip at viewport edges
@@ -84,15 +103,15 @@ export function Starfield() {
       stars = [
         // Background layer — tiny, slow, silver/blue
         ...Array.from({ length: 50 }, () =>
-          makeStar(w, h, [0.2, 0.8], [0.05, 0.28], 0.08, [0.25, 0.4, 0.35], [0.3, 0.9])
+          makeStar(w, h, [0.2, 0.8], [0.05, 0.28], 0.08, [0.25, 0.4, 0.35], [0.3, 0.9], 0)
         ),
         // Mid layer
         ...Array.from({ length: 30 }, () =>
-          makeStar(w, h, [0.5, 1.3], [0.1, 0.38], 0.18, [0.45, 0.4, 0.15], [0.4, 1.2])
+          makeStar(w, h, [0.5, 1.3], [0.1, 0.38], 0.18, [0.45, 0.4, 0.15], [0.4, 1.2], 1)
         ),
         // Foreground — larger, gold-dominant, with glow
         ...Array.from({ length: 15 }, () =>
-          makeStar(w, h, [0.9, 2.0], [0.15, 0.5], 0.28, [0.7, 0.25, 0.05], [0.6, 1.8])
+          makeStar(w, h, [0.9, 2.0], [0.15, 0.5], 0.28, [0.7, 0.25, 0.05], [0.6, 1.8], 2)
         ),
       ];
     };
@@ -106,6 +125,18 @@ export function Starfield() {
       const dt = reducedMotion ? 0 : Math.min((timestamp - lastTime) / 1000, 0.1);
       lastTime = timestamp;
 
+      // Lerp parallax offsets toward mouse target
+      if (!reducedMotion) {
+        for (let i = 0; i < 3; i++) {
+          const strength = PARALLAX_STRENGTH[i];
+          const maxPx = (window.innerWidth || 1200) * strength;
+          const targetOx = targetX * maxPx;
+          const targetOy = targetY * maxPx;
+          parallax[i].ox += (targetOx - parallax[i].ox) * 0.04;
+          parallax[i].oy += (targetOy - parallax[i].oy) * 0.04;
+        }
+      }
+
       const w = canvas.width / dpr;
       const h = canvas.height / dpr;
       ctx.clearRect(0, 0, w, h);
@@ -115,20 +146,23 @@ export function Starfield() {
         const twinkle = 0.5 + 0.5 * Math.sin(s.twinklePhase);
         s.opacity = s.baseOpacity * (0.35 + 0.65 * twinkle);
 
+        const px = s.x + parallax[s.layer].ox;
+        const py = s.y + parallax[s.layer].oy;
+
         // Radial glow for foreground (large) stars only
         if (s.size > 1.2) {
-          const grd = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.size * 2.8);
+          const grd = ctx.createRadialGradient(px, py, 0, px, py, s.size * 2.8);
           grd.addColorStop(0, STAR_RGBA[s.colorType](s.opacity * 0.7));
           grd.addColorStop(1, STAR_RGBA[s.colorType](0));
           ctx.beginPath();
-          ctx.arc(s.x, s.y, s.size * 2.8, 0, Math.PI * 2);
+          ctx.arc(px, py, s.size * 2.8, 0, Math.PI * 2);
           ctx.fillStyle = grd;
           ctx.fill();
         }
 
         // Core dot
         ctx.beginPath();
-        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.arc(px, py, s.size, 0, Math.PI * 2);
         ctx.fillStyle = STAR_RGBA[s.colorType](s.opacity);
         ctx.fill();
 
@@ -158,6 +192,7 @@ export function Starfield() {
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener("resize", init);
+      window.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("visibilitychange", onVisibilityChange);
     };
   }, []);
