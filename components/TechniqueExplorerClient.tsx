@@ -92,8 +92,6 @@ export function TechniqueExplorerClient({
     ...[...byTactic.keys()].filter((t) => !TACTIC_ORDER.includes(t)),
   ];
 
-  const maxCount = Math.max(...techniques.map((t) => t.count), 1);
-
   return (
     <>
       {/* Search + tactic filter */}
@@ -307,8 +305,6 @@ export function TechniqueExplorerClient({
         })}
       </div>
 
-      {/* Use maxCount in a hidden element to prevent unused var lint error */}
-      <span aria-hidden="true" style={{ display: "none" }}>{maxCount}</span>
     </>
   );
 }

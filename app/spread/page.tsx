@@ -6,11 +6,14 @@ import { TarotCard } from "@/components/TarotCard";
 import { Starfield } from "@/components/Starfield";
 import type { TarotCard as TarotCardType } from "@/data/types";
 
+type SharedTTP = { techniqueId: string; name: string; tactic: string };
+
 function buildReading(spread: TarotCardType[]): {
   origins: string[];
   tactics: string[];
   avgRisk: number;
   narrative: string;
+  sharedTTPs: SharedTTP[];
 } {
   const origins = [...new Set(spread.map((c) => c.origin))];
   const tactics = [
@@ -19,6 +22,30 @@ function buildReading(spread: TarotCardType[]): {
   const avgRisk = Math.round(
     spread.reduce((sum, c) => sum + c.riskLevel, 0) / spread.length
   );
+
+  // Find technique IDs that appear in 2+ of the 3 cards
+  const ttpCount = new Map<string, { ttp: SharedTTP; count: number }>();
+  for (const card of spread) {
+    const seen = new Set<string>();
+    for (const ttp of card.ttps) {
+      if (!seen.has(ttp.techniqueId)) {
+        seen.add(ttp.techniqueId);
+        const existing = ttpCount.get(ttp.techniqueId);
+        if (existing) {
+          existing.count += 1;
+        } else {
+          ttpCount.set(ttp.techniqueId, {
+            ttp: { techniqueId: ttp.techniqueId, name: ttp.name, tactic: ttp.tactic },
+            count: 1,
+          });
+        }
+      }
+    }
+  }
+  const sharedTTPs = [...ttpCount.values()]
+    .filter((e) => e.count >= 2)
+    .map((e) => e.ttp)
+    .slice(0, 4);
 
   const categoryCount: Record<string, number> = {};
   spread.forEach((c) => {
@@ -41,7 +68,7 @@ function buildReading(spread: TarotCardType[]): {
     narratives[dominantCategory] ??
     "This spread reveals a complex, multi-vector threat environment. No single defensive posture is sufficient — depth, detection, and response speed are critical.";
 
-  return { origins, tactics, avgRisk, narrative };
+  return { origins, tactics, avgRisk, narrative, sharedTTPs };
 }
 
 const positions = [
@@ -371,6 +398,58 @@ export default function SpreadPage() {
                   </div>
                 </div>
               </div>
+
+              {/* Shared TTPs — only shown when 2+ cards share a technique */}
+              {reading.sharedTTPs.length > 0 && (
+                <div className="mb-6">
+                  <div
+                    className="text-xs uppercase tracking-widest mb-3 text-center"
+                    style={{
+                      color: "var(--color-gold)",
+                      fontFamily: "var(--font-cinzel), serif",
+                      opacity: 0.55,
+                    }}
+                  >
+                    Shared Techniques
+                  </div>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {reading.sharedTTPs.map((ttp) => (
+                      <a
+                        key={ttp.techniqueId}
+                        href={`https://attack.mitre.org/techniques/${ttp.techniqueId.replace(".", "/")}/`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex flex-col items-center px-3 py-2 rounded transition-opacity hover:opacity-100"
+                        style={{
+                          background: "rgba(201,168,76,0.06)",
+                          border: "1px solid rgba(201,168,76,0.2)",
+                          textDecoration: "none",
+                          opacity: 0.85,
+                        }}
+                      >
+                        <span
+                          className="font-mono text-xs"
+                          style={{ color: "var(--color-gold)" }}
+                        >
+                          {ttp.techniqueId}
+                        </span>
+                        <span
+                          className="text-xs mt-0.5"
+                          style={{ color: "var(--color-mist)" }}
+                        >
+                          {ttp.name}
+                        </span>
+                        <span
+                          className="text-xs mt-0.5"
+                          style={{ color: "var(--color-silver)", opacity: 0.5, fontSize: "9px" }}
+                        >
+                          {ttp.tactic}
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Narrative */}
               <div
