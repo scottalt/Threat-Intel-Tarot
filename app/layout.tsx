@@ -24,6 +24,13 @@ export const metadata: Metadata = {
     description: "Real threat intelligence. Impossible to scroll past.",
     type: "website",
   },
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "TI Tarot",
+  },
+  themeColor: "#c9a84c",
 };
 
 export default function RootLayout({
