@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { drawDaily } from "@/lib/draw";
+import { drawDaily, drawDailyOffset } from "@/lib/draw";
 import { TarotCard } from "@/components/TarotCard";
 import { ShareButton } from "@/components/ShareButton";
 import { Starfield } from "@/components/Starfield";
@@ -13,6 +13,8 @@ export const metadata: Metadata = {
 
 export default function DailyPage() {
   const card = drawDaily();
+  const yesterday = drawDailyOffset(-1);
+  const tomorrow = drawDailyOffset(1);
   const today = new Date().toLocaleDateString("en-US", {
     weekday: "long",
     year: "numeric",
@@ -102,6 +104,41 @@ export default function DailyPage() {
         </div>
 
         <DailyCountdown />
+
+        {/* Yesterday / Tomorrow */}
+        <div className="mt-10 w-full flex justify-between text-xs">
+          <div className="flex flex-col gap-0.5 max-w-[45%]">
+            <span className="uppercase tracking-widest" style={{ color: "var(--color-gold)", opacity: 0.35, fontSize: "9px" }}>
+              Yesterday
+            </span>
+            <a
+              href={`/card/${yesterday.slug}`}
+              className="transition-opacity hover:opacity-100"
+              style={{ color: "var(--color-silver)", opacity: 0.5, textDecoration: "none" }}
+            >
+              {yesterday.cardTitle}
+            </a>
+            <span style={{ color: "var(--color-silver)", opacity: 0.3, fontSize: "9px" }}>
+              {yesterday.name}
+            </span>
+          </div>
+
+          <div className="flex flex-col gap-0.5 text-right max-w-[45%]">
+            <span className="uppercase tracking-widest" style={{ color: "var(--color-gold)", opacity: 0.35, fontSize: "9px" }}>
+              Tomorrow
+            </span>
+            <a
+              href={`/card/${tomorrow.slug}`}
+              className="transition-opacity hover:opacity-100"
+              style={{ color: "var(--color-silver)", opacity: 0.5, textDecoration: "none" }}
+            >
+              {tomorrow.cardTitle}
+            </a>
+            <span style={{ color: "var(--color-silver)", opacity: 0.3, fontSize: "9px" }}>
+              {tomorrow.name}
+            </span>
+          </div>
+        </div>
 
         <div
           className="mt-10 text-xs text-center"

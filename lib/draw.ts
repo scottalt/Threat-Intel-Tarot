@@ -5,13 +5,22 @@ export function drawRandom(): TarotCard {
   return cards[Math.floor(Math.random() * cards.length)];
 }
 
+function dateToSeed(date: Date): number {
+  return (
+    date.getFullYear() * 10000 +
+    (date.getMonth() + 1) * 100 +
+    date.getDate()
+  );
+}
+
 export function drawDaily(): TarotCard {
-  const today = new Date();
-  const seed =
-    today.getFullYear() * 10000 +
-    (today.getMonth() + 1) * 100 +
-    today.getDate();
-  return cards[seed % cards.length];
+  return cards[dateToSeed(new Date()) % cards.length];
+}
+
+export function drawDailyOffset(dayOffset: number): TarotCard {
+  const d = new Date();
+  d.setDate(d.getDate() + dayOffset);
+  return cards[dateToSeed(d) % cards.length];
 }
 
 export function drawSpread(count: number): TarotCard[] {
