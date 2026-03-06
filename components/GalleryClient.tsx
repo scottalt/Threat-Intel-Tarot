@@ -24,10 +24,27 @@ const riskLabel = (level: number) =>
 
 type Category = "all" | "nation-state" | "criminal" | "hacktivist";
 
+function matchesSearch(card: TarotCard, q: string): boolean {
+  const lower = q.toLowerCase();
+  return (
+    card.name.toLowerCase().includes(lower) ||
+    card.cardTitle.toLowerCase().includes(lower) ||
+    card.origin.toLowerCase().includes(lower) ||
+    card.aka.some((a) => a.toLowerCase().includes(lower)) ||
+    card.targets.some((t) => t.toLowerCase().includes(lower)) ||
+    card.motivation.some((m) => m.toLowerCase().includes(lower))
+  );
+}
+
 export function GalleryClient({ cards }: { cards: TarotCard[] }) {
   const [filter, setFilter] = useState<Category>("all");
+  const [query, setQuery] = useState("");
 
-  const filtered = filter === "all" ? cards : cards.filter((c) => c.category === filter);
+  const filtered = cards.filter((c) => {
+    const categoryMatch = filter === "all" || c.category === filter;
+    const searchMatch = query.trim() === "" || matchesSearch(c, query.trim());
+    return categoryMatch && searchMatch;
+  });
   const filters: { label: string; value: Category }[] = [
     { label: "All", value: "all" },
     { label: "Nation-State", value: "nation-state" },
@@ -37,6 +54,34 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
 
   return (
     <>
+      {/* Search box */}
+      <div className="relative w-full max-w-sm mx-auto mb-5">
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search by name, alias, origin…"
+          className="w-full px-4 py-2 text-sm bg-transparent outline-none"
+          style={{
+            color: "var(--color-mist)",
+            border: "1px solid rgba(201,168,76,0.25)",
+            borderRadius: "4px",
+            fontFamily: "var(--font-garamond), Georgia, serif",
+            caretColor: "var(--color-gold)",
+          }}
+        />
+        {query && (
+          <button
+            onClick={() => setQuery("")}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-xs"
+            style={{ color: "var(--color-silver)", opacity: 0.5 }}
+            aria-label="Clear search"
+          >
+            ✕
+          </button>
+        )}
+      </div>
+
       {/* Filter bar */}
       <div className="flex flex-wrap justify-center gap-2 mb-8">
         {filters.map((f) => (
@@ -56,6 +101,16 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
           </button>
         ))}
       </div>
+
+      {/* Empty state */}
+      {filtered.length === 0 && (
+        <div
+          className="text-center py-16 text-sm italic"
+          style={{ color: "var(--color-silver)", opacity: 0.45 }}
+        >
+          No adversaries match &ldquo;{query}&rdquo;.
+        </div>
+      )}
 
       {/* Card grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
