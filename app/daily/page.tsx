@@ -82,9 +82,10 @@ export default function DailyPage() {
 
         <div className="mt-6 flex flex-col items-center gap-3">
           <ShareButton
-            title={`Today's Threat: ${card.cardTitle}, ${card.name}`}
-            text={card.flavor}
-            url="https://tarot.scottaltiparmak.com/daily"
+            cardTitle={card.cardTitle}
+            groupName={card.name}
+            topTtp={card.ttps[0]}
+            slug={card.slug}
           />
           <div className="flex flex-wrap items-center justify-center gap-4">
             <p

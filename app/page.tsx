@@ -6,6 +6,7 @@ import { getCardBySlug } from "@/lib/slug";
 import { cards } from "@/data/cards";
 import { TarotCard } from "@/components/TarotCard";
 import { DrawButton } from "@/components/DrawButton";
+import { ShareButton } from "@/components/ShareButton";
 import { Starfield } from "@/components/Starfield";
 import { SiteNav } from "@/components/SiteNav";
 import type { TarotCard as TarotCardType } from "@/data/types";
@@ -185,18 +186,28 @@ export default function Home() {
         {card && (
           <div key={key} className="mt-10 card-deal flex flex-col items-center gap-3">
             <TarotCard key={key} card={card} />
-            <a
-              href={`/card/${card.slug}`}
-              className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
-              style={{
-                color: "var(--color-gold)",
-                opacity: 0.45,
-                fontFamily: "var(--font-cinzel), serif",
-                animation: "section-reveal 0.4s ease-out 0.6s both",
-              }}
+            <div
+              className="flex items-center gap-4"
+              style={{ animation: "section-reveal 0.4s ease-out 0.6s both" }}
             >
-              View shareable profile →
-            </a>
+              <ShareButton
+                cardTitle={card.cardTitle}
+                groupName={card.name}
+                topTtp={card.ttps[0]}
+                slug={card.slug}
+              />
+              <a
+                href={`/card/${card.slug}`}
+                className="text-xs uppercase tracking-widest transition-opacity hover:opacity-100"
+                style={{
+                  color: "var(--color-gold)",
+                  opacity: 0.45,
+                  fontFamily: "var(--font-cinzel), serif",
+                }}
+              >
+                Full profile →
+              </a>
+            </div>
           </div>
         )}
 

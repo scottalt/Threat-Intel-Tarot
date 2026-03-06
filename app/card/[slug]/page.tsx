@@ -102,9 +102,10 @@ export default async function CardPage({ params }: Props) {
         {/* Share */}
         <div className="mt-6 flex flex-col items-center gap-2">
           <ShareButton
-            title={`${card.cardTitle}: ${card.name} | Threat Intelligence Tarot`}
-            text={card.flavor}
-            url={`https://tarot.scottaltiparmak.com/card/${card.slug}`}
+            cardTitle={card.cardTitle}
+            groupName={card.name}
+            topTtp={card.ttps[0]}
+            slug={card.slug}
           />
           <div className="flex flex-wrap items-center justify-center gap-4">
             <p
