@@ -396,8 +396,16 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
                   {card.origin}
                 </div>
 
-                {/* Risk stars */}
-                <div className="text-xs">{riskLabel(card.riskLevel)}</div>
+                {/* Risk + TTP count row */}
+                <div className="flex items-center justify-between">
+                  <div className="text-xs">{riskLabel(card.riskLevel)}</div>
+                  <span
+                    className="text-xs font-mono"
+                    style={{ color: "var(--color-silver)", opacity: 0.35, fontSize: "9px" }}
+                  >
+                    {card.ttps.length} TTPs
+                  </span>
+                </div>
               </div>
             </a>
           );

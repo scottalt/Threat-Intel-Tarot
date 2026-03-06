@@ -21,6 +21,7 @@ export default function AboutPage() {
 
   return (
     <main
+      id="main-content"
       className="relative min-h-screen px-4 py-12"
       style={{
         background: "var(--color-void)",

@@ -27,6 +27,7 @@ export default function DailyPage() {
 
   return (
     <main
+      id="main-content"
       className="relative min-h-screen flex flex-col items-center py-12 px-4"
       style={{
         background: "var(--color-void)",
