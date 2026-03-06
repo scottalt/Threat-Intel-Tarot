@@ -7,6 +7,7 @@ const shortcuts = [
   { key: "← →", desc: "Browse prev / next card" },
   { key: "Swipe", desc: "Flip card or browse (mobile)" },
   { key: "Enter / Space", desc: "Flip focused card" },
+  { key: "/", desc: "Global search — groups and techniques" },
   { key: "?", desc: "Show this overlay" },
   { key: "Esc", desc: "Close overlays" },
 ];

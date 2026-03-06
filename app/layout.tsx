@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Cinzel, EB_Garamond } from "next/font/google";
 import "./globals.css";
 import { KeyboardShortcuts } from "@/components/KeyboardShortcuts";
+import { GlobalSearch } from "@/components/GlobalSearch";
 import { CustomCursor } from "@/components/CustomCursor";
 import { SoundToggle } from "@/components/SoundToggle";
 import { MusicStarter } from "@/components/MusicStarter";
@@ -78,6 +79,7 @@ export default function RootLayout({
         <a href="#main-content" className="skip-to-content">Skip to content</a>
         <CustomCursor />
         <KeyboardShortcuts />
+        <GlobalSearch />
         <SoundToggle />
         <MusicStarter />
         {children}
