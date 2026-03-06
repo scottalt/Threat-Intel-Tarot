@@ -51,9 +51,15 @@ export default async function CardPage({ params }: Props) {
   const prev: TarotCardType | undefined = index > 0 ? cards[index - 1] : undefined;
   const next: TarotCardType | undefined = index < cards.length - 1 ? cards[index + 1] : undefined;
 
-  // Related: same category, excluding current, max 3
+  // Related: ranked by shared technique IDs, falling back to same category
+  const cardTechniques = new Set(card.ttps.map((t) => t.techniqueId));
   const related = cards
-    .filter((c) => c.category === card.category && c.slug !== card.slug)
+    .filter((c) => c.slug !== card.slug)
+    .map((c) => ({
+      card: c,
+      shared: c.ttps.filter((t) => cardTechniques.has(t.techniqueId)).length,
+    }))
+    .sort((a, b) => b.shared - a.shared || (a.card.category === card.category ? -1 : 1))
     .slice(0, 3);
 
   const accent = categoryAccent[card.category];
@@ -208,7 +214,7 @@ export default async function CardPage({ params }: Props) {
               Related Adversaries
             </div>
             <div className="grid grid-cols-3 gap-3">
-              {related.map((rel) => (
+              {related.map(({ card: rel, shared }) => (
                 <a
                   key={rel.slug}
                   href={`/card/${rel.slug}`}
@@ -239,6 +245,11 @@ export default async function CardPage({ params }: Props) {
                     >
                       {rel.name}
                     </div>
+                    {shared > 0 && (
+                      <div className="mt-1 text-xs" style={{ color: "var(--color-gold)", opacity: 0.45, fontSize: "9px" }}>
+                        {shared} shared TTP{shared !== 1 ? "s" : ""}
+                      </div>
+                    )}
                     <div className="mt-1.5 text-xs">
                       {Array.from({ length: 5 }, (_, i) => (
                         <span
