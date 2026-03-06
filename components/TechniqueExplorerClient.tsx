@@ -183,11 +183,16 @@ export function TechniqueExplorerClient({
 
       {/* Techniques by tactic */}
       <div className="space-y-10">
-        {orderedTactics.map((tactic) => {
+        {orderedTactics.map((tactic, ti) => {
           const tacticTechniques = byTactic.get(tactic) ?? [];
           const tacticMax = tacticTechniques[0]?.count ?? 1;
           return (
-            <div key={tactic}>
+            <div
+              key={tactic}
+              style={{
+                animation: `section-reveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) ${Math.min(ti * 50, 400)}ms both`,
+              }}
+            >
               <div className="flex items-center gap-3 mb-4">
                 <span
                   className="text-xs px-2 py-0.5 rounded font-mono"
