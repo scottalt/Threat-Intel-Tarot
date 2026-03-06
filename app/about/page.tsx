@@ -293,7 +293,7 @@ export default function AboutPage() {
           </div>
           <div className="flex gap-4 mt-2">
             <a
-              href="https://scottaltiparmak.com"
+              href="https://www.scottaltiparmak.com"
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs transition-opacity hover:opacity-100"
@@ -302,7 +302,7 @@ export default function AboutPage() {
               scottaltiparmak.com
             </a>
             <a
-              href="https://linkedin.com/in/scottaltiparmak"
+              href="https://www.linkedin.com/in/scottaltiparmak/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs transition-opacity hover:opacity-100"
