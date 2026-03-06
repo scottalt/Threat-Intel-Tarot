@@ -24,7 +24,7 @@ const riskLabel = (level: number) =>
 
 type Category = "all" | "nation-state" | "criminal" | "hacktivist";
 type ArcanaFilter = "all" | "major" | "swords" | "wands" | "cups" | "pentacles";
-type SortOrder = "deck" | "risk-desc" | "risk-asc" | "name";
+type SortOrder = "deck" | "risk-desc" | "risk-asc" | "name" | "ttps-desc";
 
 const arcanaLabel: Record<ArcanaFilter, string> = {
   all: "All",
@@ -59,6 +59,7 @@ const SORT_LABELS: Record<SortOrder, string> = {
   "risk-desc": "Highest Risk",
   "risk-asc": "Lowest Risk",
   name: "A–Z",
+  "ttps-desc": "Most TTPs",
 };
 
 const SCROLL_KEY = "ti-gallery-scroll";
@@ -151,6 +152,7 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
       if (sort === "risk-desc") return b.riskLevel - a.riskLevel;
       if (sort === "risk-asc") return a.riskLevel - b.riskLevel;
       if (sort === "name") return a.name.localeCompare(b.name);
+      if (sort === "ttps-desc") return b.ttps.length - a.ttps.length;
       return 0; // deck order: preserve original array order
     });
   const filters: { label: string; value: Category }[] = [
@@ -206,7 +208,7 @@ export function GalleryClient({ cards }: { cards: TarotCard[] }) {
           }}
           aria-label="Sort order"
         >
-          {(["deck", "risk-desc", "risk-asc", "name"] as SortOrder[]).map((s) => (
+          {(["deck", "risk-desc", "risk-asc", "name", "ttps-desc"] as SortOrder[]).map((s) => (
             <option key={s} value={s} style={{ background: "var(--color-arcane)" }}>
               {SORT_LABELS[s]}
             </option>
