@@ -74,21 +74,15 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Hover tilt — desktop only */
-@media (hover: hover) {
-  .card-scene:hover .card-wrapper:not(.is-flipped) {
-    transform: rotateY(8deg) rotateX(-2deg);
-  }
-}
+/* Desktop hover tilt handled in TarotCard.tsx via mousemove for cursor-following effect */
 
-/* Arcane border glow */
+/* Arcane border glow — static border + GPU-composited glow overlay managed in React */
 .arcane-border {
   border: 1px solid var(--color-gold);
   box-shadow:
-    0 0 12px rgba(201, 168, 76, 0.25),
+    0 0 12px rgba(201, 168, 76, 0.22),
     0 0 40px rgba(201, 168, 76, 0.05),
-    inset 0 0 8px rgba(201, 168, 76, 0.05);
-  animation: arcane-border-pulse 3.5s ease-in-out infinite;
+    inset 0 0 8px rgba(201, 168, 76, 0.04);
 }
 
 /* Risk star styling */
@@ -201,20 +195,10 @@ body {
   animation: card-deal 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* Arcane border — breathing glow */
-@keyframes arcane-border-pulse {
-  0%, 100% {
-    box-shadow:
-      0 0 12px rgba(201, 168, 76, 0.25),
-      0 0 40px rgba(201, 168, 76, 0.05),
-      inset 0 0 8px rgba(201, 168, 76, 0.05);
-  }
-  50% {
-    box-shadow:
-      0 0 20px rgba(201, 168, 76, 0.40),
-      0 0 60px rgba(201, 168, 76, 0.12),
-      inset 0 0 14px rgba(201, 168, 76, 0.10);
-  }
+/* Arcane glow overlay — opacity-only animation (GPU composited, iOS friendly) */
+@keyframes arcane-glow-overlay {
+  0%, 100% { opacity: 0.1; }
+  50%       { opacity: 1; }
 }
 
 /* Scan line sweep (for unknown sigil eye) */

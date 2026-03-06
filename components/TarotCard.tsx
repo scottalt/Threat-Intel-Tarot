@@ -22,10 +22,12 @@ interface Particle {
   delay: number;
 }
 
-// Swipe threshold: 80px horizontal before committing flip
+// Swipe: commit flip at this horizontal distance
 const SWIPE_COMMIT_PX = 80;
-// Max drag rotation shown (degrees) at SWIPE_COMMIT_PX
+// Max rotation shown during drag (degrees) at SWIPE_COMMIT_PX
 const MAX_DRAG_DEG = 50;
+// Desktop tilt: max degrees per axis
+const TILT_MAX = 12;
 
 export function TarotCard({
   card,
@@ -36,8 +38,9 @@ export function TarotCard({
 }) {
   const [flipped, setFlipped] = useState(startFlipped);
   const [particles, setParticles] = useState<Particle[]>([]);
+  // Unified tilt: { x, y } — used for both touch tilt and mouse-move tilt
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  // dragDeg: live rotation while user is dragging (null = not dragging)
+  // Drag rotation while swiping (null = not dragging)
   const [dragDeg, setDragDeg] = useState<number | null>(null);
 
   const particleIdRef = useRef(0);
@@ -45,9 +48,12 @@ export function TarotCard({
   const touchStartXRef = useRef<number>(0);
   const touchStartYRef = useRef<number>(0);
   const isDraggingRef = useRef(false);
+  // Track whether pointer device supports hover (desktop)
+  const isPointerDeviceRef = useRef(false);
+
+  // ── Particle burst ───────────────────────────────────────────────
 
   const spawnParticles = useCallback(() => {
-    // Inner burst — larger, shorter travel
     const burst: Particle[] = Array.from({ length: 16 }, (_, i) => {
       const angle = (i * (360 / 16) * Math.PI) / 180;
       const dist = 50 + Math.random() * 50;
@@ -61,7 +67,6 @@ export function TarotCard({
         delay: Math.random() * 80,
       };
     });
-    // Outer ring — smaller, travel further
     const outer: Particle[] = Array.from({ length: 10 }, (_, i) => {
       const angle = ((i * (360 / 10) + 18) * Math.PI) / 180;
       const dist = 85 + Math.random() * 55;
@@ -81,12 +86,30 @@ export function TarotCard({
 
   const handleFlip = useCallback(() => {
     setFlipped((prev) => {
-      if (!prev) {
-        setTimeout(spawnParticles, 380);
-      }
+      if (!prev) setTimeout(spawnParticles, 380);
       return !prev;
     });
   }, [spawnParticles]);
+
+  // ── Mouse-move tilt (desktop only) ─────────────────────────────
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (flipped) return;
+      isPointerDeviceRef.current = true;
+      clearTimeout(tiltResetRef.current);
+      const rect = e.currentTarget.getBoundingClientRect();
+      const nx = (e.clientX - rect.left) / rect.width - 0.5;
+      const ny = (e.clientY - rect.top) / rect.height - 0.5;
+      setTilt({ x: -ny * TILT_MAX, y: nx * TILT_MAX });
+    },
+    [flipped]
+  );
+
+  const handleMouseLeave = useCallback(() => {
+    if (flipped) return;
+    tiltResetRef.current = setTimeout(() => setTilt({ x: 0, y: 0 }), 180);
+  }, [flipped]);
 
   // ── Touch handlers ──────────────────────────────────────────────
 
@@ -102,7 +125,7 @@ export function TarotCard({
       const rect = e.currentTarget.getBoundingClientRect();
       const nx = (touch.clientX - rect.left) / rect.width - 0.5;
       const ny = (touch.clientY - rect.top) / rect.height - 0.5;
-      setTilt({ x: -ny * 14, y: nx * 14 });
+      setTilt({ x: -ny * 10, y: nx * 10 });
     },
     [flipped]
   );
@@ -114,11 +137,9 @@ export function TarotCard({
       const dx = touch.clientX - touchStartXRef.current;
       const dy = touch.clientY - touchStartYRef.current;
 
-      // Only track as horizontal drag if clearly more horizontal than vertical
       if (Math.abs(dx) < Math.abs(dy) * 1.2) return;
 
       isDraggingRef.current = true;
-      // Map dx to rotation: clamped at MAX_DRAG_DEG
       const progress = Math.min(Math.abs(dx) / SWIPE_COMMIT_PX, 1);
       const deg = progress * MAX_DRAG_DEG * (dx > 0 ? 1 : -1);
       setDragDeg(deg);
@@ -134,26 +155,20 @@ export function TarotCard({
       const absX = Math.abs(dx);
       const absY = Math.abs(dy);
 
-      // Clear drag visual
       setDragDeg(null);
 
-      // Commit flip: horizontal swipe > threshold on face-down card
       if (!flipped && absX >= SWIPE_COMMIT_PX && absX > absY) {
         handleFlip();
-      } else if (!flipped && !isDraggingRef.current && absX < 10 && absY < 10) {
-        // Tap (no drag) — handled by onClick, do nothing here
       }
 
       isDraggingRef.current = false;
-      // Reset tilt
       tiltResetRef.current = setTimeout(() => setTilt({ x: 0, y: 0 }), 120);
     },
     [flipped, handleFlip]
   );
 
-  // ── Compute card-scene transform ────────────────────────────────
+  // ── Scene transform ─────────────────────────────────────────────
 
-  // dragDeg drives partial flip visual; tilt is the back-face hover tilt
   const sceneTransform = (() => {
     if (dragDeg !== null) {
       return `perspective(1200px) rotateY(${dragDeg}deg)`;
@@ -164,11 +179,14 @@ export function TarotCard({
     return undefined;
   })();
 
-  const sceneTransition = dragDeg !== null
-    ? "none"
-    : (!flipped && tilt.x === 0 && tilt.y === 0)
-      ? "transform 0.25s ease-out"
-      : undefined;
+  const sceneTransition =
+    dragDeg !== null
+      ? "none"
+      : !flipped && tilt.x === 0 && tilt.y === 0
+        ? "transform 0.3s ease-out"
+        : undefined;
+
+  const glowColor = categoryParticleColor[card.category] ?? "#c9a84c";
 
   return (
     <div className="flex flex-col items-center gap-3">
@@ -211,6 +229,8 @@ export function TarotCard({
         <div
           className="card-scene arcane-border"
           onClick={handleFlip}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
@@ -229,12 +249,29 @@ export function TarotCard({
             borderRadius: "16px",
             transform: sceneTransform,
             transition: sceneTransition,
-            // Pause the border glow when card is face-up (reader mode)
-            animationPlayState: flipped ? "paused" : "running",
             willChange: "transform",
+            position: "relative",
           }}
         >
-          <div className={`card-wrapper ${flipped ? "is-flipped" : ""}`}
+          {/* GPU-composited glow overlay — opacity-only animation, iOS safe */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              inset: -1,
+              borderRadius: 17,
+              pointerEvents: "none",
+              zIndex: 30,
+              boxShadow: `0 0 22px ${glowColor}66, 0 0 55px ${glowColor}22, inset 0 0 14px ${glowColor}18`,
+              border: `1px solid ${glowColor}44`,
+              animation: "arcane-glow-overlay 3.5s ease-in-out infinite",
+              animationPlayState: flipped ? "paused" : "running",
+              willChange: "opacity",
+            }}
+          />
+
+          <div
+            className={`card-wrapper ${flipped ? "is-flipped" : ""}`}
             style={{ willChange: "transform" }}
           >
             <div className="card-face card-face--back">
