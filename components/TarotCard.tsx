@@ -13,7 +13,14 @@ export function TarotCard({ card, startFlipped = false }: { card: TarotCardType;
       <div
         className="card-scene arcane-border"
         onClick={() => setFlipped((f) => !f)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setFlipped((f) => !f);
+          }
+        }}
         role="button"
+        tabIndex={0}
         aria-label={flipped ? `${card.name} — click to flip back` : "Click to reveal card"}
         style={{ borderRadius: "16px" }}
       >

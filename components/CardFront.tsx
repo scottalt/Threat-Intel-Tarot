@@ -38,7 +38,7 @@ export function CardFront({ card }: { card: TarotCard }) {
             className="text-xs uppercase tracking-widest mb-0.5"
             style={{ color: "var(--color-gold)", fontFamily: "var(--font-cinzel), serif", opacity: 0.8 }}
           >
-            {card.arcanum === "major" ? `Major Arcana · ${card.number}` : `${card.suit} · ${card.number}`}
+            {card.arcanum === "major" ? `Major Arcana · ${card.number}` : `${card.suit ?? "Minor Arcana"} · ${card.number}`}
           </div>
           <div className="text-xs" style={{ color: "var(--color-silver)" }}>
             {card.origin}

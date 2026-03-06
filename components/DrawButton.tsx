@@ -3,7 +3,7 @@ export function DrawButton({ onClick, disabled }: { onClick: () => void; disable
     <button
       onClick={onClick}
       disabled={disabled}
-      className="group relative px-8 py-3 text-sm uppercase tracking-widest transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+      className="relative px-8 py-3 text-sm uppercase tracking-widest transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
       style={{
         fontFamily: "var(--font-cinzel), serif",
         color: "var(--color-gold)",
