@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { cards } from "@/data/cards";
 import { Starfield } from "@/components/Starfield";
+import { TechniqueExplorerClient } from "@/components/TechniqueExplorerClient";
 
 export const metadata: Metadata = {
   title: "Technique Explorer — Threat Intelligence Tarot",
@@ -16,7 +17,24 @@ type TechniqueEntry = {
   groups: { name: string; cardTitle: string; slug: string }[];
 };
 
-function buildTechniqueMap(): Map<string, TechniqueEntry> {
+const TACTIC_ORDER = [
+  "Reconnaissance",
+  "Resource Development",
+  "Initial Access",
+  "Execution",
+  "Persistence",
+  "Privilege Escalation",
+  "Defense Evasion",
+  "Credential Access",
+  "Discovery",
+  "Lateral Movement",
+  "Collection",
+  "Command and Control",
+  "Exfiltration",
+  "Impact",
+];
+
+function buildTechniqueList(): TechniqueEntry[] {
   const map = new Map<string, TechniqueEntry>();
   for (const card of cards) {
     for (const ttp of card.ttps) {
@@ -36,73 +54,30 @@ function buildTechniqueMap(): Map<string, TechniqueEntry> {
       }
     }
   }
-  return map;
-}
-
-const TACTIC_ORDER = [
-  "Reconnaissance",
-  "Resource Development",
-  "Initial Access",
-  "Execution",
-  "Persistence",
-  "Privilege Escalation",
-  "Defense Evasion",
-  "Credential Access",
-  "Discovery",
-  "Lateral Movement",
-  "Collection",
-  "Command and Control",
-  "Exfiltration",
-  "Impact",
-];
-
-const TACTIC_SHORT: Record<string, string> = {
-  Reconnaissance: "RECON",
-  "Resource Development": "RESOURCE",
-  "Initial Access": "INIT ACCESS",
-  Execution: "EXEC",
-  Persistence: "PERSIST",
-  "Privilege Escalation": "PRIV ESC",
-  "Defense Evasion": "DEF EVASION",
-  "Credential Access": "CRED ACCESS",
-  Discovery: "DISCOVERY",
-  "Lateral Movement": "LAT MOVE",
-  Collection: "COLLECTION",
-  "Command and Control": "C2",
-  Exfiltration: "EXFIL",
-  Impact: "IMPACT",
-};
-
-function mitreUrl(id: string): string {
-  return `https://attack.mitre.org/techniques/${id.replace(".", "/")}/`;
+  // Sort by count desc within each tactic, then return flat sorted list
+  return Array.from(map.values()).sort((a, b) => {
+    const tacticDiff = TACTIC_ORDER.indexOf(a.tactic) - TACTIC_ORDER.indexOf(b.tactic);
+    if (tacticDiff !== 0) return tacticDiff;
+    return b.count - a.count;
+  });
 }
 
 export default function TechniquesPage() {
-  const techniqueMap = buildTechniqueMap();
-  const allTechniques = Array.from(techniqueMap.values());
+  const techniques = buildTechniqueList();
+  const totalTechniques = techniques.length;
+  const totalUses = techniques.reduce((sum, t) => sum + t.count, 0);
+  const uniqueTactics = [...new Set(techniques.map((t) => t.tactic))];
+  const tacticCount = uniqueTactics.length;
+  const mostUsed = [...techniques].sort((a, b) => b.count - a.count).slice(0, 5);
 
-  // Group by tactic
-  const byTactic = new Map<string, TechniqueEntry[]>();
-  for (const tech of allTechniques) {
-    const list = byTactic.get(tech.tactic) ?? [];
-    list.push(tech);
-    byTactic.set(tech.tactic, list);
-  }
-
-  // Sort techniques within each tactic by count desc
-  for (const [tactic, list] of byTactic) {
-    byTactic.set(tactic, list.sort((a, b) => b.count - a.count));
-  }
-
-  const totalTechniques = allTechniques.length;
-  const totalUses = allTechniques.reduce((sum, t) => sum + t.count, 0);
-  const mostUsed = [...allTechniques].sort((a, b) => b.count - a.count).slice(0, 5);
-
-  // Get ordered tactics (only those that exist in our data)
   const orderedTactics = [
-    ...TACTIC_ORDER.filter((t) => byTactic.has(t)),
-    ...[...byTactic.keys()].filter((t) => !TACTIC_ORDER.includes(t)),
+    ...TACTIC_ORDER.filter((t) => uniqueTactics.includes(t)),
+    ...uniqueTactics.filter((t) => !TACTIC_ORDER.includes(t)),
   ];
+
+  function mitreUrl(id: string) {
+    return `https://attack.mitre.org/techniques/${id.replace(".", "/")}/`;
+  }
 
   return (
     <main
@@ -164,7 +139,7 @@ export default function TechniquesPage() {
           {[
             { label: "Unique Techniques", value: totalTechniques },
             { label: "Total TTP Uses", value: totalUses },
-            { label: "Tactics Covered", value: orderedTactics.length },
+            { label: "Tactics Covered", value: tacticCount },
             { label: "Adversary Profiles", value: cards.length },
           ].map((stat) => (
             <div
@@ -206,10 +181,7 @@ export default function TechniquesPage() {
                   border: "1px solid rgba(201,168,76,0.12)",
                 }}
               >
-                <span
-                  className="text-xs w-5 text-center shrink-0"
-                  style={{ color: "var(--color-gold)", opacity: 0.45 }}
-                >
+                <span className="text-xs w-5 text-center shrink-0" style={{ color: "var(--color-gold)", opacity: 0.45 }}>
                   {i + 1}
                 </span>
                 <a
@@ -253,128 +225,8 @@ export default function TechniquesPage() {
           style={{ background: "linear-gradient(90deg, transparent, var(--color-gold), transparent)", opacity: 0.3 }}
         />
 
-        {/* Techniques by tactic */}
-        <div className="space-y-10">
-          {orderedTactics.map((tactic) => {
-            const techniques = byTactic.get(tactic) ?? [];
-            const maxCount = techniques[0]?.count ?? 1;
-            return (
-              <div key={tactic}>
-                {/* Tactic header */}
-                <div className="flex items-center gap-3 mb-4">
-                  <span
-                    className="text-xs px-2 py-0.5 rounded font-mono"
-                    style={{
-                      background: "rgba(201,168,76,0.1)",
-                      color: "var(--color-gold)",
-                      border: "1px solid rgba(201,168,76,0.2)",
-                      letterSpacing: "0.08em",
-                    }}
-                  >
-                    {TACTIC_SHORT[tactic] ?? tactic.toUpperCase()}
-                  </span>
-                  <span
-                    className="text-sm font-semibold"
-                    style={{ color: "var(--color-gold-bright)", fontFamily: "var(--font-cinzel), serif" }}
-                  >
-                    {tactic}
-                  </span>
-                  <span className="text-xs" style={{ color: "var(--color-silver)", opacity: 0.4 }}>
-                    {techniques.length} technique{techniques.length !== 1 ? "s" : ""}
-                  </span>
-                </div>
-
-                {/* Technique rows */}
-                <div className="space-y-1.5">
-                  {techniques.map((tech) => (
-                    <div
-                      key={tech.techniqueId}
-                      className="flex items-start gap-3 px-3 py-2 rounded group"
-                      style={{
-                        background: "var(--color-arcane)",
-                        border: "1px solid rgba(201,168,76,0.08)",
-                      }}
-                    >
-                      {/* Technique ID */}
-                      <a
-                        href={mitreUrl(tech.techniqueId)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-mono text-xs shrink-0 transition-opacity hover:opacity-100"
-                        style={{
-                          color: "var(--color-gold)",
-                          opacity: 0.6,
-                          textDecoration: "none",
-                          minWidth: "72px",
-                          marginTop: "2px",
-                        }}
-                      >
-                        {tech.techniqueId}
-                      </a>
-
-                      {/* Name + groups */}
-                      <div className="flex-1 min-w-0">
-                        <div className="text-sm" style={{ color: "var(--color-mist)" }}>
-                          {tech.name}
-                        </div>
-                        {tech.count > 1 && (
-                          <div className="flex flex-wrap gap-1 mt-1">
-                            {tech.groups.map((g) => (
-                              <a
-                                key={g.slug}
-                                href={`/card/${g.slug}`}
-                                className="text-xs px-1.5 py-0.5 rounded transition-opacity hover:opacity-100"
-                                style={{
-                                  background: "rgba(192,192,192,0.08)",
-                                  color: "var(--color-silver)",
-                                  border: "1px solid rgba(192,192,192,0.15)",
-                                  textDecoration: "none",
-                                  opacity: 0.75,
-                                  fontSize: "9px",
-                                }}
-                              >
-                                {g.name}
-                              </a>
-                            ))}
-                          </div>
-                        )}
-                        {tech.count === 1 && (
-                          <div className="text-xs mt-0.5" style={{ color: "var(--color-silver)", opacity: 0.4 }}>
-                            <a
-                              href={`/card/${tech.groups[0].slug}`}
-                              style={{ color: "inherit", textDecoration: "none" }}
-                            >
-                              {tech.groups[0].name}
-                            </a>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Count bar */}
-                      <div className="flex items-center gap-1.5 shrink-0">
-                        {tech.count > 1 && (
-                          <div
-                            className="h-1 rounded-full opacity-40"
-                            style={{
-                              width: `${Math.max(8, Math.round((tech.count / maxCount) * 40))}px`,
-                              background: "var(--color-gold)",
-                            }}
-                          />
-                        )}
-                        <span
-                          className="text-xs font-mono"
-                          style={{ color: "var(--color-silver)", opacity: tech.count > 1 ? 0.7 : 0.3 }}
-                        >
-                          {tech.count}×
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        {/* Client-side search + tactic filter + results */}
+        <TechniqueExplorerClient techniques={techniques} allTactics={orderedTactics} />
 
         <div className="mt-12 text-xs text-center" style={{ color: "var(--color-silver)", opacity: 0.25 }}>
           Data sourced from MITRE ATT&amp;CK. For educational purposes.
