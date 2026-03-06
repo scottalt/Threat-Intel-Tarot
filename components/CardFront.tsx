@@ -1,3 +1,5 @@
+"use client";
+
 import type { CSSProperties } from "react";
 import type { TarotCard } from "@/data/types";
 import { TTPBadge } from "./TTPBadge";
@@ -105,8 +107,30 @@ export function CardFront({ card }: { card: TarotCard }) {
                 ? `Major Arcana · ${card.number}`
                 : `${card.suit ?? "Minor Arcana"} · ${card.number}`}
             </div>
-            <div className="text-xs" style={{ color: "var(--color-silver)" }}>
-              {card.origin}
+            <div className="flex items-center gap-2">
+              <div className="text-xs" style={{ color: "var(--color-silver)" }}>
+                {card.origin}
+              </div>
+              {card.mitreGroupId && (
+                <a
+                  href={`https://attack.mitre.org/groups/${card.mitreGroupId}/`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-mono transition-opacity hover:opacity-80"
+                  style={{
+                    color: "var(--color-gold)",
+                    opacity: 0.55,
+                    textDecoration: "none",
+                    fontSize: "9px",
+                    border: "1px solid rgba(201,168,76,0.2)",
+                    padding: "1px 4px",
+                    borderRadius: "2px",
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {card.mitreGroupId}
+                </a>
+              )}
             </div>
           </div>
           <div className="text-right">
