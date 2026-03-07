@@ -72,6 +72,20 @@ export default function TechniquesPage() {
   const tacticCount = uniqueTactics.length;
   const mostUsed = [...techniques].sort((a, b) => b.count - a.count).slice(0, 5);
 
+  // Heatmap: techniques grouped by tactic, sorted by cross-deck frequency
+  type HeatCell = { id: string; name: string; count: number };
+  type HeatCol = { tactic: string; cells: HeatCell[] };
+
+  const heatmap: HeatCol[] = TACTIC_ORDER.filter((t) => uniqueTactics.includes(t)).map((tactic) => ({
+    tactic,
+    cells: techniques
+      .filter((t) => t.tactic === tactic)
+      .sort((a, b) => b.count - a.count)
+      .map((t) => ({ id: t.techniqueId, name: t.name, count: t.count })),
+  }));
+
+  const heatMaxCount = Math.max(...techniques.map((t) => t.count), 1);
+
   // Tactic distribution: total TTP uses per tactic (across all cards)
   const tacticUsage = TACTIC_ORDER.filter((t) => uniqueTactics.includes(t)).map((tactic) => {
     const count = techniques.filter((t) => t.tactic === tactic).reduce((sum, t) => sum + t.count, 0);
@@ -240,6 +254,83 @@ export default function TechniquesPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Coverage Heatmap */}
+        <div className="mb-10">
+          <div
+            className="text-xs uppercase tracking-widest mb-3"
+            style={{ color: "var(--color-gold)", fontFamily: "var(--font-cinzel), serif", opacity: 0.7 }}
+          >
+            Coverage Heatmap
+          </div>
+          <p className="text-xs mb-4" style={{ color: "var(--color-silver)", opacity: 0.4 }}>
+            Each cell is one technique. Brightness = how many adversary groups use it. Click to open MITRE ATT&amp;CK.
+          </p>
+          <div style={{ overflowX: "auto", paddingBottom: 8 }}>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: `repeat(${heatmap.length}, minmax(76px, 1fr))`,
+                gap: "4px",
+                minWidth: `${heatmap.length * 80}px`,
+              }}
+            >
+              {heatmap.map((col) => (
+                <div key={col.tactic}>
+                  <div
+                    style={{
+                      fontSize: "8px",
+                      fontFamily: "var(--font-cinzel), serif",
+                      color: "var(--color-gold)",
+                      opacity: 0.6,
+                      letterSpacing: "0.04em",
+                      textTransform: "uppercase",
+                      marginBottom: "4px",
+                      textAlign: "center",
+                      lineHeight: 1.2,
+                      minHeight: "24px",
+                      display: "flex",
+                      alignItems: "flex-end",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {col.tactic}
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                    {col.cells.map((cell) => {
+                      const opacity = Math.max(0.08, (cell.count / heatMaxCount) * 0.88);
+                      return (
+                        <a
+                          key={cell.id}
+                          href={`https://attack.mitre.org/techniques/${cell.id.replace(".", "/")}/`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title={`${cell.id} · ${cell.name} · ${cell.count} group${cell.count !== 1 ? "s" : ""}`}
+                          style={{
+                            display: "block",
+                            background: `rgba(201,168,76,${opacity})`,
+                            borderRadius: "2px",
+                            padding: "3px 4px",
+                            fontFamily: "monospace",
+                            fontSize: "8px",
+                            color: opacity > 0.45 ? "rgba(10,10,15,0.9)" : "rgba(201,168,76,0.9)",
+                            textDecoration: "none",
+                            lineHeight: 1.3,
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                        >
+                          {cell.id}
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
