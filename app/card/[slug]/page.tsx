@@ -9,6 +9,7 @@ import { SiteNav } from "@/components/SiteNav";
 import { CardKeyNav } from "@/components/CardKeyNav";
 import { NavigatorExport } from "@/components/NavigatorExport";
 import { ThreatBrief } from "@/components/ThreatBrief";
+import { CardNewsSection } from "@/components/CardNewsSection";
 import type { TarotCard as TarotCardType } from "@/data/types";
 
 type Props = {
@@ -264,6 +265,9 @@ export default async function CardPage({ params }: Props) {
             </div>
           </div>
         )}
+
+        {/* In the News */}
+        <CardNewsSection slug={card.slug} category={card.category} />
 
         <div
           className="mt-12 text-xs text-center"
