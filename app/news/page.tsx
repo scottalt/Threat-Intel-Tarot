@@ -59,34 +59,32 @@ export default async function NewsPage() {
 
       <div className="flex flex-col gap-4">
         {all.map((article, i) => (
-          <a
+          <div
             key={article.link || i}
-            href={article.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block px-4 py-4 rounded-xl transition-opacity hover:opacity-100"
+            className="px-4 py-4 rounded-xl"
             style={{
               background: "var(--color-arcane)",
               border: "1px solid rgba(201,168,76,0.1)",
-              textDecoration: "none",
-              opacity: 0.9,
               animation: `section-reveal 0.4s cubic-bezier(0.22, 1, 0.36, 1) ${Math.min(i, 20) * 25}ms both`,
             }}
           >
-            <div className="flex items-start justify-between gap-2 mb-2">
+            <a
+              href={article.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-start justify-between gap-2 mb-2 hover:opacity-80 transition-opacity"
+              style={{ textDecoration: "none" }}
+            >
               <div
                 className="text-sm font-semibold leading-snug"
                 style={{ color: "var(--color-mist)", flex: 1 }}
               >
                 {article.title}
               </div>
-              <span
-                className="shrink-0"
-                style={{ color: "var(--color-silver)", opacity: 0.4, fontSize: "10px" }}
-              >
+              <span className="shrink-0" style={{ color: "var(--color-silver)", opacity: 0.4, fontSize: "10px" }}>
                 ↗
               </span>
-            </div>
+            </a>
 
             <div className="flex items-center gap-2 flex-wrap mb-2">
               <span
@@ -113,7 +111,6 @@ export default async function NewsPage() {
                   <a
                     key={card.slug}
                     href={`/card/${card.slug}`}
-                    onClick={(e) => e.stopPropagation()}
                     className="text-xs px-2 py-0.5 rounded transition-opacity hover:opacity-100"
                     style={{
                       background: `${catColor[card.category] ?? "#c9a84c"}18`,
@@ -131,7 +128,7 @@ export default async function NewsPage() {
                 ))}
               </div>
             )}
-          </a>
+          </div>
         ))}
       </div>
       <BackToTop />
