@@ -29,6 +29,8 @@ function buildGraphData(): { nodes: GraphNode[]; edges: GraphEdge[] } {
     type: r.type,
     strength: r.strength,
     summary: r.summary,
+    detail: r.detail,
+    sources: r.sources,
   }));
 
   return { nodes, edges };
