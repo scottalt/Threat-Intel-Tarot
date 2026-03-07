@@ -33,8 +33,10 @@ const CAT_COLOR: Record<string, string> = {
 export function GraphClient({ nodes, edges }: { nodes: GraphNode[]; edges: GraphEdge[] }) {
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const fgRef = useRef<any>(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
-  const [threshold, setThreshold] = useState(3);
+  const [threshold, setThreshold] = useState(5);
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [tooltip, setTooltip] = useState<{ x: number; y: number; node: GraphNode; connections: number } | null>(null);
   const [hoverNode, setHoverNode] = useState<GraphNode | null>(null);
@@ -52,6 +54,14 @@ export function GraphClient({ nodes, edges }: { nodes: GraphNode[]; edges: Graph
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);
+
+  // Set strong repulsion whenever graph data changes (threshold or category filter)
+  useEffect(() => {
+    if (fgRef.current) {
+      fgRef.current.d3Force("charge")?.strength(-300);
+      fgRef.current.d3ReheatSimulation();
+    }
+  }, [threshold, categoryFilter]);
 
   const categories = ["all", ...Array.from(new Set(nodes.map((n) => n.category))).sort()];
 
@@ -167,6 +177,7 @@ export function GraphClient({ nodes, edges }: { nodes: GraphNode[]; edges: Graph
     <div style={{ position: "relative", width: "100%", height: "100%" }}>
       <div ref={containerRef} style={{ width: "100%", height: "100%" }}>
         <ForceGraph2D
+          ref={fgRef}
           graphData={graphData}
           width={dimensions.width}
           height={dimensions.height}
@@ -182,9 +193,9 @@ export function GraphClient({ nodes, edges }: { nodes: GraphNode[]; edges: Graph
           onNodeRightClick={onNodeRightClick}
           nodeCanvasObject={paintNode}
           nodeCanvasObjectMode={() => "replace"}
-          cooldownTicks={120}
-          d3AlphaDecay={0.02}
-          d3VelocityDecay={0.3}
+          cooldownTicks={200}
+          d3AlphaDecay={0.015}
+          d3VelocityDecay={0.4}
           linkDirectionalParticles={0}
         />
       </div>
@@ -280,8 +291,8 @@ export function GraphClient({ nodes, edges }: { nodes: GraphNode[]; edges: Graph
           </span>
           <input
             type="range"
-            min={1}
-            max={8}
+            min={2}
+            max={12}
             value={threshold}
             onChange={(e) => setThreshold(Number(e.target.value))}
             style={{ flex: 1, accentColor: "#c9a84c" }}

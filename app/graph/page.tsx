@@ -43,7 +43,7 @@ function buildGraphData(): { nodes: GraphNode[]; edges: GraphEdge[] } {
 
 export default function GraphPage() {
   const { nodes, edges } = buildGraphData();
-  const totalEdges = edges.filter((e) => e.shared >= 3).length;
+  const totalEdges = edges.filter((e) => e.shared >= 5).length;
 
   return (
     <main
