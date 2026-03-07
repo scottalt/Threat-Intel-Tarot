@@ -19,14 +19,30 @@ const FEEDS = [
   { name: "Dark Reading", url: "https://www.darkreading.com/rss.xml" },
 ];
 
-// Build term -> card lookup once at module load
-const CARD_TERMS: { term: string; card: CardMeta }[] = [];
+function escapeRegex(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+// Build pre-compiled word-boundary patterns at module load
+// Lookbehind/lookahead ensures "APT28" won't match inside "RAPT28" or "APT289"
+// Minimum lengths prevent generic substrings like "com", "ice", "salt" causing false positives
+const CARD_TERMS: { pattern: RegExp; card: CardMeta }[] = [];
 for (const card of cards) {
   const meta: CardMeta = { slug: card.slug, name: card.name, category: card.category };
-  CARD_TERMS.push({ term: card.name.toLowerCase(), card: meta });
+  // Card name: always include if >= 5 chars
+  if (card.name.length >= 5) {
+    CARD_TERMS.push({
+      pattern: new RegExp(`(?<![a-z0-9])${escapeRegex(card.name)}(?![a-z0-9])`, "i"),
+      card: meta,
+    });
+  }
+  // Aliases: only include if >= 6 chars to avoid generic short tokens
   for (const alias of card.aka) {
-    if (alias.length >= 4) {
-      CARD_TERMS.push({ term: alias.toLowerCase(), card: meta });
+    if (alias.length >= 6) {
+      CARD_TERMS.push({
+        pattern: new RegExp(`(?<![a-z0-9])${escapeRegex(alias)}(?![a-z0-9])`, "i"),
+        card: meta,
+      });
     }
   }
 }
@@ -77,10 +93,10 @@ function parseItems(xml: string): Array<Pick<NewsArticle, "title" | "link" | "de
 }
 
 function matchCards(title: string, description: string): CardMeta[] {
-  const haystack = `${title} ${description}`.toLowerCase();
+  const haystack = `${title} ${description}`;
   const matched = new Map<string, CardMeta>();
-  for (const { term, card } of CARD_TERMS) {
-    if (haystack.includes(term) && !matched.has(card.slug)) {
+  for (const { pattern, card } of CARD_TERMS) {
+    if (!matched.has(card.slug) && pattern.test(haystack)) {
       matched.set(card.slug, card);
     }
   }
