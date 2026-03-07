@@ -32,8 +32,6 @@ function timeAgo(pubDate: string): string {
 export default async function NewsPage() {
   const articles = await fetchNews();
   const tagged = articles.filter((a) => a.matchedCards.length > 0);
-  const untagged = articles.filter((a) => a.matchedCards.length === 0);
-  const all = [...tagged, ...untagged];
 
   return (
     <main id="main-content" className="min-h-screen px-4 py-12 max-w-3xl mx-auto">
@@ -45,20 +43,20 @@ export default async function NewsPage() {
         Threat Intel News
       </h1>
       <p className="text-center text-sm mb-1" style={{ color: "var(--color-silver)", opacity: 0.55 }}>
-        {articles.length} articles · {tagged.length} tagged to adversary groups
+        {tagged.length} articles tagged to adversary groups
       </p>
       <p className="text-center text-xs mb-10" style={{ color: "var(--color-silver)", opacity: 0.3 }}>
-        Updated every 6 hours · BleepingComputer, The Record, CISA, Krebs, Dark Reading
+        Updated every 6 hours · BleepingComputer, The Record, CISA, Krebs, Dark Reading, SecurityWeek, The Hacker News, and more
       </p>
 
-      {all.length === 0 && (
+      {tagged.length === 0 && (
         <div className="text-center py-16" style={{ color: "var(--color-silver)", opacity: 0.4 }}>
           No articles available. Check back shortly.
         </div>
       )}
 
       <div className="flex flex-col gap-4">
-        {all.map((article, i) => (
+        {tagged.map((article, i) => (
           <div
             key={article.link || i}
             className="px-4 py-4 rounded-xl"

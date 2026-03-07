@@ -17,6 +17,13 @@ const FEEDS = [
   { name: "CISA", url: "https://www.cisa.gov/cybersecurity-advisories/all-advisories.xml" },
   { name: "Krebs on Security", url: "https://krebsonsecurity.com/feed/" },
   { name: "Dark Reading", url: "https://www.darkreading.com/rss.xml" },
+  { name: "SecurityWeek", url: "https://feeds.feedburner.com/securityweek" },
+  { name: "The Hacker News", url: "https://feeds.feedburner.com/TheHackersNews" },
+  { name: "Unit 42", url: "https://unit42.paloaltonetworks.com/feed/" },
+  { name: "Talos Intelligence", url: "https://blog.talosintelligence.com/feeds/posts/default" },
+  { name: "SANS ISC", url: "https://isc.sans.edu/rssfeed_full.xml" },
+  { name: "Securelist", url: "https://securelist.com/feed/" },
+  { name: "Microsoft MSRC", url: "https://msrc.microsoft.com/blog/feed" },
 ];
 
 function escapeRegex(s: string): string {
@@ -92,8 +99,16 @@ function parseItems(xml: string): Array<Pick<NewsArticle, "title" | "link" | "de
   return items;
 }
 
+function cleanText(s: string): string {
+  return s
+    .replace(/<[^>]+>/g, " ")          // strip HTML tags
+    .replace(/https?:\/\/\S+/g, " ")   // strip URLs
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function matchCards(title: string, description: string): CardMeta[] {
-  const haystack = `${title} ${description}`;
+  const haystack = cleanText(`${title} ${description}`);
   const matched = new Map<string, CardMeta>();
   for (const { pattern, card } of CARD_TERMS) {
     if (!matched.has(card.slug) && pattern.test(haystack)) {
