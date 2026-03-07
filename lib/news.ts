@@ -108,7 +108,10 @@ function cleanText(s: string): string {
 }
 
 function matchCards(title: string, description: string): CardMeta[] {
-  const haystack = cleanText(`${title} ${description}`);
+  // Use title + lede only (first 400 chars of description) to avoid tagging
+  // groups that are only mentioned as comparisons or footnotes deep in the body
+  const lede = cleanText(description).slice(0, 400);
+  const haystack = `${cleanText(title)} ${lede}`;
   const matched = new Map<string, CardMeta>();
   for (const { pattern, card } of CARD_TERMS) {
     if (!matched.has(card.slug) && pattern.test(haystack)) {
