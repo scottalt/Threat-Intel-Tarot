@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { href: "/sectors", label: "Sectors" },
   { href: "/map", label: "Map" },
   { href: "/timeline", label: "Timeline" },
+  { href: "/news", label: "News" },
   { href: "/compare", label: "Compare" },
   { href: "/watchlist", label: "Watchlist" },
   { href: "/glossary", label: "Glossary" },
