@@ -1,10 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import { useRouter } from "next/navigation";
-import dynamic from "next/dynamic";
-
-const ForceGraph2D = dynamic(() => import("react-force-graph-2d"), { ssr: false });
 
 export type GraphNode = {
   id: string;
@@ -22,6 +18,8 @@ export type GraphEdge = {
   shared: number;
 };
 
+type PositionedNode = GraphNode & { x: number; y: number };
+
 const CAT_COLOR: Record<string, string> = {
   "nation-state": "#4aadad",
   criminal: "#9f7aea",
@@ -30,248 +28,302 @@ const CAT_COLOR: Record<string, string> = {
   unknown: "#b8b8c8",
 };
 
-export function GraphClient({ nodes, edges }: { nodes: GraphNode[]; edges: GraphEdge[] }) {
-  const router = useRouter();
-  const containerRef = useRef<HTMLDivElement>(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const fgRef = useRef<any>(null);
-  const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
-  const [threshold, setThreshold] = useState(5);
-  const [categoryFilter, setCategoryFilter] = useState("all");
-  const [tooltip, setTooltip] = useState<{ x: number; y: number; node: GraphNode; connections: number } | null>(null);
-  const [hoverNode, setHoverNode] = useState<GraphNode | null>(null);
+function nodeRadius(riskLevel: number) {
+  return 4 + riskLevel * 2;
+}
 
-  useEffect(() => {
-    function update() {
-      if (containerRef.current) {
-        setDimensions({
-          width: containerRef.current.clientWidth,
-          height: containerRef.current.clientHeight,
-        });
+function runSimulation(
+  nodes: GraphNode[],
+  edges: GraphEdge[],
+  width: number,
+  height: number
+): PositionedNode[] {
+  // Inline simulation — avoids importing d3-force in a way that breaks SSR
+  // We use a simplified force-directed layout: repulsion + attraction + centering
+  const pos = nodes.map((n, i) => ({
+    ...n,
+    x: width / 2 + Math.cos((i / nodes.length) * 2 * Math.PI) * (Math.min(width, height) * 0.35),
+    y: height / 2 + Math.sin((i / nodes.length) * 2 * Math.PI) * (Math.min(width, height) * 0.35),
+    vx: 0,
+    vy: 0,
+  }));
+
+  const idToIdx = new Map(pos.map((n, i) => [n.id, i]));
+  const edgeList = edges
+    .map((e) => ({ si: idToIdx.get(e.source)!, ti: idToIdx.get(e.target)!, shared: e.shared }))
+    .filter((e) => e.si !== undefined && e.ti !== undefined);
+
+  const TICKS = 300;
+  const REPULSION = 3500;
+  const LINK_DIST = 120;
+  const LINK_STRENGTH = 0.3;
+  const CENTER_STRENGTH = 0.05;
+  const cx = width / 2;
+  const cy = height / 2;
+
+  for (let tick = 0; tick < TICKS; tick++) {
+    const alpha = 1 - tick / TICKS;
+
+    // Repulsion between all pairs
+    for (let i = 0; i < pos.length; i++) {
+      for (let j = i + 1; j < pos.length; j++) {
+        const dx = pos[j].x - pos[i].x || 0.01;
+        const dy = pos[j].y - pos[i].y || 0.01;
+        const dist2 = dx * dx + dy * dy || 1;
+        const force = (REPULSION / dist2) * alpha;
+        pos[i].vx -= (dx / Math.sqrt(dist2)) * force;
+        pos[i].vy -= (dy / Math.sqrt(dist2)) * force;
+        pos[j].vx += (dx / Math.sqrt(dist2)) * force;
+        pos[j].vy += (dy / Math.sqrt(dist2)) * force;
       }
     }
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
 
-  // Set strong repulsion whenever graph data changes (threshold or category filter)
-  useEffect(() => {
-    if (fgRef.current) {
-      fgRef.current.d3Force("charge")?.strength(-300);
-      fgRef.current.d3ReheatSimulation();
+    // Link attraction
+    for (const { si, ti, shared } of edgeList) {
+      const dx = pos[ti].x - pos[si].x;
+      const dy = pos[ti].y - pos[si].y;
+      const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+      const targetDist = LINK_DIST / Math.sqrt(shared);
+      const delta = (dist - targetDist) / dist;
+      const strength = LINK_STRENGTH * alpha * delta;
+      pos[si].vx += dx * strength;
+      pos[si].vy += dy * strength;
+      pos[ti].vx -= dx * strength;
+      pos[ti].vy -= dy * strength;
     }
-  }, [threshold, categoryFilter]);
 
-  const categories = ["all", ...Array.from(new Set(nodes.map((n) => n.category))).sort()];
-
-  const filteredNodes = categoryFilter === "all" ? nodes : nodes.filter((n) => n.category === categoryFilter);
-  const filteredNodeIds = new Set(filteredNodes.map((n) => n.id));
-
-  const filteredEdges = edges.filter(
-    (e) =>
-      e.shared >= threshold &&
-      filteredNodeIds.has(e.source) &&
-      filteredNodeIds.has(e.target)
-  );
-
-  // Count connections per node for tooltip
-  const connectionCount = new Map<string, number>();
-  for (const edge of filteredEdges) {
-    connectionCount.set(edge.source, (connectionCount.get(edge.source) ?? 0) + 1);
-    connectionCount.set(edge.target, (connectionCount.get(edge.target) ?? 0) + 1);
+    // Centering
+    for (const n of pos) {
+      n.vx += (cx - n.x) * CENTER_STRENGTH * alpha;
+      n.vy += (cy - n.y) * CENTER_STRENGTH * alpha;
+      // Damping
+      n.vx *= 0.6;
+      n.vy *= 0.6;
+      n.x += n.vx;
+      n.y += n.vy;
+      // Clamp to bounds with padding
+      const r = nodeRadius(n.riskLevel);
+      n.x = Math.max(r + 10, Math.min(width - r - 10, n.x));
+      n.y = Math.max(r + 10, Math.min(height - r - 10, n.y));
+    }
   }
 
-  const graphData = {
-    nodes: filteredNodes.map((n) => ({ ...n })),
-    links: filteredEdges.map((e) => ({ ...e })),
-  };
+  return pos.map(({ vx, vy, ...rest }) => rest);
+}
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const nodeColor = useCallback((node: any) => CAT_COLOR[(node as GraphNode).category] ?? "#b8b8c8", []);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const nodeVal = useCallback((node: any) => Math.pow(2 + (node as GraphNode).riskLevel * 1.5, 2), []);
+export function GraphClient({ nodes, edges }: { nodes: GraphNode[]; edges: GraphEdge[] }) {
+  const containerRef = useRef<SVGSVGElement>(null);
+  const [dims, setDims] = useState({ w: 900, h: 600 });
+  const [threshold, setThreshold] = useState(5);
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [hoverId, setHoverId] = useState<string | null>(null);
+  const [positioned, setPositioned] = useState<PositionedNode[]>([]);
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const isPanning = useRef(false);
+  const lastPan = useRef({ x: 0, y: 0 });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const linkColor = useCallback((link: any) => {
-    const opacity = Math.min((link as GraphEdge).shared / 8, 0.8) + 0.1;
-    return `rgba(201,168,76,${opacity.toFixed(2)})`;
+  // Measure container
+  useEffect(() => {
+    const el = containerRef.current?.parentElement;
+    if (!el) return;
+    const ro = new ResizeObserver(() => {
+      setDims({ w: el.clientWidth, h: el.clientHeight });
+    });
+    ro.observe(el);
+    setDims({ w: el.clientWidth, h: el.clientHeight });
+    return () => ro.disconnect();
   }, []);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const linkWidth = useCallback((link: any) => 0.5 + (link as GraphEdge).shared * 0.4, []);
+  // Re-run simulation when filter/threshold/dims change
+  useEffect(() => {
+    const filteredNodes = categoryFilter === "all" ? nodes : nodes.filter((n) => n.category === categoryFilter);
+    const filteredIds = new Set(filteredNodes.map((n) => n.id));
+    const filteredEdges = edges.filter(
+      (e) => e.shared >= threshold && filteredIds.has(e.source) && filteredIds.has(e.target)
+    );
+    const result = runSimulation(filteredNodes, filteredEdges, dims.w, dims.h);
+    setPositioned(result);
+    setPan({ x: 0, y: 0 });
+    setZoom(1);
+    setHoverId(null);
+  }, [nodes, edges, threshold, categoryFilter, dims]);
 
-  const onNodeClick = useCallback(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (node: any) => {
-      router.push(`/card/${(node as GraphNode).id}`);
-    },
-    [router]
+  const filteredIds = new Set(
+    (categoryFilter === "all" ? nodes : nodes.filter((n) => n.category === categoryFilter)).map((n) => n.id)
+  );
+  const visibleEdges = edges.filter(
+    (e) => e.shared >= threshold && filteredIds.has(e.source) && filteredIds.has(e.target)
   );
 
-  const onNodeHover = useCallback(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (node: any) => {
-      setHoverNode(node as GraphNode | null);
-      if (!node) {
-        setTooltip(null);
+  const nodeMap = new Map(positioned.map((n) => [n.id, n]));
+
+  // Edges connected to hovered node
+  const hoveredEdgeSet = new Set<string>();
+  const hoveredNeighbors = new Set<string>();
+  if (hoverId) {
+    for (const e of visibleEdges) {
+      if (e.source === hoverId || e.target === hoverId) {
+        hoveredEdgeSet.add(`${e.source}--${e.target}`);
+        hoveredNeighbors.add(e.source === hoverId ? e.target : e.source);
       }
-    },
-    []
-  );
+    }
+  }
 
-  const onNodeRightClick = useCallback(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (node: any, event: MouseEvent) => {
-      const n = node as GraphNode;
-      event.preventDefault();
-      setTooltip({
-        x: event.clientX,
-        y: event.clientY,
-        node: n,
-        connections: connectionCount.get(n.id) ?? 0,
-      });
-    },
-    [connectionCount]
-  );
+  const connectionCount = new Map<string, number>();
+  for (const e of visibleEdges) {
+    connectionCount.set(e.source, (connectionCount.get(e.source) ?? 0) + 1);
+    connectionCount.set(e.target, (connectionCount.get(e.target) ?? 0) + 1);
+  }
 
-  const paintNode = useCallback(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (rawNode: any, ctx: CanvasRenderingContext2D, globalScale: number) => {
-      const node = rawNode as GraphNode & { x?: number; y?: number };
-      const x = node.x ?? 0;
-      const y = node.y ?? 0;
-      const r = Math.sqrt(nodeVal(node)) * 0.8;
-      const color = nodeColor(node);
-      const isHovered = hoverNode?.id === node.id;
+  // Zoom / pan handlers
+  const onWheel = useCallback((e: React.WheelEvent) => {
+    e.preventDefault();
+    setZoom((z) => Math.max(0.3, Math.min(4, z * (e.deltaY < 0 ? 1.1 : 0.9))));
+  }, []);
 
-      // Glow for hovered
-      if (isHovered) {
-        ctx.beginPath();
-        ctx.arc(x, y, r + 4, 0, 2 * Math.PI);
-        ctx.fillStyle = `${color}33`;
-        ctx.fill();
-      }
+  const onMouseDown = useCallback((e: React.MouseEvent) => {
+    if (e.button !== 0) return;
+    isPanning.current = true;
+    lastPan.current = { x: e.clientX, y: e.clientY };
+  }, []);
 
-      // Node circle
-      ctx.beginPath();
-      ctx.arc(x, y, r, 0, 2 * Math.PI);
-      ctx.fillStyle = isHovered ? color : `${color}bb`;
-      ctx.fill();
+  const onMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!isPanning.current) return;
+    const dx = e.clientX - lastPan.current.x;
+    const dy = e.clientY - lastPan.current.y;
+    lastPan.current = { x: e.clientX, y: e.clientY };
+    setPan((p) => ({ x: p.x + dx, y: p.y + dy }));
+  }, []);
 
-      // Label at higher zoom
-      if (globalScale >= 1.8 || isHovered) {
-        const label = node.name;
-        const fontSize = Math.max(10 / globalScale, 3);
-        ctx.font = `${fontSize}px sans-serif`;
-        ctx.fillStyle = "#e8e0f0";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText(label, x, y + r + fontSize + 1);
-      }
-    },
-    [nodeColor, nodeVal, hoverNode]
-  );
+  const onMouseUp = useCallback(() => {
+    isPanning.current = false;
+  }, []);
+
+  const categories = ["all", ...Array.from(new Set(nodes.map((n) => n.category))).sort()];
+  const hoveredNode = hoverId ? nodeMap.get(hoverId) : null;
+
+  const hasHover = hoverId !== null;
 
   return (
     <div style={{ position: "relative", width: "100%", height: "100%" }}>
-      <div ref={containerRef} style={{ width: "100%", height: "100%" }}>
-        <ForceGraph2D
-          ref={fgRef}
-          graphData={graphData}
-          width={dimensions.width}
-          height={dimensions.height}
-          backgroundColor="#0a0a0f"
-          nodeId="id"
-          nodeLabel=""
-          nodeColor={nodeColor}
-          nodeVal={nodeVal}
-          linkColor={linkColor}
-          linkWidth={linkWidth}
-          onNodeClick={onNodeClick}
-          onNodeHover={onNodeHover}
-          onNodeRightClick={onNodeRightClick}
-          nodeCanvasObject={paintNode}
-          nodeCanvasObjectMode={() => "replace"}
-          cooldownTicks={200}
-          d3AlphaDecay={0.015}
-          d3VelocityDecay={0.4}
-          linkDirectionalParticles={0}
-        />
-      </div>
+      <svg
+        ref={containerRef}
+        width={dims.w}
+        height={dims.h}
+        style={{ display: "block", cursor: isPanning.current ? "grabbing" : "grab" }}
+        onWheel={onWheel}
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={onMouseUp}
+        onMouseLeave={onMouseUp}
+      >
+        <g transform={`translate(${pan.x},${pan.y}) scale(${zoom})`}>
+          {/* Edges */}
+          {visibleEdges.map((e) => {
+            const a = nodeMap.get(e.source);
+            const b = nodeMap.get(e.target);
+            if (!a || !b) return null;
+            const key = `${e.source}--${e.target}`;
+            const isHighlighted = hoveredEdgeSet.has(key);
+            const isDimmed = hasHover && !isHighlighted;
+            const opacity = isDimmed ? 0.04 : (Math.min(e.shared / 8, 0.7) + 0.1);
+            const strokeW = isDimmed ? 0.5 : (0.5 + e.shared * 0.35);
+            return (
+              <line
+                key={key}
+                x1={a.x} y1={a.y}
+                x2={b.x} y2={b.y}
+                stroke={isHighlighted ? "#f0c040" : "rgba(201,168,76,1)"}
+                strokeOpacity={opacity}
+                strokeWidth={strokeW}
+                style={{ transition: "stroke-opacity 0.15s, stroke-width 0.15s" }}
+              />
+            );
+          })}
+
+          {/* Nodes */}
+          {positioned.map((node) => {
+            const color = CAT_COLOR[node.category] ?? "#b8b8c8";
+            const r = nodeRadius(node.riskLevel);
+            const isHovered = hoverId === node.id;
+            const isNeighbor = hoveredNeighbors.has(node.id);
+            const isDimmed = hasHover && !isHovered && !isNeighbor;
+            return (
+              <g
+                key={node.id}
+                transform={`translate(${node.x},${node.y})`}
+                style={{ cursor: "pointer" }}
+                onMouseEnter={() => setHoverId(node.id)}
+                onMouseLeave={() => setHoverId(null)}
+                onClick={() => window.open(`/card/${node.id}`, "_self")}
+              >
+                {isHovered && (
+                  <circle r={r + 6} fill={color} opacity={0.2} />
+                )}
+                <circle
+                  r={r}
+                  fill={color}
+                  opacity={isDimmed ? 0.15 : (isHovered || isNeighbor ? 1 : 0.75)}
+                  style={{ transition: "opacity 0.15s" }}
+                />
+                {/* Label — always show on hover, show at zoom >= 1.8 otherwise */}
+                {(isHovered || isNeighbor || zoom >= 1.8) && (
+                  <text
+                    y={r + 10}
+                    textAnchor="middle"
+                    fontSize={isHovered ? 11 / zoom : 9 / zoom}
+                    fill={isDimmed ? "#555" : "#e8e0f0"}
+                    style={{ pointerEvents: "none", userSelect: "none", transition: "fill 0.15s" }}
+                  >
+                    {node.name}
+                  </text>
+                )}
+              </g>
+            );
+          })}
+        </g>
+      </svg>
 
       {/* Hover tooltip */}
-      {hoverNode && (
+      {hoveredNode && (
         <div
           style={{
             position: "absolute",
-            top: 16,
+            top: 12,
             left: "50%",
             transform: "translateX(-50%)",
-            background: "rgba(26,26,46,0.95)",
-            border: `1px solid ${CAT_COLOR[hoverNode.category] ?? "#c9a84c"}44`,
+            background: "rgba(26,26,46,0.96)",
+            border: `1px solid ${CAT_COLOR[hoveredNode.category] ?? "#c9a84c"}55`,
             borderRadius: 8,
-            padding: "8px 14px",
+            padding: "8px 16px",
             pointerEvents: "none",
             zIndex: 20,
             textAlign: "center",
+            whiteSpace: "nowrap",
           }}
         >
           <div style={{ color: "#f0c040", fontFamily: "var(--font-cinzel), serif", fontSize: 13, fontWeight: 600 }}>
-            {hoverNode.cardTitle}
+            {hoveredNode.cardTitle}
           </div>
           <div style={{ color: "#c0c0c0", fontSize: 11, marginTop: 2 }}>
-            {hoverNode.name} · {hoverNode.origin}
+            {hoveredNode.name} · {hoveredNode.origin}
           </div>
-          <div style={{ color: CAT_COLOR[hoverNode.category] ?? "#c9a84c", fontSize: 10, marginTop: 2, opacity: 0.8 }}>
-            {connectionCount.get(hoverNode.id) ?? 0} connections at threshold {threshold} · {hoverNode.ttpCount} TTPs
+          <div style={{ color: CAT_COLOR[hoveredNode.category] ?? "#c9a84c", fontSize: 10, marginTop: 2 }}>
+            {connectionCount.get(hoveredNode.id) ?? 0} connections at this threshold · {hoveredNode.ttpCount} TTPs
           </div>
-          <div style={{ color: "#c0c0c0", fontSize: 9, marginTop: 3, opacity: 0.4 }}>
-            Click to open card · Right-click to pin
-          </div>
+          <div style={{ color: "#888", fontSize: 9, marginTop: 3 }}>Click to open card</div>
         </div>
       )}
 
-      {/* Pinned tooltip */}
-      {tooltip && (
-        <div
-          style={{
-            position: "fixed",
-            top: tooltip.y + 12,
-            left: tooltip.x + 12,
-            background: "rgba(26,26,46,0.97)",
-            border: `1px solid ${CAT_COLOR[tooltip.node.category] ?? "#c9a84c"}66`,
-            borderRadius: 8,
-            padding: "10px 14px",
-            zIndex: 30,
-            fontSize: 12,
-            maxWidth: 220,
-            cursor: "pointer",
-          }}
-          onClick={() => setTooltip(null)}
-        >
-          <div style={{ color: "#f0c040", fontFamily: "var(--font-cinzel), serif", fontSize: 13, fontWeight: 600, marginBottom: 4 }}>
-            {tooltip.node.cardTitle}
-          </div>
-          <div style={{ color: "#e8e0f0", marginBottom: 2 }}>{tooltip.node.name}</div>
-          <div style={{ color: "#c0c0c0", fontSize: 10, opacity: 0.7 }}>
-            {tooltip.node.origin} · {tooltip.node.category}
-          </div>
-          <div style={{ color: "#c9a84c", fontSize: 10, marginTop: 4 }}>
-            {tooltip.connections} connections · {tooltip.node.ttpCount} TTPs
-          </div>
-          <div style={{ color: "#c0c0c0", fontSize: 9, marginTop: 6, opacity: 0.4 }}>Click to dismiss</div>
-        </div>
-      )}
-
-      {/* Controls overlay */}
+      {/* Controls */}
       <div
         style={{
           position: "absolute",
           bottom: 24,
           left: "50%",
           transform: "translateX(-50%)",
-          background: "rgba(10,10,15,0.85)",
+          background: "rgba(10,10,15,0.88)",
           border: "1px solid rgba(201,168,76,0.15)",
           borderRadius: 12,
           padding: "12px 20px",
@@ -284,16 +336,12 @@ export function GraphClient({ nodes, edges }: { nodes: GraphNode[]; edges: Graph
           minWidth: 320,
         }}
       >
-        {/* Threshold slider */}
         <div style={{ display: "flex", alignItems: "center", gap: 10, width: "100%" }}>
           <span style={{ color: "#c9a84c", fontSize: 10, fontFamily: "var(--font-cinzel), serif", opacity: 0.7, whiteSpace: "nowrap" }}>
             Min shared TTPs
           </span>
           <input
-            type="range"
-            min={2}
-            max={12}
-            value={threshold}
+            type="range" min={2} max={12} value={threshold}
             onChange={(e) => setThreshold(Number(e.target.value))}
             style={{ flex: 1, accentColor: "#c9a84c" }}
           />
@@ -302,7 +350,6 @@ export function GraphClient({ nodes, edges }: { nodes: GraphNode[]; edges: Graph
           </span>
         </div>
 
-        {/* Category filter */}
         <div style={{ display: "flex", gap: 6, flexWrap: "wrap", justifyContent: "center" }}>
           {categories.map((cat) => (
             <button
@@ -330,9 +377,8 @@ export function GraphClient({ nodes, edges }: { nodes: GraphNode[]; edges: Graph
           ))}
         </div>
 
-        {/* Stats */}
         <div style={{ color: "#c0c0c0", fontSize: 9, opacity: 0.4 }}>
-          {filteredNodes.length} groups · {filteredEdges.length} connections
+          {positioned.length} groups · {visibleEdges.length} connections · scroll to zoom · drag to pan
         </div>
       </div>
 
@@ -342,7 +388,7 @@ export function GraphClient({ nodes, edges }: { nodes: GraphNode[]; edges: Graph
           position: "absolute",
           top: 80,
           right: 16,
-          background: "rgba(10,10,15,0.8)",
+          background: "rgba(10,10,15,0.82)",
           border: "1px solid rgba(201,168,76,0.12)",
           borderRadius: 8,
           padding: "10px 14px",
@@ -360,12 +406,8 @@ export function GraphClient({ nodes, edges }: { nodes: GraphNode[]; edges: Graph
           </div>
         ))}
         <div style={{ marginTop: 10, paddingTop: 8, borderTop: "1px solid rgba(201,168,76,0.1)" }}>
-          <div style={{ color: "#c9a84c", fontSize: 9, fontFamily: "var(--font-cinzel), serif", opacity: 0.6, marginBottom: 6, letterSpacing: "0.06em" }}>
-            NODE SIZE
-          </div>
-          <div style={{ color: "#c0c0c0", fontSize: 9, opacity: 0.55 }}>= Risk level</div>
-          <div style={{ color: "#c9a84c", fontSize: 9, opacity: 0.55, marginTop: 4 }}>Edge brightness</div>
-          <div style={{ color: "#c0c0c0", fontSize: 9, opacity: 0.55 }}>= Shared TTPs</div>
+          <div style={{ color: "#c0c0c0", fontSize: 9, opacity: 0.5 }}>Node size = risk level</div>
+          <div style={{ color: "#c9a84c", fontSize: 9, opacity: 0.5, marginTop: 3 }}>Edge brightness = shared TTPs</div>
         </div>
       </div>
     </div>
