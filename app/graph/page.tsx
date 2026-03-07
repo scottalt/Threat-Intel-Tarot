@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { cards } from "@/data/cards";
+import { relationships } from "@/data/relationships";
 import { SiteNav } from "@/components/SiteNav";
 import { Starfield } from "@/components/Starfield";
 import { GraphClient } from "@/components/GraphClient";
@@ -8,7 +9,7 @@ import type { GraphNode, GraphEdge } from "@/components/GraphClient";
 export const metadata: Metadata = {
   title: "Adversary Relationship Graph | Threat Intelligence Tarot",
   description:
-    "Interactive force-directed graph showing connections between 78 adversary groups based on shared MITRE ATT&CK techniques.",
+    "Interactive graph of documented relationships between adversary groups — shared members, tooling, lineage, infrastructure, and state sponsorship.",
 };
 
 function buildGraphData(): { nodes: GraphNode[]; edges: GraphEdge[] } {
@@ -22,28 +23,20 @@ function buildGraphData(): { nodes: GraphNode[]; edges: GraphEdge[] } {
     ttpCount: card.ttps.length,
   }));
 
-  const edges: GraphEdge[] = [];
-  for (let i = 0; i < cards.length; i++) {
-    const a = cards[i];
-    const aIds = new Set(a.ttps.map((t) => t.techniqueId));
-    for (let j = i + 1; j < cards.length; j++) {
-      const b = cards[j];
-      let shared = 0;
-      for (const ttp of b.ttps) {
-        if (aIds.has(ttp.techniqueId)) shared++;
-      }
-      if (shared >= 2) {
-        edges.push({ source: a.slug, target: b.slug, shared });
-      }
-    }
-  }
+  const edges: GraphEdge[] = relationships.map((r) => ({
+    source: r.a,
+    target: r.b,
+    type: r.type,
+    strength: r.strength,
+    summary: r.summary,
+  }));
 
   return { nodes, edges };
 }
 
 export default function GraphPage() {
   const { nodes, edges } = buildGraphData();
-  const totalEdges = edges.filter((e) => e.shared >= 5).length;
+  const confirmed = edges.filter((e) => e.strength === "confirmed").length;
 
   return (
     <main
@@ -60,7 +53,6 @@ export default function GraphPage() {
     >
       <Starfield />
 
-      {/* Header */}
       <div
         style={{
           position: "relative",
@@ -83,12 +75,11 @@ export default function GraphPage() {
             Adversary Relationship Graph
           </h1>
           <p style={{ color: "var(--color-silver)", opacity: 0.45, fontSize: 11, marginTop: 4 }}>
-            {nodes.length} groups · {totalEdges} connections at default threshold · click a node to open its card
+            {edges.length} documented relationships · {confirmed} confirmed · hover to inspect · click to open card
           </p>
         </div>
       </div>
 
-      {/* Graph — fills remaining height */}
       <div style={{ flex: 1, position: "relative", zIndex: 5 }}>
         <GraphClient nodes={nodes} edges={edges} />
       </div>
