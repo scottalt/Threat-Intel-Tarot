@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { cards } from "@/data/cards";
-import { relationships } from "@/data/relationships";
 import { SiteNav } from "@/components/SiteNav";
 import { Starfield } from "@/components/Starfield";
 import { GraphClient } from "@/components/GraphClient";
@@ -9,36 +8,37 @@ import type { GraphNode, GraphEdge } from "@/components/GraphClient";
 export const metadata: Metadata = {
   title: "Adversary Relationship Graph | Threat Intelligence Tarot",
   description:
-    "Interactive graph of documented relationships between adversary groups — shared members, tooling, lineage, infrastructure, and state sponsorship.",
+    "Interactive force-directed graph showing connections between adversary groups based on shared MITRE ATT&CK techniques.",
 };
 
 function buildGraphData(): { nodes: GraphNode[]; edges: GraphEdge[] } {
-  const nodes: GraphNode[] = cards.map((card) => ({
-    id: card.slug,
-    name: card.name,
-    cardTitle: card.cardTitle,
-    category: card.category,
-    riskLevel: card.riskLevel,
-    origin: card.origin,
-    ttpCount: card.ttps.length,
+  const nodes: GraphNode[] = cards.map((c) => ({
+    id: c.slug,
+    name: c.name,
+    cardTitle: c.cardTitle,
+    category: c.category,
+    riskLevel: c.riskLevel,
+    origin: c.origin,
   }));
 
-  const edges: GraphEdge[] = relationships.map((r) => ({
-    source: r.a,
-    target: r.b,
-    type: r.type,
-    strength: r.strength,
-    summary: r.summary,
-    detail: r.detail,
-    sources: r.sources,
-  }));
+  const edges: GraphEdge[] = [];
+  for (let i = 0; i < cards.length; i++) {
+    const idsA = new Set(cards[i].ttps.map((t) => t.techniqueId));
+    for (let j = i + 1; j < cards.length; j++) {
+      const shared = cards[j].ttps.filter((t) => idsA.has(t.techniqueId)).length;
+      if (shared >= 1) {
+        edges.push({ source: cards[i].slug, target: cards[j].slug, shared });
+      }
+    }
+  }
 
   return { nodes, edges };
 }
 
 export default function GraphPage() {
   const { nodes, edges } = buildGraphData();
-  const confirmed = edges.filter((e) => e.strength === "confirmed").length;
+  const defaultThreshold = 3;
+  const defaultEdges = edges.filter((e) => e.shared >= defaultThreshold).length;
 
   return (
     <main
@@ -76,8 +76,15 @@ export default function GraphPage() {
           >
             Adversary Relationship Graph
           </h1>
-          <p style={{ color: "var(--color-silver)", opacity: 0.45, fontSize: 11, marginTop: 4 }}>
-            {edges.length} documented relationships · {confirmed} confirmed · hover to inspect · click to open card
+          <p
+            style={{
+              color: "var(--color-silver)",
+              opacity: 0.45,
+              fontSize: 11,
+              marginTop: 4,
+            }}
+          >
+            {nodes.length} adversaries · {defaultEdges} connections at default threshold · drag nodes · click to open card
           </p>
         </div>
       </div>
