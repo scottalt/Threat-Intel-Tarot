@@ -14,6 +14,10 @@ export const metadata: Metadata = {
     "Today's threat intelligence card. A new adversary profile every day.",
 };
 
+// Without this, Next.js statically generates the page at build time and the
+// date/card freeze to whatever day the last deploy happened.
+export const dynamic = "force-dynamic";
+
 export default function DailyPage() {
   const card = drawDaily();
   const yesterday = drawDailyOffset(-1);
