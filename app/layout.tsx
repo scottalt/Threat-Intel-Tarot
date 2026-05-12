@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s | Threat Intelligence Tarot",
   },
   description:
-    "78 real adversary profiles from MITRE ATT&CK, presented as a tarot card deck. Draw a card to reveal TTPs, targets, and defenses for APT groups worldwide.",
+    "143 real adversary profiles from MITRE ATT&CK, presented as a trading-card deck. Draw a card to reveal TTPs, targets, and defenses for APT groups worldwide.",
   keywords: [
     "threat intelligence",
     "APT",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "Threat Intelligence Tarot",
-    description: "Real threat intelligence. Impossible to scroll past. 78 adversary profiles from MITRE ATT&CK.",
+    description: "Real threat intelligence. Impossible to scroll past. 143 adversary profiles from MITRE ATT&CK.",
     type: "website",
     url: "https://tarot.scottaltiparmak.com",
     siteName: "Threat Intelligence Tarot",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Threat Intelligence Tarot",
-    description: "Real threat intelligence. Impossible to scroll past. 78 MITRE ATT&CK adversary profiles.",
+    description: "Real threat intelligence. Impossible to scroll past. 143 MITRE ATT&CK adversary profiles.",
     creator: "@scottalt",
   },
   manifest: "/manifest.webmanifest",

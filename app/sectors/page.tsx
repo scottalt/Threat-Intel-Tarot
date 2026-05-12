@@ -8,7 +8,7 @@ import { SectorIndexClient } from "@/components/SectorIndexClient";
 export const metadata: Metadata = {
   title: "Sector Intelligence | Threat Intelligence Tarot",
   description:
-    "Which industries are targeted by the most threat actors? Ranked by adversary count across 78 groups, with risk profiles for each sector.",
+    "Which industries are targeted by the most threat actors? Ranked by adversary count across 143 groups, with risk profiles for each sector.",
 };
 
 type SectorEntry = {

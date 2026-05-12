@@ -6,7 +6,7 @@ import { cards } from "@/data/cards";
 export const metadata: Metadata = {
   title: "About | Threat Intelligence Tarot",
   description:
-    "Threat Intelligence Tarot: real MITRE ATT&CK data for 78 adversary groups, presented as a tarot card deck.",
+    "Threat Intelligence Tarot: real MITRE ATT&CK data for 143 adversary groups, presented as a trading card deck.",
 };
 
 export default function AboutPage() {
@@ -100,7 +100,7 @@ export default function AboutPage() {
               The Deck
             </h2>
             <p style={{ opacity: 0.85 }}>
-              The full 78-card deck maps directly to tarot structure:
+              The full {cards.length}-card deck starts with the canonical 78-card tarot structure and extends with expansion cards for groups that did not fit the four suits:
             </p>
             <div className="mt-4 grid grid-cols-2 gap-3">
               {[
@@ -158,7 +158,7 @@ export default function AboutPage() {
               </li>
               <li className="flex gap-2">
                 <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>
-                <span><strong style={{ color: "var(--color-mist)" }}>Gallery:</strong> browse all 78 cards. Filter by threat category, suit, or origin country. Search by group name, alias, technique ID, or targeted sector.</span>
+                <span><strong style={{ color: "var(--color-mist)" }}>Gallery:</strong> browse the full {cards.length}-card deck. Filter by threat category, suit, or origin country. Search by group name, alias, technique ID, or targeted sector.</span>
               </li>
               <li className="flex gap-2">
                 <span style={{ color: "var(--color-crimson)", flexShrink: 0 }}>◆</span>

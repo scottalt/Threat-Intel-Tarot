@@ -8,7 +8,7 @@ import { TechniqueExplorerClient } from "@/components/TechniqueExplorerClient";
 export const metadata: Metadata = {
   title: "Technique Explorer | Threat Intelligence Tarot",
   description:
-    "Browse all MITRE ATT&CK techniques used across 78 adversary profiles. See which threat groups share the same tactics and techniques.",
+    "Browse all MITRE ATT&CK techniques used across 143 adversary profiles. See which threat groups share the same tactics and techniques.",
 };
 
 type TechniqueEntry = {

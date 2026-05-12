@@ -8,7 +8,7 @@ import { MapClient } from "@/components/MapClient";
 export const metadata: Metadata = {
   title: "Map | Threat Intelligence Tarot",
   description:
-    "Global threat actor origin map. See where the world's most dangerous adversaries operate, clustered by region and category across 78 APT profiles.",
+    "Global threat actor origin map. See where the world's most dangerous adversaries operate, clustered by region and category across 143 APT profiles.",
 };
 
 export default function MapPage() {

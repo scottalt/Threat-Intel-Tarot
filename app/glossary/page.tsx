@@ -38,7 +38,7 @@ const SECTIONS = [
   },
   {
     title: "Volume II: The Unbound Arcana",
-    body: "The core deck of 78 cards covers the most widely recognized and documented threat actor groups. Volume II adds 28 expansion cards for groups that are operationally significant but less frequently covered in mainstream threat intelligence. Expansion cards are marked with a II prefix in the gallery and on each card.",
+    body: "The core deck of 78 cards covers the most widely recognized and documented threat actor groups, structured as a canonical tarot deck. Volume II adds 65 expansion cards for groups that are operationally significant but did not fit the four-suit structure — including additional state-aligned APTs, recent ransomware crews, and hacktivist clusters. Expansion cards are marked with a II prefix in the gallery and on each card.",
   },
 ];
 

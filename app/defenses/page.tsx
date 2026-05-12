@@ -8,7 +8,7 @@ import { DefenseIndexClient } from "@/components/DefenseIndexClient";
 export const metadata: Metadata = {
   title: "Defense Index | Threat Intelligence Tarot",
   description:
-    "Which security controls defend against the most threat actors? Ranked by coverage across 78 adversary profiles, prioritized for defenders.",
+    "Which security controls defend against the most threat actors? Ranked by coverage across 143 adversary profiles, prioritized for defenders.",
 };
 
 type DefenseEntry = {

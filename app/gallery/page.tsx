@@ -8,7 +8,7 @@ import { BackToTop } from "@/components/BackToTop";
 export const metadata: Metadata = {
   title: "All Adversaries | Threat Intelligence Tarot",
   description:
-    "Browse all 78 adversary profiles: the complete tarot deck. Nation-state, criminal, and hacktivist groups from MITRE ATT&CK.",
+    "Browse all 143 adversary profiles: the complete trading-card deck. Nation-state, criminal, and hacktivist groups from MITRE ATT&CK.",
 };
 
 export default function GalleryPage() {
